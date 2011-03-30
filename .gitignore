@@ -1,0 +1,12 @@
+/tmp
+/lib
+/bin
+*.user*
+Makefile*
+*.pdb
+*.~ml
+/release
+/Release
+/debug
+/Debug
+/*-build-*
