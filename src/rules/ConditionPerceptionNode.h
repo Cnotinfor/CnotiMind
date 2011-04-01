@@ -1,5 +1,5 @@
-#if !defined(_CONDITIONEVENTNODE_H)
-#define _CONDITIONEVENTNODE_H
+#if !defined(_CONDITIONPERCEPTIONNODE_H)
+#define _CONDITIONPERCEPTIONNODE_H
 
 #include <QtCore/QString>
 
@@ -9,19 +9,16 @@ namespace CnotiMind
 {
 	class Brain;
 
-	class ConditionEventNode : public ConditionNode
+	class ConditionPerceptionNode : public ConditionNode
 	{
 		Q_OBJECT
 
 	public:
-		ConditionEventNode(const QString& key, const QString& value, ConditionOperator op, Brain* brain, QObject* parent);
-
-		void exec();
-		RuleNodeTypes type() const;
+		ConditionPerceptionNode(const QString& key, const QString& value, ConditionOperator op, Brain* brain, QObject* parent);
 
 	protected:
-		bool isTrue();
+		bool isTrue() const;
 	};
 
 }
-#endif  //_CONDITIONEVENTNODE_H
+#endif  //_CONDITIONPERCEPTIONNODE_H

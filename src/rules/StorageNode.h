@@ -16,7 +16,7 @@ namespace CnotiMind
 		StorageNode(const QString& key, const QString& value, Brain::MemoryType memory, Brain* brain, QObject* parent);
 
 		void exec();
-		RuleNodeTypes type() const;
+		void exec( QHash<QString, QString>& variables );
 
 	protected:
 		Brain::MemoryType _memory;

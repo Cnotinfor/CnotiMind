@@ -14,12 +14,14 @@ namespace CnotiMind
 
 	void ActionNode::exec()
 	{
-		_brain->_rules;
+
+		_brain->executeAction( _key, _value );
 	}
 
-	RuleNode::RuleNodeTypes ActionNode::type() const
+	void ActionNode::exec( QHash<QString, QString> &variables )
 	{
-		return Action;
+		_brain->executeAction( _key, _value );
+		// TODO, check variables and test if it needs to be replaced in the value.
 	}
 
 }

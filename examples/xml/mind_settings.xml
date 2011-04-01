@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- List of perceptions -->
+<!-- Things the agent perceives and can react to -->
+<Settings>
+	<Perception name="Save Melody" type="string" />
+	<Perception name="Load Melody" type="string" />
+	<Perception name="Save Melody MP3" type="string" />
+	<Perception name="New Melody" />
+	<Perception name="Stop Creating Melody" />
+	<Perception name="Finish Melody" />
+	<Perception name="User Exit" />
+	<Perception name="User Show" />
+	<Perception name="Add Note Height" type="Values" />
+<!--		<value>Do</value>
+		<value>Re</value>
+		<value>Mi</value>
+		<value>Fa</value>
+		<value>Sol</value>
+		<value>La</value>
+		<value>Si</value>
+		<value>Do Agudo</value> -->
+	<!--</Perception>-->
+	<Perception name="Add Note Duration" type="int" />
+	<Perception name="Delete Note" />
+	<Perception name="Change Melody Instrument" type="int" />
+	<Perception name="Change Melody Rhythm" type="int,int"/>
+	<Perception name="Change Melody Tempo" type="int"/>
+
+
+	<!-- List of actions -->
+	<!-- Actions the agent can do -->
+	<Action name="Talk" type="string" />
+	<Action name="Walk" type="string" />
+	<Action name="Play Instrument" type="string" />
+
+	<!-- List of emotions the agent has -->
+	<Emotion name="Happiness" value="1" min="-10" max="10" decay="" />
+	<Emotion name="Boreness" value="1" min="-10" max="10" decay="" />
+</Settings>

@@ -2,12 +2,14 @@
 #define _ACTION_H
 
 #include <QtCore/QString>
+
+#include "CnotiMind_global.h"
 #include "Node.h"
 
 namespace CnotiMind
 {
 
-	class Action : public Node
+	class CNOTIMIND_EXPORT Action : public Node
 	{
 	public:
 		Action( const QString& key, const QString& value );

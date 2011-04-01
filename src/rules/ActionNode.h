@@ -16,7 +16,8 @@ namespace CnotiMind
 		ActionNode( const QString& key, const QString& value, Brain* brain, QObject* parent );
 
 		void exec();
-		RuleNodeTypes type() const;
+		void exec( QHash<QString, QString>& variables );
+
 	};
 
 }

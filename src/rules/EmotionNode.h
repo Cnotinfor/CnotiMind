@@ -18,7 +18,8 @@ namespace CnotiMind
 		EmotionNode(const QString& key, const QString& value, int max, int min, Brain* brain, QObject* parent);
 
 		void exec();
-		RuleNodeTypes type() const;
+		void exec( QHash<QString, QString>& variables );
+
 
 	protected:
 		int _min;

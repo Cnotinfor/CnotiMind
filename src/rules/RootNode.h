@@ -2,6 +2,7 @@
 #define _ROOTNODE_H
 
 #include <QtCore/QString>
+#include <QtCore/QList>
 
 #include "RuleNode.h"
 
@@ -14,10 +15,13 @@ namespace CnotiMind
 		Q_OBJECT
 
 	public:
-		RootNode(const QString& key, const QString& value, Brain* brain, QObject* parent);
+		RootNode( Brain* brain, QObject* parent );
+
 		void exec();
-		RuleNodeTypes type() const;
+		void exec( QHash<QString, QString>& variables );
+
 		bool isRoot() const;
+
 	};
 
 }

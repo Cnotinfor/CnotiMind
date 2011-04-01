@@ -4,10 +4,11 @@
 #include <QtCore/QString>
 
 #include "ConditionNode.h"
+#include "../Brain.h"
 
 namespace CnotiMind
 {
-	class Brain;
+
 
 	class ConditionDataMiningNode : public ConditionNode
 	{
@@ -15,16 +16,20 @@ namespace CnotiMind
 
 	public:
 
-		ConditionDataMiningNode(const QString& key, const QString& value, ConditionOperator op, DataMiningOperation _dataMiningOperator, Brain* brain, QObject* parent);
-		ConditionDataMiningNode(const QString& key, const QString& value, ConditionOperator op, DataMiningOperation _dataMiningOperator, const QString& variable, Brain* brain, QObject* parent);
+		ConditionDataMiningNode(const QString& key, const QString& value, ConditionOperator op, DataMiningOperation _dataMiningOperator, Brain::MemoryType memory, Brain* brain, QObject* parent);
+		ConditionDataMiningNode(const QString& key, const QString& value, ConditionOperator op, DataMiningOperation _dataMiningOperator, Brain::MemoryType memory, const QString& variable, Brain* brain, QObject* parent);
 
 		void exec();
-		RuleNodeTypes type() const;
+		void exec( QHash<QString, QString>& variables );
+
 		const QString& variable() const;
+
 
 	protected:
 		int _dataMiningOperator;
 		QString _variable;
+		QString _result;
+		Brain::MemoryType _memory;
 		bool isTrue() const;
 	};
 

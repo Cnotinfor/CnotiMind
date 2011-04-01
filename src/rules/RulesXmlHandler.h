@@ -3,27 +3,51 @@
 
 #include <QXmlDefaultHandler>
 
+class QObject;
+
 namespace CnotiMind
 {
 	class RuleNode;
+	class RootNode;
+	class ActionNode;
+	class StorageNode;
+	class EmotionNode;
+	class ConditionNode;
+	class ConditionPerceptionNode;
+	class ConditionEmotionNode;
+	class ConditionDataMiningNode;
+	class Brain;
 
 	class RulesXmlHandler : public QXmlDefaultHandler
 	{
 
 	public:
-		explicit RulesXmlHandler();
+		explicit RulesXmlHandler( Brain* brain );
+		~RulesXmlHandler();
 
 		bool startElement ( const QString & namespaceURI, const QString & localName, const QString & qName, const QXmlAttributes & atts );
 		bool endElement( const QString & namespaceURI, const QString & localName, const QString & qName );
 
-	signals:
+		RuleNode* rootNode() const;
 
-	public slots:
+	protected:
+		bool createRootNode( const QXmlAttributes & atts );
+		bool createActionNode( const QXmlAttributes & atts );
+		bool createStorageNode( const QXmlAttributes & atts );
+		bool createEmotionNode( const QXmlAttributes & atts );
+		bool createConditionNode( const QXmlAttributes & atts );
+		bool createConditionPerceptionNode( const QXmlAttributes & atts );
+		bool createConditionEmotionNode( const QXmlAttributes & atts );
+		bool createConditionDataMiningNode( const QXmlAttributes & atts );
 
-	private:
+
+	protected:
 		RuleNode* _rootNode;
 		RuleNode* _currentNode;
+		RuleNode* _parentNode;
+		Brain* _brain;
 
+		QObject* _parentObject; // Parent of the RootNode
 	};
 
 }

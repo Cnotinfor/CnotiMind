@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Rules>
+	<Condition perception="User Show">
+		<Action key="Talk" value="Hello" />
+		<Emotion key="Happiness" value="1" max="5" />
+		<Emotion key="Happiness" value="1" max="5" />
+	</Condition>
+
+	<Condition perception="User Exit">
+		<Action key="Talk" value="Bye" />
+		<Emotion key="Happiness" value="-1" min="0"/>
+	</Condition>
+</Rules>

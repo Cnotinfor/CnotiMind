@@ -26,20 +26,23 @@ namespace CnotiMind
 	bool SettingsXmlHandler::startElement ( const QString & namespaceURI, const QString & localName, const QString & qName, const QXmlAttributes & atts )
 	{
 
+		if( QString::compare( qName, "Settings", Qt::CaseInsensitive ) == 0 )
+		{
+			return true;
+		}
 		if( QString::compare( qName, "Perception", Qt::CaseInsensitive ) == 0 )
 		{
 			return elementPerception( atts );
 		}
-		else if( QString::compare( qName, "Action", Qt::CaseInsensitive ) == 0 )
+		if( QString::compare( qName, "Action", Qt::CaseInsensitive ) == 0 )
 		{
 			return elementAction( atts );
 		}
-		else if( QString::compare( qName, "Emotion", Qt::CaseInsensitive ) == 0 )
+		if( QString::compare( qName, "Emotion", Qt::CaseInsensitive ) == 0 )
 		{
-
 			return elementEmotion( atts );
 		}
-		else if( QString::compare( qName, "Value", Qt::CaseInsensitive ) == 0 )
+		if( QString::compare( qName, "Value", Qt::CaseInsensitive ) == 0 )
 		{
 			// Test if it an element values appears, but it not child
 			// from Emotion, Action or Perception element
@@ -61,21 +64,23 @@ namespace CnotiMind
 
 	bool SettingsXmlHandler::endElement( const QString & namespaceURI, const QString & localName, const QString & qName )
 	{
+		if( QString::compare( qName, "Settings", Qt::CaseInsensitive ) == 0 )
+		{
+			return true;
+		}
 		if( QString::compare( qName, "Perception", Qt::CaseInsensitive ) == 0 )
 		{
 			return endElementPerception();
 		}
-		else if( QString::compare( qName, "Action", Qt::CaseInsensitive ) == 0 )
+		if( QString::compare( qName, "Action", Qt::CaseInsensitive ) == 0 )
 		{
-			_insideAction = false;
-			return true;
+			return endElementAction();
 		}
-		else if( QString::compare( qName, "Emotion", Qt::CaseInsensitive ) == 0 )
+		if( QString::compare( qName, "Emotion", Qt::CaseInsensitive ) == 0 )
 		{
-			_insideEmotion = false;
-			return true;
+			return endElementEmotion();
 		}
-		else if( QString::compare( qName, "Value", Qt::CaseInsensitive ) == 0 )
+		if( QString::compare( qName, "Value", Qt::CaseInsensitive ) == 0 )
 		{
 			_insideValue = false;
 			return true;
@@ -157,8 +162,8 @@ namespace CnotiMind
 
 		// Test if it has all the attributes required for the emotions
 		if( atts.index( "value" ) != -1 &&
-			atts.index( "min" ) != -1 &&
-			atts.index( "max" ) != -1 )
+			atts.index( "max" ) != -1 &&
+			atts.index( "min" ) != -1 )
 		{
 			bool ok;
 			int i;
@@ -171,18 +176,18 @@ namespace CnotiMind
 			}
 			_emotionAttributes.append( i );
 
-			i = atts.value( "min" ).toInt( &ok );
-			if(!ok)
-			{
-				qWarning() << "[SettingsXmlHandler::elementEmotion] Invalid attribute value: min =" << i;
-				return false;
-			}
-			_emotionAttributes.append( i );
-
 			i = atts.value( "max" ).toInt( &ok );
 			if(!ok)
 			{
 				qWarning() << "[SettingsXmlHandler::elementEmotion] Invalid attribute value: max =" << i;
+				return false;
+			}
+			_emotionAttributes.append( i );
+
+			i = atts.value( "min" ).toInt( &ok );
+			if(!ok)
+			{
+				qWarning() << "[SettingsXmlHandler::elementEmotion] Invalid attribute value: min =" << i;
 				return false;
 			}
 			_emotionAttributes.append( i );
@@ -212,7 +217,7 @@ namespace CnotiMind
 		if( _insideAction )
 		{
 			_brain->addValidAction( _elementName );
-			_insidePerception = false;
+			_insideAction = false;
 			return true;
 		}
 		return false;

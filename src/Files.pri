@@ -1,5 +1,6 @@
 HEADERS += Action.h \
 		   Brain.h \
+		   CnotiMind_global.h \
 		   Competences.h \
 		   Emotion.h \
 		   MemoryEvent.h \

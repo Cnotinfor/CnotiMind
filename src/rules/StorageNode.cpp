@@ -18,9 +18,8 @@ namespace CnotiMind
 
 	}
 
-	RuleNode::RuleNodeTypes StorageNode::type() const
+	void StorageNode::exec( QHash<QString, QString> &variables )
 	{
-		return Storage;
-	}
 
+	}
 }

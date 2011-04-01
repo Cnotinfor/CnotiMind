@@ -5,13 +5,14 @@
 #include <QtCore/QObject>
 #include <QtCore/QList>
 
+#include "CnotiMind_global.h"
 #include "Action.h"
 #include "Brain.h"
 #include "Perception.h"
 
 namespace CnotiMind
 {
-	class Competences: QObject
+	class CNOTIMIND_EXPORT Competences: public QObject
 	{
 		Q_OBJECT
 

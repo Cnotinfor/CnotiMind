@@ -3,10 +3,12 @@
 
 #include <QtCore/QString>
 
+#include "CnotiMind_global.h"
+
 namespace CnotiMind
 {
 
-	class Node
+	class CNOTIMIND_EXPORT Node
 	{
 	public:
 		Node(const QString& key, const QString& value);

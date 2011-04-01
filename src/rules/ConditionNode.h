@@ -17,12 +17,13 @@ namespace CnotiMind
 
 		enum ConditionOperator
 		{
-			Equal,
-			Different,
-			Smaller,
-			Bigger,
-			EqualOrBigger,
-			EqualOrSmaller
+			ConditionOperatorEqual,
+			ConditionOperatorDifferent,
+			ConditionOperatorSmaller,
+			ConditionOperatorBigger,
+			ConditionOperatorBiggerOrEqual,
+			ConditionOperatorSmallerOrEqual,
+			ConditionOperatorUndefined
 		};
 		Q_ENUMS( ConditionOperator )
 
@@ -36,19 +37,25 @@ namespace CnotiMind
 			Exists,
 			Last,
 			First,
-			Duration
+			Duration,
+			Time,
+			Undefined
 		};
 		Q_ENUMS( DataMiningOperation )
 
 		ConditionNode(const QString& key, const QString& value, ConditionOperator op, Brain* brain, QObject* parent);
 
-		virtual void exec() = 0;
-		RuleNodeTypes type() const;
+		void exec();
+		void exec( QHash<QString,QString>& variables );
 
+
+		static ConditionOperator translateConditionOperator( const QString &text );
+		static DataMiningOperation translateDataMiningOperator( const QString &text );
 
 	protected:
 		ConditionOperator _operator;
-		virtual bool isTrue() = 0;
+		virtual bool isTrue() const = 0;
+
 	};
 
 }

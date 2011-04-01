@@ -1,39 +1,31 @@
 # ------------------------------------------------------------
 #
-#  Project for building CnotiMind library
+#  Project for building Little Mozart with the Ogre SDK
 #
 # ------------------------------------------------------------
 
-TARGET    = CnotiMind
-TEMPLATE  = lib
+TARGET    = SingleEmotion
+TEMPLATE  = app
 QT       += xml
-QT       -= gui
-#CONFIG   += embed_manifest_exe create
+CONFIG   += embed_manifest_exe
 
 # ------------------------------------------------------------
-TMP_PATH      = ../tmp
-DESTDIR       = ../lib
-
-# ------------------------------------------------------------
-DEFINES      += CNOTIMIND_LIB QT_NO_QT_INCLUDE_WARN
-
-# ------------------------------------------------------------
-# Defautl settings
-# ------------------------------------------------------------
-
-#INCLUDEPATH += .
-
 # Debug settings
 CONFIG( debug, debug|release ) {
 	TARGET = $${TARGET}_d
 	BUILD_NAME = debug
+	LIBS += -lCnotiMind_d
 }
 
 # Release settings
 CONFIG( release, debug|release ) {
 	BUILD_NAME = release
+	LIBS += -lCnotiMind
 }
 
+# ------------------------------------------------------------
+TMP_PATH      = ../../tmp/examples/$${TARGET}
+DESTDIR       = ../bin/$${BUILD_NAME}
 
 OBJECTS_DIR += $${TMP_PATH}/$${BUILD_NAME}
 MOC_DIR     += $${TMP_PATH}/moc
@@ -46,13 +38,25 @@ INCLUDEPATH += $${OBJECTS_DIR} \
 			   $${RCC_DIR}
 
 # ------------------------------------------------------------
+INCLUDEPATH += ../../include
+
+LIBS += -L../../lib
+
+# ------------------------------------------------------------
 #  Files to be included in the project
 # ------------------------------------------------------------
-include( "Files.pri" )
-include( "../include/Include.pri" )
-include( "rules/Rules.pri" )
 
-# ------------------------------------------------------------
 
 HEADERS += \
+	Form.h
 
+SOURCES += \
+	Form.cpp \
+	main.cpp
+
+FORMS += \
+	Form.ui
+
+OTHER_FILES += \
+	../xml/single_emotion_rules.xml \
+	../xml/mind_settings.xml

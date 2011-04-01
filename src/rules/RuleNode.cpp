@@ -1,4 +1,5 @@
 #include <QtCore/QString>
+#include <QtCore/QListIterator>
 
 #include "RuleNode.h"
 #include "../Brain.h"
@@ -19,4 +20,40 @@ namespace CnotiMind
 		return false;
 	}
 
+	/**
+		Executes all children nodes exec
+	*/
+	void RuleNode::execChildren()
+	{
+		QListIterator<QObject*> it( children() );
+
+		// calls exec for each children;
+		while(it.hasNext())
+		{
+			QObject* obj = it.next();
+
+			RuleNode* node = qobject_cast<RuleNode*>( obj );
+
+			node->exec();
+		}
+	}
+
+	/**
+		Executes all children nodes exec.
+		It uses the variables
+	*/
+	void RuleNode::execChildren( QHash<QString, QString>& variables )
+	{
+		QListIterator<QObject*> it( children() );
+
+		// calls exec for each children;
+		while(it.hasNext())
+		{
+			QObject* obj = it.next();
+
+			RuleNode* node = qobject_cast<RuleNode*>( obj );
+
+			node->exec( variables );
+		}
+	}
 }

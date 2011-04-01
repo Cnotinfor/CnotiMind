@@ -4,6 +4,7 @@
 #include <QtCore/QString>
 
 #include "ConditionNode.h"
+#include "../Emotion.h"
 
 namespace CnotiMind
 {
@@ -15,11 +16,12 @@ namespace CnotiMind
 
 	public:
 		ConditionEmotionNode( const QString& emotion, const QString& value, ConditionOperator op, Brain* brain, QObject* parent );
-		void exec();
-		RuleNodeTypes type() const;
 
 	protected:
 		bool isTrue() const;
+		bool testEmotion( const Emotion& e ) const;
+
+		int _valueInt;
 	};
 
 }
