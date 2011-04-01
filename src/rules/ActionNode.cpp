@@ -20,7 +20,7 @@ namespace CnotiMind
 
 	void ActionNode::exec( QHash<QString, QString> &variables )
 	{
-		_brain->executeAction( _key, _value );
+		_brain->executeAction( _key, variableToValue( _value, variables ) );
 		// TODO, check variables and test if it needs to be replaced in the value.
 	}
 

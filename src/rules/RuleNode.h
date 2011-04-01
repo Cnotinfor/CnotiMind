@@ -41,6 +41,8 @@ namespace CnotiMind
 		void execChildren();
 		void execChildren( QHash<QString, QString>& variables );
 
+		const QString& variableToValue( const QString& value, QHash<QString, QString>& variables );
+
 	protected:
 		Brain* _brain;
 	};

@@ -56,4 +56,27 @@ namespace CnotiMind
 			node->exec( variables );
 		}
 	}
+
+	/*
+		Check if there is a variable in the value parameter.
+
+		If it is a variable try to get the value from the variables.
+
+		Variables start with the character $.
+	*/
+	const QString& RuleNode::variableToValue( const QString& value, QHash<QString, QString>& variables )
+	{
+		if(value.at(0) == '$')
+		{
+			QString variableName = value.mid(1); // Get the variable name, removes $
+
+			QHash<QString,QString>::const_iterator it = variables.find( variableName);
+			if( it != variables.end()  )
+			{
+				return it.value();
+			}
+		}
+
+		return value;
+	}
 }

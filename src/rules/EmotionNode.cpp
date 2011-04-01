@@ -44,18 +44,12 @@ namespace CnotiMind
 		_value.toInt(&ok);
 		if(!ok) // it is not a number, it could be a variable
 		{
-			if( variables.contains( _value ) ) // Test if the variable is set
-			{
-				_valueInt = variables.value( _value ).toInt(&ok); // get the value from the variable
+			const QString& value = variableToValue( _value, variables);
 
-				if(!ok) // if there has an error convertinf the value to int
-				{
-					return;
-				}
-			}
-			else
+			int newValueInt = value.toInt(&ok);
+			if( ok )
 			{
-				return; // It doesn't contain the variable, does nothing
+				_valueInt = newValueInt;
 			}
 		}
 

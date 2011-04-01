@@ -13,13 +13,23 @@ namespace CnotiMind
 
 	}
 
+	/*
+		Creates a memory Event and store it in the brain memory
+	*/
 	void StorageNode::exec()
 	{
+		MemoryEvent m( _key, _value );
 
+		_brain->storeToMemory( m, _memory);
 	}
 
+	/*
+
+	*/
 	void StorageNode::exec( QHash<QString, QString> &variables )
 	{
+		MemoryEvent m( _key, variableToValue( _value, variables ) );
 
+		_brain->storeToMemory( m, _memory);
 	}
 }
