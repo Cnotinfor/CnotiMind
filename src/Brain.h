@@ -12,6 +12,9 @@
 #include "Perception.h"
 #include "Emotion.h"
 #include "MemoryEvent.h"
+#include "CnotiMind.h"
+#include "rules/ConditionNode.h"
+
 
 
 namespace CnotiMind
@@ -21,7 +24,7 @@ namespace CnotiMind
 	class ActionNode;
 	class StorageNode;
 	class EmotionNode;
-	class ConditionNode;
+	//class ConditionNode;
 	class ConditionPerceptionNode;
 	class ConditionEmotionNode;
 	class ConditionDataMiningNode;
@@ -33,12 +36,7 @@ namespace CnotiMind
 
 	public:
 
-		enum MemoryType
-		{
-			LongTermMemory,
-			WorkingMemory,
-			UndefinedMemory
-		};
+
 
 		Q_ENUMS( MemoryType )
 
@@ -74,35 +72,58 @@ namespace CnotiMind
 		friend class RuleNode;
 		friend class RootNode;
 		friend class ActionNode;
-		friend class StorageNode;
 		friend class EmotionNode;
+		friend class DataMiningNode;
+		friend class StorageNode;
 		friend class ConditionNode;
 		friend class ConditionEmotionNode;
 		friend class ConditionDataMiningNode;
 		friend class ConditionPerceptionNode;
 
 	public:
-		static MemoryType translateMemoryType( const QString& text );
 
 	public slots:
 		void receivePerception(const Perception& perception);
 
 	signals:
 		void sendAction( const QString& key, const QString& value );
-		void sendEmotionalState(const QString& emotion, int value);
+		void sendEmotionalState(const QString& emotion, qreal value);
 
 	private:
 
 		// Methods to update the emotional state
-		void updateEmotionalValue(const QString& emotionName, int variation, int max, int min);
-		void updateEmotionalValue(const QString& emotionName, int variation);
+		void updateEmotionalValue(const QString& emotionName, qreal variation, qreal max, qreal min);
+		void updateEmotionalValue(const QString& emotionName, qreal variation);
 
 		// Methods to store information in memory
 		void storeToMemory( const MemoryEvent& event, MemoryType memory );
 
 		void executeAction( const QString& key, const QString& value );
 
+		// Methods to get information from the memory
+		QVariant dataMining( DataMiningOperation operation, const QString& event, MemoryType memoryType, bool *valid = NULL );
+		QVariant dataMining( DataMiningOperation operation, const QString& event, const QString& value, MemoryType memoryType, bool *valid = NULL );
+		QVariant dataMining( DataMiningOperation operation, const QString& event, qreal value, MemoryType memoryType, bool *valid = NULL );
 
+		qreal dataMiningMax( const QString& event, const QList<MemoryEvent>& memory, bool *valid = NULL );
+		qreal dataMiningMin( const QString& event, const QList<MemoryEvent>& memory, bool *valid = NULL );
+		qreal dataMiningSum( const QString& event, const QList<MemoryEvent>& memory, bool *valid = NULL );
+		qreal dataMiningSum( const QString& event, qreal value, const QList<MemoryEvent>& memory, bool *valid = NULL );
+		qreal dataMiningCount( const QString& event, const QList<MemoryEvent>& memory, bool *valid = NULL );
+		qreal dataMiningCount( const QString& event, const QString& value, const QList<MemoryEvent>& memory, bool *valid = NULL );
+		qreal dataMiningMean( const QString& event, const QList<MemoryEvent>& memory, bool *valid = NULL );
+
+		bool dataMiningExists( const QString& event, const QList<MemoryEvent>& memory, bool *valid = NULL );
+		bool dataMiningExists( const QString& event, const QString& value, const QList<MemoryEvent>& memory, bool *valid = NULL );
+
+		QString dataMiningLast( const QString& event, const QList<MemoryEvent>& memory, bool *valid = NULL );
+		QString dataMiningFirst( const QString& event, const QList<MemoryEvent>& memory, bool *valid = NULL );
+
+//		QString dataMiningDuration( const QString& event, const QList<MemoryEvent>& memory );
+//		QString dataMiningTime( const QString& event, const QList<MemoryEvent>& memory );
+
+		// method to help set valid value
+		inline void setValid( bool* valid, bool value );
 
 	private:
 		RuleNode* _rules;

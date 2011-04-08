@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Rules>
-	<Condition perception="User Talk" value="Hello">
-		<Condition datamining="last" event="User Talk" value="Hello" >
+	<Perception name="Add Note" value="Do">
+		<Datamining operation="last" event="Add Note" value="Hello"> <!-- operator="" variable="" result="" -->
 			<Action key="Talk" value="Again??" />
 		</Condition>
 		<Condition datamining="last" event="User Talk" value="Bye" >

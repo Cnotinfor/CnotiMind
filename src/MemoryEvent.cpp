@@ -1,6 +1,8 @@
 #include <QtCore/QString>
+#include <QtCore/QVariant>
 
 #include "MemoryEvent.h"
+#include "Perception.h"
 
 namespace CnotiMind
 {
@@ -11,33 +13,46 @@ namespace CnotiMind
 		is the local time.
 
 	*/
-	MemoryEvent::MemoryEvent(const QString& key, const QString& value):
-		Node( key, value ),
+	MemoryEvent::MemoryEvent(const QString& key, const QVariant& value):
+		_event( key ),
+		_value( value ),
 		_time( time() )
 	{
 
 	}
 
-	MemoryEvent::MemoryEvent(const QString& key, const QString& value, time_t time):
-		Node( key, value ),
+	MemoryEvent::MemoryEvent(const QString& key, const QVariant& value, time_t time):
+		_event( key ),
+		_value( value ),
 		_time( time )
 	{
 
 	}
 
+	/*
+		Creates a Memory Event based on a Perception.
+	*/
+	MemoryEvent::MemoryEvent( const Perception& perception ):
+		_event( perception.name() ),
+		_value( perception.value() ),
+		_time( time() )
+	{
+
+	}
+
+	const QVariant& MemoryEvent::value() const
+	{
+		return _value;
+	}
+
+	const QString& MemoryEvent::event() const
+	{
+		return _event;
+	}
+
 	time_t MemoryEvent::time() const
 	{
 		return _time;
-	}
-
-	const QString& MemoryEvent::key() const
-	{
-		return _key;
-	}
-
-	const QString& MemoryEvent::value() const
-	{
-		return _value;
 	}
 
 }

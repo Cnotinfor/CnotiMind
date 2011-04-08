@@ -30,7 +30,7 @@ private slots:
 
 	// Brain slots - connect brain to the GUI
 	void actionReceived( const QString& key, const QString& value );
-	void emotionReceived( const QString& emotion, int value );
+	void emotionReceived( const QString& emotion, qreal value );
 
 
 protected:

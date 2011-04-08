@@ -7,7 +7,8 @@ HEADERS += rules/ActionNode.h \
 		   rules/RuleNode.h \
 		   rules/StorageNode.h \
     rules/RulesXmlHandler.h \
-    rules/ConditionPerceptionNode.h
+    rules/ConditionPerceptionNode.h \
+    rules/DataMiningNode.h
 
 SOURCES += rules/ActionNode.cpp \
 		   rules/ConditionDataMiningNode.cpp \
@@ -18,4 +19,5 @@ SOURCES += rules/ActionNode.cpp \
 		   rules/RuleNode.cpp \
 		   rules/StorageNode.cpp \
     rules/RulesXmlHandler.cpp \
-    rules/ConditionPerceptionNode.cpp
+    rules/ConditionPerceptionNode.cpp \
+    rules/DataMiningNode.cpp

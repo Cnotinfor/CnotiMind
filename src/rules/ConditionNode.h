@@ -4,6 +4,7 @@
 #include <QtCore/QString>
 
 #include "RuleNode.h"
+#include "../CnotiMind.h"
 
 namespace CnotiMind
 {
@@ -15,46 +16,18 @@ namespace CnotiMind
 
 	public:
 
-		enum ConditionOperator
-		{
-			ConditionOperatorEqual,
-			ConditionOperatorDifferent,
-			ConditionOperatorSmaller,
-			ConditionOperatorBigger,
-			ConditionOperatorBiggerOrEqual,
-			ConditionOperatorSmallerOrEqual,
-			ConditionOperatorUndefined
-		};
-		Q_ENUMS( ConditionOperator )
-
-		enum DataMiningOperation
-		{
-			Max,
-			Min,
-			Sum,
-			Count,
-			Mean,
-			Exists,
-			Last,
-			First,
-			Duration,
-			Time,
-			Undefined
-		};
-		Q_ENUMS( DataMiningOperation )
-
 		ConditionNode(const QString& key, const QString& value, ConditionOperator op, Brain* brain, QObject* parent);
 
 		void exec();
 		void exec( QHash<QString,QString>& variables );
 
 
-		static ConditionOperator translateConditionOperator( const QString &text );
-		static DataMiningOperation translateDataMiningOperator( const QString &text );
-
 	protected:
 		ConditionOperator _operator;
-		virtual bool isTrue() const = 0;
+		virtual bool isTrue() = 0;
+
+		qreal _valueNumeric;
+		bool _isValueNumeric;
 
 	};
 

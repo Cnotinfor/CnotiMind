@@ -8,14 +8,13 @@
 namespace CnotiMind
 {
 
-	ConditionEmotionNode::ConditionEmotionNode(const QString& emotion, const QString& value, ConditionNode::ConditionOperator op, Brain* brain, QObject* parent):
-		ConditionNode( emotion, value, op, brain, parent ),
-		_valueInt( value.toInt() )
+	ConditionEmotionNode::ConditionEmotionNode(const QString& emotion, const QString& value, ConditionOperator op, Brain* brain, QObject* parent):
+		ConditionNode( emotion, value, op, brain, parent )
 	{
 
 	}
 
-	bool ConditionEmotionNode::isTrue() const
+	bool ConditionEmotionNode::isTrue()
 	{
 		// If the brain doesn't have emotions
 		if( _brain->_emotions.isEmpty() )
@@ -43,17 +42,19 @@ namespace CnotiMind
 	*/
 	bool ConditionEmotionNode::testEmotion( const Emotion& e ) const
 	{
-		switch( _operator )
+		if( _isValueNumeric )
 		{
-			case ConditionOperatorBigger: return e.value() == _valueInt;
-			case ConditionOperatorBiggerOrEqual: return e.value() >= _valueInt;
-			case ConditionOperatorSmaller: return e.value() < _valueInt;
-			case ConditionOperatorSmallerOrEqual: return e.value() <= _valueInt;
-			case ConditionOperatorEqual: return e.value() == _valueInt;
-			case ConditionOperatorDifferent: return e.value() != _valueInt;
+			switch( _operator )
+			{
+				case ConditionOperatorBigger: return e.value() == _valueNumeric;
+				case ConditionOperatorBiggerOrEqual: return e.value() >= _valueNumeric;
+				case ConditionOperatorSmaller: return e.value() < _valueNumeric;
+				case ConditionOperatorSmallerOrEqual: return e.value() <= _valueNumeric;
+				case ConditionOperatorEqual: return e.value() == _valueNumeric;
+				case ConditionOperatorDifferent: return e.value() != _valueNumeric;
+			}
 		}
-
-		// if the operator is invalid
+		// if the operator is invalid or the value is not numeric
 		return false;
 	}
 

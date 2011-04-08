@@ -4,20 +4,22 @@
 #include <QtCore/QString>
 
 #include "ConditionNode.h"
-#include "../Brain.h"
+#include "../CnotiMind.h"
 
 namespace CnotiMind
 {
 
 
-	class ConditionDataMiningNode : public ConditionNode
+	class ConditionDataMiningNode : public ConditionNode //, DataMining
 	{
 		Q_OBJECT
 
 	public:
 
-		ConditionDataMiningNode(const QString& key, const QString& value, ConditionOperator op, DataMiningOperation _dataMiningOperator, Brain::MemoryType memory, Brain* brain, QObject* parent);
-		ConditionDataMiningNode(const QString& key, const QString& value, ConditionOperator op, DataMiningOperation _dataMiningOperator, Brain::MemoryType memory, const QString& variable, Brain* brain, QObject* parent);
+		ConditionDataMiningNode(const QString& key, const QString& value, ConditionOperator op,
+								DataMiningOperation dataMiningOperation, MemoryType memory,
+								const QString& variable, const QString& compareValue,
+								Brain* brain, QObject* parent);
 
 		void exec();
 		void exec( QHash<QString, QString>& variables );
@@ -26,11 +28,16 @@ namespace CnotiMind
 
 
 	protected:
-		int _dataMiningOperator;
-		QString _variable;
+		const DataMiningOperation _dataMiningOperation;
+		const QString _variable;
+		const QString _compareValue;
+		qreal _compareValueNumeric;
+		const MemoryType _memory;
+		bool _isCompareValueNumeric;
 		QString _result;
-		Brain::MemoryType _memory;
-		bool isTrue() const;
+
+
+		bool isTrue();
 	};
 
 }

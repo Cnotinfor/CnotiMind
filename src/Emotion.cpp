@@ -1,4 +1,5 @@
 #include <QtCore/QString>
+#include <QtGlobal>
 #include "Emotion.h"
 
 namespace CnotiMind
@@ -13,7 +14,7 @@ namespace CnotiMind
 
 	}
 
-	Emotion::Emotion( const QString& key, int value ):
+	Emotion::Emotion( const QString& key, qreal value ):
 		_key( key ),
 		_value( value ),
 		_min( INT_MIN ),
@@ -22,7 +23,7 @@ namespace CnotiMind
 
 	}
 
-	Emotion::Emotion( const QString& key, int value, int max, int min ):
+	Emotion::Emotion( const QString& key, qreal value, qreal max, qreal min ):
 		_key( key ),
 		_value( value ),
 		_min( min ),
@@ -31,7 +32,7 @@ namespace CnotiMind
 
 	}
 
-	int Emotion::value() const
+	qreal Emotion::value() const
 	{
 		return _value;
 	}
@@ -54,25 +55,14 @@ namespace CnotiMind
 		Same happens for the minimal value
 
 	*/
-	bool Emotion::setValue( int newValue, int max, int min )
+	bool Emotion::setValue( qreal newValue, qreal max, qreal min )
 	{
-		int oldValue = _value;
+		qreal oldValue = _value;
 
-		int newMax = max < _max ? max : _max;
-		int newMin = min > _min ? min : _min;
+		qreal newMax = qMin( max, _max );
+		qreal newMin = qMax( min, _min );
 
-		if(newValue > newMax)
-		{
-			_value = newMax;
-		}
-		else if( newValue < newMin )
-		{
-			_value = newMin;
-		}
-		else
-		{
-			_value = newValue;
-		}
+		_value = qBound( newMin, newValue, newMax );
 
 		// Return true if the value changed
 		return oldValue != _value;
@@ -82,7 +72,7 @@ namespace CnotiMind
 	/**
 		Changes the value of the emotion.
 	*/
-	bool Emotion::setValue( int newValue )
+	bool Emotion::setValue( qreal newValue )
 	{
 		return setValue( newValue, _max, _min );
 	}
@@ -93,7 +83,7 @@ namespace CnotiMind
 		If the max and min are higher or lower then the emotion max and min, the emotion
 		max and min are used.
 	*/
-	bool Emotion::addValue( int increment, int max, int min )
+	bool Emotion::addValue( qreal increment, qreal max, qreal min )
 	{
 		return setValue( _value + increment, max, min);
 	}
@@ -101,7 +91,7 @@ namespace CnotiMind
 	/**
 		Add an increment to the value
 	*/
-	bool Emotion::addValue( int increment )
+	bool Emotion::addValue( qreal increment )
 	{
 		return setValue( _value + increment );
 	}

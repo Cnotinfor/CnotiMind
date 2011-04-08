@@ -37,7 +37,7 @@ namespace CnotiMind
 		bool _needValues;
 
 		QStringList _possibleValues;
-		QList<int> _emotionAttributes;
+		QList<qreal> _emotionAttributes;
 
 		// Constants
 		const QString TYPE;

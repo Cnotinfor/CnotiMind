@@ -18,10 +18,8 @@ namespace CnotiMind
 		ConditionEmotionNode( const QString& emotion, const QString& value, ConditionOperator op, Brain* brain, QObject* parent );
 
 	protected:
-		bool isTrue() const;
+		bool isTrue();
 		bool testEmotion( const Emotion& e ) const;
-
-		int _valueInt;
 	};
 
 }

@@ -22,7 +22,7 @@ Form::Form(QWidget *parent) :
 	_ui->setupUi(this);
 
 	connect( _brain, SIGNAL(sendAction(const QString&,const QString&)), this, SLOT(actionReceived(const QString&,const QString&)));
-	connect( _brain, SIGNAL(sendEmotionalState(const QString&,int)), this, SLOT(emotionReceived( const QString&, int )));
+	connect( _brain, SIGNAL(sendEmotionalState(const QString&,qreal)), this, SLOT(emotionReceived( const QString&, qreal )));
 
 	if(!_brain->loadXmlRules( XML_RULES ) )
 	{
@@ -42,13 +42,13 @@ Form::~Form()
 void Form::on_pushButtonShow_clicked()
 {
 
-	CnotiMind::Perception p("User Show", "");
+	CnotiMind::Perception p("User Talk", "Hello");
 	_brain->receivePerception( p );
 }
 
 void Form::on_pushButtonExit_clicked()
 {
-	CnotiMind::Perception p("User Exit", "");
+	CnotiMind::Perception p("User Talk", "Bye");
 	_brain->receivePerception( p );
 }
 
@@ -57,7 +57,7 @@ void Form::actionReceived( const QString& key, const QString& value )
 	_ui->plainTextEdit->appendPlainText( "Action " + key + ": " + value );
 }
 
-void Form::emotionReceived( const QString& emotion, int value )
+void Form::emotionReceived( const QString& emotion, qreal value )
 {
 	_ui->plainTextEdit->appendPlainText( "Emotion " + emotion + ": " + QString::number( value ) );
 }

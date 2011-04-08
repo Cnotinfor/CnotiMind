@@ -9,6 +9,7 @@
 #include "ConditionPerceptionNode.h"
 #include "ConditionEmotionNode.h"
 #include "ConditionDataMiningNode.h"
+#include "DataMiningNode.h"
 #include "../Brain.h"
 
 namespace CnotiMind
@@ -54,6 +55,10 @@ namespace CnotiMind
 		else if( QString::compare( qName, "Emotion", Qt::CaseInsensitive ) == 0 )
 		{
 			return createEmotionNode( atts );
+		}
+		else if( QString::compare( qName, "DataMining", Qt::CaseInsensitive ) == 0 )
+		{
+			return createDataMiningNode( atts );
 		}
 
 		return false;
@@ -137,7 +142,7 @@ namespace CnotiMind
 
 		QString key = atts.value( "key" );
 		QString value = atts.value( "value" );
-		Brain::MemoryType memory = Brain::translateMemoryType( atts.value( "memory" ) );
+		MemoryType memory = translateMemoryType( atts.value( "memory" ) );
 
 		_parentNode = _currentNode;
 		_currentNode =  new StorageNode( key, value, memory, _brain, _parentNode );
@@ -156,9 +161,9 @@ namespace CnotiMind
 		QString value = atts.value( "value" );
 
 		bool okMin;
-		int min = atts.value( "min" ).toInt(&okMin);
+		qreal min = atts.value( "min" ).toDouble(&okMin);
 		bool okMax;
-		int max = atts.value( "max" ).toInt(&okMax);
+		qreal max = atts.value( "max" ).toDouble(&okMax);
 
 		if(!okMax)
 		{
@@ -175,6 +180,25 @@ namespace CnotiMind
 		return true;
 	}
 
+	bool RulesXmlHandler::createDataMiningNode( const QXmlAttributes & atts )
+	{
+		if( _rootNode == NULL || _currentNode == NULL )
+		{
+			return false;
+		}
+
+		QString key = atts.value( "event" );
+		QString value = atts.value( "value" );
+		DataMiningOperation opDataMining = translateDataMiningOperator( atts.value( "operation" ) );
+		QString variable = atts.value( "variable" );
+		MemoryType memory = translateMemoryType( atts.value( "memory" ) );
+
+		_parentNode = _currentNode;
+		_currentNode =  new DataMiningNode( key, value, opDataMining, memory, variable, _brain, _parentNode );
+
+		return true;
+	}
+
 	/*
 
 	*/
@@ -185,15 +209,17 @@ namespace CnotiMind
 			return false;
 		}
 
-		if( atts.index( "perception") != -1)
+		QString typeCondition = atts.value( "name" );
+
+		if( QString::compare( typeCondition, "perception", Qt::CaseInsensitive ) == 0 )
 		{
 			return createConditionPerceptionNode( atts );
 		}
-		else if( atts.index( "datamining" ) != -1)
+		else if( QString::compare( typeCondition, "datamining", Qt::CaseInsensitive ) == 0 )
 		{
 			return createConditionDataMiningNode( atts );
 		}
-		else if( atts.index( "emotion" ) != -1 )
+		else if( QString::compare( typeCondition, "emotion", Qt::CaseInsensitive ) == 0 )
 		{
 			return createConditionEmotionNode( atts );
 		}
@@ -208,14 +234,12 @@ namespace CnotiMind
 	{
 		QString key = atts.value( "perception" );
 		QString value = atts.value( "value" );
-		QString opString = atts.value( "operator" );
-		ConditionNode::ConditionOperator op = ConditionNode::translateConditionOperator( opString );
+		ConditionOperator op = translateConditionOperator( atts.value( "operator" ) );
 
 		_parentNode = _currentNode;
 		_currentNode =  new ConditionPerceptionNode( key, value, op, _brain, _parentNode );
 
 		return true;
-
 	}
 
 	/*
@@ -225,7 +249,7 @@ namespace CnotiMind
 	{
 		QString key = atts.value( "emotion" );
 		QString value = atts.value( "value" );
-		ConditionNode::ConditionOperator op = ConditionNode::translateConditionOperator( atts.value( "operator" ) );
+		ConditionOperator op = translateConditionOperator( atts.value( "operator" ) );
 
 		_parentNode = _currentNode;
 		_currentNode =  new ConditionEmotionNode( key, value, op, _brain, _parentNode );
@@ -240,12 +264,14 @@ namespace CnotiMind
 	{
 		QString key = atts.value( "event" );
 		QString value = atts.value( "value" );
-		ConditionNode::ConditionOperator op = ConditionNode::translateConditionOperator( atts.value( "operator" ) );
-		ConditionNode::DataMiningOperation opDataMining = ConditionNode::translateDataMiningOperator( atts.value( "datamining" ) );
-		Brain::MemoryType memory = Brain::translateMemoryType( atts.value( "memory" ) );
+		ConditionOperator op = translateConditionOperator( atts.value( "operator" ) );
+		DataMiningOperation opDataMining = translateDataMiningOperator( atts.value( "operation" ) );
+		QString variable = atts.value( "variable" );
+		QString compareValue = atts.value( "compareValue" );
+		MemoryType memory = translateMemoryType( atts.value( "memory" ) );
 
 		_parentNode = _currentNode;
-		_currentNode =  new ConditionDataMiningNode( key, value, op, opDataMining, memory, _brain, _parentNode );
+		_currentNode =  new ConditionDataMiningNode( key, value, op, opDataMining, memory, variable, compareValue, _brain, _parentNode );
 
 		return true;
 	}

@@ -10,6 +10,7 @@
 	<Perception name="Finish Melody" />
 	<Perception name="User Exit" />
 	<Perception name="User Show" />
+	<Perception name="User Talk" />
 	<Perception name="Add Note Height" type="Values" />
 <!--		<value>Do</value>
 		<value>Re</value>
@@ -34,6 +35,6 @@
 	<Action name="Play Instrument" type="string" />
 
 	<!-- List of emotions the agent has -->
-	<Emotion name="Happiness" value="1" min="-10" max="10" decay="" />
-	<Emotion name="Boreness" value="1" min="-10" max="10" decay="" />
+	<Emotion name="Happiness" value="0" min="-10" max="10" decay="" />
+	<Emotion name="Boreness" value="0" min="-10" max="10" decay="" />
 </Settings>

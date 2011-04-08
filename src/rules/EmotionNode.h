@@ -15,16 +15,17 @@ namespace CnotiMind
 
 	public:
 		EmotionNode(const QString& key, const QString& value, Brain* brain, QObject* parent);
-		EmotionNode(const QString& key, const QString& value, int max, int min, Brain* brain, QObject* parent);
+		EmotionNode(const QString& key, const QString& value, qreal max, qreal min, Brain* brain, QObject* parent);
 
 		void exec();
 		void exec( QHash<QString, QString>& variables );
 
 
 	protected:
-		int _min;
-		int _max;
-		int _valueInt;
+		qreal _min;
+		qreal _max;
+		qreal _valueNumeric;
+		bool _valueNumericOk;
 	};
 
 }

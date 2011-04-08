@@ -232,6 +232,7 @@ namespace CnotiMind
 			_insideEmotion = false;
 			return true;
 		}
+		return true;
 	}
 
 

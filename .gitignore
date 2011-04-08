@@ -10,3 +10,4 @@ Makefile*
 /debug
 /Debug
 /*-build-*
+/examples/bin

@@ -6,7 +6,7 @@
 namespace CnotiMind
 {
 
-	StorageNode::StorageNode(const QString& key, const QString& value, Brain::MemoryType memory, Brain* brain, QObject* parent):
+	StorageNode::StorageNode(const QString& key, const QString& value, MemoryType memory, Brain* brain, QObject* parent):
 		RuleNode( key, value, brain, parent ),
 		_memory( memory )
 	{

@@ -63,6 +63,8 @@ namespace CnotiMind
 		If it is a variable try to get the value from the variables.
 
 		Variables start with the character $.
+
+		If the variable is not found, it return an empty QString
 	*/
 	const QString& RuleNode::variableToValue( const QString& value, QHash<QString, QString>& variables )
 	{
@@ -77,6 +79,6 @@ namespace CnotiMind
 			}
 		}
 
-		return value;
+		return "";
 	}
 }

@@ -32,7 +32,7 @@ namespace CnotiMind
 
 	}
 
-	void Competences::changeEmotion( const QString& emotion, int newValue )
+	void Competences::changeEmotion( const QString& emotion, qreal newValue )
 	{
 
 	}

@@ -10,16 +10,16 @@ namespace CnotiMind
 		RuleNode( key, value, brain, parent ),
 		_min(INT_MIN),
 		_max(INT_MAX),
-		_valueInt( value.toInt() )
+		_valueNumeric( value.toDouble( &_valueNumericOk) )
 	{
 
 	}
 
-	EmotionNode::EmotionNode( const QString& key, const QString& value, int max, int min, Brain* brain, QObject* parent ):
+	EmotionNode::EmotionNode( const QString& key, const QString& value, qreal max, qreal min, Brain* brain, QObject* parent ):
 		RuleNode( key, value, brain, parent ),
 		_min( min ),
 		_max( max ),
-		_valueInt( value.toInt() )
+		_valueNumeric( value.toDouble() )
 	{
 
 	}
@@ -34,25 +34,23 @@ namespace CnotiMind
 			return; // it doesn't do nothing
 		}
 
-		_brain->updateEmotionalValue( _key, _valueInt, _max, _min );
+		_brain->updateEmotionalValue( _key, _valueNumeric, _max, _min );
 	}
 
 	void EmotionNode::exec( QHash<QString, QString> &variables )
 	{
-		// Test if the value is valid
-		bool ok;
-		_value.toInt(&ok);
-		if(!ok) // it is not a number, it could be a variable
+		if(!_valueNumericOk) // it is not a number, it could be a variable
 		{
 			const QString& value = variableToValue( _value, variables);
+			bool ok;
 
-			int newValueInt = value.toInt(&ok);
+			qreal newValueInt = value.toDouble(&ok);
 			if( ok )
 			{
-				_valueInt = newValueInt;
+				_valueNumeric = newValueInt;
 			}
 		}
 
-		_brain->updateEmotionalValue( _key, _valueInt, _max, _min );
+		_brain->updateEmotionalValue( _key, _valueNumeric, _max, _min );
 	}
 }

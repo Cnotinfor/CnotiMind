@@ -17,7 +17,7 @@ namespace CnotiMind
 		ConditionPerceptionNode(const QString& key, const QString& value, ConditionOperator op, Brain* brain, QObject* parent);
 
 	protected:
-		bool isTrue() const;
+		bool isTrue();
 	};
 
 }

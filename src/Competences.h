@@ -23,7 +23,7 @@ namespace CnotiMind
 
 		bool loadXML( const QString& path );
 		void newAction( const Action& action );
-		void changeEmotion( const QString& emotion, int newValue );
+		void changeEmotion( const QString& emotion, qreal newValue );
 		void connectToBrain( const Brain* brain );
 
 	private:

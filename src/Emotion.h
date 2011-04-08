@@ -14,15 +14,15 @@ namespace CnotiMind
 	{
 	public:
 		Emotion();
-		Emotion(const QString& key, int value);
-		Emotion(const QString& key, int value, int max, int min);
+		Emotion(const QString& key, qreal value);
+		Emotion(const QString& key, qreal value, qreal max, qreal min);
 
-		int value() const;
+		qreal value() const;
 		const QString& key() const;
-		bool setValue( int newValue, int max, int min );
-		bool setValue( int newValue );
-		bool addValue( int increment, int max, int min );
-		bool addValue( int increment );
+		bool setValue( qreal newValue, qreal max, qreal min );
+		bool setValue( qreal newValue );
+		bool addValue( qreal increment, qreal max, qreal min );
+		bool addValue( qreal increment );
 
 		friend bool operator==(const Emotion& emotion, const QString& emotionName);
 		friend bool operator==(const QString& emotionName, const Emotion& emotion);
@@ -32,9 +32,9 @@ namespace CnotiMind
 		friend QStringList&	operator<< ( QStringList& list, const Emotion& e );
 
 	protected:
-		int _value;
-		int _max;
-		int _min;
+		qreal _value;
+		qreal _max;
+		qreal _min;
 		QString _key;
 	};
 

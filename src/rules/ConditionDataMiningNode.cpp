@@ -7,22 +7,19 @@
 namespace CnotiMind
 {
 
-	ConditionDataMiningNode::ConditionDataMiningNode(const QString& key, const QString& value, ConditionNode::ConditionOperator op, ConditionNode::DataMiningOperation dataMiningOperator, Brain::MemoryType memory, Brain* brain, QObject* parent):
+	ConditionDataMiningNode::ConditionDataMiningNode(const QString& key, const QString& value,
+													 ConditionOperator op, DataMiningOperation dataMiningOperation,
+													 MemoryType memory, const QString& variable,
+													 const QString& compareValue, Brain* brain,
+													 QObject* parent):
 		ConditionNode( key, value, op, brain, parent ),
-		_dataMiningOperator( dataMiningOperator ),
-		_variable( "" ),
-		_memory( memory )
-	{
-
-	}
-
-	ConditionDataMiningNode::ConditionDataMiningNode(const QString& key, const QString& value, ConditionNode::ConditionOperator op, ConditionNode::DataMiningOperation dataMiningOperator, Brain::MemoryType memory, const QString& variable, Brain* brain, QObject* parent):
-		ConditionNode( key, value, op, brain, parent ),
-		_dataMiningOperator( dataMiningOperator ),
+		_dataMiningOperation( dataMiningOperation ),
 		_variable( variable ),
-		_memory( memory )
+		_compareValue( compareValue ),
+		_memory( memory ),
+		_isCompareValueNumeric( false )
 	{
-
+		_compareValueNumeric = _compareValue.toFloat( &_isCompareValueNumeric );
 	}
 
 	void ConditionDataMiningNode::exec()
@@ -60,20 +57,57 @@ namespace CnotiMind
 		return _variable;
 	}
 
-	bool ConditionDataMiningNode::isTrue() const
+	/*
+		Test if the datamining condition is true
+	*/
+	bool ConditionDataMiningNode::isTrue()
 	{
+		bool valid;
 
-
-		switch( _operator )
+		// If the values are numbers it should use the
+		if( _isValueNumeric && _isCompareValueNumeric )
 		{
-//			case ConditionOperatorBigger: return e.value() == _valueInt;
-//			case ConditionOperatorBiggerOrEqual: return e.value() >= _valueInt;
-//			case ConditionOperatorSmaller: return e.value() < _valueInt;
-//			case ConditionOperatorSmallerOrEqual: return e.value() <= _valueInt;
-//			case ConditionOperatorEqual: return e.value() == _valueInt;
-//			case ConditionOperatorDifferent: return e.value() != _valueInt;
+			QVariant result = _brain->dataMining( _dataMiningOperation, _key, _valueNumeric, _memory, &valid );
+
+			if(!valid)
+			{
+				return false;
+			}
+
+			_result = result.toString();
+			qreal _resultNumeric = result.toReal();
+
+			switch( _operator )
+			{
+				case ConditionOperatorBigger: return _resultNumeric > _compareValueNumeric ;
+				case ConditionOperatorBiggerOrEqual: return _resultNumeric >= _compareValueNumeric;
+				case ConditionOperatorSmaller: return _resultNumeric < _compareValueNumeric;
+				case ConditionOperatorSmallerOrEqual: return _resultNumeric <= _compareValueNumeric;
+				case ConditionOperatorEqual: return _resultNumeric == _compareValueNumeric;
+				case ConditionOperatorDifferent: return _resultNumeric != _compareValueNumeric;
+			}
+
+			return false;
 		}
-		return true;
+		else // If the value is QString
+		{
+			QVariant result = _brain->dataMining( _dataMiningOperation, _key, _value, _memory, &valid );
+
+			if(!valid)
+			{
+				return false;
+			}
+
+			_result = result.toString();
+
+			switch( _operator )
+			{
+				case ConditionOperatorEqual: return QString::compare( _result, _compareValue, Qt::CaseInsensitive ) == 0;
+				case ConditionOperatorDifferent: return QString::compare( _result, _compareValue, Qt::CaseInsensitive ) != 0;
+			}
+
+			return false;
+		}
 	}
 
 }

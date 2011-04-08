@@ -1,8 +1,10 @@
 #include <QtCore/QString>
 #include <QtCore/QDebug>
 #include <QtCore/QMutableListIterator>
+#include <QtCore/QListIterator>
 
 #include "Brain.h"
+#include "CnotiMind.h"
 #include "SettingsXmlHandler.h"
 #include "rules/RuleNode.h"
 #include "rules/RulesXmlHandler.h"
@@ -77,7 +79,7 @@ namespace CnotiMind
 		Emotions the brain reacts to.
 
 		If no emotions are added to the brain, it will not react to emotion changes
-		defined on the rules.
+		defined on the rules
 	*/
 	void Brain::addEmotion( const Emotion& emotion )
 	{
@@ -254,21 +256,6 @@ namespace CnotiMind
 	}
 
 
-	/*
-		Translate a QString to MemoryType
-	*/
-	Brain::MemoryType Brain::translateMemoryType( const QString& text )
-	{
-		if( QString::compare( text, "WM", Qt::CaseInsensitive) == 0 )
-		{
-			return WorkingMemory;
-		}
-		if( QString::compare( text, "LTM", Qt::CaseInsensitive) == 0 )
-		{
-			return LongTermMemory;
-		}
-		return UndefinedMemory;
-	}
 
 	void Brain::receivePerception( const Perception& perception )
 	{
@@ -278,7 +265,7 @@ namespace CnotiMind
 		_semaphoreBrain.release();
 	}
 
-	void Brain::updateEmotionalValue(const QString& emotionName, int variation, int max, int min)
+	void Brain::updateEmotionalValue(const QString& emotionName, qreal variation, qreal max, qreal min)
 	{
 		QMutableListIterator<Emotion> it(_emotions);
 		while(it.hasNext())
@@ -301,7 +288,7 @@ namespace CnotiMind
 		}
 	}
 
-	void Brain::updateEmotionalValue(const QString& emotionName, int variation)
+	void Brain::updateEmotionalValue(const QString& emotionName, qreal variation)
 	{
 		updateEmotionalValue( emotionName, variation, INT_MAX, INT_MIN);
 	}
@@ -330,4 +317,509 @@ namespace CnotiMind
 		emit sendAction( key, value );
 	}
 
+	/*
+		Return a QString with the datamining result operation. In case there are no events, or
+		the data doesn't allow the operation it return an empty QString.
+
+		All numeric operations are converted to QString
+	*/
+
+	;
+
+	QVariant Brain::dataMining( DataMiningOperation operation, const QString& event, MemoryType memoryType, bool* valid )
+	{
+		// test if parameters are valid for datamining
+		if( event.isEmpty() )
+		{
+			setValid( valid, false );
+			return "";
+		}
+
+		// get the memory to performe data mining
+		QList<MemoryEvent>& memory = ( memoryType == WorkingMemory ? _workingMemory : _longTermMemory );
+		setValid( valid, true );
+
+		switch( operation )
+		{
+		case DMO_Max:
+			return QString::number( dataMiningMax( event, memory, valid ) );
+		case DMO_Min:
+			return QString::number( dataMiningMin( event, memory, valid ) );
+		case DMO_Sum:
+			return QString::number( dataMiningSum( event, memory, valid ) );
+		case DMO_Count:
+			return QString::number( dataMiningCount( event, memory, valid ) );
+		case DMO_Mean:
+			return QString::number( dataMiningMean( event, memory, valid ) );
+		case DMO_Exists:
+			return dataMiningExists( event, memory, valid ) ? "1" : "0";
+		case DMO_Last:
+			return dataMiningLast( event, memory, valid );
+		case DMO_First:
+			return dataMiningFirst( event, memory, valid );
+		}
+
+		setValid( valid, false );
+		return "";
+	}
+
+	QVariant Brain::dataMining( DataMiningOperation operation, const QString& event, const QString& value, MemoryType memoryType, bool* valid )
+	{
+		// test if parameters are valid for datamining
+		if( event.isEmpty() )
+		{
+			setValid( valid, false );
+			return "";
+		}
+
+		// if value is empty, do datamining without the value
+		if( value.isEmpty() )
+		{
+			return dataMining( operation, event, memoryType, valid );
+		}
+
+
+		// get the memory to performe data mining
+		QList<MemoryEvent>& memory = ( memoryType == WorkingMemory ? _workingMemory : _longTermMemory );
+		setValid( valid, true );
+
+		switch( operation )
+		{
+		case DMO_Count:
+			return QString::number( dataMiningCount( event, value, memory, valid ) );
+		case DMO_Exists:
+			return dataMiningExists( event, value, memory, valid ) ? "1" : "0";
+		}
+
+		setValid( valid, false );
+		return "";
+	}
+
+	QVariant Brain::dataMining( DataMiningOperation operation, const QString& event, qreal value, MemoryType memoryType, bool* valid )
+	{
+		// test if parameters are valid for datamining
+		if( event.isEmpty() )
+		{
+			setValid( valid, false );
+			return 0;
+		}
+
+		// get the memory to performe data mining
+		QList<MemoryEvent>& memory = ( memoryType == WorkingMemory ? _workingMemory : _longTermMemory );
+		setValid( valid, true );
+
+		switch( operation )
+		{
+		case DMO_Sum:
+			return dataMiningSum( event, value, memory, valid );
+		}
+
+		setValid( valid, false );
+		return 0;
+	}
+
+
+	/*
+		Datamining Max only works if the values are numbers.
+
+		If any value of the event is not a number, it will set valid to false.
+		If the memory is empty it will set valid to false.
+		If no event is found it also set valid to false.
+
+		Valid becomes true, if it founds one element.
+	*/
+	qreal Brain::dataMiningMax( const QString& event, const QList<MemoryEvent>& memory, bool* valid )
+	{
+		// by defaulf the data mining is not valid
+		setValid( valid, false );
+
+		if( memory.isEmpty() )
+		{
+			return 0;
+		}
+
+		bool ok;
+		qreal max = INT_MIN;
+		qreal aux;
+		QListIterator<MemoryEvent> it(memory);
+		while(it.hasNext()) // Iterate all memory
+		{
+			const MemoryEvent& me = it.next();
+
+			if( QString::compare(me.event(), event, Qt::CaseInsensitive) == 0 ) // Event found
+			{
+				aux = me.value().toReal(&ok); // convert value to qreal
+				if( !ok ) // if the event value is not numeric
+				{
+					setValid( valid, false ); // mark has invalid datamining
+					return 0;
+				}
+
+				if( aux > max )
+				{
+					max = aux;
+					setValid( valid, true );// Max found, mark data mining has valid
+				}
+			}
+		}
+
+		return max;
+	}
+
+	qreal Brain::dataMiningMin( const QString& event, const QList<MemoryEvent>& memory, bool* valid )
+	{
+		// by defaulf the data mining is not valid
+		setValid( valid, false );
+
+		if( memory.isEmpty() )
+		{
+			return 0;
+		}
+
+		bool ok;
+		qreal min = INT_MAX;
+		qreal aux;
+		QListIterator<MemoryEvent> it(memory);
+		while(it.hasNext()) // Iterate all memory
+		{
+			const MemoryEvent& me = it.next();
+
+			if( QString::compare(me.event(), event, Qt::CaseInsensitive) == 0 ) // Event found
+			{
+				aux = me.value().toReal(&ok); // convert value to qreal
+				if( !ok ) // if the event value is not numeric
+				{
+					setValid( valid, false );
+					return 0;
+				}
+
+				if( aux < min )
+				{
+					min = aux;
+					setValid( valid, true ); // min found, mark has valid datamining
+				}
+			}
+		}
+
+		return min;
+	}
+
+	/*
+		Datamining Sum only works if the values are numbers.
+
+		If any value of the event is not a number, it will set valid to false.
+
+		If the memory is empty or no event is found it will set valid to true, and return 0.
+	*/
+	qreal Brain::dataMiningSum( const QString& event, const QList<MemoryEvent>& memory, bool* valid)
+	{
+		// by defaulf the data mining is valid
+		setValid( valid, true );
+
+		if( memory.isEmpty() )
+		{
+			return 0;
+		}
+
+		bool ok;
+		qreal sum = 0;
+		qreal aux;
+		QListIterator<MemoryEvent> it(memory);
+		while(it.hasNext()) // Iterate all memory
+		{
+			const MemoryEvent& me = it.next();
+
+			if( QString::compare(me.event(), event, Qt::CaseInsensitive) == 0 ) // Event found
+			{
+				aux = me.value().toReal(&ok); // convert value to qreal
+				if( !ok ) // if the event value is not numeric
+				{
+					setValid( valid, false ); // mark has invalid datamining
+					return 0;
+				}
+				sum += aux; // increment
+			}
+		}
+
+		return sum;
+	}
+
+	/*
+		Datamining Sum only works if the values are numbers.
+		It only sums events with the value specified.
+
+		If any value of the event is not a number, it will set valid to false.
+
+		If the memory is empty or no event with the value is found it will set valid to true, and return 0.
+	*/
+	qreal Brain::dataMiningSum( const QString& event, qreal value, const QList<MemoryEvent>& memory, bool* valid )
+	{
+		// by defaulf the data mining is valid
+		setValid( valid, true );
+
+		if( memory.isEmpty() )
+		{
+			return 0;
+		}
+
+		bool ok;
+		qreal sum = 0;
+		qreal aux;
+		QListIterator<MemoryEvent> it(memory);
+		while(it.hasNext()) // Iterate all memory
+		{
+			const MemoryEvent& me = it.next();
+
+			if( QString::compare(me.event(), event, Qt::CaseInsensitive) == 0 ) // Event found
+			{
+				aux = me.value().toReal(&ok); // convert value to qreal
+				if( !ok ) // if the event value is not numeric
+				{
+					setValid( valid, false );
+					return 0;
+				}
+				if( value == aux )
+				{
+					sum += aux; // increment
+				}
+			}
+		}
+
+		return sum;
+	}
+
+	/*
+		Datamining Count counts all events with name event in memory
+
+		It is always valid datamining.
+	*/
+	qreal Brain::dataMiningCount( const QString& event, const QList<MemoryEvent>& memory, bool* valid )
+	{
+		// by defaulf the data mining is valid
+		setValid( valid, true );
+
+		if( memory.isEmpty() )
+		{
+			return 0;
+		}
+
+		int n = 0;
+
+		QListIterator<MemoryEvent> it(memory);
+		while( it.hasNext() ) // Iterate all memory
+		{
+			const MemoryEvent& me = it.next();
+
+			if( QString::compare(me.event(), event, Qt::CaseInsensitive ) == 0 ) // Event found
+			{
+				n++;
+			}
+		}
+
+		return n;
+	}
+
+	/*
+		Datamining Count counts all events with name event and value in memory
+
+		It is always valid datamining.
+	*/
+	qreal Brain::dataMiningCount( const QString& event, const QString& value, const QList<MemoryEvent>& memory, bool* valid )
+	{
+		// by default the data mining is valid
+		setValid( valid, true );
+
+		if( memory.isEmpty() )
+		{
+			return 0;
+		}
+
+		int n = 0;
+
+		QListIterator<MemoryEvent> it(memory);
+		while( it.hasNext() ) // Iterate all memory
+		{
+			const MemoryEvent& me = it.next();
+
+			if( QString::compare(me.event(), event, Qt::CaseInsensitive ) == 0 &&
+				QString::compare(me.value().toString(), value, Qt::CaseInsensitive ) == 0 ) // Event with value found
+			{
+				n++;
+			}
+		}
+
+		return n;
+	}
+
+	/*
+		Datamining Mean only works if the values are numbers.
+
+		If any value of the event is not a number, it will set valid to false.
+
+		If the memory is empty or no event is found it will set valid to true, and return 0.
+	*/
+	qreal Brain::dataMiningMean( const QString& event, const QList<MemoryEvent>& memory, bool* valid)
+	{
+		// by defaulf the data mining is valid
+		setValid( valid, false );
+
+		if( memory.isEmpty() )
+		{
+			return 0;
+		}
+
+		bool ok;
+		qreal sum = 0;
+		int n = 0;
+		qreal aux;
+		QListIterator<MemoryEvent> it(memory);
+		while(it.hasNext()) // Iterate all memory
+		{
+			const MemoryEvent& me = it.next();
+
+			if( QString::compare(me.event(), event, Qt::CaseInsensitive) == 0 ) // Event found
+			{
+				aux = me.value().toReal(&ok); // convert value to qreal
+				if( !ok ) // if the event value is not numeric
+				{
+					setValid( valid, false );
+					return 0;
+				}
+				sum += aux; // increment
+				n++;
+			}
+		}
+
+		// Return 0, if no events were found
+		return (n > 0 ? sum / n : 0); // return mean = sum / n
+	}
+
+	/*
+		Datamining Exists is always valid
+	*/
+	bool Brain::dataMiningExists( const QString& event, const QList<MemoryEvent>& memory, bool* valid)
+	{
+		// set data mining to valid
+		setValid( valid, true );
+
+		if( memory.isEmpty() )
+		{
+			return false;
+		}
+
+		QListIterator<MemoryEvent> it(memory);
+		while(it.hasNext()) // Iterate all memory
+		{
+			const MemoryEvent& me = it.next();
+
+			if( QString::compare(me.event(), event, Qt::CaseInsensitive) == 0 ) // Event found
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/*
+		Datamining Exists is always valid
+	*/
+	bool Brain::dataMiningExists( const QString& event, const QString& value, const QList<MemoryEvent>& memory, bool *valid )
+	{
+		// set data mining to valid
+		setValid( valid, true );
+
+		if( memory.isEmpty() )
+		{
+			return false;
+		}
+
+		QListIterator<MemoryEvent> it(memory);
+		while(it.hasNext()) // Iterate all memory
+		{
+			const MemoryEvent& me = it.next();
+
+			if( QString::compare(me.event(), event, Qt::CaseInsensitive ) == 0 &&
+				QString::compare(me.value().toString(), value, Qt::CaseInsensitive ) == 0 ) // Event with value found
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+
+	/*
+		Dataminign Last. Return the value of the last event found
+
+		If the memory is empty or the event is not found, set valid to false. Return an emtpy QString.
+	*/
+	QString Brain::dataMiningLast( const QString& event, const QList<MemoryEvent>& memory, bool* valid)
+	{
+		// by defaulf the data mining is not valid
+		setValid( valid, false );
+
+		if( memory.isEmpty() )
+		{
+			return "";
+		}
+
+		QListIterator<MemoryEvent> it(memory);
+		it.toBack(); // start search from back
+		while( it.hasPrevious() ) // Iterate all memory
+		{
+			const MemoryEvent& me = it.previous();
+
+			if( QString::compare(me.event(), event, Qt::CaseInsensitive ) == 0 ) // Event found
+			{
+				setValid( valid, true );
+				return me.value().toString();
+			}
+		}
+
+		return "";
+	}
+
+	/*
+		Dataminign First. Return the value of the first event found
+
+		If the memory is empty or the event is not found, set valid to false. Return an emtpy QString.
+	*/
+	QString Brain::dataMiningFirst( const QString& event, const QList<MemoryEvent>& memory, bool* valid )
+	{
+		// by defaulf the data mining is not valid
+		setValid( valid, false );
+
+		if( memory.isEmpty() )
+		{
+			return "";
+		}
+
+		QListIterator<MemoryEvent> it(memory);
+		while( it.hasNext() ) // Iterate all memory
+		{
+			const MemoryEvent& me = it.next();
+
+			if( QString::compare(me.event(), event, Qt::CaseInsensitive ) == 0 ) // Event found
+			{
+				setValid( valid, true );
+				return me.value().toString();
+			}
+		}
+
+		return "";
+	}
+
+	/*
+		Private method, to change the value of the pointer valid.
+		It only changes, if the pointer is valid.
+	*/
+	void Brain::setValid( bool* valid, bool value )
+	{
+		if( valid != NULL)
+		{
+			*valid = value;
+		}
+	}
 }
