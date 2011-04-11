@@ -18,6 +18,8 @@ namespace CnotiMind
 		void exec();
 		void exec( QHash<QString, QString>& variables );
 
+		QString info( int depth = 0 ) const;
+
 	protected:
 		MemoryType _memory;
 	};

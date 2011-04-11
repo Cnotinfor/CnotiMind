@@ -38,6 +38,7 @@ namespace CnotiMind
 		bool createDataMiningNode( const QXmlAttributes & atts );
 		bool createConditionNode( const QXmlAttributes & atts );
 		bool createConditionPerceptionNode( const QXmlAttributes & atts );
+		bool createConditionVariableNode( const QXmlAttributes & atts );
 		bool createConditionEmotionNode( const QXmlAttributes & atts );
 		bool createConditionDataMiningNode( const QXmlAttributes & atts );
 

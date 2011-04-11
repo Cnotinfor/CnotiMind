@@ -14,6 +14,34 @@ namespace CnotiMind
 
 	}
 
+	void ConditionPerceptionNode::exec()
+	{
+		if( isTrue() )
+		{
+			QHash<QString,QString> variables;
+			variables.insert("[Perception.value]", _value );
+			execChildren( variables );
+		}
+	}
+
+	void ConditionPerceptionNode::exec( QHash<QString,QString>& variables )
+	{
+		if( isTrue() )
+		{
+			variables.insert( "[Perception.value]", _value );
+			execChildren( variables );
+		}
+	}
+
+	QString ConditionPerceptionNode::info( int depth ) const
+	{
+		QString info;
+
+		info += space(depth) + "Condition type=Perception";
+
+		return info + RuleNode::info(depth);
+	}
+
 	/*
 		Test if there are perceptions, and test the first queued perception, if it is
 		equal to this node perception.
@@ -45,7 +73,7 @@ namespace CnotiMind
 
 						switch( _operator )
 						{
-							case ConditionOperatorBigger: return perceptionValue == nodeValue;
+							case ConditionOperatorBigger: return perceptionValue > nodeValue;
 							case ConditionOperatorBiggerOrEqual: return perceptionValue >= nodeValue;
 							case ConditionOperatorSmaller: return perceptionValue < nodeValue;
 							case ConditionOperatorSmallerOrEqual: return perceptionValue <= nodeValue;

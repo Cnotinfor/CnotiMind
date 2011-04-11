@@ -40,4 +40,13 @@ namespace CnotiMind
 		}
 	}
 
+	QString ConditionNode::info( int depth ) const
+	{
+		QString info;
+
+		info += space(depth) + "Condition ";
+
+		return info + RuleNode::info(depth);
+	}
+
 }

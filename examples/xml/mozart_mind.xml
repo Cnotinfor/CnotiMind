@@ -5,6 +5,7 @@
 	<Perception name="Add Note" type="string" />
 	<Perception name="Set Duration" type="int" />
 	<Perception name="Delete Note" />
+	<Perception name="User Talk" />
 
 	<!-- List of actions -->
 	<!-- Actions the agent can do -->

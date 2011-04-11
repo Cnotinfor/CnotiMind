@@ -22,6 +22,7 @@ namespace CnotiMind
 
 		bool isRoot() const;
 
+		QString info( int depth = 0 ) const;
 	};
 
 }

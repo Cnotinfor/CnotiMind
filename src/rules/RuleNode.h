@@ -37,11 +37,15 @@ namespace CnotiMind
 		virtual void exec( QHash<QString, QString>& variables ) = 0;
 		virtual bool isRoot() const;
 
+		virtual QString info( int depth = 0 ) const = 0;
+
 	protected:
-		void execChildren();
-		void execChildren( QHash<QString, QString>& variables );
+		virtual void execChildren();
+		virtual void execChildren( QHash<QString, QString>& variables );
 
 		const QString& variableToValue( const QString& value, QHash<QString, QString>& variables );
+
+		QString space( int depth ) const;
 
 	protected:
 		Brain* _brain;

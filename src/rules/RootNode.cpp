@@ -32,4 +32,8 @@ namespace CnotiMind
 		return true;
 	}
 
+	QString RootNode::info( int depth) const
+	{
+		return "Root" + RuleNode::info( depth );
+	}
 }

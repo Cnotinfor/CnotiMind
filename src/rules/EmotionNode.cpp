@@ -24,6 +24,24 @@ namespace CnotiMind
 
 	}
 
+	QString EmotionNode::info( int depth ) const
+	{
+		QString info;
+
+		info += space(depth) + "Emotion (" + _key + ") increment=" + _value;
+
+		if(_min != INT_MIN)
+		{
+			info += " min=" + QString::number( _min );
+		}
+		if(_max != INT_MAX)
+		{
+			info += " max=" + QString::number( _max );
+		}
+
+		return info + RuleNode::info(depth);
+	}
+
 	void EmotionNode::exec()
 	{
 		// Test if the value is valid

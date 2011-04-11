@@ -20,6 +20,32 @@ namespace CnotiMind
 		return false;
 	}
 
+	/*
+		Writes the information about the node and child nodes
+
+		Depth parameter is to be used internally to beatify the output
+	*/
+	QString RuleNode::info( int depth ) const
+	{
+		QString info;
+		QListIterator<QObject*> it( children() );
+
+		QString s = space( depth );
+
+		// calls exec for each children;
+		while(it.hasNext())
+		{
+			QObject* obj = it.next();
+
+			RuleNode* node = qobject_cast<RuleNode*>( obj );
+
+
+			info += s + node->info( depth + 1 );
+		}
+
+		return info;
+	}
+
 	/**
 		Executes all children nodes exec
 	*/
@@ -68,17 +94,29 @@ namespace CnotiMind
 	*/
 	const QString& RuleNode::variableToValue( const QString& value, QHash<QString, QString>& variables )
 	{
-		if(value.at(0) == '$')
+		// A variable is between square brackets
+		if(value.at(0) == '[' && value.at( value.size() - 1 ) == ']')
 		{
-			QString variableName = value.mid(1); // Get the variable name, removes $
-
-			QHash<QString,QString>::const_iterator it = variables.find( variableName);
+			QHash<QString,QString>::const_iterator it = variables.find( value );
 			if( it != variables.end()  )
 			{
 				return it.value();
 			}
+			return "";
 		}
 
-		return "";
+		return value;
+	}
+
+
+	QString RuleNode::space(int depth) const
+	{
+		QString space = "\n";
+		for( int i=0; i <= depth; i++ )
+		{
+			space += "\t";
+		}
+
+		return space;
 	}
 }

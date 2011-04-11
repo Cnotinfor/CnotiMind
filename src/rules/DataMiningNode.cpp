@@ -20,6 +20,7 @@ namespace CnotiMind
 		{
 			if( _variable.isEmpty() )
 			{
+				// this should not happen, since the _variable should never be empty
 				execChildren();
 			}
 			else
@@ -41,6 +42,15 @@ namespace CnotiMind
 			}
 			execChildren( variables );
 		}
+	}
+
+	QString DataMiningNode::info( int depth ) const
+	{
+		QString info;
+
+		info += space(depth) + "DataMining";
+
+		return info + RuleNode::info(depth);
 	}
 
 	bool DataMiningNode::isTrue()

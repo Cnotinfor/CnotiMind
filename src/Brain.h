@@ -43,6 +43,8 @@ namespace CnotiMind
 		Brain(const QString& path, QObject* parent);
 		Brain(QObject* parent);
 
+		~Brain();
+
 		// Methods to set up the brain
 		bool loadXmlSettings( const QString& filename );
 		void addValidPerception( const QString& perception );
@@ -84,6 +86,7 @@ namespace CnotiMind
 
 	public slots:
 		void receivePerception(const Perception& perception);
+		void stop();
 
 	signals:
 		void sendAction( const QString& key, const QString& value );
@@ -136,6 +139,8 @@ namespace CnotiMind
 		QList<MemoryEvent> _longTermMemory;
 		QList<MemoryEvent> _workingMemory;
 		int _timerDecayEmotions;
+
+		bool _quit;
 	};
 
 }

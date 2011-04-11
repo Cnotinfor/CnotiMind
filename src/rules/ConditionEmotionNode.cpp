@@ -14,6 +14,34 @@ namespace CnotiMind
 
 	}
 
+	void ConditionEmotionNode::exec()
+	{
+		if( isTrue() )
+		{
+			QHash<QString,QString> variables;
+			variables.insert("[Emotion.value]", _value );
+			execChildren( variables );
+		}
+	}
+
+	void ConditionEmotionNode::exec( QHash<QString,QString>& variables )
+	{
+		if( isTrue() )
+		{
+			variables.insert( "[Emotion.value]", _value );
+			execChildren( variables );
+		}
+	}
+
+	QString ConditionEmotionNode::info( int depth ) const
+	{
+		QString info;
+
+		info += space(depth) + "Condition type=Emotion";
+
+		return info + RuleNode::info(depth);
+	}
+
 	bool ConditionEmotionNode::isTrue()
 	{
 		// If the brain doesn't have emotions
@@ -46,7 +74,7 @@ namespace CnotiMind
 		{
 			switch( _operator )
 			{
-				case ConditionOperatorBigger: return e.value() == _valueNumeric;
+				case ConditionOperatorBigger: return e.value() > _valueNumeric;
 				case ConditionOperatorBiggerOrEqual: return e.value() >= _valueNumeric;
 				case ConditionOperatorSmaller: return e.value() < _valueNumeric;
 				case ConditionOperatorSmallerOrEqual: return e.value() <= _valueNumeric;

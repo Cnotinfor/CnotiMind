@@ -24,4 +24,13 @@ namespace CnotiMind
 		// TODO, check variables and test if it needs to be replaced in the value.
 	}
 
+	QString ActionNode::info( int depth ) const
+	{
+		QString info;
+
+		info += space(depth) + "Action (" + _key + ") value=" + _value;
+
+		return info + RuleNode::info(depth);
+	}
+
 }

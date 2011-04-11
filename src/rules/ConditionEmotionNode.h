@@ -17,6 +17,11 @@ namespace CnotiMind
 	public:
 		ConditionEmotionNode( const QString& emotion, const QString& value, ConditionOperator op, Brain* brain, QObject* parent );
 
+		void exec();
+		void exec( QHash<QString,QString>& variables );
+
+		QString info( int depth = 0 ) const;
+
 	protected:
 		bool isTrue();
 		bool testEmotion( const Emotion& e ) const;

@@ -38,6 +38,8 @@ INCLUDEPATH += $${OBJECTS_DIR} \
 			   $${RCC_DIR}
 
 # ------------------------------------------------------------
+#  Path for CnotiMind
+# ------------------------------------------------------------
 INCLUDEPATH += ../../include
 
 LIBS += -L../../lib
@@ -50,14 +52,15 @@ LIBS += -L../../lib
 
 SOURCES += \
 	main.cpp \
-    Form.cpp
+	Form.cpp
 
 OTHER_FILES += \
 	../xml/mozart_rules.xml \
 	../xml/mozart_mind.xml
 
 HEADERS += \
-    Form.h
+	Form.h \
+	CnotiAudio.h
 
 FORMS += \
-    Form.ui
+	Form.ui

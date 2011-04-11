@@ -2,6 +2,7 @@
 #define _CONDITIONNODE_H
 
 #include <QtCore/QString>
+#include <QtCore/QHash>
 
 #include "RuleNode.h"
 #include "../CnotiMind.h"
@@ -21,6 +22,7 @@ namespace CnotiMind
 		void exec();
 		void exec( QHash<QString,QString>& variables );
 
+		QString info( int depth = 0 ) const;
 
 	protected:
 		ConditionOperator _operator;

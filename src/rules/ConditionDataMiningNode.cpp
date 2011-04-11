@@ -51,10 +51,13 @@ namespace CnotiMind
 		}
 	}
 
-
-	const QString& ConditionDataMiningNode::variable() const
+	QString ConditionDataMiningNode::info( int depth ) const
 	{
-		return _variable;
+		QString info;
+
+		info += space(depth) + "Condition type=DataMining";
+
+		return info + RuleNode::info(depth);
 	}
 
 	/*

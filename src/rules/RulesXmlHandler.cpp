@@ -1,4 +1,5 @@
 #include <QtCore/QObject>
+#include <QDebug>
 
 #include "RulesXmlHandler.h"
 #include "RootNode.h"
@@ -9,6 +10,7 @@
 #include "ConditionPerceptionNode.h"
 #include "ConditionEmotionNode.h"
 #include "ConditionDataMiningNode.h"
+#include "ConditionVariableNode.h"
 #include "DataMiningNode.h"
 #include "../Brain.h"
 
@@ -60,6 +62,8 @@ namespace CnotiMind
 		{
 			return createDataMiningNode( atts );
 		}
+
+		qDebug() << "[RulesXmlHandler::startElement] Invalid element" << qName;
 
 		return false;
 	}
@@ -123,7 +127,7 @@ namespace CnotiMind
 			return false;
 		}
 
-		QString key = atts.value( "key" );
+		QString key = atts.value( "name" );
 		QString value = atts.value( "value" );
 
 		_parentNode = _currentNode;
@@ -140,7 +144,7 @@ namespace CnotiMind
 			return false;
 		}
 
-		QString key = atts.value( "key" );
+		QString key = atts.value( "event" );
 		QString value = atts.value( "value" );
 		MemoryType memory = translateMemoryType( atts.value( "memory" ) );
 
@@ -157,8 +161,8 @@ namespace CnotiMind
 			return false;
 		}
 
-		QString key = atts.value( "key" );
-		QString value = atts.value( "value" );
+		QString key = atts.value( "name" );
+		QString value = atts.value( "increment" );
 
 		bool okMin;
 		qreal min = atts.value( "min" ).toDouble(&okMin);
@@ -209,7 +213,7 @@ namespace CnotiMind
 			return false;
 		}
 
-		QString typeCondition = atts.value( "name" );
+		QString typeCondition = atts.value( "type" );
 
 		if( QString::compare( typeCondition, "perception", Qt::CaseInsensitive ) == 0 )
 		{
@@ -223,7 +227,12 @@ namespace CnotiMind
 		{
 			return createConditionEmotionNode( atts );
 		}
+		else if( QString::compare( typeCondition, "variable", Qt::CaseInsensitive ) == 0 )
+		{
+			return createConditionVariableNode( atts );
+		}
 
+		qDebug() << "[RulesXmlHandler::createConditionNode] Invalid condition node type" << typeCondition;
 		return false;
 	}
 
@@ -238,6 +247,18 @@ namespace CnotiMind
 
 		_parentNode = _currentNode;
 		_currentNode =  new ConditionPerceptionNode( key, value, op, _brain, _parentNode );
+
+		return true;
+	}
+
+	bool RulesXmlHandler::createConditionVariableNode( const QXmlAttributes & atts )
+	{
+		QString key = atts.value( "variable" );
+		QString value = atts.value( "compareValue" );
+		ConditionOperator op = translateConditionOperator( atts.value( "operator" ) );
+
+		_parentNode = _currentNode;
+		_currentNode =  new ConditionVariableNode( key, value, op, _brain, _parentNode );
 
 		return true;
 	}

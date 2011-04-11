@@ -32,4 +32,13 @@ namespace CnotiMind
 
 		_brain->storeToMemory( m, _memory);
 	}
+
+	QString StorageNode::info( int depth ) const
+	{
+		QString info;
+
+		info += space(depth) + "Storage key=" + _key + " value=" + _value;
+
+		return info + RuleNode::info(depth);
+	}
 }

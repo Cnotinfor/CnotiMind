@@ -59,43 +59,43 @@ namespace CnotiMind
 	*/
 	DataMiningOperation translateDataMiningOperator( const QString &text )
 	{
-		if( QString::compare( text, "max" ) == 0 )
+		if( QString::compare( text, "max", Qt::CaseInsensitive  ) == 0 )
 		{
 			return DMO_Max;
 		}
-		if( QString::compare( text, "min" ) == 0 )
+		if( QString::compare( text, "min", Qt::CaseInsensitive  ) == 0 )
 		{
 			return DMO_Min;
 		}
-		if( QString::compare( text, "sum" ) == 0 )
+		if( QString::compare( text, "sum", Qt::CaseInsensitive  ) == 0 )
 		{
 			return DMO_Sum;
 		}
-		if( QString::compare( text, "count" ) == 0 )
+		if( QString::compare( text, "count", Qt::CaseInsensitive  ) == 0 )
 		{
 			return DMO_Count;
 		}
-		if( QString::compare( text, "mean" ) == 0 )
+		if( QString::compare( text, "mean", Qt::CaseInsensitive  ) == 0 )
 		{
 			return DMO_Mean;
 		}
-		if( QString::compare( text, "exists" ) == 0 )
+		if( QString::compare( text, "exists", Qt::CaseInsensitive ) == 0 )
 		{
 			return DMO_Exists;
 		}
-		if( QString::compare( text, "last" ) == 0 )
+		if( QString::compare( text, "last", Qt::CaseInsensitive  ) == 0 )
 		{
 			return DMO_Last;
 		}
-		if( QString::compare( text, "first" ) == 0 )
+		if( QString::compare( text, "first", Qt::CaseInsensitive  ) == 0 )
 		{
 			return DMO_First;
 		}
-		if( QString::compare( text, "duration" ) == 0 )
+		if( QString::compare( text, "duration", Qt::CaseInsensitive  ) == 0 )
 		{
 			return DMO_Duration;
 		}
-		if( QString::compare( text, "time" ) == 0 )
+		if( QString::compare( text, "time", Qt::CaseInsensitive  ) == 0 )
 		{
 			return DMO_Time;
 		}

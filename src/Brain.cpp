@@ -14,8 +14,9 @@ namespace CnotiMind
 {
 
 	Brain::Brain( const QString& path, QObject* parent ):
-		QThread( parent ),
-		_rules( NULL )
+		QThread( parent ),\
+		_rules( NULL ),
+		_quit( false )
 	{
 		loadXmlSettings( path );
 
@@ -23,9 +24,17 @@ namespace CnotiMind
 
 	Brain::Brain( QObject* parent ):
 		QThread( parent ),
-		_rules( NULL )
+		_rules( NULL ),
+		_quit( false )
 	{
 
+	}
+
+	Brain::~Brain()
+	{
+//		_quit = true;
+//		_semaphoreBrain.release();
+//		wait();
 	}
 
 	/**
@@ -159,6 +168,12 @@ namespace CnotiMind
 			// - changes in the memory
 			_semaphoreBrain.acquire();
 
+			// Check if it should stop
+			if(_quit)
+			{
+				return;
+			}
+
 			int n_emotions = _emotionsChanged.size();
 
 			// Execute the rules
@@ -247,7 +262,10 @@ namespace CnotiMind
 
 	void Brain::printRules()
 	{
-
+		if( _rules != NULL )
+		{
+			qDebug() << _rules->info();
+		}
 	}
 
 	void Brain::printMemory( MemoryType type )
@@ -263,6 +281,16 @@ namespace CnotiMind
 
 		// changing the semaphore, so that
 		_semaphoreBrain.release();
+	}
+
+	/*
+		Stops the brain
+	*/
+	void Brain::stop()
+	{
+		_quit = true;
+		_semaphoreBrain.release();
+		wait();
 	}
 
 	void Brain::updateEmotionalValue(const QString& emotionName, qreal variation, qreal max, qreal min)
