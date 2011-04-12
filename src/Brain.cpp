@@ -133,12 +133,47 @@ namespace CnotiMind
 
 	bool Brain::saveMemory(const QString& filename)
 	{
-		return true;
+		QFile f(filename);
+
+		if( f.open( QIODevice::WriteOnly | QIODevice::Text ) )
+		{
+			f.write( "<Memory>\n" );
+			f.write( "<LongTermMemory>\n" );
+			QListIterator<MemoryEvent> it(_longTermMemory);
+			while(it.hasNext())
+			{
+
+				f.write( it.next().toXml().toUtf8() + "\n" );
+			}
+			f.write( "</LongTermMemory>\n" );
+			f.write( "<WorkingMemory>\n" );
+			QListIterator<MemoryEvent> it2(_workingMemory);
+			while(it2.hasNext())
+			{
+				f.write( it2.next().toXml().toUtf8() + "\n" );
+			}
+			f.write( "</WorkingMemory>\n" );
+			f.write( "</Memory>\n" );
+
+			f.close();
+			return true;
+		}
+
+		return false;
 	}
 
 	bool Brain::loadMemory(const QString& filename)
 	{
-		return true;
+		QFile f(filename);
+
+		if( f.open( QIODevice::ReadOnly | QIODevice::Text ) )
+		{
+
+			f.close();
+			return true;
+		}
+
+		return false;
 	}
 
 	bool Brain::saveEmotionalState(const QString& filename)

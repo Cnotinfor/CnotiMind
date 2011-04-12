@@ -13,7 +13,7 @@
 #include "Emotion.h"
 #include "MemoryEvent.h"
 #include "CnotiMind.h"
-#include "rules/ConditionNode.h"
+//#include "rules/ConditionNode.h"
 
 
 
@@ -24,10 +24,11 @@ namespace CnotiMind
 	class ActionNode;
 	class StorageNode;
 	class EmotionNode;
-	//class ConditionNode;
+	class ConditionNode;
 	class ConditionPerceptionNode;
 	class ConditionEmotionNode;
 	class ConditionDataMiningNode;
+	class MemoryXmlHandler;
 
 
 	class CNOTIMIND_EXPORT Brain: public QThread
@@ -81,6 +82,8 @@ namespace CnotiMind
 		friend class ConditionEmotionNode;
 		friend class ConditionDataMiningNode;
 		friend class ConditionPerceptionNode;
+		friend class MemoryXmlHandler;
+
 
 	public:
 

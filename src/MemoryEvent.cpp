@@ -55,4 +55,18 @@ namespace CnotiMind
 		return _time;
 	}
 
+	QString MemoryEvent::toXml() const
+	{
+		QString xml;
+
+		xml = "<MemoryEvent ";
+
+		xml += "event=\"" + _event + "\"";
+		xml += "value=\"" + _value.toString() + "\"";
+		xml += "time=\"" + QString::number( _time ) + "\"";
+
+		xml += "</MemoryEvent>";
+
+		return xml;
+	}
 }

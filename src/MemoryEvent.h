@@ -5,13 +5,14 @@
 #include <QtCore/QVariant>
 #include <ctime>
 
+#include "ObjectToXml.h"
 
 namespace CnotiMind
 {
 
 	class Perception;
 
-	class MemoryEvent
+	class MemoryEvent: public ObjectToXml
 	{
 	public:
 
@@ -22,6 +23,8 @@ namespace CnotiMind
 		const QVariant& value() const;
 		const QString& event() const;
 		time_t time() const;
+
+		QString toXml() const;
 
 	protected:
 		QString _event;

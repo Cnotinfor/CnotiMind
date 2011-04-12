@@ -94,6 +94,7 @@ namespace CnotiMind
 	*/
 	const QString& RuleNode::variableToValue( const QString& value, QHash<QString, QString>& variables )
 	{
+		static QString empty;
 		// A variable is between square brackets
 		if(value.at(0) == '[' && value.at( value.size() - 1 ) == ']')
 		{
@@ -102,7 +103,7 @@ namespace CnotiMind
 			{
 				return it.value();
 			}
-			return "";
+			return empty;
 		}
 
 		return value;

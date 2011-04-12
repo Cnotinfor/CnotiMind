@@ -8,8 +8,9 @@ HEADERS += \
 	Node.h \
 	Perception.h \
 	SettingsXmlHandler.h \
-	CnotiMind.h
-
+	CnotiMind.h \
+	ObjectToXml.h \
+	MemoryXmlHandler.h
 
 SOURCES += \
 	Action.cpp \
@@ -20,4 +21,6 @@ SOURCES += \
 	Node.cpp \
 	Perception.cpp \
 	SettingsXmlHandler.cpp \
-	CnotiMind.cpp
+	CnotiMind.cpp \
+	ObjectToXml.cpp \
+	MemoryXmlHandler.cpp
