@@ -46,7 +46,7 @@ namespace CnotiMind
 		{
 			return ConditionOperatorEqual;
 		}
-		if( text.compare("!=") == 0)
+		if( text.compare("!=") == 0 || text.compare("<>") == 0)
 		{
 			return ConditionOperatorDifferent;
 		}

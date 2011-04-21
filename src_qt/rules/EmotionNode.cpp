@@ -19,7 +19,7 @@ namespace CnotiMind
 		RuleNode( key, value, brain, parent ),
 		_min( min ),
 		_max( max ),
-		_valueNumeric( value.toDouble() )
+		_valueNumeric( value.toDouble( &_valueNumericOk ) )
 	{
 
 	}
@@ -45,9 +45,7 @@ namespace CnotiMind
 	void EmotionNode::exec()
 	{
 		// Test if the value is valid
-		bool ok;
-		_value.toInt(&ok);
-		if(!ok) // it is not a number, it could be a variable, but there are no variables
+		if(!_valueNumericOk) // it is not a number, it could be a variable, but there are no variables
 		{
 			return; // it doesn't do nothing
 		}
@@ -59,14 +57,18 @@ namespace CnotiMind
 	{
 		if(!_valueNumericOk) // it is not a number, it could be a variable
 		{
-			const QString& value = variableToValue( _value, variables);
 			bool ok;
+			const QString& value = variableToValue( _value, variables);
 
+			// Test if the value from the variable is a valid number
 			qreal newValueInt = value.toDouble(&ok);
-			if( ok )
+			if( !ok )
 			{
-				_valueNumeric = newValueInt;
+				return;// Not valid, it doesn't do nothing
 			}
+
+			// Update the numeric value
+			_valueNumeric = newValueInt;
 		}
 
 		_brain->updateEmotionalValue( _key, _valueNumeric, _max, _min );

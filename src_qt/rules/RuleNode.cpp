@@ -88,7 +88,7 @@ namespace CnotiMind
 
 		If it is a variable try to get the value from the variables.
 
-		Variables start with the character $.
+		Variables are betweeen square brackets [].
 
 		If the variable is not found, it return an empty QString
 	*/

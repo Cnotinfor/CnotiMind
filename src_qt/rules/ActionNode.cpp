@@ -14,14 +14,18 @@ namespace CnotiMind
 
 	void ActionNode::exec()
 	{
-
 		_brain->executeAction( _key, _value );
 	}
 
 	void ActionNode::exec( QHash<QString, QString> &variables )
 	{
-		_brain->executeAction( _key, variableToValue( _value, variables ) );
-		// TODO, check variables and test if it needs to be replaced in the value.
+		const QString& value = variableToValue( _value, variables );
+
+		// Test if the value is valid.
+		if( !value.isEmpty() )
+		{
+			_brain->executeAction( _key, value );
+		}
 	}
 
 	QString ActionNode::info( int depth ) const

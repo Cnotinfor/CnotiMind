@@ -1,4 +1,8 @@
-CnotiMind is a library made in C++ and Qt Framework
+CnotiMind is a library made in C++/Qt Framework and Objective-C.
+
+There are two directories,
+src_qt -> C++/Qt version
+src_ios -> Objective-C version for iOS devices
 
 Several ideias are based on the FAtiMA project from INESC-ID, but we made many simplifications.
 

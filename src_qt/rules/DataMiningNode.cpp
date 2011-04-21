@@ -9,9 +9,10 @@ namespace CnotiMind
 		RuleNode( key, value, brain, parent ),
 		_operation( dataMiningOperation ),
 		_memory( memory ),
-		_variable( variable )
+		_variable( variable ),
+		_valueNumeric( value.toDouble( &_isValueNumeric ) )
 	{
-		_valueNumeric = value.toDouble( &_isValueNumeric );
+
 	}
 
 	void DataMiningNode::exec()
