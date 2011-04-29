@@ -39,9 +39,21 @@ namespace CnotiMind
 		DMO_Undefined
 	};
 
+	enum MathOperation
+	{
+		MathOperationSum,
+		MathOperationMultiplication,
+		MathOperationDivision,
+		MathOperationRemainder,
+		MathOperationSubtraction,
+		MathOperationSquareRoot,
+		MathOperationUndefined
+	};
+
 	MemoryType translateMemoryType( const QString& text );
 	ConditionOperator translateConditionOperator( const QString &text );
 	DataMiningOperation translateDataMiningOperator( const QString &text );
+	MathOperation translateMathOperation( const QString &text );
 }
 
 #endif // CNOTIMIND_H

@@ -51,7 +51,7 @@
 				<Storage event="Start Note" value="Pause" />
 			</Condition>
 		</Condition>
-	
+
 		<!-- Test if there is already one note -->
 		<Condition type="DataMining" operation="Exists"	event="Add Note" compareValue="1" memory="WM">
 			<DataMining operation="Last" event="Add Note" variable="[LastNote]" memory="WM">
@@ -284,7 +284,7 @@
 
 		<!-- If there are no notes -->
 		<Condition type="DataMining" operation="Exists"	event="Add Note" compareValue="0" memory="WM">
-			
+
 		</Condition>
 
 
@@ -293,6 +293,86 @@
 		<Storage event="Add Note" value="[Perception.value]" memory="WM" />
 		<Storage event="Add Note" value="[Perception.value]" memory="LTM" />
 		<Action name="Talk" value="Note Added" />
+	</Condition>
+
+	<!-- When a duration is added -->
+	<Condition type="Perception" perception="Add Duration">
+		<!-- Calculate the music lenght -->
+		<DataMining operation="Sum" event="Add Duration" variable="[MusicLength]" memory="WM">
+			<!-- Check how much tempos from the compass have been used -->
+			<MathOperation name="Remainder" variable="[MusicLenght]" value="4" result="[Duration]">
+
+				<!-- Compass with 0 durations -->
+				<Condition type="Variable" variable="[Duration]" compareValue="0">
+					<Condition type="Perception" perception="Add Duration" value="1">
+						<Emotion name="Happiness" increment="1" max="8" />
+					</Condition>
+					<Condition type="Perception" perception="Add Duration" value="2">
+						<Emotion name="Happiness" increment="1" max="8" />
+					</Condition>
+					<Condition type="Perception" perception="Add Duration" value="3">
+						<Emotion name="Happiness" increment="1" max="8" />
+					</Condition>
+					<Condition type="Perception" perception="Add Duration" value="4">
+						<Emotion name="Happiness" increment="1" max="8" />
+					</Condition>
+				</Condition>
+
+				<!-- Compass with 1 durations -->
+				<Condition type="Variable" variable="[Duration]" compareValue="1">
+					<Condition type="Perception" perception="Add Duration" value="1">
+						<Emotion name="Happiness" increment="1" max="8" />
+					</Condition>
+					<Condition type="Perception" perception="Add Duration" value="2">
+						<Emotion name="Happiness" increment="1" max="8" />
+					</Condition>
+					<Condition type="Perception" perception="Add Duration" value="3">
+						<Emotion name="Happiness" increment="1" max="8" />
+					</Condition>
+					<Condition type="Perception" perception="Add Duration" value="4">
+						<Emotion name="Happiness" increment="1" max="8" />
+					</Condition>
+				</Condition>
+
+				<!-- Compass with 2 durations -->
+				<Condition type="Variable" variable="[Duration]" compareValue="2">
+					<Condition type="Perception" perception="Add Duration" value="1">
+						<Emotion name="Happiness" increment="1" max="8" />
+					</Condition>
+					<Condition type="Perception" perception="Add Duration" value="2">
+						<Emotion name="Happiness" increment="1" max="8" />
+					</Condition>
+					<Condition type="Perception" perception="Add Duration" value="3">
+						<Emotion name="Happiness" increment="1" max="8" />
+					</Condition>
+					<Condition type="Perception" perception="Add Duration" value="4">
+						<Emotion name="Happiness" increment="1" max="8" />
+					</Condition>
+				</Condition>
+
+				<!-- Compass with 3 durations -->
+				<Condition type="Variable" variable="[Duration]" compareValue="3">
+					<Condition type="Perception" perception="Add Duration" value="1">
+						<Emotion name="Happiness" increment="1" max="8" />
+					</Condition>
+					<Condition type="Perception" perception="Add Duration" value="2">
+						<Emotion name="Happiness" increment="1" max="8" />
+					</Condition>
+					<Condition type="Perception" perception="Add Duration" value="3">
+						<Emotion name="Happiness" increment="1" max="8" />
+					</Condition>
+					<Condition type="Perception" perception="Add Duration" value="4">
+						<Emotion name="Happiness" increment="1" max="8" />
+					</Condition>
+				</Condition>
+
+			</MathOperation>
+
+			<Storage event="Add Duration" value="[Perception.value]" memory="WM" />
+			<Storage event="Add Duration" value="[Perception.value]" memory="LTM" />
+			<Action name="Talk" value="Duration Added" />
+
+		</DataMining>
 	</Condition>
 
 

@@ -10,7 +10,8 @@ HEADERS += \
 	rules/RulesXmlHandler.h \
 	rules/ConditionPerceptionNode.h \
 	rules/DataMiningNode.h \
-	rules/ConditionVariableNode.h
+	rules/ConditionVariableNode.h \
+    rules/MathOperationNode.h
 
 SOURCES += \
 	rules/ActionNode.cpp \
@@ -24,4 +25,5 @@ SOURCES += \
 	rules/RulesXmlHandler.cpp \
 	rules/ConditionPerceptionNode.cpp \
 	rules/DataMiningNode.cpp \
-	rules/ConditionVariableNode.cpp
+	rules/ConditionVariableNode.cpp \
+    rules/MathOperationNode.cpp

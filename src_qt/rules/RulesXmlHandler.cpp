@@ -12,6 +12,7 @@
 #include "ConditionDataMiningNode.h"
 #include "ConditionVariableNode.h"
 #include "DataMiningNode.h"
+#include "MathOperationNode.h"
 #include "../Brain.h"
 
 namespace CnotiMind
@@ -42,25 +43,29 @@ namespace CnotiMind
 		{
 			return createRootNode( atts );
 		}
-		else if( QString::compare( qName, "Condition", Qt::CaseInsensitive ) == 0 )
+		if( QString::compare( qName, "Condition", Qt::CaseInsensitive ) == 0 )
 		{
 			return createConditionNode( atts );
 		}
-		else if( QString::compare( qName, "Action", Qt::CaseInsensitive ) == 0 )
+		if( QString::compare( qName, "Action", Qt::CaseInsensitive ) == 0 )
 		{
 			return createActionNode( atts );
 		}
-		else if( QString::compare( qName, "Storage", Qt::CaseInsensitive ) == 0 )
+		if( QString::compare( qName, "Storage", Qt::CaseInsensitive ) == 0 )
 		{
 			return createStorageNode( atts );
 		}
-		else if( QString::compare( qName, "Emotion", Qt::CaseInsensitive ) == 0 )
+		if( QString::compare( qName, "Emotion", Qt::CaseInsensitive ) == 0 )
 		{
 			return createEmotionNode( atts );
 		}
-		else if( QString::compare( qName, "DataMining", Qt::CaseInsensitive ) == 0 )
+		if( QString::compare( qName, "DataMining", Qt::CaseInsensitive ) == 0 )
 		{
 			return createDataMiningNode( atts );
+		}
+		if( QString::compare( qName, "MathOperation", Qt::CaseInsensitive ) == 0 )
+		{
+			return createMathOperationNode( atts );
 		}
 
 		qDebug() << "[RulesXmlHandler::startElement] Invalid element" << qName;
@@ -297,5 +302,17 @@ namespace CnotiMind
 		return true;
 	}
 
+	bool RulesXmlHandler::createMathOperationNode( const QXmlAttributes & atts )
+	{
+		MathOperation operation = translateMathOperation( atts.value( "name" ) );
+		QString value = atts.value( "value" );
+		QString variable = atts.value( "variable" );
+		QString resultVariable = atts.value( "result" );
+
+		_parentNode = _currentNode;
+		_currentNode =  new MathOperationNode( operation, variable, value, resultVariable, _brain, _parentNode );
+
+		return true;
+	}
 
 }

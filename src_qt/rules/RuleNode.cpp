@@ -84,7 +84,7 @@ namespace CnotiMind
 	}
 
 	/*
-		Check if there is a variable in the value parameter.
+		Check if there is a variable in the value parameter name.
 
 		If it is a variable try to get the value from the variables.
 

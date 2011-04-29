@@ -101,4 +101,47 @@ namespace CnotiMind
 		}
 		return DMO_Undefined;
 	}
+
+	/*
+		Convert text string to a MathOperation
+	*/
+	MathOperation translateMathOperation( const QString &text )
+	{
+		if( QString::compare( text, "sum", Qt::CaseInsensitive  ) == 0 ||
+			QString::compare( text, "+" ) == 0 )
+		{
+			return MathOperationSum;
+		}
+		if( QString::compare( text, "sub", Qt::CaseInsensitive  ) == 0 ||
+			QString::compare( text, "subtraction", Qt::CaseInsensitive  ) == 0 ||
+			QString::compare( text, "-" ) == 0 )
+		{
+			return MathOperationSubtraction;
+		}
+		if( QString::compare( text, "mul", Qt::CaseInsensitive  ) == 0 ||
+			QString::compare( text, "multiplication", Qt::CaseInsensitive  ) == 0 ||
+			QString::compare( text, "x", Qt::CaseInsensitive ) == 0 ||
+			QString::compare( text, "*" ) == 0 )
+		{
+			return MathOperationMultiplication;
+		}
+		if( QString::compare( text, "div", Qt::CaseInsensitive  ) == 0 ||
+			QString::compare( text, "division", Qt::CaseInsensitive  ) == 0 ||
+			QString::compare( text, "quotient", Qt::CaseInsensitive  ) == 0 ||
+			QString::compare( text, "/" ) == 0 )
+		{
+			return MathOperationDivision;
+		}
+		if( QString::compare( text, "remainder", Qt::CaseInsensitive  ) == 0 ||
+			QString::compare( text, "%" ) == 0 )
+		{
+			return MathOperationRemainder;
+		}
+		if( QString::compare( text, "sqrt", Qt::CaseInsensitive  ) == 0 )
+		{
+			return MathOperationSquareRoot;
+		}
+
+		return MathOperationUndefined;
+	}
 }
