@@ -12,7 +12,7 @@ namespace CnotiMind
 
 	class Brain;
 
-	class RuleNode : public QObject, public Node
+	class RuleNode : public QObject
 	{
 		Q_OBJECT
 
@@ -31,7 +31,7 @@ namespace CnotiMind
 		};
 		Q_DECLARE_FLAGS( RuleNodeTypes, RuleNodeType )
 
-		RuleNode( const QString& key, const QString& value, Brain* brain, QObject* parent );
+		RuleNode( Brain* brain, QObject* parent );
 
 		virtual void exec() = 0;
 		virtual void exec( QHash<QString, QString>& variables ) = 0;

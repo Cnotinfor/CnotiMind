@@ -7,8 +7,7 @@
 namespace CnotiMind
 {
 
-	RuleNode::RuleNode( const QString& key, const QString& value, Brain* brain, QObject* parent ):
-		Node( key, value ),
+	RuleNode::RuleNode( Brain* brain, QObject* parent ):
 		QObject( parent ),
 		_brain( brain )
 	{
@@ -38,7 +37,6 @@ namespace CnotiMind
 			QObject* obj = it.next();
 
 			RuleNode* node = qobject_cast<RuleNode*>( obj );
-
 
 			info += s + node->info( depth + 1 );
 		}
@@ -95,17 +93,20 @@ namespace CnotiMind
 	const QString& RuleNode::variableToValue( const QString& value, QHash<QString, QString>& variables )
 	{
 		static QString empty;
-		// A variable is between square brackets
+		// A variable value is between square brackets
 		if(value.at(0) == '[' && value.at( value.size() - 1 ) == ']')
 		{
 			QHash<QString,QString>::const_iterator it = variables.find( value );
 			if( it != variables.end()  )
 			{
-				return it.value();
+				return it.value(); // return the value from the variable
 			}
+
+			// variable not found return empty string
 			return empty;
 		}
 
+		// because it is not a variable, return the value
 		return value;
 	}
 

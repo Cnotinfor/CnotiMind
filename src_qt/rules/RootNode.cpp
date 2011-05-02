@@ -8,7 +8,7 @@ namespace CnotiMind
 {
 
 	RootNode::RootNode( Brain* brain, QObject* parent ):
-		RuleNode("Root", "", brain, parent)
+		RuleNode( brain, parent)
 	{
 	}
 
@@ -27,11 +27,17 @@ namespace CnotiMind
 		execChildren( variables );
 	}
 
+	/*
+		Reimplementation. This is the only node that it is root
+	*/
 	bool RootNode::isRoot() const
 	{
 		return true;
 	}
 
+	/*
+		Debug information
+	*/
 	QString RootNode::info( int depth) const
 	{
 		return "Root" + RuleNode::info( depth );

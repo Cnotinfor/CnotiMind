@@ -35,6 +35,7 @@ namespace CnotiMind
 
 		MathOperation _operation;
 		QString _variable;
+		QString _value;
 		qreal _numericValue;
 		bool _isNumericValue;
 		QString _resultVariable;

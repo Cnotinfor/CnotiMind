@@ -22,6 +22,8 @@ namespace CnotiMind
 
 	protected:
 		MemoryType _memory;
+		QString _event;
+		QString _value;
 	};
 
 }

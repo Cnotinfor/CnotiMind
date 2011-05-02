@@ -1,13 +1,15 @@
 #include "MathOperationNode.h"
 #include <QtCore/qmath.h>
+#include <QDebug>
 
 namespace CnotiMind
 {
 
 	MathOperationNode::MathOperationNode( MathOperation op, const QString& variable, const QString& value,
 										  const QString& resultVariable, Brain* brain, QObject* parent ):
-		RuleNode( "", value, brain, parent),
+		RuleNode( brain, parent),
 		_operation( op ),
+		_value( value ),
 		_numericValue( value.toDouble( &_isNumericValue ) ),
 		_resultVariable( resultVariable ),
 		_variable( variable )
@@ -24,10 +26,31 @@ namespace CnotiMind
 
 	void MathOperationNode::exec( QHash<QString, QString>& variables )
 	{
-		// Must be numeric value to be executed
+		bool valueOk;
+		qreal numericValue;
+
+		// Test if the value to use in the operation is a variable
 		if(!_isNumericValue)
 		{
-			return;
+			QString value = variableToValue( _value, variables );
+
+			// Variable not found
+			if(value == _value || value.isEmpty())
+			{
+				qDebug() << "[MathOperationNode::exec] value" << _value << "has not found in variables";
+				return; // does nothing
+			}
+
+			// Convert to number
+			numericValue = value.toDouble( &valueOk );
+			if( !valueOk )
+			{
+				qDebug() << "[MathOperationNode::exec] value" << _value << "is not a number";
+				return; // It was not possible to convert to number
+			}
+
+			// update the numeric value from the node
+			_numericValue = numericValue;
 		}
 
 		// Test if the variable exists
@@ -36,10 +59,10 @@ namespace CnotiMind
 			// Get the value from the Variable
 			QString variableValue =  variableToValue( _variable, variables );
 
-			// Test if it is a numeric value
-			bool ok;
-			qreal variableNumericValue = variableValue.toDouble(&ok);
-			if( ok )
+			// Test if the variable value is a numeric value
+			bool variableOk;
+			qreal variableNumericValue = variableValue.toDouble( &variableOk );
+			if( variableOk )
 			{
 				// Apply the operator
 				qreal result = applyOperation( variableNumericValue );

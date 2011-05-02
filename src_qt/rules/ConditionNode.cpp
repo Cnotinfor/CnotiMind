@@ -7,7 +7,9 @@ namespace CnotiMind
 {
 
 	ConditionNode::ConditionNode(const QString& key, const QString& value, ConditionOperator op, Brain* brain, QObject* parent):
-		RuleNode( key, value, brain, parent ),
+		RuleNode( brain, parent ),
+		_key( key ),
+		_value( value ),
 		_operator( op ),
 		_isValueNumeric( false )
 	{

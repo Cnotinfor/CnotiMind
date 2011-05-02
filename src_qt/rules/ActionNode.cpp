@@ -6,15 +6,17 @@
 namespace CnotiMind
 {
 
-	ActionNode::ActionNode(const QString& key, const QString& value, Brain* brain, QObject* parent):
-		RuleNode( key, value, brain, parent )
+	ActionNode::ActionNode(const QString& name, const QString& value, Brain* brain, QObject* parent):
+		RuleNode( brain, parent ),
+		_name( name ),
+		_value( value )
 	{
 
 	}
 
 	void ActionNode::exec()
 	{
-		_brain->executeAction( _key, _value );
+		_brain->executeAction( _name, _value );
 	}
 
 	void ActionNode::exec( QHash<QString, QString> &variables )
@@ -24,7 +26,7 @@ namespace CnotiMind
 		// Test if the value is valid.
 		if( !value.isEmpty() )
 		{
-			_brain->executeAction( _key, value );
+			_brain->executeAction( _name, value );
 		}
 	}
 
@@ -32,9 +34,9 @@ namespace CnotiMind
 	{
 		QString info;
 
-		info += space(depth) + "Action (" + _key + ") value=" + _value;
+		info += space(depth) + "Action (" + _name + ") value=" + _value;
 
-		return info + RuleNode::info(depth);
+		return info;
 	}
 
 }

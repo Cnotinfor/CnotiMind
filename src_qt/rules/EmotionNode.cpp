@@ -6,8 +6,10 @@
 namespace CnotiMind
 {
 
-	EmotionNode::EmotionNode( const QString& key, const QString& value, Brain* brain, QObject* parent ):
-		RuleNode( key, value, brain, parent ),
+	EmotionNode::EmotionNode( const QString& emotion, const QString& value, Brain* brain, QObject* parent ):
+		RuleNode( brain, parent ),
+		_emotion( emotion ),
+		_value( value ),
 		_min(INT_MIN),
 		_max(INT_MAX),
 		_valueNumeric( value.toDouble( &_valueNumericOk) )
@@ -15,8 +17,10 @@ namespace CnotiMind
 
 	}
 
-	EmotionNode::EmotionNode( const QString& key, const QString& value, qreal max, qreal min, Brain* brain, QObject* parent ):
-		RuleNode( key, value, brain, parent ),
+	EmotionNode::EmotionNode( const QString& emotion, const QString& value, qreal max, qreal min, Brain* brain, QObject* parent ):
+		RuleNode( brain, parent ),
+		_emotion( emotion ),
+		_value( value ),
 		_min( min ),
 		_max( max ),
 		_valueNumeric( value.toDouble( &_valueNumericOk ) )
@@ -28,7 +32,7 @@ namespace CnotiMind
 	{
 		QString info;
 
-		info += space(depth) + "Emotion (" + _key + ") increment=" + _value;
+		info += space(depth) + "Emotion (" + _emotion + ") increment=" + _value;
 
 		if(_min != INT_MIN)
 		{
@@ -50,7 +54,7 @@ namespace CnotiMind
 			return; // it doesn't do nothing
 		}
 
-		_brain->updateEmotionalValue( _key, _valueNumeric, _max, _min );
+		_brain->updateEmotionalValue( _emotion, _valueNumeric, _max, _min );
 	}
 
 	void EmotionNode::exec( QHash<QString, QString> &variables )
@@ -71,6 +75,6 @@ namespace CnotiMind
 			_valueNumeric = newValueInt;
 		}
 
-		_brain->updateEmotionalValue( _key, _valueNumeric, _max, _min );
+		_brain->updateEmotionalValue( _emotion, _valueNumeric, _max, _min );
 	}
 }

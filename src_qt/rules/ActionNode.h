@@ -19,6 +19,11 @@ namespace CnotiMind
 		void exec( QHash<QString, QString>& variables );
 
 		QString info( int depth ) const;
+
+	protected:
+		QString _name;
+		QString _value;
+
 	};
 
 }

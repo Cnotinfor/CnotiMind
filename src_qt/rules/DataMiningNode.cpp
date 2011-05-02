@@ -4,9 +4,11 @@
 namespace CnotiMind
 {
 
-	DataMiningNode::DataMiningNode( const QString& key, const QString& value, DataMiningOperation dataMiningOperation,
+	DataMiningNode::DataMiningNode( const QString& event, const QString& value, DataMiningOperation dataMiningOperation,
 								   MemoryType memory, const QString& variable, Brain* brain, QObject* parent ) :
-		RuleNode( key, value, brain, parent ),
+		RuleNode( brain, parent ),
+		_event( event ),
+		_value( value ),
 		_operation( dataMiningOperation ),
 		_memory( memory ),
 		_variable( variable ),
@@ -61,13 +63,13 @@ namespace CnotiMind
 		// If the values are numbers it should use the
 		if( _isValueNumeric )
 		{
-			_result = _brain->dataMining( _operation, _key, _valueNumeric, _memory, &valid );
+			_result = _brain->dataMining( _operation, _event, _valueNumeric, _memory, &valid );
 
 			return valid;
 		}
 		else // If the value is QString
 		{
-			_result = _brain->dataMining( _operation, _key, _value, _memory, &valid );
+			_result = _brain->dataMining( _operation, _event, _value, _memory, &valid );
 
 			return valid;
 		}

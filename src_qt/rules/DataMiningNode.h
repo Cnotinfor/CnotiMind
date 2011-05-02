@@ -27,6 +27,8 @@ namespace CnotiMind
 	protected:
 		bool isTrue();
 
+		QString _event;
+		QString _value;
 		const DataMiningOperation _operation;
 		const MemoryType _memory;
 		const QString _variable;

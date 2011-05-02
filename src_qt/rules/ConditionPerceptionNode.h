@@ -14,7 +14,7 @@ namespace CnotiMind
 		Q_OBJECT
 
 	public:
-		ConditionPerceptionNode(const QString& key, const QString& value, ConditionOperator op, Brain* brain, QObject* parent);
+		ConditionPerceptionNode(const QString& perception, const QString& value, ConditionOperator op, Brain* brain, QObject* parent);
 
 		void exec();
 		void exec( QHash<QString,QString>& variables );

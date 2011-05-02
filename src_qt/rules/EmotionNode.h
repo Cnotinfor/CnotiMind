@@ -23,6 +23,8 @@ namespace CnotiMind
 		QString info( int depth = 0 ) const;
 
 	protected:
+		QString _emotion;
+		QString _value;
 		qreal _min;
 		qreal _max;
 		qreal _valueNumeric;

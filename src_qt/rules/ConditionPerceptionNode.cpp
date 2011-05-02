@@ -8,8 +8,8 @@
 namespace CnotiMind
 {
 
-	ConditionPerceptionNode::ConditionPerceptionNode( const QString& key, const QString& value, ConditionOperator op, Brain* brain, QObject* parent):
-		ConditionNode( key, value, op, brain, parent )
+	ConditionPerceptionNode::ConditionPerceptionNode( const QString& perception, const QString& value, ConditionOperator op, Brain* brain, QObject* parent):
+		ConditionNode( perception, value, op, brain, parent )
 	{
 
 	}
