@@ -1,5 +1,6 @@
 #include <QtCore/QString>
 #include <QtCore/QListIterator>
+#include <QRegExp>
 
 #include "RuleNode.h"
 #include "../Brain.h"
@@ -82,32 +83,38 @@ namespace CnotiMind
 	}
 
 	/*
-		Check if there is a variable in the value parameter name.
+		Check if in the value string there are variable tags
 
-		If it is a variable try to get the value from the variables.
+		If it is a variable tag try to get the value from the variables lists.
 
-		Variables are betweeen square brackets [].
+		Variables tags are betweeen square brackets [].
 
-		If the variable is not found, it return an empty QString
+		If the variable value is not found, it is replaced by an empty string.
 	*/
-	const QString& RuleNode::variableToValue( const QString& value, QHash<QString, QString>& variables )
+	void RuleNode::variableToValue( QString& value, QHash<QString, QString>& variables )
 	{
+		QRegExp regex( "(\\\[[a-zA-Z]+\\\])", Qt::CaseInsensitive );
 		static QString empty;
-		// A variable value is between square brackets
-		if(value.at(0) == '[' && value.at( value.size() - 1 ) == ']')
+		// Search for variable value is between square brackets
+		int pos = 0;
+		while( (pos = regex.indexIn( value, pos ) ) != -1 )
 		{
-			QHash<QString,QString>::const_iterator it = variables.find( value );
+			QString var = regex.cap( 1 );
+			pos += regex.matchedLength();
+
+			// Search for the variable in the variables list
+			QHash<QString,QString>::const_iterator it = variables.find( var );
 			if( it != variables.end()  )
 			{
-				return it.value(); // return the value from the variable
+				// found it, replace by the variable tag, by the variable value
+				value.replace( var, it.value(), Qt::CaseInsensitive );
 			}
-
-			// variable not found return empty string
-			return empty;
+			else
+			{
+				// not found replace by an empty string
+				value.replace( var, empty, Qt::CaseInsensitive );
+			}
 		}
-
-		// because it is not a variable, return the value
-		return value;
 	}
 
 

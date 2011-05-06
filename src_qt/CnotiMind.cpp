@@ -42,7 +42,7 @@ namespace CnotiMind
 		{
 			return ConditionOperatorSmallerOrEqual;
 		}
-		if( text.compare("==") == 0)
+		if( text.compare("==") == 0 || text.compare("=") == 0 )
 		{
 			return ConditionOperatorEqual;
 		}

@@ -62,7 +62,8 @@ namespace CnotiMind
 		if(!_valueNumericOk) // it is not a number, it could be a variable
 		{
 			bool ok;
-			const QString& value = variableToValue( _value, variables);
+			QString value = _value;
+			variableToValue( value, variables);
 
 			// Test if the value from the variable is a valid number
 			qreal newValueInt = value.toDouble(&ok);

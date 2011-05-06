@@ -305,7 +305,15 @@ namespace CnotiMind
 
 	void Brain::printMemory( MemoryType type )
 	{
+		QListIterator<MemoryEvent> it(type == WorkingMemory ? _workingMemory : _longTermMemory );
 
+		qDebug() << "[Brain::printMemory]";
+		while(it.hasNext())
+		{
+			MemoryEvent me = it.next();
+
+			qDebug() << me.event() << me.value().toString();
+		}
 	}
 
 

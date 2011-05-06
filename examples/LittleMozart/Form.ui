@@ -179,6 +179,13 @@
          </property>
         </spacer>
        </item>
+       <item>
+        <widget class="QPushButton" name="pushButtonPrint">
+         <property name="text">
+          <string>Print memory</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
      <widget class="QFrame" name="frame_2">

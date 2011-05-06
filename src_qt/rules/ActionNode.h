@@ -13,7 +13,7 @@ namespace CnotiMind
 		Q_OBJECT
 
 	public:
-		ActionNode( const QString& key, const QString& value, Brain* brain, QObject* parent );
+		ActionNode( const QString& key, const QString& value, const QString probability, Brain* brain, QObject* parent );
 
 		void exec();
 		void exec( QHash<QString, QString>& variables );
@@ -23,6 +23,9 @@ namespace CnotiMind
 	protected:
 		QString _name;
 		QString _value;
+		QString _probability;
+		qreal   _probabilityValue; // Between 0 and 1
+		bool    _isProbabilityNumeric;
 
 	};
 

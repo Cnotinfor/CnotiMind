@@ -1,1 +1,1 @@
-#include "../src/Brain.h"
+#include "../src_qt/Brain.h"

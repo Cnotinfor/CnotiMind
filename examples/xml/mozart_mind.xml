@@ -10,8 +10,9 @@
 	<!-- List of actions -->
 	<!-- Actions the agent can do -->
 	<Action name="Talk" />
+	<Action name="Think" />
+	<Action name="Information" />
 
 	<!-- List of emotions the agent has -->
-	<Emotion name="Happiness" value="1" min="-10" max="10" decay="" />
-	<Emotion name="Boreness" value="1" min="-10" max="10" decay="" />
+	<Emotion name="Joy" value="0" min="-10" max="10" decay="60" />
 </Settings>

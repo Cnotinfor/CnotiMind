@@ -30,7 +30,10 @@ namespace CnotiMind
 	*/
 	void StorageNode::exec( QHash<QString, QString> &variables )
 	{
-		MemoryEvent m( _event, variableToValue( _value, variables ) );
+		QString value = _value;
+		variableToValue( value, variables );
+
+		MemoryEvent m( _event, value );
 
 		_brain->storeToMemory( m, _memory);
 	}

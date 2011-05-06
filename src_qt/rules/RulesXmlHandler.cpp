@@ -134,9 +134,15 @@ namespace CnotiMind
 
 		QString key = atts.value( "name" );
 		QString value = atts.value( "value" );
+		QString probability = atts.value( "probability" );
+
+		if( probability.isEmpty() )
+		{
+			probability = "1";
+		}
 
 		_parentNode = _currentNode;
-		_currentNode =  new ActionNode( key, value, _brain, _parentNode );
+		_currentNode =  new ActionNode( key, value, probability, _brain, _parentNode );
 
 		return true;
 

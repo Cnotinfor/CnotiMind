@@ -19,7 +19,11 @@ namespace CnotiMind
 		if( isTrue() )
 		{
 			QHash<QString,QString> variables;
-			variables.insert("[Perception.value]", _value );
+
+			// get the perception, being handled
+			Perception p = _brain->_receivedPerceptions.head();
+
+			variables.insert("[Perception.value]", p.value().toString() );
 			execChildren( variables );
 		}
 	}
@@ -28,7 +32,15 @@ namespace CnotiMind
 	{
 		if( isTrue() )
 		{
-			variables.insert( "[Perception.value]", _value );
+			// if the perception value is not in the variables list
+			if( ! variables.contains( "[Perception.value]" ) )
+			{
+				// get the perception, being handled
+				Perception p = _brain->_receivedPerceptions.head();
+
+				// Insert the perception value in the variables
+				variables.insert("[Perception.value]", p.value().toString() );
+			}
 			execChildren( variables );
 		}
 	}

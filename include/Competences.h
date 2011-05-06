@@ -1,1 +1,1 @@
-#include "../src/Competences.h"
+#include "../src_qt/Competences.h"

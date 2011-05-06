@@ -1,4 +1,5 @@
 #include <QtCore/QString>
+#include <QDateTime>
 
 #include "ActionNode.h"
 #include "../Brain.h"
@@ -6,22 +7,50 @@
 namespace CnotiMind
 {
 
-	ActionNode::ActionNode(const QString& name, const QString& value, Brain* brain, QObject* parent):
+	ActionNode::ActionNode(const QString& name, const QString& value, const QString probability, Brain* brain, QObject* parent):
 		RuleNode( brain, parent ),
 		_name( name ),
-		_value( value )
+		_value( value ),
+		_probability( probability ),
+		_probabilityValue( probability.toDouble( &_isProbabilityNumeric ) )
 	{
-
+		// To generate a new random seed
+		qsrand( QDateTime::currentDateTime().toTime_t() );
 	}
 
 	void ActionNode::exec()
 	{
+		// if the probability is
+		if( _isProbabilityNumeric )
+		{
+			if( _probabilityValue <= 0 )
+			{
+				return;
+			}
+			if( _probabilityValue < 1 )
+			{
+				// test if it should execute
+				if( qrand() * 1.0 / RAND_MAX > _probabilityValue )
+				{
+					return; // it will not execute
+				}
+			}
+		}
+		else
+		{
+			// if the probability is not a number, return since there are no variables
+			// to get the value
+			return;
+		}
+
 		_brain->executeAction( _name, _value );
 	}
 
 	void ActionNode::exec( QHash<QString, QString> &variables )
 	{
-		const QString& value = variableToValue( _value, variables );
+		// Update the _value
+		QString value = _value;
+		variableToValue( value, variables );
 
 		// Test if the value is valid.
 		if( !value.isEmpty() )

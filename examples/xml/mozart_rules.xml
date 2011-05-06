@@ -6,278 +6,378 @@
 		<!-- First Note added -->
 		<Condition type="DataMining" operation="Exists"	event="Add Note" compareValue="0" memory="WM">
 			<Condition type="Perception" perception="Add Note" value="Do">
-				<Action name="Talk" value="StartNoteDo" />
-				<Emotion name="Happiness" increment="2" max="10" />
+				<Action name="Think" value="Good Note" />
+				<Emotion name="Joy" increment="2" max="10" />
 				<Storage event="Start Note" value="Do" />
 			</Condition>
 			<Condition type="Perception" perception="Add Note" value="Re">
-				<Action name="Talk" value ="StartNoteRe" />
-				<Emotion name="Happiness" increment="-2" max="-8" />
+				<Action name="Think" value ="Bad Note" />
+				<Emotion name="Joy" increment="-2" max="-8" />
 				<Storage event="Start Note" value="Re" />
 			</Condition>
 			<Condition type="Perception" perception="Add Note" value="Mi">
-				<Action name="Talk" value ="StartNoteMi" />
-				<Emotion name="Happiness" increment="2" max="8" />
+				<Action name="Think" value ="Good Note" />
+				<Emotion name="Joy" increment="2" max="8" />
 				<Storage event="Start Note" value="Mi" />
 			</Condition>
 			<Condition type="Perception" perception="Add Note" value="Fa">
-				<Action name="Talk" value ="StartNoteFa" />
-				<Emotion name="Happiness" increment="-1" min="-5"/>
+				<Action name="Think" value ="Bad Note" />
+				<Emotion name="Joy" increment="-1" min="-5"/>
 				<Storage event="Start Note" value="Fa" />
 			</Condition>
 			<Condition type="Perception" perception="Add Note" value="Sol">
-				<Action name="Talk" value ="StartNoteSol" />
-				<Emotion name="Happiness" increment="2" max="9" />
+				<Action name="Think" value ="Good Note" />
+				<Emotion name="Joy" increment="2" max="9" />
 				<Storage event="Start Note" value="Sol" />
 			</Condition>
 			<Condition type="Perception" perception="Add Note" value="La">
-				<Action name="Talk" value ="StartNoteLa" />
-				<Emotion name="Happiness" increment="-1" min="-5" />
+				<Action name="Think" value ="Bad Note" />
+				<Emotion name="Joy" increment="-1" min="-5" />
 				<Storage event="Start Note" value="La" />
 			</Condition>
 			<Condition type="Perception" perception="Add Note" value="Si">
-				<Action name="Talk" value ="StartNoteSi" />
-				<Emotion name="Happiness" increment="-2" min="-10" />
+				<Action name="Think" value ="Bad Note" />
+				<Emotion name="Joy" increment="-2" min="-10" />
 				<Storage event="Start Note" value="Si" />
 			</Condition>
 			<Condition type="Perception" perception="Add Note" value="Do Agudo">
-				<Action name="Talk" value ="StartNoteDoAgudo" />
-				<Emotion name="Happiness" increment="2" max="10" />
+				<Action name="Think" value ="Good Note" />
+				<Emotion name="Joy" increment="2" max="10" />
 				<Storage event="Start Note" value="Do Agudo" />
 			</Condition>
 			<Condition type="Perception" perception="Add Note" value="Pause">
-				<Action name="Talk" value ="StartNotePause" />
-				<Emotion name="Happiness" increment="-2" min="-10" />
+				<Action name="Think" value ="Bad Note" />
+				<Emotion name="Joy" increment="-2" min="-10" />
 				<Storage event="Start Note" value="Pause" />
 			</Condition>
 		</Condition>
 
 		<!-- Test if there is already one note -->
 		<Condition type="DataMining" operation="Exists"	event="Add Note" compareValue="1" memory="WM">
-			<DataMining operation="Last" event="Add Note" variable="[LastNote]" memory="WM">
+			<DataMining operation="Last" event="Add Note" variable="[LastNote]"  memory="WM">
 				<!-- Do -->
 				<Condition type="Perception" perception="Add Note" value="Do">
 					<Condition type="Variable" variable="[LastNote]" compareValue="Do">
-						<Emotion name="Happiness" increment="2" max="8" />
+						<Emotion name="Joy" increment="2" max="8" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Re">
-						<Emotion name="Happiness" increment="1" max="7" />
+						<Emotion name="Joy" increment="1" max="7" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Mi">
-						<Emotion name="Happiness" increment="2" max="9" />
+						<Emotion name="Joy" increment="2" max="9" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Fa">
-						<Emotion name="Happiness" increment="-2" min="-7" />
+						<Emotion name="Joy" increment="-2" min="-7" />
+						<Action name="Think" value ="Bad Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Sol">
-						<Emotion name="Happiness" increment="2" max="10" />
+						<Emotion name="Joy" increment="2" max="10" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="La">
-						<Emotion name="Happiness" increment="-1" min="-5" />
+						<Emotion name="Joy" increment="-1" min="-5" />
+						<Action name="Think" value ="Bad Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Si">
-						<Emotion name="Happiness" increment="-2" min="-10"/>
+						<Emotion name="Joy" increment="-2" min="-10"/>
+						<Action name="Think" value ="Bad Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Do Agudo">
-						<Emotion name="Happiness" increment="1" max="0" />
+						<Emotion name="Joy" increment="1" max="0" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 				</Condition>
 
 				<!-- Re -->
 				<Condition type="Perception" perception="Add Note" value="Re">
 					<Condition type="Variable" variable="[LastNote]" compareValue="Do">
-						<Emotion name="Happiness" increment="1" max="7" />
+						<Emotion name="Joy" increment="1" max="7" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Re">
-						<Emotion name="Happiness" increment="1" max="8" />
+						<Emotion name="Joy" increment="1" max="8" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Mi">
-						<Emotion name="Happiness" increment="2" max="10" />
+						<Emotion name="Joy" increment="2" max="10" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Fa">
-						<Emotion name="Happiness" increment="1" max="0" />
+						<Emotion name="Joy" increment="1" max="0" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Sol">
-						<Emotion name="Happiness" increment="-1" max="-5" />
+						<Emotion name="Joy" increment="-1" max="-5" />
+						<Action name="Think" value ="Bad Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="La">
-						<Emotion name="Happiness" increment="-2" max="-7" />
+						<Emotion name="Joy" increment="-2" max="-7" />
+						<Action name="Think" value ="Bad Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Si">
-						<Emotion name="Happiness" increment="-2" max="-10" />
+						<Emotion name="Joy" increment="-2" max="-10" />
+						<Action name="Think" value ="Bad Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Do Agudo">
-						<Emotion name="Happiness" increment="-1" max="-5" />
+						<Emotion name="Joy" increment="-1" max="-5" />
+						<Action name="Think" value ="Bad Note" />
 					</Condition>
 				</Condition>
 
 				<!-- Mi -->
 				<Condition type="Perception" perception="Add Note" value="Re">
 					<Condition type="Variable" variable="[LastNote]" compareValue="Do">
-						<Emotion name="Happiness" increment="2" max="10" />
+						<Emotion name="Joy" increment="2" max="10" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Re">
-						<Emotion name="Happiness" increment="1" max="7" />
+						<Emotion name="Joy" increment="1" max="7" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Mi">
-						<Emotion name="Happiness" increment="1" max="8" />
+						<Emotion name="Joy" increment="1" max="8" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Fa">
-						<Emotion name="Happiness" increment="1" max="7" />
+						<Emotion name="Joy" increment="1" max="7" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Sol">
-						<Emotion name="Happiness" increment="2" max="9" />
+						<Emotion name="Joy" increment="2" max="9" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="La">
-						<Emotion name="Happiness" increment="-1" min="-5" />
+						<Emotion name="Joy" increment="-1" min="-5" />
+						<Action name="Think" value ="Bad Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Si">
-						<Emotion name="Happiness" increment="-1" min="-7" />
+						<Emotion name="Joy" increment="-1" min="-7" />
+						<Action name="Think" value ="Bad Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Do Agudo">
-						<Emotion name="Happiness" increment="-2" min="-7" />
+						<Emotion name="Joy" increment="-2" min="-7" />
+						<Action name="Think" value ="Bad Note" />
 					</Condition>
 				</Condition>
 
 				<!-- Fa -->
 				<Condition type="Perception" perception="Add Note" value="Mi">
 					<Condition type="Variable" variable="[LastNote]" compareValue="Do">
-						<Emotion name="Happiness" increment="-1" min="-5" />
+						<Emotion name="Joy" increment="-1" min="-5" />
+						<Action name="Think" value ="Bad Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Re">
-						<Emotion name="Happiness" increment="1" max="7" />
+						<Emotion name="Joy" increment="1" max="7" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Mi">
-						<Emotion name="Happiness" increment="2" max="9" />
+						<Emotion name="Joy" increment="2" max="9" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Fa">
-						<Emotion name="Happiness" increment="2" max="8" />
+						<Emotion name="Joy" increment="2" max="8" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Sol">
-						<Emotion name="Happiness" increment="2" max="10" />
+						<Emotion name="Joy" increment="2" max="10" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="La">
-						<Emotion name="Happiness" increment="1" max="0" />
+						<Emotion name="Joy" increment="1" max="0" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Si">
-						<Emotion name="Happiness" increment="-2" max="-10" />
+						<Emotion name="Joy" increment="-2" max="-10" />
+						<Action name="Think" value ="Bad Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Do Agudo">
-						<Emotion name="Happiness" increment="-1" max="-5" />
+						<Emotion name="Joy" increment="-1" max="-5" />
+						<Action name="Think" value ="Bad Note" />
 					</Condition>
 				</Condition>
 
 				<!-- Sol -->
 				<Condition type="Perception" perception="Add Note" value="Sol">
 					<Condition type="Variable" variable="[LastNote]" compareValue="Do">
-						<Emotion name="Happiness" increment="2" max="10" />
+						<Emotion name="Joy" increment="2" max="10" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Re">
-						<Emotion name="Happiness" increment="-2" max="-5" />
+						<Emotion name="Joy" increment="-2" max="-5" />
+						<Action name="Think" value ="Bad Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Mi">
-						<Emotion name="Happiness" increment="2" max="8" />
+						<Emotion name="Joy" increment="2" max="8" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Fa">
-						<Emotion name="Happiness" increment="1" max="7" />
+						<Emotion name="Joy" increment="1" max="7" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Sol">
-						<Emotion name="Happiness" increment="1" max="8" />
+						<Emotion name="Joy" increment="1" max="8" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="La">
-						<Emotion name="Happiness" increment="1" max="7" />
+						<Emotion name="Joy" increment="1" max="7" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Si">
-						<Emotion name="Happiness" increment="-1" min="-5" />
+						<Emotion name="Joy" increment="-1" min="-5" />
+						<Action name="Think" value ="Bad Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Do Agudo">
-						<Emotion name="Happiness" increment="2" max="9" />
+						<Emotion name="Joy" increment="2" max="9" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 				</Condition>
 
 				<!-- La -->
 				<Condition type="Perception" perception="Add Note" value="La">
 					<Condition type="Variable" variable="[LastNote]" compareValue="Do">
-						<Emotion name="Happiness" increment="-1" min="-5" />
+						<Emotion name="Joy" increment="-1" min="-5" />
+						<Action name="Think" value ="Bad Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Re">
-						<Emotion name="Happiness" increment="-1" min="-7" />
+						<Emotion name="Joy" increment="-1" min="-7" />
+						<Action name="Think" value ="Bad Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Mi">
-						<Emotion name="Happiness" increment="-1" min="-5" />
+						<Emotion name="Joy" increment="-1" min="-5" />
+						<Action name="Think" value ="Bad Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Fa">
-						<Emotion name="Happiness" increment="1" max="7" />
+						<Emotion name="Joy" increment="1" max="7" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Sol">
-						<Emotion name="Happiness" increment="2" max="9" />
+						<Emotion name="Joy" increment="2" max="9" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="La">
-						<Emotion name="Happiness" increment="1" max="8" />
+						<Emotion name="Joy" increment="1" max="8" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Si">
-						<Emotion name="Happiness" increment="2" max="10" />
+						<Emotion name="Joy" increment="2" max="10" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Do Agudo">
-						<Emotion name="Happiness" increment="-1" min="-5"/>
+						<Emotion name="Joy" increment="-1" min="-5"/>
+						<Action name="Think" value ="Bad Note" />
 					</Condition>
 				</Condition>
 
 				<!-- Si -->
 				<Condition type="Perception" perception="Add Note" value="Si">
 					<Condition type="Variable" variable="[LastNote]" compareValue="Do">
-						<Emotion name="Happiness" increment="-2" min="-10" />
+						<Emotion name="Joy" increment="-2" min="-10" />
+						<Action name="Think" value ="Bad Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Re">
-						<Emotion name="Happiness" increment="-1" min="-7" />
+						<Emotion name="Joy" increment="-1" min="-7" />
+						<Action name="Think" value ="Bad Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Mi">
-						<Emotion name="Happiness" increment="-1" min="-5" />
+						<Emotion name="Joy" increment="-1" min="-5" />
+						<Action name="Think" value ="Bad Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Fa">
-						<Emotion name="Happiness" increment="-2" max="-10" />
+						<Emotion name="Joy" increment="-2" max="-10" />
+						<Action name="Think" value ="Bad Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Sol">
-						<Emotion name="Happiness" increment="-1" max="-5" />
+						<Emotion name="Joy" increment="-1" max="-5" />
+						<Action name="Think" value ="Bad Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="La">
-						<Emotion name="Happiness" increment="2" max="9" />
+						<Emotion name="Joy" increment="2" max="9" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Si">
-						<Emotion name="Happiness" increment="1" max="8" />
+						<Emotion name="Joy" increment="1" max="8" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Do Agudo">
-						<Emotion name="Happiness" increment="2" max="10" />
+						<Emotion name="Joy" increment="2" max="10" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 				</Condition>
 
 				<!-- Do agudo -->
 				<Condition type="Perception" perception="Add Note" value="Do Agudo">
 					<Condition type="Variable" variable="[LastNote]" compareValue="Do">
-						<Emotion name="Happiness" increment="1" max="0" />
+						<Emotion name="Joy" increment="1" max="0" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Re">
-						<Emotion name="Happiness" increment="-2" min="-10" />
+						<Emotion name="Joy" increment="-2" min="-10" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Mi">
-						<Emotion name="Happiness" increment="-1" min="-5" />
+						<Emotion name="Joy" increment="-1" min="-5" />
+						<Action name="Think" value ="Bad Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Fa">
-						<Emotion name="Happiness" increment="-1" min="-7" />
+						<Emotion name="Joy" increment="-1" min="-7" />
+						<Action name="Think" value ="Bad Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Sol">
-						<Emotion name="Happiness" increment="2" max="10" />
+						<Emotion name="Joy" increment="2" max="10" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="La">
-						<Emotion name="Happiness" increment="-1" min="-5" />
+						<Emotion name="Joy" increment="-1" min="-5" />
+						<Action name="Think" value ="Bad Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Si">
-						<Emotion name="Happiness" increment="2" max="9"/>
+						<Emotion name="Joy" increment="2" max="9"/>
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 					<Condition type="Variable" variable="[LastNote]" compareValue="Do Agudo">
-						<Emotion name="Happiness" increment="1" max="8" />
+						<Emotion name="Joy" increment="1" max="8" />
+						<Action name="Think" value ="Good Note" />
 					</Condition>
 				</Condition>
+
+				<!-- Do agudo -->
+				<Condition type="Perception" perception="Add Note" value="Pause">
+					<Condition type="Variable" variable="[LastNote]" compareValue="Do">
+						<Emotion name="Joy" increment="1" max="0" />
+						<Action name="Think" value ="Good Note" />
+					</Condition>
+					<Condition type="Variable" variable="[LastNote]" compareValue="Re">
+						<Emotion name="Joy" increment="-2" min="-10" />
+						<Action name="Think" value ="Bad Note" />
+					</Condition>
+					<Condition type="Variable" variable="[LastNote]" compareValue="Mi">
+						<Emotion name="Joy" increment="-1" min="-5" />
+						<Action name="Think" value ="Bad Note" />
+					</Condition>
+					<Condition type="Variable" variable="[LastNote]" compareValue="Fa">
+						<Emotion name="Joy" increment="-1" min="-7" />
+						<Action name="Think" value ="Bad Note" />
+					</Condition>
+					<Condition type="Variable" variable="[LastNote]" compareValue="Sol">
+						<Emotion name="Joy" increment="2" max="10" />
+						<Action name="Think" value ="Good Note" />
+					</Condition>
+					<Condition type="Variable" variable="[LastNote]" compareValue="La">
+						<Emotion name="Joy" increment="-1" min="-5" />
+					</Condition>
+					<Condition type="Variable" variable="[LastNote]" compareValue="Si">
+						<Emotion name="Joy" increment="2" max="9"/>
+						<Action name="Think" value ="Good Note" />
+					</Condition>
+					<Condition type="Variable" variable="[LastNote]" compareValue="Do Agudo">
+						<Emotion name="Joy" increment="1" max="8" />
+						<Action name="Think" value ="Good Note" />
+					</Condition>
+				</Condition>
+
+				<Action name="Think" value="[Last Note] [Perception.value]" />
 
 			</DataMining>
 		</Condition>
@@ -289,10 +389,10 @@
 
 
 		<!-- Save note added to the memory -->
-		<!-- It uses the value from the current Perception "Add Note" -->
 		<Storage event="Add Note" value="[Perception.value]" memory="WM" />
 		<Storage event="Add Note" value="[Perception.value]" memory="LTM" />
-		<Action name="Talk" value="Note Added" />
+
+		<!-- -->
 	</Condition>
 
 	<!-- When a duration is added -->
@@ -303,74 +403,90 @@
 			<MathOperation name="Remainder" variable="[MusicLenght]" value="4" result="[Duration]">
 
 				<!-- Compass with 0 durations -->
+
 				<Condition type="Variable" variable="[Duration]" compareValue="0">
 					<Condition type="Perception" perception="Add Duration" value="1">
-						<Emotion name="Happiness" increment="1" max="8" />
+						<Emotion name="Joy" increment="1" max="2" />
+						<Action name="Think" value ="Good Duration" />
 					</Condition>
 					<Condition type="Perception" perception="Add Duration" value="2">
-						<Emotion name="Happiness" increment="1" max="8" />
+						<Emotion name="Joy" increment="1" max="2" />
+						<Action name="Think" value ="Good Duration" />
 					</Condition>
 					<Condition type="Perception" perception="Add Duration" value="3">
-						<Emotion name="Happiness" increment="1" max="8" />
+						<Emotion name="Joy" increment="1" max="2" />
+						<Action name="Think" value ="Good Duration" />
 					</Condition>
 					<Condition type="Perception" perception="Add Duration" value="4">
-						<Emotion name="Happiness" increment="1" max="8" />
+						<Emotion name="Joy" increment="1" max="2" />
+						<Action name="Think" value ="Good Duration" />
 					</Condition>
 				</Condition>
 
 				<!-- Compass with 1 durations -->
 				<Condition type="Variable" variable="[Duration]" compareValue="1">
 					<Condition type="Perception" perception="Add Duration" value="1">
-						<Emotion name="Happiness" increment="1" max="8" />
+						<Emotion name="Joy" increment="1" max="10" />
+						<Action name="Think" value ="Good Duration" />
 					</Condition>
 					<Condition type="Perception" perception="Add Duration" value="2">
-						<Emotion name="Happiness" increment="1" max="8" />
+						<Emotion name="Joy" increment="-4" min="-10" />
 					</Condition>
 					<Condition type="Perception" perception="Add Duration" value="3">
-						<Emotion name="Happiness" increment="1" max="8" />
+						<Emotion name="Joy" increment="-4" min="-10" />
 					</Condition>
 					<Condition type="Perception" perception="Add Duration" value="4">
-						<Emotion name="Happiness" increment="1" max="8" />
+						<Emotion name="Joy" increment="-4" min="-10" />
 					</Condition>
 				</Condition>
 
 				<!-- Compass with 2 durations -->
 				<Condition type="Variable" variable="[Duration]" compareValue="2">
 					<Condition type="Perception" perception="Add Duration" value="1">
-						<Emotion name="Happiness" increment="1" max="8" />
+						<Emotion name="Joy" increment="1" max="8" />
+						<Action name="Think" value ="Good Duration" />
 					</Condition>
 					<Condition type="Perception" perception="Add Duration" value="2">
-						<Emotion name="Happiness" increment="1" max="8" />
+						<Emotion name="Joy" increment="1" max="10" />
+						<Action name="Think" value ="Good Duration" />
 					</Condition>
 					<Condition type="Perception" perception="Add Duration" value="3">
-						<Emotion name="Happiness" increment="1" max="8" />
+						<Emotion name="Joy" increment="-4" min="-10" />
+						<Action name="Think" value ="Bad Duration" />
 					</Condition>
 					<Condition type="Perception" perception="Add Duration" value="4">
-						<Emotion name="Happiness" increment="1" max="8" />
+						<Emotion name="Joy" increment="-4" min="-10" />
+						<Action name="Think" value ="Bad Duration" />
 					</Condition>
 				</Condition>
 
 				<!-- Compass with 3 durations -->
 				<Condition type="Variable" variable="[Duration]" compareValue="3">
 					<Condition type="Perception" perception="Add Duration" value="1">
-						<Emotion name="Happiness" increment="1" max="8" />
+						<Emotion name="Joy" increment="1" max="10" />
+						<Action name="Think" value ="Good Duration" />
 					</Condition>
 					<Condition type="Perception" perception="Add Duration" value="2">
-						<Emotion name="Happiness" increment="1" max="8" />
+						<Emotion name="Joy" increment="-4" min="-10" />
+						<Action name="Think" value ="Bad Duration" />
 					</Condition>
 					<Condition type="Perception" perception="Add Duration" value="3">
-						<Emotion name="Happiness" increment="1" max="8" />
+						<Emotion name="Joy" increment="-4" min="-10" />
+						<Action name="Think" value ="Bad Duration" />
 					</Condition>
 					<Condition type="Perception" perception="Add Duration" value="4">
-						<Emotion name="Happiness" increment="1" max="8" />
+						<Emotion name="Joy" increment="-4" min="-10" />
+						<Action name="Think" value ="Bad Duration" />
 					</Condition>
 				</Condition>
 
 			</MathOperation>
 
+			<Action name="Think" value="[Perception.value]" />
 			<Storage event="Add Duration" value="[Perception.value]" memory="WM" />
 			<Storage event="Add Duration" value="[Perception.value]" memory="LTM" />
-			<Action name="Talk" value="Duration Added" />
+
+			<Action name="Talk" value="Evaluation Note" />
 
 		</DataMining>
 	</Condition>

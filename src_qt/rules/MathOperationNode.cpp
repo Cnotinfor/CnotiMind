@@ -32,12 +32,13 @@ namespace CnotiMind
 		// Test if the value to use in the operation is a variable
 		if(!_isNumericValue)
 		{
-			QString value = variableToValue( _value, variables );
+			QString value = _value;
+			variableToValue( value, variables );
 
 			// Variable not found
-			if(value == _value || value.isEmpty())
+			if( value.isEmpty() )
 			{
-				qDebug() << "[MathOperationNode::exec] value" << _value << "has not found in variables";
+				qDebug() << "[MathOperationNode::exec] value" << value << "has not found in variables";
 				return; // does nothing
 			}
 
@@ -45,7 +46,7 @@ namespace CnotiMind
 			numericValue = value.toDouble( &valueOk );
 			if( !valueOk )
 			{
-				qDebug() << "[MathOperationNode::exec] value" << _value << "is not a number";
+				qDebug() << "[MathOperationNode::exec] value" << value << "is not a number";
 				return; // It was not possible to convert to number
 			}
 
@@ -53,12 +54,13 @@ namespace CnotiMind
 			_numericValue = numericValue;
 		}
 
-		// Test if the variable exists
-		if( variables.contains( _variable ) )
-		{
-			// Get the value from the Variable
-			QString variableValue =  variableToValue( _variable, variables );
+		// Get the value from the Variable
+		QString variableValue = _variable;
+		variableToValue( variableValue, variables );
 
+		// Test if the variable exists
+		if( !variableValue.isEmpty() )
+		{
 			// Test if the variable value is a numeric value
 			bool variableOk;
 			qreal variableNumericValue = variableValue.toDouble( &variableOk );

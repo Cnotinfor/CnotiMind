@@ -106,6 +106,11 @@ void Form::durationClicked( const QString& duration )
 	_brain->receivePerception( p );
 }
 
+void Form::on_pushButtonPrint_clicked()
+{
+	_brain->printMemory(CnotiMind::WorkingMemory);
+}
+
 void Form::actionReceived(const QString& action,const QString& value)
 {
 	ui->plainTextEditActions->insertPlainText( action + ": " + value + "\n");
