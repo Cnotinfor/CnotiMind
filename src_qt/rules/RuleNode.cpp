@@ -93,14 +93,14 @@ namespace CnotiMind
 	*/
 	void RuleNode::variableToValue( QString& value, QHash<QString, QString>& variables )
 	{
-		QRegExp regex( "(\\\[[a-zA-Z]+\\\])", Qt::CaseInsensitive );
+		QRegExp regex( "(\\[[a-zA-Z0-9_\\- \\.]+\\])", Qt::CaseInsensitive );
 		static QString empty;
 		// Search for variable value is between square brackets
 		int pos = 0;
 		while( (pos = regex.indexIn( value, pos ) ) != -1 )
 		{
 			QString var = regex.cap( 1 );
-			pos += regex.matchedLength();
+			//pos += regex.matchedLength();
 
 			// Search for the variable in the variables list
 			QHash<QString,QString>::const_iterator it = variables.find( var );
@@ -108,6 +108,7 @@ namespace CnotiMind
 			{
 				// found it, replace by the variable tag, by the variable value
 				value.replace( var, it.value(), Qt::CaseInsensitive );
+				pos += it.value().length();
 			}
 			else
 			{

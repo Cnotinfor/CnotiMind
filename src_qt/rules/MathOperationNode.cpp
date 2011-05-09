@@ -100,15 +100,23 @@ namespace CnotiMind
 		switch( _operation )
 		{
 			case MathOperationSum:
-				return _numericValue + variableValue;
+				return variableValue + _numericValue;
 			case MathOperationMultiplication:
-				return _numericValue * variableValue;
+				return variableValue * _numericValue ;
 			case MathOperationDivision:
-				return _numericValue / variableValue;
+				if( variableValue == 0 )
+				{
+					return 0;
+				}
+				return variableValue / _numericValue;
 			case MathOperationRemainder:
-				return (int) _numericValue % (int) variableValue;
+				if( variableValue == 0 )
+				{
+					return 0;
+				}
+				return (int) variableValue % (int) _numericValue;
 			case MathOperationSubtraction:
-				return _numericValue - variableValue;
+				return variableValue - _numericValue;
 			case MathOperationSquareRoot:
 				return qSqrt( variableValue );
 		}
