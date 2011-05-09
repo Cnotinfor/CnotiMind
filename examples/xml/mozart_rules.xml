@@ -11,54 +11,63 @@
 				<Emotion name="Joy" increment="2" max="10" />
 				<Storage event="Start Note" value="Do" memory="WM" />
 				<Property name="Notes Option" value="Good" />
+				<Property name="Note Sequence" value="First Note Do" />
 			</Condition>
 			<Condition type="Perception" perception="Add Note" value="Re">
 				<Action name="Think" value ="Bad Note" />
 				<Emotion name="Joy" increment="-2" max="-8" />
 				<Storage event="Start Note" value="Re" memory="WM" />
 				<Property name="Notes Option" value="Bad" />
+				<Property name="Note Sequence" value="First Note Re" />
 			</Condition>
 			<Condition type="Perception" perception="Add Note" value="Mi">
 				<Action name="Think" value ="Good Note" />
 				<Emotion name="Joy" increment="2" max="8" />
 				<Storage event="Start Note" value="Mi" memory="WM" />
 				<Property name="Notes Option" value="Good" />
+				<Property name="Note Sequence" value="First Note Mi" />
 			</Condition>
 			<Condition type="Perception" perception="Add Note" value="Fa">
 				<Action name="Think" value ="Bad Note" />
 				<Emotion name="Joy" increment="-1" min="-5"/>
 				<Storage event="Start Note" value="Fa" memory="WM" />
 				<Property name="Notes Option" value="Bad" />
+				<Property name="Note Sequence" value="First Note Fa" />
 			</Condition>
 			<Condition type="Perception" perception="Add Note" value="Sol">
 				<Action name="Think" value ="Good Note" />
 				<Emotion name="Joy" increment="2" max="9" />
 				<Storage event="Start Note" value="Sol" memory="WM" />
 				<Property name="Notes Option" value="Good" />
+				<Property name="Note Sequence" value="First Note Sol" />
 			</Condition>
 			<Condition type="Perception" perception="Add Note" value="La">
 				<Action name="Think" value ="Bad Note" />
 				<Emotion name="Joy" increment="-1" min="-5" />
 				<Storage event="Start Note" value="La" memory="WM" />
 				<Property name="Notes Option" value="Bad" />
+				<Property name="Note Sequence" value="First Note La" />
 			</Condition>
 			<Condition type="Perception" perception="Add Note" value="Si">
 				<Action name="Think" value ="Bad Note" />
 				<Emotion name="Joy" increment="-2" min="-10" />
 				<Storage event="Start Note" value="Si" memory="WM" />
 				<Property name="Notes Option" value="Bad" />
+				<Property name="Note Sequence" value="First Note Si" />
 			</Condition>
 			<Condition type="Perception" perception="Add Note" value="Do Agudo">
 				<Action name="Think" value ="Good Note" />
 				<Emotion name="Joy" increment="2" max="10" />
 				<Storage event="Start Note" value="Do Agudo" memory="WM" />
 				<Property name="Notes Option" value="Good" />
+				<Property name="Note Sequence" value="First Note Do Agudo" />
 			</Condition>
 			<Condition type="Perception" perception="Add Note" value="Pause">
 				<Action name="Think" value ="Bad Note" />
 				<Emotion name="Joy" increment="-2" min="-10" />
 				<Storage event="Start Note" value="Pause" memory="WM" />
 				<Property name="Notes Option" value="Bad" />
+				<Property name="Note Sequence" value="First Note Pause" />
 			</Condition>
 		</Condition>
 
@@ -457,6 +466,7 @@
 				</Condition>
 
 				<Action name="Think" value="Sequence [Last Note] [Perception.value]" />
+				<Property name="Note Sequence" value="[Last Note] [Perception.value]" />
 
 			</DataMining>
 		</Condition>
@@ -590,6 +600,19 @@
 			<Storage event="Add Duration" value="[Perception.value]" memory="WM" />
 			<Storage event="Add Duration" value="[Perception.value]" memory="LTM" />
 
+			<Condition type="Property" property="Duration Option" compareValue="Bad">
+				<Action name="Talk" value="Wrong Duration [Music Duration] [Perception.value]" />
+			</Condition>
+			<Condition type="Property" property="Duration Option" compareValue="Good">
+				<Condition type="Property" property="Notes Option" compareValue="Bad">
+					<Action name="Talk" value="Wrong Note {Note Sequence}" probability="0.9" />
+				</Condition>
+				<Condition type="Property" property="Notes Option" compareValue="Good">
+					<Action name="Talk" value="Good Note {Note Sequence}" probability="0.3" />
+					<Action name="Talk" value="Good Duration [Music Duration] [Perception.value]" probability="0.3" />
+				</Condition>
+			</Condition>
+			
 			<Action name="Talk" value="Evaluation Note" />
 
 		</DataMining>

@@ -1,5 +1,6 @@
 #include <QDebug>
 #include <QSignalMapper>
+#include <QScrollBar>
 
 #include "Form.h"
 #include "ui_Form.h"
