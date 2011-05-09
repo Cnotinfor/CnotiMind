@@ -109,6 +109,7 @@ void Form::durationClicked( const QString& duration )
 void Form::on_pushButtonPrint_clicked()
 {
 	_brain->printMemory(CnotiMind::WorkingMemory);
+	_brain->printProperties();
 }
 
 void Form::actionReceived(const QString& action,const QString& value)

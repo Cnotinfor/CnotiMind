@@ -212,7 +212,10 @@ namespace CnotiMind
 			int n_emotions = _emotionsChanged.size();
 
 			// Execute the rules
-			_rules->exec();
+			if( _rules != NULL )
+			{
+				_rules->exec();
+			}
 
 			// remove the emotions changed since the last rules exection
 			// if new emotions were added during the rules execution, they are not removed,
@@ -316,6 +319,17 @@ namespace CnotiMind
 		}
 	}
 
+	void Brain::printProperties()
+	{
+		QHashIterator<QString, QString> it(_properties);
+
+		qDebug() << "[Brain::printProperties]";
+		while(it.hasNext())
+		{
+			it.next();
+			qDebug() << it.key() << it.value();
+		}
+	}
 
 
 	void Brain::receivePerception( const Perception& perception )

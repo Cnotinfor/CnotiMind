@@ -63,7 +63,7 @@ namespace CnotiMind
 	void StorageNode::exec( QHash<QString, QString> &variables )
 	{
 		QString value = _value;
-		variableToValue( value, variables );
+		tagsToValue( value, variables );
 
 		MemoryEvent m( _event, value );
 

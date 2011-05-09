@@ -70,6 +70,7 @@ namespace CnotiMind
 		void printSettings();
 		void printRules();
 		void printMemory( MemoryType type );
+		void printProperties();
 
 		// Friend classes
 		friend class RuleNode;
@@ -82,6 +83,10 @@ namespace CnotiMind
 		friend class ConditionEmotionNode;
 		friend class ConditionDataMiningNode;
 		friend class ConditionPerceptionNode;
+		friend class ConditionVariableNode;
+		friend class ConditionPropertyNode;
+		friend class PropertyNode;
+		friend class MathOperationNode;
 		friend class MemoryXmlHandler;
 
 
@@ -141,6 +146,7 @@ namespace CnotiMind
 		QQueue<QString> _emotionsChanged;
 		QList<MemoryEvent> _longTermMemory;
 		QList<MemoryEvent> _workingMemory;
+		QHash<QString, QString> _properties;
 		int _timerDecayEmotions;
 
 		bool _quit;

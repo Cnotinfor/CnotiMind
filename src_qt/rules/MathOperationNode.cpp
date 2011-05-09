@@ -33,7 +33,7 @@ namespace CnotiMind
 		if(!_isNumericValue)
 		{
 			QString value = _value;
-			variableToValue( value, variables );
+			tagsToValue( value, variables );
 
 			// Variable not found
 			if( value.isEmpty() )
@@ -56,7 +56,7 @@ namespace CnotiMind
 
 		// Get the value from the Variable
 		QString variableValue = _variable;
-		variableToValue( variableValue, variables );
+		tagsToValue( variableValue, variables );
 
 		// Test if the variable exists
 		if( !variableValue.isEmpty() )

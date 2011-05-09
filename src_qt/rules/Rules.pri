@@ -11,7 +11,9 @@ HEADERS += \
 	rules/ConditionPerceptionNode.h \
 	rules/DataMiningNode.h \
 	rules/ConditionVariableNode.h \
-    rules/MathOperationNode.h
+    rules/MathOperationNode.h \
+    rules/PropertyNode.h \
+    rules/ConditionPropertyNode.h
 
 SOURCES += \
 	rules/ActionNode.cpp \
@@ -26,4 +28,6 @@ SOURCES += \
 	rules/ConditionPerceptionNode.cpp \
 	rules/DataMiningNode.cpp \
 	rules/ConditionVariableNode.cpp \
-    rules/MathOperationNode.cpp
+    rules/MathOperationNode.cpp \
+    rules/PropertyNode.cpp \
+    rules/ConditionPropertyNode.cpp

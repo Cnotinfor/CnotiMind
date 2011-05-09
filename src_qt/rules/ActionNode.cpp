@@ -50,7 +50,7 @@ namespace CnotiMind
 	{
 		// Update the _value
 		QString value = _value;
-		variableToValue( value, variables );
+		tagsToValue( value, variables );
 
 		// Test if the value is valid.
 		if( !value.isEmpty() )

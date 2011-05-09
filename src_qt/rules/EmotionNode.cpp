@@ -63,7 +63,7 @@ namespace CnotiMind
 		{
 			bool ok;
 			QString value = _value;
-			variableToValue( value, variables);
+			tagsToValue( value, variables);
 
 			// Test if the value from the variable is a valid number
 			qreal newValueInt = value.toDouble(&ok);

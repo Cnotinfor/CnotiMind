@@ -13,6 +13,8 @@
 #include "ConditionVariableNode.h"
 #include "DataMiningNode.h"
 #include "MathOperationNode.h"
+#include "PropertyNode.h"
+#include "ConditionPropertyNode.h"
 #include "../Brain.h"
 
 namespace CnotiMind
@@ -66,6 +68,10 @@ namespace CnotiMind
 		if( QString::compare( qName, "MathOperation", Qt::CaseInsensitive ) == 0 )
 		{
 			return createMathOperationNode( atts );
+		}
+		if( QString::compare( qName, "Property", Qt::CaseInsensitive ) == 0 )
+		{
+			return createPropertyNode( atts );
 		}
 
 		qDebug() << "[RulesXmlHandler::startElement] Invalid element" << qName;
@@ -254,6 +260,10 @@ namespace CnotiMind
 		{
 			return createConditionVariableNode( atts );
 		}
+		else if( QString::compare( typeCondition, "property", Qt::CaseInsensitive ) == 0 )
+		{
+			return createConditionPropertyNode( atts );
+		}
 
 		qDebug() << "[RulesXmlHandler::createConditionNode] Invalid condition node type" << typeCondition;
 		return false;
@@ -282,6 +292,19 @@ namespace CnotiMind
 
 		_parentNode = _currentNode;
 		_currentNode =  new ConditionVariableNode( key, value, op, _brain, _parentNode );
+
+		return true;
+	}
+
+
+	bool RulesXmlHandler::createConditionPropertyNode( const QXmlAttributes & atts )
+	{
+		QString key = atts.value( "property" );
+		QString value = atts.value( "compareValue" );
+		ConditionOperator op = translateConditionOperator( atts.value( "operator" ) );
+
+		_parentNode = _currentNode;
+		_currentNode =  new ConditionPropertyNode( key, value, op, _brain, _parentNode );
 
 		return true;
 	}
@@ -329,6 +352,17 @@ namespace CnotiMind
 
 		_parentNode = _currentNode;
 		_currentNode =  new MathOperationNode( operation, variable, value, resultVariable, _brain, _parentNode );
+
+		return true;
+	}
+
+	bool RulesXmlHandler::createPropertyNode( const QXmlAttributes & atts )
+	{
+		QString value = atts.value( "value" );
+		QString name = atts.value( "name" );
+
+		_parentNode = _currentNode;
+		_currentNode =  new PropertyNode( name, value, _brain, _parentNode );
 
 		return true;
 	}
