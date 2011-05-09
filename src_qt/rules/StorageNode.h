@@ -13,7 +13,8 @@ namespace CnotiMind
 		Q_OBJECT
 
 	public:
-		StorageNode(const QString& key, const QString& value, MemoryType memory, Brain* brain, QObject* parent);
+		StorageNode( const QString& event, const QString& value, MemoryType memory, Brain* brain, QObject* parent );
+		StorageNode( bool clear, MemoryType memory, Brain* brain, QObject* parent );
 
 		void exec();
 		void exec( QHash<QString, QString>& variables );
@@ -22,8 +23,9 @@ namespace CnotiMind
 
 	protected:
 		MemoryType _memory;
-		QString _event;
-		QString _value;
+		QString    _event;
+		QString    _value;
+		bool       _clearStorage;
 	};
 
 }

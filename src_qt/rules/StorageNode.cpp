@@ -10,7 +10,18 @@ namespace CnotiMind
 		RuleNode( brain, parent ),
 		_memory( memory ),
 		_event( event ),
-		_value( value )
+		_value( value ),
+		_clearStorage( false )
+	{
+
+	}
+
+	StorageNode::StorageNode( bool clear, MemoryType memory, Brain* brain, QObject* parent ):
+		RuleNode( brain, parent ),
+		_memory( memory ),
+		_clearStorage( clear ),
+		_event( "" ),
+		_value( "" )
 	{
 
 	}
@@ -20,6 +31,27 @@ namespace CnotiMind
 	*/
 	void StorageNode::exec()
 	{
+		// Test if the node is for clearing the memory
+		if( _clearStorage )
+		{
+			if( _memory == CnotiMind::WorkingMemory )
+			{
+				_brain->clearWorkingMemory();
+			}
+			else
+			{
+				_brain->clearMemory();
+			}
+			return;
+		}
+
+		// If it is not for clearing, check if the value and event are valid
+		if( _event.isEmpty() || _value.isEmpty() )
+		{
+			return;
+		}
+
+		// Create memory event to add to the memory
 		MemoryEvent m( _event, _value );
 
 		_brain->storeToMemory( m, _memory);

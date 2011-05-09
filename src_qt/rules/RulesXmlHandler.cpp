@@ -157,10 +157,22 @@ namespace CnotiMind
 
 		QString key = atts.value( "event" );
 		QString value = atts.value( "value" );
+		QString clear = atts.value( "clear" );
 		MemoryType memory = translateMemoryType( atts.value( "memory" ) );
 
 		_parentNode = _currentNode;
-		_currentNode =  new StorageNode( key, value, memory, _brain, _parentNode );
+
+		// If the clear attribute is set, it doesn't store the event
+		if( QString::compare( clear, "yes", Qt::CaseInsensitive ) == 0)
+		{
+			_currentNode =  new StorageNode( true, memory, _brain, _parentNode );
+		}
+		else
+		{
+			_currentNode =  new StorageNode( key, value, memory, _brain, _parentNode );
+		}
+
+
 
 		return true;
 	}
