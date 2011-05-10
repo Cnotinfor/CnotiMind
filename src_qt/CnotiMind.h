@@ -50,10 +50,19 @@ namespace CnotiMind
 		MathOperationUndefined
 	};
 
+	enum DeletePosition
+	{
+		DeleteLast,
+		DeleteFirst,
+		DeleteItem, // Not implemente yeat
+		DeleteAll
+	};
+
 	MemoryType translateMemoryType( const QString& text );
 	ConditionOperator translateConditionOperator( const QString &text );
 	DataMiningOperation translateDataMiningOperator( const QString &text );
 	MathOperation translateMathOperation( const QString &text );
+	DeletePosition translateDeleteItem( const QString &text );
 }
 
 #endif // CNOTIMIND_H

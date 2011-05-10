@@ -16,6 +16,7 @@ namespace CnotiMind
 	{
 	public:
 
+		MemoryEvent( const QString& event );
 		MemoryEvent( const QString& event, const QVariant& value );
 		MemoryEvent( const QString& event, const QVariant& value, time_t time );
 		MemoryEvent( const Perception& perception );
@@ -25,6 +26,9 @@ namespace CnotiMind
 		time_t time() const;
 
 		QString toXml() const;
+
+		bool operator ==( const QString& name );
+		bool operator ==( const MemoryEvent& event );
 
 	protected:
 		QString _event;

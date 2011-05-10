@@ -14,8 +14,7 @@ namespace CnotiMind
 		_probability( probability ),
 		_probabilityValue( probability.toDouble( &_isProbabilityNumeric ) )
 	{
-		// To generate a new random seed
-		qsrand( QDateTime::currentDateTime().toTime_t() );
+
 	}
 
 	void ActionNode::exec()

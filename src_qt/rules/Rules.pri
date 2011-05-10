@@ -13,7 +13,9 @@ HEADERS += \
 	rules/ConditionVariableNode.h \
     rules/MathOperationNode.h \
     rules/PropertyNode.h \
-    rules/ConditionPropertyNode.h
+    rules/ConditionPropertyNode.h \
+    rules/DeleteNote.h \
+    rules/ClearMemory.h
 
 SOURCES += \
 	rules/ActionNode.cpp \
@@ -30,4 +32,6 @@ SOURCES += \
 	rules/ConditionVariableNode.cpp \
     rules/MathOperationNode.cpp \
     rules/PropertyNode.cpp \
-    rules/ConditionPropertyNode.cpp
+    rules/ConditionPropertyNode.cpp \
+    rules/DeleteNote.cpp \
+    rules/ClearMemory.cpp

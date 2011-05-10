@@ -144,4 +144,28 @@ namespace CnotiMind
 
 		return MathOperationUndefined;
 	}
+
+	/*
+		Convert text string to a DeleteItem
+	*/
+	DeletePosition translateDeleteItem( const QString &text )
+	{
+		if( QString::compare( text, "last", Qt::CaseInsensitive  ) == 0 )
+		{
+			return DeleteLast;
+		}
+		if( QString::compare( text, "first", Qt::CaseInsensitive  ) == 0 )
+		{
+			return DeleteFirst;
+		}
+		if( QString::compare( text, "item", Qt::CaseInsensitive  ) == 0 )
+		{
+			return DeleteItem;
+		}
+		if( QString::compare( text, "all", Qt::CaseInsensitive  ) == 0 )
+		{
+			return DeleteAll;
+		}
+
+	}
 }

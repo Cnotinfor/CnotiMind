@@ -55,12 +55,12 @@
 				<Property name="Notes Option" value="Bad" />
 				<Property name="Note Sequence" value="First Note Si" />
 			</Condition>
-			<Condition type="Perception" perception="Add Note" value="Do Agudo">
+			<Condition type="Perception" perception="Add Note" value="DoAgudo">
 				<Action name="Think" value ="Good Note" />
 				<Emotion name="Joy" increment="2" max="10" />
-				<Storage event="Start Note" value="Do Agudo" memory="WM" />
+				<Storage event="Start Note" value="DoAgudo" memory="WM" />
 				<Property name="Notes Option" value="Good" />
-				<Property name="Note Sequence" value="First Note Do Agudo" />
+				<Property name="Note Sequence" value="First Note DoAgudo" />
 			</Condition>
 			<Condition type="Perception" perception="Add Note" value="Pause">
 				<Action name="Think" value ="Bad Note" />
@@ -111,7 +111,7 @@
 						<Action name="Think" value ="Bad Note" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Do Agudo">
+					<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
 						<Emotion name="Joy" increment="1" max="0" />
 						<Action name="Think" value ="Good Note" />
 						<Property name="Notes Option" value="Good" />
@@ -155,7 +155,7 @@
 						<Action name="Think" value ="Bad Note" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Do Agudo">
+					<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
 						<Emotion name="Joy" increment="-1" max="-5" />
 						<Action name="Think" value ="Bad Note" />
 						<Property name="Notes Option" value="Bad" />
@@ -163,7 +163,7 @@
 				</Condition>
 
 				<!-- Mi -->
-				<Condition type="Perception" perception="Add Note" value="Re">
+				<Condition type="Perception" perception="Add Note" value="Mi">
 					<Condition type="Variable" variable="[Last Note]" compareValue="Do">
 						<Emotion name="Joy" increment="2" max="10" />
 						<Action name="Think" value ="Good Note" />
@@ -195,7 +195,7 @@
 						<Action name="Think" value ="Bad Note" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Do Agudo">
+					<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
 						<Emotion name="Joy" increment="-2" min="-7" />
 						<Action name="Think" value ="Bad Note" />
 						<Property name="Notes Option" value="Bad" />
@@ -203,7 +203,7 @@
 				</Condition>
 
 				<!-- Fa -->
-				<Condition type="Perception" perception="Add Note" value="Mi">
+				<Condition type="Perception" perception="Add Note" value="Fa">
 					<Condition type="Variable" variable="[Last Note]" compareValue="Do">
 						<Emotion name="Joy" increment="-1" min="-5" />
 						<Action name="Think" value ="Bad Note" />
@@ -239,7 +239,7 @@
 						<Action name="Think" value ="Bad Note" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Do Agudo">
+					<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
 						<Emotion name="Joy" increment="-1" max="-5" />
 						<Action name="Think" value ="Bad Note" />
 						<Property name="Notes Option" value="Bad" />
@@ -283,7 +283,7 @@
 						<Action name="Think" value ="Bad Note" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Do Agudo">
+					<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
 						<Emotion name="Joy" increment="2" max="9" />
 						<Action name="Think" value ="Good Note" />
 						<Property name="Notes Option" value="Good" />
@@ -327,7 +327,7 @@
 						<Action name="Think" value ="Good Note" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Do Agudo">
+					<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
 						<Emotion name="Joy" increment="-1" min="-5"/>
 						<Action name="Think" value ="Bad Note" />
 						<Property name="Notes Option" value="Bad" />
@@ -371,15 +371,15 @@
 						<Action name="Think" value ="Good Note" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Do Agudo">
+					<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
 						<Emotion name="Joy" increment="2" max="10" />
 						<Action name="Think" value ="Good Note" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
 				</Condition>
 
-				<!-- Do agudo -->
-				<Condition type="Perception" perception="Add Note" value="Do Agudo">
+				<!-- DoAgudo -->
+				<Condition type="Perception" perception="Add Note" value="DoAgudo">
 					<Condition type="Variable" variable="[Last Note]" compareValue="Do">
 						<Emotion name="Joy" increment="1" max="0" />
 						<Action name="Think" value ="Good Note" />
@@ -414,14 +414,14 @@
 						<Action name="Think" value ="Good Note" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Do Agudo">
+					<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
 						<Emotion name="Joy" increment="1" max="8" />
 						<Action name="Think" value ="Good Note" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
 				</Condition>
 
-				<!-- Do agudo -->
+				<!-- Pause -->
 				<Condition type="Perception" perception="Add Note" value="Pause">
 					<Condition type="Variable" variable="[Last Note]" compareValue="Do">
 						<Emotion name="Joy" increment="1" max="0" />
@@ -458,7 +458,7 @@
 						<Action name="Think" value ="Good Note" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Do Agudo">
+					<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
 						<Emotion name="Joy" increment="1" max="8" />
 						<Action name="Think" value ="Good Note" />
 						<Property name="Notes Option" value="Good" />
@@ -612,11 +612,19 @@
 					<Action name="Talk" value="Good Duration [Music Duration] [Perception.value]" probability="0.3" />
 				</Condition>
 			</Condition>
-			
-			<Action name="Talk" value="Evaluation Note" />
 
 		</DataMining>
 	</Condition>
 
+	<Condition type="Perception" perception="Delete Note">
+		<Datamining >
+
+			<Delete memory="WM" name="Add Duration" item="Last" />
+		</DataMining>
+	</Condition>
+
+	<Condition type="Perception" perception="Delete Duration">
+		<Delete memory="WM" name="Add Duration" item="Last" />
+	</Condition>
 
 </Rules>

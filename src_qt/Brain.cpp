@@ -2,6 +2,7 @@
 #include <QtCore/QDebug>
 #include <QtCore/QMutableListIterator>
 #include <QtCore/QListIterator>
+#include <QDateTime>
 
 #include "Brain.h"
 #include "CnotiMind.h"
@@ -20,6 +21,8 @@ namespace CnotiMind
 	{
 		loadXmlSettings( path );
 
+		// To generate a new random seed
+		qsrand( QDateTime::currentDateTime().toTime_t() );
 	}
 
 	Brain::Brain( QObject* parent ):
@@ -401,6 +404,27 @@ namespace CnotiMind
 	{
 		emit sendAction( key, value );
 	}
+
+	/*
+		Delete an event from the memory
+	*/
+	void Brain::deleteEvent( const QString& key, DeletePosition position, MemoryType memory )
+	{
+		QList<MemoryEvent>* mem = ( memory == LongTermMemory ? &_longTermMemory : &_workingMemory );
+
+		switch(position)
+		{
+			case DeleteLast:
+
+				break;
+		}
+	}
+
+	void Brain::deleteEvent( const QString& key, const QString& value, DeletePosition position, MemoryType memory )
+	{
+
+	}
+
 
 	/*
 		Return a QString with the datamining result operation. In case there are no events, or
@@ -895,6 +919,70 @@ namespace CnotiMind
 
 		return "";
 	}
+
+	/*
+		Datamining Time. Get the time from the last event in memory
+
+		If the memory is empty or the event is not found, set valid to false. Return 0.
+	*/
+	qreal Brain::dataMiningTime( const QString& event, const QList<MemoryEvent>& memory, bool *valid )
+	{
+		// by defaulf the data mining is not valid
+		setValid( valid, false );
+
+		if( memory.isEmpty() )
+		{
+			return 0;
+		}
+
+		QListIterator<MemoryEvent> it(memory);
+		it.toBack();
+		while( it.hasPrevious() ) // Iterate all memory
+		{
+			const MemoryEvent& me = it.previous();
+
+			if( QString::compare(me.event(), event, Qt::CaseInsensitive ) == 0 ) // Event found
+			{
+				setValid( valid, true );
+				return me.time();
+			}
+		}
+
+		return 0;
+	}
+
+	/*
+		Datamining Time. Get the time from the last event in memory with a specific value
+
+		If the memory is empty or the event is not found, set valid to false. Return 0.
+	*/
+	qreal Brain::dataMiningTime( const QString& event, const QString& value, const QList<MemoryEvent>& memory, bool *valid )
+	{
+		// by defaulf the data mining is not valid
+		setValid( valid, false );
+
+		if( memory.isEmpty() )
+		{
+			return 0;
+		}
+
+		QListIterator<MemoryEvent> it(memory);
+		it.toBack();
+		while( it.hasPrevious() ) // Iterate all memory
+		{
+			const MemoryEvent& me = it.previous();
+
+			if( QString::compare(me.event(), event, Qt::CaseInsensitive ) == 0 &&
+				QString::compare(me.value().toString(), value, Qt::CaseInsensitive ) == 0    ) // Event found
+			{
+				setValid( valid, true );
+				return me.time();
+			}
+		}
+
+		return 0;
+	}
+
 
 	/*
 		Private method, to change the value of the pointer valid.

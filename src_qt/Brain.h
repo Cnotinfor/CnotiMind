@@ -111,6 +111,10 @@ namespace CnotiMind
 
 		void executeAction( const QString& key, const QString& value );
 
+		void deleteEvent( const QString& key, DeletePosition position, MemoryType memory );
+		void deleteEvent( const QString& key, const QString& value, DeletePosition position, MemoryType memory );
+
+
 		// Methods to get information from the memory
 		QVariant dataMining( DataMiningOperation operation, const QString& event, MemoryType memoryType, bool *valid = NULL );
 		QVariant dataMining( DataMiningOperation operation, const QString& event, const QString& value, MemoryType memoryType, bool *valid = NULL );
@@ -129,6 +133,9 @@ namespace CnotiMind
 
 		QString dataMiningLast( const QString& event, const QList<MemoryEvent>& memory, bool *valid = NULL );
 		QString dataMiningFirst( const QString& event, const QList<MemoryEvent>& memory, bool *valid = NULL );
+
+		qreal dataMiningTime( const QString& event, const QList<MemoryEvent>& memory, bool *valid = NULL );
+		qreal dataMiningTime( const QString& event, const QString& value, const QList<MemoryEvent>& memory, bool *valid = NULL );
 
 //		QString dataMiningDuration( const QString& event, const QList<MemoryEvent>& memory );
 //		QString dataMiningTime( const QString& event, const QList<MemoryEvent>& memory );
