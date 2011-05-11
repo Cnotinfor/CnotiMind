@@ -22,13 +22,13 @@ namespace CnotiMind
 			_brain->clearWorkingMemory();
 			break;
 		}
-
-
 	}
 
 	void ClearMemoryNode::exec( QHash<QString, QString>& variables )
 	{
+		Q_UNUSED( variables )
 
+		exec();
 	}
 
 	QString ClearMemoryNode::info( int depth ) const
