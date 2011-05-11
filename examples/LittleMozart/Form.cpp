@@ -91,8 +91,10 @@ void Form::noteClicked( const QString& note )
 {
 	qDebug() << "Note:" << note;
 	ui->groupBoxDurations->setEnabled( true );
+	ui->pushButtonDeleteNote->setEnabled( false );
 
-	CnotiMind::Perception p( "Add Note", note );
+
+	CnotiMind::Perception p( "Note", note );
 
 	_brain->receivePerception( p );
 }
@@ -101,8 +103,9 @@ void Form::noteClicked( const QString& note )
 void Form::durationClicked( const QString& duration )
 {
 	ui->groupBoxDurations->setEnabled( false );
+	ui->pushButtonDeleteNote->setEnabled( true );
 
-	CnotiMind::Perception p( "Add Duration", duration );
+	CnotiMind::Perception p( "Duration", duration );
 
 	_brain->receivePerception( p );
 }
@@ -111,6 +114,26 @@ void Form::on_pushButtonPrint_clicked()
 {
 	_brain->printMemory(CnotiMind::WorkingMemory);
 	_brain->printProperties();
+}
+
+void Form::on_pushButtonCancelDuration_clicked()
+{
+	ui->groupBoxDurations->setEnabled( false );
+	ui->pushButtonDeleteNote->setEnabled( true );
+
+	CnotiMind::Perception p( "Delete Note", "" );
+
+	_brain->receivePerception( p );
+}
+
+void Form::on_pushButtonDeleteNote_clicked()
+{
+	CnotiMind::Perception p( "Delete Note", "" );
+	_brain->receivePerception( p );
+
+	CnotiMind::Perception p2( "Delete Duration", "" );
+	_brain->receivePerception( p2 );
+
 }
 
 void Form::actionReceived(const QString& action,const QString& value)

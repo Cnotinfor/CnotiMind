@@ -14,8 +14,8 @@ HEADERS += \
     rules/MathOperationNode.h \
     rules/PropertyNode.h \
     rules/ConditionPropertyNode.h \
-    rules/DeleteNote.h \
-    rules/ClearMemory.h
+    rules/ClearMemoryNode.h \
+    rules/DeleteNode.h
 
 SOURCES += \
 	rules/ActionNode.cpp \
@@ -33,5 +33,5 @@ SOURCES += \
     rules/MathOperationNode.cpp \
     rules/PropertyNode.cpp \
     rules/ConditionPropertyNode.cpp \
-    rules/DeleteNote.cpp \
-    rules/ClearMemory.cpp
+    rules/ClearMemoryNode.cpp \
+    rules/DeleteNode.cpp

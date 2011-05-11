@@ -30,6 +30,8 @@ namespace CnotiMind
 
 		RuleNode* rootNode() const;
 
+		int line() const;
+
 	protected:
 		bool createRootNode( const QXmlAttributes & atts );
 		bool createActionNode( const QXmlAttributes & atts );
@@ -44,6 +46,8 @@ namespace CnotiMind
 		bool createConditionDataMiningNode( const QXmlAttributes & atts );
 		bool createMathOperationNode( const QXmlAttributes & atts );
 		bool createPropertyNode( const QXmlAttributes & atts );
+		bool createDeleteNode( const QXmlAttributes & atts );
+		bool createClearMemoryNode( const QXmlAttributes & atts );
 
 
 	protected:
@@ -53,6 +57,8 @@ namespace CnotiMind
 		Brain* _brain;
 
 		QObject* _parentObject; // Parent of the RootNode
+
+		int _line;
 	};
 
 }

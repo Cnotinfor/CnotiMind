@@ -88,6 +88,8 @@ namespace CnotiMind
 		friend class PropertyNode;
 		friend class MathOperationNode;
 		friend class MemoryXmlHandler;
+		friend class ClearMemoryNode;
+		friend class DeleteNode;
 
 
 	public:

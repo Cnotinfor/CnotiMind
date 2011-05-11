@@ -15,6 +15,8 @@
 #include "MathOperationNode.h"
 #include "PropertyNode.h"
 #include "ConditionPropertyNode.h"
+#include "DeleteNode.h"
+#include "ClearMemoryNode.h"
 #include "../Brain.h"
 
 namespace CnotiMind
@@ -26,7 +28,8 @@ namespace CnotiMind
 		_currentNode( NULL ),
 		_parentNode( NULL ),
 		_brain( brain ),
-		_parentObject( new QObject(0) )
+		_parentObject( new QObject(0) ),
+		_line( 0 )
 	{
 	}
 
@@ -40,6 +43,8 @@ namespace CnotiMind
 	{
 		Q_UNUSED( namespaceURI );
 		Q_UNUSED( localName );
+
+		_line++;
 
 		if( QString::compare( qName, "Rules", Qt::CaseInsensitive ) == 0 )
 		{
@@ -72,6 +77,14 @@ namespace CnotiMind
 		if( QString::compare( qName, "Property", Qt::CaseInsensitive ) == 0 )
 		{
 			return createPropertyNode( atts );
+		}
+		if( QString::compare( qName, "Delete", Qt::CaseInsensitive ) == 0 )
+		{
+			return createDeleteNode( atts );
+		}
+		if( QString::compare( qName, "ClearMemory", Qt::CaseInsensitive ) == 0 )
+		{
+			return createClearMemoryNode( atts );
 		}
 
 		qDebug() << "[RulesXmlHandler::startElement] Invalid element" << qName;
@@ -110,6 +123,11 @@ namespace CnotiMind
 		_rootNode->setParent( 0 );
 
 		return _rootNode;
+	}
+
+	int RulesXmlHandler::line() const
+	{
+		return _line;
 	}
 
 	/*
@@ -345,6 +363,11 @@ namespace CnotiMind
 
 	bool RulesXmlHandler::createMathOperationNode( const QXmlAttributes & atts )
 	{
+		if( _rootNode == NULL || _currentNode == NULL )
+		{
+			return false;
+		}
+
 		MathOperation operation = translateMathOperation( atts.value( "name" ) );
 		QString value = atts.value( "value" );
 		QString variable = atts.value( "variable" );
@@ -363,6 +386,29 @@ namespace CnotiMind
 
 		_parentNode = _currentNode;
 		_currentNode =  new PropertyNode( name, value, _brain, _parentNode );
+
+		return true;
+	}
+
+	bool RulesXmlHandler::createDeleteNode( const QXmlAttributes & atts )
+	{
+		QString name = atts.value( "name" );
+		QString value = atts.value( "value" );
+		DeletePosition position = translateDeletePosition( atts.value( "position" ) ) ;
+		MemoryType memory = translateMemoryType( atts.value( "memory" ) );
+
+		_parentNode = _currentNode;
+		_currentNode =  new DeleteNode( name, value, position, memory, _brain, _parentNode );
+
+		return true;
+	}
+
+	bool RulesXmlHandler::createClearMemoryNode( const QXmlAttributes & atts )
+	{
+		MemoryType memory = translateMemoryType( atts.value( "memory" ) );
+
+		_parentNode = _currentNode;
+		_currentNode =  new ClearMemoryNode( memory, _brain, _parentNode );
 
 		return true;
 	}

@@ -62,7 +62,7 @@ namespace CnotiMind
 	ConditionOperator translateConditionOperator( const QString &text );
 	DataMiningOperation translateDataMiningOperator( const QString &text );
 	MathOperation translateMathOperation( const QString &text );
-	DeletePosition translateDeleteItem( const QString &text );
+	DeletePosition translateDeletePosition( const QString &text );
 }
 
 #endif // CNOTIMIND_H

@@ -1,68 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Rules>
-	<Condition type="Perception" perception="Add Note">
+	<Condition type="Perception" perception="Note">
 
 		<!-- First Note added -->
-		<Condition type="DataMining" operation="Exists"	event="Add Note" compareValue="0" memory="WM">
+		<Condition type="DataMining" operation="Exists"	event="Note" compareValue="0" memory="WM">
 			<Action name="Think" value="First Note" />
-			<Condition type="Perception" perception="Add Note" value="Do">
+			<Condition type="Perception" perception="Note" value="Do">
 				<Action name="Think" value="Good Note" />
 				<Emotion name="Joy" increment="2" max="10" />
 				<Storage event="Start Note" value="Do" memory="WM" />
 				<Property name="Notes Option" value="Good" />
 				<Property name="Note Sequence" value="First Note Do" />
 			</Condition>
-			<Condition type="Perception" perception="Add Note" value="Re">
+			<Condition type="Perception" perception="Note" value="Re">
 				<Action name="Think" value ="Bad Note" />
 				<Emotion name="Joy" increment="-2" max="-8" />
 				<Storage event="Start Note" value="Re" memory="WM" />
 				<Property name="Notes Option" value="Bad" />
 				<Property name="Note Sequence" value="First Note Re" />
 			</Condition>
-			<Condition type="Perception" perception="Add Note" value="Mi">
+			<Condition type="Perception" perception="Note" value="Mi">
 				<Action name="Think" value ="Good Note" />
 				<Emotion name="Joy" increment="2" max="8" />
 				<Storage event="Start Note" value="Mi" memory="WM" />
 				<Property name="Notes Option" value="Good" />
 				<Property name="Note Sequence" value="First Note Mi" />
 			</Condition>
-			<Condition type="Perception" perception="Add Note" value="Fa">
+			<Condition type="Perception" perception="Note" value="Fa">
 				<Action name="Think" value ="Bad Note" />
 				<Emotion name="Joy" increment="-1" min="-5"/>
 				<Storage event="Start Note" value="Fa" memory="WM" />
 				<Property name="Notes Option" value="Bad" />
 				<Property name="Note Sequence" value="First Note Fa" />
 			</Condition>
-			<Condition type="Perception" perception="Add Note" value="Sol">
+			<Condition type="Perception" perception="Note" value="Sol">
 				<Action name="Think" value ="Good Note" />
 				<Emotion name="Joy" increment="2" max="9" />
 				<Storage event="Start Note" value="Sol" memory="WM" />
 				<Property name="Notes Option" value="Good" />
 				<Property name="Note Sequence" value="First Note Sol" />
 			</Condition>
-			<Condition type="Perception" perception="Add Note" value="La">
+			<Condition type="Perception" perception="Note" value="La">
 				<Action name="Think" value ="Bad Note" />
 				<Emotion name="Joy" increment="-1" min="-5" />
 				<Storage event="Start Note" value="La" memory="WM" />
 				<Property name="Notes Option" value="Bad" />
 				<Property name="Note Sequence" value="First Note La" />
 			</Condition>
-			<Condition type="Perception" perception="Add Note" value="Si">
+			<Condition type="Perception" perception="Note" value="Si">
 				<Action name="Think" value ="Bad Note" />
 				<Emotion name="Joy" increment="-2" min="-10" />
 				<Storage event="Start Note" value="Si" memory="WM" />
 				<Property name="Notes Option" value="Bad" />
 				<Property name="Note Sequence" value="First Note Si" />
 			</Condition>
-			<Condition type="Perception" perception="Add Note" value="DoAgudo">
+			<Condition type="Perception" perception="Note" value="DoAgudo">
 				<Action name="Think" value ="Good Note" />
 				<Emotion name="Joy" increment="2" max="10" />
 				<Storage event="Start Note" value="DoAgudo" memory="WM" />
 				<Property name="Notes Option" value="Good" />
 				<Property name="Note Sequence" value="First Note DoAgudo" />
 			</Condition>
-			<Condition type="Perception" perception="Add Note" value="Pause">
+			<Condition type="Perception" perception="Note" value="Pause">
 				<Action name="Think" value ="Bad Note" />
 				<Emotion name="Joy" increment="-2" min="-10" />
 				<Storage event="Start Note" value="Pause" memory="WM" />
@@ -72,10 +72,10 @@
 		</Condition>
 
 		<!-- Test if there is already one note -->
-		<Condition type="DataMining" operation="Exists"	event="Add Note" compareValue="1" memory="WM">
-			<DataMining operation="Last" event="Add Note" variable="[Last Note]"  memory="WM">
+		<Condition type="DataMining" operation="Exists"	event="Note" compareValue="1" memory="WM">
+			<DataMining operation="Last" event="Note" variable="[Last Note]"  memory="WM">
 				<!-- Do -->
-				<Condition type="Perception" perception="Add Note" value="Do">
+				<Condition type="Perception" perception="Note" value="Do">
 					<Condition type="Variable" variable="[Last Note]" compareValue="Do">
 						<Emotion name="Joy" increment="2" max="8" />
 						<Action name="Think" value ="Good Note" />
@@ -119,7 +119,7 @@
 				</Condition>
 
 				<!-- Re -->
-				<Condition type="Perception" perception="Add Note" value="Re">
+				<Condition type="Perception" perception="Note" value="Re">
 					<Condition type="Variable" variable="[Last Note]" compareValue="Do">
 						<Emotion name="Joy" increment="1" max="7" />
 						<Action name="Think" value ="Good Note" />
@@ -163,7 +163,7 @@
 				</Condition>
 
 				<!-- Mi -->
-				<Condition type="Perception" perception="Add Note" value="Mi">
+				<Condition type="Perception" perception="Note" value="Mi">
 					<Condition type="Variable" variable="[Last Note]" compareValue="Do">
 						<Emotion name="Joy" increment="2" max="10" />
 						<Action name="Think" value ="Good Note" />
@@ -203,7 +203,7 @@
 				</Condition>
 
 				<!-- Fa -->
-				<Condition type="Perception" perception="Add Note" value="Fa">
+				<Condition type="Perception" perception="Note" value="Fa">
 					<Condition type="Variable" variable="[Last Note]" compareValue="Do">
 						<Emotion name="Joy" increment="-1" min="-5" />
 						<Action name="Think" value ="Bad Note" />
@@ -247,7 +247,7 @@
 				</Condition>
 
 				<!-- Sol -->
-				<Condition type="Perception" perception="Add Note" value="Sol">
+				<Condition type="Perception" perception="Note" value="Sol">
 					<Condition type="Variable" variable="[Last Note]" compareValue="Do">
 						<Emotion name="Joy" increment="2" max="10" />
 						<Action name="Think" value ="Good Note" />
@@ -291,7 +291,7 @@
 				</Condition>
 
 				<!-- La -->
-				<Condition type="Perception" perception="Add Note" value="La">
+				<Condition type="Perception" perception="Note" value="La">
 					<Condition type="Variable" variable="[Last Note]" compareValue="Do">
 						<Emotion name="Joy" increment="-1" min="-5" />
 						<Action name="Think" value ="Bad Note" />
@@ -335,7 +335,7 @@
 				</Condition>
 
 				<!-- Si -->
-				<Condition type="Perception" perception="Add Note" value="Si">
+				<Condition type="Perception" perception="Note" value="Si">
 					<Condition type="Variable" variable="[Last Note]" compareValue="Do">
 						<Emotion name="Joy" increment="-2" min="-10" />
 						<Action name="Think" value ="Bad Note" />
@@ -379,7 +379,7 @@
 				</Condition>
 
 				<!-- DoAgudo -->
-				<Condition type="Perception" perception="Add Note" value="DoAgudo">
+				<Condition type="Perception" perception="Note" value="DoAgudo">
 					<Condition type="Variable" variable="[Last Note]" compareValue="Do">
 						<Emotion name="Joy" increment="1" max="0" />
 						<Action name="Think" value ="Good Note" />
@@ -422,7 +422,7 @@
 				</Condition>
 
 				<!-- Pause -->
-				<Condition type="Perception" perception="Add Note" value="Pause">
+				<Condition type="Perception" perception="Note" value="Pause">
 					<Condition type="Variable" variable="[Last Note]" compareValue="Do">
 						<Emotion name="Joy" increment="1" max="0" />
 						<Action name="Think" value ="Good Note" />
@@ -472,22 +472,22 @@
 		</Condition>
 
 		<!-- If there are no notes -->
-		<Condition type="DataMining" operation="Exists"	event="Add Note" compareValue="0" memory="WM">
+		<Condition type="DataMining" operation="Exists"	event="Note" compareValue="0" memory="WM">
 
 		</Condition>
 
 
 		<!-- Save note added to the memory -->
-		<Storage event="Add Note" value="[Perception.value]" memory="WM" />
-		<Storage event="Add Note" value="[Perception.value]" memory="LTM" />
+		<Storage event="Note" value="[Perception.value]" memory="WM" />
+		<Storage event="Note" value="[Perception.value]" memory="LTM" />
 
 		<!-- -->
 	</Condition>
 
 	<!-- When a duration is added -->
-	<Condition type="Perception" perception="Add Duration">
+	<Condition type="Perception" perception="Duration">
 		<!-- Calculate the music lenght -->
-		<DataMining operation="Sum" event="Add Duration" variable="[Music Duration]" memory="WM">
+		<DataMining operation="Sum" event="Duration" variable="[Music Duration]" memory="WM">
 			<Action name="Think" value ="Music Duration [Music Duration]" />
 
 			<!-- Check how much tempos from the compass have been used -->
@@ -496,22 +496,22 @@
 				<!-- Compass with 0 durations -->
 
 				<Condition type="Variable" variable="[Duration]" compareValue="0">
-					<Condition type="Perception" perception="Add Duration" value="1">
+					<Condition type="Perception" perception="Duration" value="1">
 						<Emotion name="Joy" increment="1" max="2" />
 						<Action name="Think" value ="Good Duration" />
 						<Property name="Duration Option" value ="Good" />
 					</Condition>
-					<Condition type="Perception" perception="Add Duration" value="2">
+					<Condition type="Perception" perception="Duration" value="2">
 						<Emotion name="Joy" increment="1" max="2" />
 						<Action name="Think" value ="Good Duration" />
 						<Property name="Duration Option" value ="Good" />
 					</Condition>
-					<Condition type="Perception" perception="Add Duration" value="3">
+					<Condition type="Perception" perception="Duration" value="3">
 						<Emotion name="Joy" increment="1" max="2" />
 						<Action name="Think" value ="Good Duration" />
 						<Property name="Duration Option" value ="Good" />
 					</Condition>
-					<Condition type="Perception" perception="Add Duration" value="4">
+					<Condition type="Perception" perception="Duration" value="4">
 						<Emotion name="Joy" increment="1" max="2" />
 						<Action name="Think" value ="Good Duration" />
 						<Property name="Duration Option" value ="Good" />
@@ -520,22 +520,22 @@
 
 				<!-- Compass with 1 durations -->
 				<Condition type="Variable" variable="[Duration]" compareValue="1">
-					<Condition type="Perception" perception="Add Duration" value="1">
+					<Condition type="Perception" perception="Duration" value="1">
 						<Emotion name="Joy" increment="1" max="10" />
 						<Action name="Think" value ="Good Duration" />
 						<Property name="Duration Option" value ="Good" />
 					</Condition>
-					<Condition type="Perception" perception="Add Duration" value="2">
+					<Condition type="Perception" perception="Duration" value="2">
 						<Emotion name="Joy" increment="-4" min="-10" />
 						<Action name="Think" value ="Bad Duration" />
 						<Property name="Duration Option" value ="Bad" />
 					</Condition>
-					<Condition type="Perception" perception="Add Duration" value="3">
+					<Condition type="Perception" perception="Duration" value="3">
 						<Emotion name="Joy" increment="-4" min="-10" />
 						<Action name="Think" value ="Bad Duration" />
 						<Property name="Duration Option" value ="Bad" />
 					</Condition>
-					<Condition type="Perception" perception="Add Duration" value="4">
+					<Condition type="Perception" perception="Duration" value="4">
 						<Emotion name="Joy" increment="-4" min="-10" />
 						<Action name="Think" value ="Bad Duration" />
 						<Property name="Duration Option" value ="Bad" />
@@ -544,22 +544,22 @@
 
 				<!-- Compass with 2 durations -->
 				<Condition type="Variable" variable="[Duration]" compareValue="2">
-					<Condition type="Perception" perception="Add Duration" value="1">
+					<Condition type="Perception" perception="Duration" value="1">
 						<Emotion name="Joy" increment="1" max="8" />
 						<Action name="Think" value ="Good Duration" />
 						<Property name="Duration Option" value ="Good" />
 					</Condition>
-					<Condition type="Perception" perception="Add Duration" value="2">
+					<Condition type="Perception" perception="Duration" value="2">
 						<Emotion name="Joy" increment="1" max="10" />
 						<Action name="Think" value ="Good Duration" />
 						<Property name="Duration Option" value ="Good" />
 					</Condition>
-					<Condition type="Perception" perception="Add Duration" value="3">
+					<Condition type="Perception" perception="Duration" value="3">
 						<Emotion name="Joy" increment="-4" min="-10" />
 						<Action name="Think" value ="Bad Duration" />
 						<Property name="Duration Option" value ="Bad" />
 					</Condition>
-					<Condition type="Perception" perception="Add Duration" value="4">
+					<Condition type="Perception" perception="Duration" value="4">
 						<Emotion name="Joy" increment="-4" min="-10" />
 						<Action name="Think" value ="Bad Duration" />
 						<Property name="Duration Option" value ="Bad" />
@@ -568,22 +568,22 @@
 
 				<!-- Compass with 3 durations -->
 				<Condition type="Variable" variable="[Duration]" compareValue="3">
-					<Condition type="Perception" perception="Add Duration" value="1">
+					<Condition type="Perception" perception="Duration" value="1">
 						<Emotion name="Joy" increment="1" max="10" />
 						<Action name="Think" value ="Good Duration" />
 						<Property name="Duration Option" value ="Good" />
 					</Condition>
-					<Condition type="Perception" perception="Add Duration" value="2">
+					<Condition type="Perception" perception="Duration" value="2">
 						<Emotion name="Joy" increment="-4" min="-10" />
 						<Action name="Think" value ="Bad Duration" />
 						<Property name="Duration Option" value ="Bad" />
 					</Condition>
-					<Condition type="Perception" perception="Add Duration" value="3">
+					<Condition type="Perception" perception="Duration" value="3">
 						<Emotion name="Joy" increment="-4" min="-10" />
 						<Action name="Think" value ="Bad Duration" />
 						<Property name="Duration Option" value ="Bad" />
 					</Condition>
-					<Condition type="Perception" perception="Add Duration" value="4">
+					<Condition type="Perception" perception="Duration" value="4">
 						<Emotion name="Joy" increment="-4" min="-10" />
 						<Action name="Think" value ="Bad Duration" />
 						<Property name="Duration Option" value ="Bad" />
@@ -597,8 +597,8 @@
 
 
 
-			<Storage event="Add Duration" value="[Perception.value]" memory="WM" />
-			<Storage event="Add Duration" value="[Perception.value]" memory="LTM" />
+			<Storage event="Duration" value="[Perception.value]" memory="WM" />
+			<Storage event="Duration" value="[Perception.value]" memory="LTM" />
 
 			<Condition type="Property" property="Duration Option" compareValue="Bad">
 				<Action name="Talk" value="Wrong Duration [Music Duration] [Perception.value]" />
@@ -609,7 +609,7 @@
 				</Condition>
 				<Condition type="Property" property="Notes Option" compareValue="Good">
 					<Action name="Talk" value="Good Note {Note Sequence}" probability="0.3" />
-					<Action name="Talk" value="Good Duration [Music Duration] [Perception.value]" probability="0.3" />
+					<!--<Action name="Talk" value="Good Duration [Music Duration] [Perception.value]" probability="0.3" />-->
 				</Condition>
 			</Condition>
 
@@ -617,14 +617,47 @@
 	</Condition>
 
 	<Condition type="Perception" perception="Delete Note">
-		<Datamining >
-
-			<Delete memory="WM" name="Add Duration" item="Last" />
-		</DataMining>
+		<Condition type="DataMining" operation="Exists"	event="Note" compareValue="0" memory="WM">
+			<Condition type="DataMining" operation="Exists"	event="Pause" compareValue="0" memory="WM">
+				<Action name="Think" value="There are no notes to delete" />
+			</Condition>
+			<Condition type="DataMining" operation="Exists"	event="Pause" compareValue="1" memory="WM">
+				<Delete memory="WM" name="Pause" position="Last" />
+				<Action name="Think" value="Pause deleted" />
+			</Condition>
+		</Condition>
+		
+		<Condition type="DataMining" operation="Exists"	event="Note" compareValue="1" memory="WM">
+			<Condition type="DataMining" operation="Exists"	event="Pause" compareValue="0" memory="WM">
+				<Delete memory="WM" name="Note" position="Last" />
+				<Action name="Think" value="Note deleted" />
+			</Condition>
+			<Condition type="DataMining" operation="Exists"	event="Pause" compareValue="1" memory="WM">
+				<!-- If there are Pause and Note events. -->
+				<!-- Test which one is the most recent -->
+				<DataMining operation="Time" event="Note" variable="[Note Time]" memory="WM">
+					<DataMining operation="Time" event="Pause" variable="[Pause Time]" memory="WM">
+						<Condition type="Variable" variable="[Note Time]" compareValue="[Pause Time]" operator="bigger" >
+							<Action name="Think" value="[Note Time] bigger [Pause Time]" />
+						</Condition>
+						<Condition type="Variable" variable="[Note Time]" compareValue="[Pause Time]" operator="smaller" >
+							<Action name="Think" value="[Note Time] smaller [Pause Time]" />
+						</Condition>
+					</DataMining>
+				</DataMining>
+			</Condition>
+		</Condition>
 	</Condition>
+
 
 	<Condition type="Perception" perception="Delete Duration">
-		<Delete memory="WM" name="Add Duration" item="Last" />
+		<Condition type="DataMining" operation="Exists"	event="Duration" compareValue="0" memory="WM">
+			<Action name="Think" value="Not possible to delete the duration" />
+		</Condition>
+		<Condition type="DataMining" operation="Exists"	event="Duration" compareValue="1" memory="WM">
+			<Delete memory="WM" name="Duration" position="Last" />
+			<Action name="Think" value="Duration deleted" />
+		</Condition>
 	</Condition>
-
+	
 </Rules>

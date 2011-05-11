@@ -26,15 +26,15 @@ namespace CnotiMind
 	*/
 	ConditionOperator translateConditionOperator( const QString &text )
 	{
-		if( text.compare(">") == 0)
+		if( text.compare(">") == 0 || text.compare("bigger") == 0 )
 		{
 			return ConditionOperatorBigger;
 		}
-		if( text.compare(">=") == 0)
+		if( text.compare(">=") == 0 )
 		{
 			return ConditionOperatorBiggerOrEqual;
 		}
-		if( text.compare("<") == 0)
+		if( text.compare("<") == 0 || text.compare("smaller") == 0 )
 		{
 			return ConditionOperatorSmaller;
 		}
@@ -148,7 +148,7 @@ namespace CnotiMind
 	/*
 		Convert text string to a DeleteItem
 	*/
-	DeletePosition translateDeleteItem( const QString &text )
+	DeletePosition translateDeletePosition( const QString &text )
 	{
 		if( QString::compare( text, "last", Qt::CaseInsensitive  ) == 0 )
 		{

@@ -123,6 +123,8 @@ namespace CnotiMind
 			return true;
 		}
 
+		qDebug() << "[Brain::loadXmlRules] Error in XML, line" << handler->line();
+
 		return false;
 	}
 
@@ -412,11 +414,29 @@ namespace CnotiMind
 	{
 		QList<MemoryEvent>* mem = ( memory == LongTermMemory ? &_longTermMemory : &_workingMemory );
 
+		QMutableListIterator<MemoryEvent> it(*mem);
+
 		switch(position)
 		{
 			case DeleteLast:
-
+				it.toBack();
+				while(it.hasPrevious())
+				{
+					if( it.previous() == key )
+					{
+						it.remove();
+					}
+				}
 				break;
+			case DeleteFirst:
+				while(it.hasNext())
+				{
+					if( it.next() == key )
+					{
+						it.remove();
+					}
+				}
+			break;
 		}
 	}
 
@@ -466,6 +486,8 @@ namespace CnotiMind
 			return dataMiningLast( event, memory, valid );
 		case DMO_First:
 			return dataMiningFirst( event, memory, valid );
+		case DMO_Time:
+			return dataMiningTime( event, memory, valid );
 		}
 
 		setValid( valid, false );

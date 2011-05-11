@@ -60,28 +60,52 @@ namespace CnotiMind
 				bool ok;
 				qreal value = v.toDouble(&ok);
 
-				if( ok && _isValueNumeric ) // if both values are numbers
+				if( ok ) // if the variable value is a number
 				{
-					switch( _operator )
+					if( _isValueNumeric ) // if the value to compare is a number
 					{
-						case ConditionOperatorBigger: return _valueNumeric > value;
-						case ConditionOperatorBiggerOrEqual: return _valueNumeric >= value;
-						case ConditionOperatorSmaller: return _valueNumeric < value;
-						case ConditionOperatorSmallerOrEqual: return _valueNumeric <= value;
-						case ConditionOperatorEqual: return _valueNumeric == value;
-						case ConditionOperatorDifferent: return _valueNumeric != value;
+						switch( _operator )
+						{
+							case ConditionOperatorBigger: return _valueNumeric > value;
+							case ConditionOperatorBiggerOrEqual: return _valueNumeric >= value;
+							case ConditionOperatorSmaller: return _valueNumeric < value;
+							case ConditionOperatorSmallerOrEqual: return _valueNumeric <= value;
+							case ConditionOperatorEqual: return _valueNumeric == value;
+							case ConditionOperatorDifferent: return _valueNumeric != value;
+						}
+						return false;
 					}
-					return false;
+					else // if it is not a number, test if it is variable
+					{
+						QString strValue = _value;
+						tagsToValue( strValue, variables ); // convert variable tags to number
+
+						qreal compareValue = strValue.toDouble(&ok);
+
+						if(ok) // if it is number
+						{
+							switch( _operator )
+							{
+								case ConditionOperatorBigger: return compareValue > value;
+								case ConditionOperatorBiggerOrEqual: return compareValue >= value;
+								case ConditionOperatorSmaller: return compareValue < value;
+								case ConditionOperatorSmallerOrEqual: return compareValue <= value;
+								case ConditionOperatorEqual: return compareValue == value;
+								case ConditionOperatorDifferent: return compareValue != value;
+							}
+							return false;
+						}
+						// if it is not a number use the code below
+					}
 				}
-				else // If one of the value is not a number
+
+				// If one of the value is not a number
+				switch( _operator ) // it's a string, just to this 2 operators
 				{
-					switch( _operator ) // it's a string, just to this 2 operators
-					{
-						case ConditionOperatorEqual: return QString::compare( _value, v, Qt::CaseInsensitive ) == 0;
-						case ConditionOperatorDifferent: return QString::compare( _value, v, Qt::CaseInsensitive ) != 0;
-					}
-					return false;
+					case ConditionOperatorEqual: return QString::compare( _value, v, Qt::CaseInsensitive ) == 0;
+					case ConditionOperatorDifferent: return QString::compare( _value, v, Qt::CaseInsensitive ) != 0;
 				}
+				return false;
 			}
 		}
 
