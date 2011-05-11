@@ -15,7 +15,7 @@
 			</Condition>
 			<Condition type="Perception" perception="Note" value="Re">
 				<Action name="Think" value ="Bad Note" />
-				<Emotion name="Joy" increment="-2" max="-8" />
+				<Emotion name="Joy" increment="-2" min="-8" />
 				<Storage event="Start Note" value="Re" memory="WM" />
 				<Property name="Notes Option" value="Bad" />
 				<Property name="Note Sequence" value="First Note Re" />
@@ -141,22 +141,22 @@
 						<Property name="Notes Option" value="Good" />
 					</Condition>
 					<Condition type="Variable" variable="[Last Note]" compareValue="Sol">
-						<Emotion name="Joy" increment="-1" max="-5" />
+						<Emotion name="Joy" increment="-1" min="-5" />
 						<Action name="Think" value ="Bad Note" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
 					<Condition type="Variable" variable="[Last Note]" compareValue="La">
-						<Emotion name="Joy" increment="-2" max="-7" />
+						<Emotion name="Joy" increment="-2" min="-7" />
 						<Action name="Think" value ="Bad Note" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
 					<Condition type="Variable" variable="[Last Note]" compareValue="Si">
-						<Emotion name="Joy" increment="-2" max="-10" />
+						<Emotion name="Joy" increment="-2" min="-10" />
 						<Action name="Think" value ="Bad Note" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
 					<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
-						<Emotion name="Joy" increment="-1" max="-5" />
+						<Emotion name="Joy" increment="-1" min="-5" />
 						<Action name="Think" value ="Bad Note" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
@@ -239,12 +239,12 @@
 						<Property name="Notes Option" value="Good" />
 					</Condition>
 					<Condition type="Variable" variable="[Last Note]" compareValue="Si">
-						<Emotion name="Joy" increment="-2" max="-10" />
+						<Emotion name="Joy" increment="-2" min="-10" />
 						<Action name="Think" value ="Bad Note" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
 					<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
-						<Emotion name="Joy" increment="-1" max="-5" />
+						<Emotion name="Joy" increment="-1" min="-5" />
 						<Action name="Think" value ="Bad Note" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
@@ -258,7 +258,7 @@
 						<Property name="Notes Option" value="Good" />
 					</Condition>
 					<Condition type="Variable" variable="[Last Note]" compareValue="Re">
-						<Emotion name="Joy" increment="-2" max="-5" />
+						<Emotion name="Joy" increment="-2" min="-5" />
 						<Action name="Think" value ="Bad Note" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
@@ -356,12 +356,12 @@
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
 					<Condition type="Variable" variable="[Last Note]" compareValue="Fa">
-						<Emotion name="Joy" increment="-2" max="-10" />
+						<Emotion name="Joy" increment="-2" min="-10" />
 						<Action name="Think" value ="Bad Note" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
 					<Condition type="Variable" variable="[Last Note]" compareValue="Sol">
-						<Emotion name="Joy" increment="-1" max="-5" />
+						<Emotion name="Joy" increment="-1" min="-5" />
 						<Action name="Think" value ="Bad Note" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
@@ -472,7 +472,7 @@
 					
 					<!-- If it the last note has a pause -->
 					<Condition type="property" name="Pause" value="true">
-						<Emotion name="Joy" increment="-2" max="-10" />
+						<Emotion name="Joy" increment="-2" min="-10" />
 						<Action name="Think" value ="Bad Note" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
