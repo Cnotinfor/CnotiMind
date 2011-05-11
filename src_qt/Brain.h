@@ -118,9 +118,9 @@ namespace CnotiMind
 
 
 		// Methods to get information from the memory
-		QVariant dataMining( DataMiningOperation operation, const QString& event, MemoryType memoryType, bool *valid = NULL );
-		QVariant dataMining( DataMiningOperation operation, const QString& event, const QString& value, MemoryType memoryType, bool *valid = NULL );
-		QVariant dataMining( DataMiningOperation operation, const QString& event, qreal value, MemoryType memoryType, bool *valid = NULL );
+		QVariant dataMining( DataMiningOperation operation, const QString& event, int position, MemoryType memoryType, bool *valid = NULL );
+		QVariant dataMining( DataMiningOperation operation, const QString& event, const QString& value, int position, MemoryType memoryType, bool *valid = NULL );
+		QVariant dataMining( DataMiningOperation operation, const QString& event, qreal value, int position, MemoryType memoryType, bool *valid = NULL );
 
 		qreal dataMiningMax( const QString& event, const QList<MemoryEvent>& memory, bool *valid = NULL );
 		qreal dataMiningMin( const QString& event, const QList<MemoryEvent>& memory, bool *valid = NULL );
@@ -135,6 +135,7 @@ namespace CnotiMind
 
 		QString dataMiningLast( const QString& event, const QList<MemoryEvent>& memory, bool *valid = NULL );
 		QString dataMiningFirst( const QString& event, const QList<MemoryEvent>& memory, bool *valid = NULL );
+		QString dataMiningItem( const QString& event, int position, const QList<MemoryEvent>& memory, bool *valid = NULL );
 
 		qreal dataMiningTime( const QString& event, const QList<MemoryEvent>& memory, bool *valid = NULL );
 		qreal dataMiningTime( const QString& event, const QString& value, const QList<MemoryEvent>& memory, bool *valid = NULL );

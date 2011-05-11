@@ -425,6 +425,7 @@ namespace CnotiMind
 					if( it.previous() == key )
 					{
 						it.remove();
+						break;
 					}
 				}
 				break;
@@ -434,9 +435,19 @@ namespace CnotiMind
 					if( it.next() == key )
 					{
 						it.remove();
+						break;
 					}
 				}
-			break;
+				break;
+			case DeleteAll:
+				while(it.hasNext())
+				{
+					if( it.next() == key )
+					{
+						it.remove();
+					}
+				}
+				break;
 		}
 	}
 
@@ -455,7 +466,7 @@ namespace CnotiMind
 
 	;
 
-	QVariant Brain::dataMining( DataMiningOperation operation, const QString& event, MemoryType memoryType, bool* valid )
+	QVariant Brain::dataMining( DataMiningOperation operation, const QString& event, int position, MemoryType memoryType, bool* valid )
 	{
 		// test if parameters are valid for datamining
 		if( event.isEmpty() )
@@ -488,13 +499,15 @@ namespace CnotiMind
 			return dataMiningFirst( event, memory, valid );
 		case DMO_Time:
 			return dataMiningTime( event, memory, valid );
+		case DMO_Item:
+			return dataMiningItem( event, position, memory, valid );
 		}
 
 		setValid( valid, false );
 		return "";
 	}
 
-	QVariant Brain::dataMining( DataMiningOperation operation, const QString& event, const QString& value, MemoryType memoryType, bool* valid )
+	QVariant Brain::dataMining( DataMiningOperation operation, const QString& event, const QString& value, int position, MemoryType memoryType, bool* valid )
 	{
 		// test if parameters are valid for datamining
 		if( event.isEmpty() )
@@ -506,7 +519,7 @@ namespace CnotiMind
 		// if value is empty, do datamining without the value
 		if( value.isEmpty() )
 		{
-			return dataMining( operation, event, memoryType, valid );
+			return dataMining( operation, event, position, memoryType, valid );
 		}
 
 
@@ -526,7 +539,7 @@ namespace CnotiMind
 		return "";
 	}
 
-	QVariant Brain::dataMining( DataMiningOperation operation, const QString& event, qreal value, MemoryType memoryType, bool* valid )
+	QVariant Brain::dataMining( DataMiningOperation operation, const QString& event, qreal value, int position, MemoryType memoryType, bool* valid )
 	{
 		// test if parameters are valid for datamining
 		if( event.isEmpty() )
@@ -942,6 +955,64 @@ namespace CnotiMind
 		return "";
 	}
 
+	QString Brain::dataMiningItem( const QString& event, int position, const QList<MemoryEvent>& memory, bool *valid )
+	{
+		// by defaulf the data mining is not valid
+		setValid( valid, false );
+
+		if( memory.isEmpty() )
+		{
+			return "";
+		}
+
+		// Search for elements starting from start
+		if( position > 0 )
+		{
+			QListIterator<MemoryEvent> it(memory);
+			while( it.hasNext() ) // Iterate all memory
+			{
+				const MemoryEvent& me = it.next();
+
+				if( QString::compare(me.event(), event, Qt::CaseInsensitive ) == 0 ) // Event found
+				{
+					// test if it the correct item
+					if( position == 1 )
+					{
+						setValid( valid, true );
+						return me.value().toString();
+					}
+					position--; // found one, decrease the position
+				}
+			}
+			return "";
+		}
+		else if ( position < 0 )
+		{
+			QListIterator<MemoryEvent> it(memory);
+			it.toBack(); // start search from back
+			while( it.hasPrevious() ) // Iterate all memory
+			{
+				const MemoryEvent& me = it.previous();
+
+				if( QString::compare(me.event(), event, Qt::CaseInsensitive ) == 0 ) // Event found
+				{
+					// test if it is the correct event
+					if( position == -1 )
+					{
+						setValid( valid, true );
+						return me.value().toString();
+					}
+					position++; // Increase position until it reachs -1
+				}
+			}
+
+			return "";
+		}
+
+		// position can't be 0
+		return "";
+	}
+
 	/*
 		Datamining Time. Get the time from the last event in memory
 
@@ -966,6 +1037,7 @@ namespace CnotiMind
 			if( QString::compare(me.event(), event, Qt::CaseInsensitive ) == 0 ) // Event found
 			{
 				setValid( valid, true );
+				qDebug() << me.time();
 				return me.time();
 			}
 		}

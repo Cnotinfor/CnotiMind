@@ -16,7 +16,7 @@ namespace CnotiMind
 
 	public:
 		DataMiningNode(const QString& key, const QString& value, DataMiningOperation dataMiningOperation,
-					   MemoryType memory, const QString& variable, Brain* brain, QObject* parent);
+					   MemoryType memory, const QString& variable, const QString& position, Brain* brain, QObject* parent);
 
 		void exec();
 		void exec( QHash<QString, QString>& variables );
@@ -25,7 +25,7 @@ namespace CnotiMind
 
 
 	protected:
-		bool isTrue();
+		bool isTrue( const QHash<QString, QString>& variables );
 
 		QString _event;
 		QString _value;
@@ -35,6 +35,10 @@ namespace CnotiMind
 		qreal _valueNumeric;
 		bool _isValueNumeric;
 		QVariant _result;
+		QString _position;
+		bool _isPositionNumeric;
+		int _positionNumeric;
+
 	};
 
 }

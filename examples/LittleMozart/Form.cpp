@@ -34,7 +34,7 @@ Form::Form(QWidget *parent) :
 	signalMapperNotes->setMapping(ui->pushButtonSol, "Sol");
 	signalMapperNotes->setMapping(ui->pushButtonLa, "La");
 	signalMapperNotes->setMapping(ui->pushButtonSi, "Si");
-	signalMapperNotes->setMapping(ui->pushButtonDoAgudo, "Do Agudo");
+	signalMapperNotes->setMapping(ui->pushButtonDoAgudo, "DoAgudo");
 	signalMapperNotes->setMapping(ui->pushButtonPause, "Pause");
 
 	connect(signalMapperNotes, SIGNAL(mapped(const QString&)), this, SLOT(noteClicked(const QString&)));

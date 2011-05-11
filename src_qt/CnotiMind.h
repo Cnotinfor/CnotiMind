@@ -36,6 +36,7 @@ namespace CnotiMind
 		DMO_First,
 		DMO_Duration,
 		DMO_Time,
+		DMO_Item,
 		DMO_Undefined
 	};
 

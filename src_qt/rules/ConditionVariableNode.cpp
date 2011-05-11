@@ -66,12 +66,12 @@ namespace CnotiMind
 					{
 						switch( _operator )
 						{
-							case ConditionOperatorBigger: return _valueNumeric > value;
-							case ConditionOperatorBiggerOrEqual: return _valueNumeric >= value;
-							case ConditionOperatorSmaller: return _valueNumeric < value;
-							case ConditionOperatorSmallerOrEqual: return _valueNumeric <= value;
-							case ConditionOperatorEqual: return _valueNumeric == value;
-							case ConditionOperatorDifferent: return _valueNumeric != value;
+							case ConditionOperatorBigger: return value > _valueNumeric ;
+							case ConditionOperatorBiggerOrEqual: return value >= _valueNumeric;
+							case ConditionOperatorSmaller: return value < _valueNumeric;
+							case ConditionOperatorSmallerOrEqual: return value <= _valueNumeric;
+							case ConditionOperatorEqual: return value == _valueNumeric;
+							case ConditionOperatorDifferent: return value != _valueNumeric;
 						}
 						return false;
 					}
@@ -86,12 +86,12 @@ namespace CnotiMind
 						{
 							switch( _operator )
 							{
-								case ConditionOperatorBigger: return compareValue > value;
-								case ConditionOperatorBiggerOrEqual: return compareValue >= value;
-								case ConditionOperatorSmaller: return compareValue < value;
-								case ConditionOperatorSmallerOrEqual: return compareValue <= value;
-								case ConditionOperatorEqual: return compareValue == value;
-								case ConditionOperatorDifferent: return compareValue != value;
+								case ConditionOperatorBigger: return value > compareValue;
+								case ConditionOperatorBiggerOrEqual: return value >= compareValue;
+								case ConditionOperatorSmaller: return value < compareValue;
+								case ConditionOperatorSmallerOrEqual: return value <= compareValue;
+								case ConditionOperatorEqual: return value == compareValue;
+								case ConditionOperatorDifferent: return value != compareValue;
 							}
 							return false;
 						}

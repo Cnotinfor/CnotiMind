@@ -70,7 +70,7 @@ namespace CnotiMind
 		// If the values are numbers it should use the
 		if( _isValueNumeric && _isCompareValueNumeric )
 		{
-			QVariant result = _brain->dataMining( _dataMiningOperation, _key, _valueNumeric, _memory, &valid );
+			QVariant result = _brain->dataMining( _dataMiningOperation, _key, _valueNumeric, 0, _memory, &valid );
 
 			if(!valid)
 			{
@@ -94,7 +94,7 @@ namespace CnotiMind
 		}
 		else // If the value is QString
 		{
-			QVariant result = _brain->dataMining( _dataMiningOperation, _key, _value, _memory, &valid );
+			QVariant result = _brain->dataMining( _dataMiningOperation, _key, _value, 0, _memory, &valid );
 
 			if(!valid)
 			{

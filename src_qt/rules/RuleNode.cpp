@@ -92,7 +92,7 @@ namespace CnotiMind
 
 		If the variable/property tag is not found, it is replaced by an empty string.
 	*/
-	void RuleNode::tagsToValue( QString& value, QHash<QString, QString>& variables )
+	void RuleNode::tagsToValue( QString& value, const QHash<QString, QString>& variables )
 	{
 		static QString empty;
 

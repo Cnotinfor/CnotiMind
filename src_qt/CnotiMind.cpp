@@ -99,6 +99,10 @@ namespace CnotiMind
 		{
 			return DMO_Time;
 		}
+		if( QString::compare( text, "item", Qt::CaseInsensitive  ) == 0 )
+		{
+			return DMO_Item;
+		}
 		return DMO_Undefined;
 	}
 

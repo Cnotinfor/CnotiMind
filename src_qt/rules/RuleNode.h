@@ -43,7 +43,7 @@ namespace CnotiMind
 		virtual void execChildren();
 		virtual void execChildren( QHash<QString, QString>& variables );
 
-		void tagsToValue( QString& value, QHash<QString, QString>& variables );
+		void tagsToValue( QString& value, const QHash<QString, QString>& variables );
 
 		QString space( int depth ) const;
 

@@ -3,7 +3,6 @@
 
 #include <QtCore/QString>
 #include <QtCore/QVariant>
-#include <ctime>
 
 #include "ObjectToXml.h"
 
@@ -18,12 +17,12 @@ namespace CnotiMind
 
 		MemoryEvent( const QString& event );
 		MemoryEvent( const QString& event, const QVariant& value );
-		MemoryEvent( const QString& event, const QVariant& value, time_t time );
+		MemoryEvent( const QString& event, const QVariant& value, qint64 time );
 		MemoryEvent( const Perception& perception );
 
 		const QVariant& value() const;
 		const QString& event() const;
-		time_t time() const;
+		qint64 time() const;
 
 		QString toXml() const;
 
@@ -33,7 +32,7 @@ namespace CnotiMind
 	protected:
 		QString _event;
 		QVariant _value;
-		time_t _time;
+		qint64 _time;
 	};
 
 }

@@ -1,5 +1,6 @@
 #include <QtCore/QString>
 #include <QtCore/QVariant>
+#include <QDateTime>
 
 #include "MemoryEvent.h"
 #include "Perception.h"
@@ -10,7 +11,7 @@ namespace CnotiMind
 	MemoryEvent::MemoryEvent( const QString& key ):
 		_event( key ),
 		_value( QVariant() ),
-		_time( time() )
+		_time( QDateTime::currentDateTime().toMSecsSinceEpoch() )
 	{
 
 	}
@@ -24,12 +25,12 @@ namespace CnotiMind
 	MemoryEvent::MemoryEvent(const QString& key, const QVariant& value):
 		_event( key ),
 		_value( value ),
-		_time( time() )
+		_time( QDateTime::currentDateTime().toMSecsSinceEpoch() )
 	{
 
 	}
 
-	MemoryEvent::MemoryEvent(const QString& key, const QVariant& value, time_t time):
+	MemoryEvent::MemoryEvent(const QString& key, const QVariant& value, qint64 time):
 		_event( key ),
 		_value( value ),
 		_time( time )
@@ -43,7 +44,7 @@ namespace CnotiMind
 	MemoryEvent::MemoryEvent( const Perception& perception ):
 		_event( perception.name() ),
 		_value( perception.value() ),
-		_time( time() )
+		_time( QDateTime::currentDateTime().toMSecsSinceEpoch() )
 	{
 
 	}
@@ -58,7 +59,7 @@ namespace CnotiMind
 		return _event;
 	}
 
-	time_t MemoryEvent::time() const
+	qint64 MemoryEvent::time() const
 	{
 		return _time;
 	}

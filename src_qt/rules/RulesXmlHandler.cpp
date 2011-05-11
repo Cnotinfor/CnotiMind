@@ -242,10 +242,11 @@ namespace CnotiMind
 		QString value = atts.value( "value" );
 		DataMiningOperation opDataMining = translateDataMiningOperator( atts.value( "operation" ) );
 		QString variable = atts.value( "variable" );
+		QString position = atts.value( "position" );
 		MemoryType memory = translateMemoryType( atts.value( "memory" ) );
 
 		_parentNode = _currentNode;
-		_currentNode =  new DataMiningNode( key, value, opDataMining, memory, variable, _brain, _parentNode );
+		_currentNode =  new DataMiningNode( key, value, opDataMining, memory, variable, position, _brain, _parentNode );
 
 		return true;
 	}

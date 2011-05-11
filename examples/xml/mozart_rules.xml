@@ -463,10 +463,24 @@
 						<Action name="Think" value ="Good Note" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
+					<!-- It should not repeat pauses -->
+					<Condition type="Variable" variable="[Last Note]" compareValue="Pause">
+						<Emotion name="Joy" increment="1" max="8" />
+						<Action name="Think" value ="Bad Note" />
+						<Property name="Notes Option" value="Bad" />
+					</Condition>
+					
+					<Property name="Pause" value="true" />
 				</Condition>
 
-				<Action name="Think" value="Sequence [Last Note] [Perception.value]" />
-				<Property name="Note Sequence" value="[Last Note] [Perception.value]" />
+				<!-- If the pause was not selected -->
+				<Condition type="Perception" perception="Note" value="Pause" operator="!=">
+					<Property name="Pause" value="false" />
+					<Action name="Think" value="Sequence [Last Note] [Perception.value]" />
+					<Property name="Note Sequence" value="[Last Note] [Perception.value]" />
+				</Condition>
+
+				
 
 			</DataMining>
 		</Condition>
@@ -478,9 +492,16 @@
 
 
 		<!-- Save note added to the memory -->
-		<Storage event="Note" value="[Perception.value]" memory="WM" />
-		<Storage event="Note" value="[Perception.value]" memory="LTM" />
-
+		<Condition type="Perception" perception="Note" value="Pause" operator="!=" >
+			<Storage event="Note" value="[Perception.value]" memory="WM" />
+			<Storage event="Note" value="[Perception.value]" memory="LTM" />
+		</Condition>
+		<Condition type="Perception" perception="Note" value="Pause" operator="==" >
+			<Storage event="Pause" value="[Perception.value]" memory="WM" />
+			<Storage event="Pause" value="[Perception.value]" memory="LTM" />
+		</Condition>
+		
+		
 		<!-- -->
 	</Condition>
 
@@ -591,7 +612,7 @@
 				</Condition>
 
 				<!-- Think the current compass duration and the duration choosen -->
-				<Action name="Think" value="Compass Duration [Music Duration] {Duration Option}" />
+				<Action name="Think" value="Music length [Music Duration] : Duration {Duration Option}" />
 
 			</MathOperation>
 
@@ -605,11 +626,20 @@
 			</Condition>
 			<Condition type="Property" property="Duration Option" compareValue="Good">
 				<Condition type="Property" property="Notes Option" compareValue="Bad">
-					<Action name="Talk" value="Wrong Note {Note Sequence}" probability="0.9" />
+					<Condition type="Property" property="Pause" compareValue="false">
+						<Action name="Talk" value="Wrong Note {Note Sequence}" probability="0.9" />
+					</Condition>
+					<Condition type="Property" property="Pause" compareValue="true">
+						<Action name="Talk" value="Wrong Note Pause" probability="0.9" />
+					</Condition>
 				</Condition>
 				<Condition type="Property" property="Notes Option" compareValue="Good">
-					<Action name="Talk" value="Good Note {Note Sequence}" probability="0.3" />
-					<!--<Action name="Talk" value="Good Duration [Music Duration] [Perception.value]" probability="0.3" />-->
+					<Condition type="Property" property="Pause" compareValue="false">
+						<Action name="Talk" value="Good Note {Note Sequence}" probability="0.3" />
+					</Condition>
+					<Condition type="Property" property="Pause" compareValue="true">
+						<Action name="Talk" value="Good Note Pause" probability="0.3" />
+					</Condition>
 				</Condition>
 			</Condition>
 
@@ -647,6 +677,23 @@
 				</DataMining>
 			</Condition>
 		</Condition>
+		
+		<!-- Check if there are still notes in the memory. If not remove the StartNote Event -->
+		<DataMining operation="Count" event="Note" memory="WM" variable="[Count Notes]">
+			<DataMining operation="Count" event="Pause" memory="WM" variable="[Count Pause]">
+				<!-- math operation to calculate the number of notes and pause -->
+				<MathOperation name="Sum" variable="[Count Pause]" value="[Count Notes]" result="[Number Notes]">
+					
+					<Condition type="Variable" variable="[Number Notes]" compareValue="0">
+						<Delete memory="WM" name="Start Note" position="First" />
+					</Condition>
+				</MathOperation>
+			</DataMining>
+			
+			<!-- If there are more notes then it should change the Note Sequence property-->
+			<Condition type="Variable" variable="[Number Notes]" compareValue="0">
+			</Condition>
+		</DataMining>
 	</Condition>
 
 
