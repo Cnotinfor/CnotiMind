@@ -181,6 +181,20 @@
         </widget>
        </item>
        <item>
+        <widget class="QPushButton" name="pushButtonStartMelody">
+         <property name="text">
+          <string>Start New Melody</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButtonFinishMelody">
+         <property name="text">
+          <string>Finish Melody</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>

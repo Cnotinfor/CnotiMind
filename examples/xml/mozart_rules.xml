@@ -427,52 +427,56 @@
 
 				<!-- Pause -->
 				<Condition type="Perception" perception="Note" value="Pause">
-					<Condition type="Variable" variable="[Last Note]" compareValue="Do">
-						<Emotion name="Joy" increment="1" max="0" />
-						<Action name="Think" value ="Good Note" />
-						<Property name="Notes Option" value="Good" />
+					<Condition type="property" name="Pause" value="false">
+						<Condition type="Variable" variable="[Last Note]" compareValue="Do">
+							<Emotion name="Joy" increment="1" max="0" />
+							<Action name="Think" value ="Good Note" />
+							<Property name="Notes Option" value="Good" />
+						</Condition>
+						<Condition type="Variable" variable="[Last Note]" compareValue="Re">
+							<Emotion name="Joy" increment="-2" min="-10" />
+							<Action name="Think" value ="Bad Note" />
+							<Property name="Notes Option" value="Bad" />
+						</Condition>
+						<Condition type="Variable" variable="[Last Note]" compareValue="Mi">
+							<Emotion name="Joy" increment="-1" min="-5" />
+							<Action name="Think" value ="Bad Note" />
+							<Property name="Notes Option" value="Bad" />
+						</Condition>
+						<Condition type="Variable" variable="[Last Note]" compareValue="Fa">
+							<Emotion name="Joy" increment="-1" min="-7" />
+							<Action name="Think" value ="Bad Note" />
+							<Property name="Notes Option" value="Bad" />
+						</Condition>
+						<Condition type="Variable" variable="[Last Note]" compareValue="Sol">
+							<Emotion name="Joy" increment="2" max="10" />
+							<Action name="Think" value ="Good Note" />
+							<Property name="Notes Option" value="Good" />
+						</Condition>
+						<Condition type="Variable" variable="[Last Note]" compareValue="La">
+							<Emotion name="Joy" increment="-1" min="-5" />
+							<Action name="Think" value="Bad Note" />
+							<Property name="Notes Option" value="Bad" />
+						</Condition>
+						<Condition type="Variable" variable="[Last Note]" compareValue="Si">
+							<Emotion name="Joy" increment="2" max="9"/>
+							<Action name="Think" value ="Good Note" />
+							<Property name="Notes Option" value="Good" />
+						</Condition>
+						<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
+							<Emotion name="Joy" increment="1" max="8" />
+							<Action name="Think" value ="Good Note" />
+							<Property name="Notes Option" value="Good" />
+						</Condition>
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Re">
-						<Emotion name="Joy" increment="-2" min="-10" />
+					
+					<!-- If it the last note has a pause -->
+					<Condition type="property" name="Pause" value="true">
+						<Emotion name="Joy" increment="-2" max="-10" />
 						<Action name="Think" value ="Bad Note" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Mi">
-						<Emotion name="Joy" increment="-1" min="-5" />
-						<Action name="Think" value ="Bad Note" />
-						<Property name="Notes Option" value="Bad" />
-					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Fa">
-						<Emotion name="Joy" increment="-1" min="-7" />
-						<Action name="Think" value ="Bad Note" />
-						<Property name="Notes Option" value="Bad" />
-					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Sol">
-						<Emotion name="Joy" increment="2" max="10" />
-						<Action name="Think" value ="Good Note" />
-						<Property name="Notes Option" value="Good" />
-					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="La">
-						<Emotion name="Joy" increment="-1" min="-5" />
-						<Action name="Think" value="Bad Note" />
-						<Property name="Notes Option" value="Bad" />
-					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Si">
-						<Emotion name="Joy" increment="2" max="9"/>
-						<Action name="Think" value ="Good Note" />
-						<Property name="Notes Option" value="Good" />
-					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
-						<Emotion name="Joy" increment="1" max="8" />
-						<Action name="Think" value ="Good Note" />
-						<Property name="Notes Option" value="Good" />
-					</Condition>
-					<!-- It should not repeat pauses -->
-					<Condition type="Variable" variable="[Last Note]" compareValue="Pause">
-						<Emotion name="Joy" increment="1" max="8" />
-						<Action name="Think" value ="Bad Note" />
-						<Property name="Notes Option" value="Bad" />
-					</Condition>
+
 					
 					<Property name="Pause" value="true" />
 				</Condition>
@@ -484,16 +488,8 @@
 					<Property name="Note Sequence" value="[Last Note] [Perception.value]" />
 				</Condition>
 
-				
-
 			</DataMining>
 		</Condition>
-
-		<!-- If there are no notes -->
-		<Condition type="DataMining" operation="Exists"	event="Note" compareValue="0" memory="WM">
-
-		</Condition>
-
 
 		<!-- Save note added to the memory -->
 		<Condition type="Perception" perception="Note" value="Pause" operator="!=" >
@@ -655,6 +651,7 @@
 			<Condition type="DataMining" operation="Exists"	event="Pause" compareValue="1" memory="WM">
 				<Delete memory="WM" name="Pause" position="Last" />
 				<Action name="Think" value="Pause deleted" />
+
 			</Condition>
 		</Condition>
 		
@@ -683,6 +680,7 @@
 			</Condition>
 			
 			<!-- After deleting the note -->
+			<!-- Test if there are more then 2 notes, to update the Note Sequence -->
 			<Condition type="DataMining" operation="Count" event="Note" compareValue="1" operator="bigger" memory="WM">
 				<DataMining operation="Last" event="Note" variable="[Last Note]" memory="WM">
 					<DataMining operation="Item" event="Note" variable="[Second Last Note]" position="-2" memory="WM">
@@ -984,8 +982,14 @@
 		</Condition>
 	</Condition>
 
-	<Condition type="Perception" perception="StartMelody">
+	<Condition type="Perception" perception="Start Melody">
 		<ClearMemory memory="WM" />
+		<Action name="Think" value="Starting a new melody in fresh Working Memory" />
+	</Condition>
+	
+	<!-- Test if the it is a good spot to finish the melody -->
+	<Condition type="Perception" perception="Finish Melody">
+		<Action name="Think" value="Melody finished" />
 	</Condition>
 	
 </Rules>

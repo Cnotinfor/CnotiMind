@@ -30,6 +30,8 @@ private slots:
 	void on_pushButtonPrint_clicked();
 	void on_pushButtonCancelDuration_clicked();
 	void on_pushButtonDeleteNote_clicked();
+	void on_pushButtonStartMelody_clicked();
+	void on_pushButtonFinishMelody_clicked();
 
 	void actionReceived(const QString& action,const QString& value);
 	void emotionReceived( const QString& emotion, qreal value);
