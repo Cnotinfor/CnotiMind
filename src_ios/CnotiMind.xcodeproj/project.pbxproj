@@ -1,0 +1,591 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1800506C136818D000DB332E /* Brain.h in Headers */ = {isa = PBXBuildFile; fileRef = 1800506A136818D000DB332E /* Brain.h */; };
+		1800506D136818D000DB332E /* Brain.m in Sources */ = {isa = PBXBuildFile; fileRef = 1800506B136818D000DB332E /* Brain.m */; };
+		180050721368254700DB332E /* NSMutableArray+QueueAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 180050701368254700DB332E /* NSMutableArray+QueueAdditions.h */; };
+		180050731368254700DB332E /* NSMutableArray+QueueAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 180050711368254700DB332E /* NSMutableArray+QueueAdditions.m */; };
+		180051141368816F00DB332E /* GDataXMLNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 180051121368816F00DB332E /* GDataXMLNode.h */; };
+		180051151368816F00DB332E /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 180051131368816F00DB332E /* GDataXMLNode.m */; };
+		180A63C5137D7D3500389290 /* Emotion.h in Headers */ = {isa = PBXBuildFile; fileRef = 180A63C3137D7D3500389290 /* Emotion.h */; };
+		180A63C6137D7D3500389290 /* Emotion.m in Sources */ = {isa = PBXBuildFile; fileRef = 180A63C4137D7D3500389290 /* Emotion.m */; };
+		18189F8E1377E4D60020716D /* ConditionDataMiningNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 18189F8C1377E4D60020716D /* ConditionDataMiningNode.h */; };
+		18189F8F1377E4D60020716D /* ConditionDataMiningNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 18189F8D1377E4D60020716D /* ConditionDataMiningNode.m */; };
+		18189F931377F73C0020716D /* ConditionEmotionNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 18189F911377F73B0020716D /* ConditionEmotionNode.h */; };
+		18189F941377F73C0020716D /* ConditionEmotionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 18189F921377F73B0020716D /* ConditionEmotionNode.m */; };
+		1847CE45136AD75800D6D0FF /* ActionNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 1847CE43136AD75800D6D0FF /* ActionNode.h */; };
+		1847CE46136AD75800D6D0FF /* ActionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1847CE44136AD75800D6D0FF /* ActionNode.m */; };
+		18888C081366CEC400F96F2B /* Perception.h in Headers */ = {isa = PBXBuildFile; fileRef = 18888C061366CEC400F96F2B /* Perception.h */; };
+		18888C091366CEC400F96F2B /* Perception.m in Sources */ = {isa = PBXBuildFile; fileRef = 18888C071366CEC400F96F2B /* Perception.m */; };
+		18888C0D1366D80A00F96F2B /* MemoryEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 18888C0B1366D80900F96F2B /* MemoryEvent.h */; };
+		18888C0E1366D80A00F96F2B /* MemoryEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 18888C0C1366D80A00F96F2B /* MemoryEvent.m */; };
+		18888C171366FF6C00F96F2B /* CnotiMind.h in Headers */ = {isa = PBXBuildFile; fileRef = 18888C151366FF6C00F96F2B /* CnotiMind.h */; };
+		18888C181366FF6C00F96F2B /* CnotiMind.m in Sources */ = {isa = PBXBuildFile; fileRef = 18888C161366FF6C00F96F2B /* CnotiMind.m */; };
+		18888C1C136703A200F96F2B /* ObjectToXML.h in Headers */ = {isa = PBXBuildFile; fileRef = 18888C1A136703A200F96F2B /* ObjectToXML.h */; };
+		18888C21136707D900F96F2B /* RuleNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 18888C1F136707D900F96F2B /* RuleNode.h */; };
+		18888C22136707D900F96F2B /* RuleNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 18888C20136707D900F96F2B /* RuleNode.m */; };
+		18A7DCE1137823F000292D73 /* ConditionPerceptionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A7DCDF137823F000292D73 /* ConditionPerceptionNode.m */; };
+		18A7DCE2137823F000292D73 /* ConditionPerceptionNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 18A7DCE0137823F000292D73 /* ConditionPerceptionNode.h */; };
+		18A7DCE61378330E00292D73 /* ConditionVariableNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A7DCE41378330E00292D73 /* ConditionVariableNode.m */; };
+		18A7DCE71378330E00292D73 /* ConditionVariableNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 18A7DCE51378330E00292D73 /* ConditionVariableNode.h */; };
+		18A7DCEA13783C4F00292D73 /* DataMiningNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 18A7DCE813783C4F00292D73 /* DataMiningNode.h */; };
+		18A7DCEB13783C4F00292D73 /* DataMiningNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A7DCE913783C4F00292D73 /* DataMiningNode.m */; };
+		18A7DCEE1378475C00292D73 /* EmotionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A7DCEC1378475C00292D73 /* EmotionNode.m */; };
+		18A7DCEF1378475C00292D73 /* EmotionNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 18A7DCED1378475C00292D73 /* EmotionNode.h */; };
+		18DEE3F6136F181E00708EEE /* StorageNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 18DEE3F4136F181E00708EEE /* StorageNode.h */; };
+		18DEE3F7136F181E00708EEE /* StorageNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DEE3F5136F181E00708EEE /* StorageNode.m */; };
+		18EF043E136DF4FA00D0EFE5 /* ConditionNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 18EF043C136DF4FA00D0EFE5 /* ConditionNode.h */; };
+		18EF043F136DF4FA00D0EFE5 /* ConditionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EF043D136DF4FA00D0EFE5 /* ConditionNode.m */; };
+		18EF2B39137AC44000CC14ED /* RootNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 18EF2B37137AC44000CC14ED /* RootNode.h */; };
+		18EF2B3A137AC44000CC14ED /* RootNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EF2B38137AC44000CC14ED /* RootNode.m */; };
+		18F98A7113603671006AE7F4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F98A7013603671006AE7F4 /* Foundation.framework */; };
+		18F98A7C13603671006AE7F4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F98A7B13603671006AE7F4 /* UIKit.framework */; };
+		18F98A7D13603671006AE7F4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F98A7013603671006AE7F4 /* Foundation.framework */; };
+		18F98A7F13603671006AE7F4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F98A7E13603671006AE7F4 /* CoreGraphics.framework */; };
+		18F98A8213603671006AE7F4 /* libCnotiMind.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F98A6D13603671006AE7F4 /* libCnotiMind.a */; };
+		18F98A8813603671006AE7F4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18F98A8613603671006AE7F4 /* InfoPlist.strings */; };
+		18F98A8B13603671006AE7F4 /* CnotiMindTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 18F98A8A13603671006AE7F4 /* CnotiMindTests.h */; };
+		18F98A8D13603671006AE7F4 /* CnotiMindTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F98A8C13603671006AE7F4 /* CnotiMindTests.m */; };
+		18F98A981360411B006AE7F4 /* Node.h in Headers */ = {isa = PBXBuildFile; fileRef = 18F98A961360411B006AE7F4 /* Node.h */; };
+		18F98A991360411B006AE7F4 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F98A971360411B006AE7F4 /* Node.m */; };
+		18F98A9C1360476E006AE7F4 /* Action.h in Headers */ = {isa = PBXBuildFile; fileRef = 18F98A9A1360476E006AE7F4 /* Action.h */; };
+		18F98A9D1360476E006AE7F4 /* Action.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F98A9B1360476E006AE7F4 /* Action.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		18F98A8013603671006AE7F4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18F98A6413603671006AE7F4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 18F98A6C13603671006AE7F4;
+			remoteInfo = CnotiMind;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1800506A136818D000DB332E /* Brain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Brain.h; sourceTree = "<group>"; };
+		1800506B136818D000DB332E /* Brain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Brain.m; sourceTree = "<group>"; };
+		180050701368254700DB332E /* NSMutableArray+QueueAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+QueueAdditions.h"; sourceTree = "<group>"; };
+		180050711368254700DB332E /* NSMutableArray+QueueAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+QueueAdditions.m"; sourceTree = "<group>"; };
+		180051121368816F00DB332E /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
+		180051131368816F00DB332E /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
+		180A63C3137D7D3500389290 /* Emotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Emotion.h; sourceTree = "<group>"; };
+		180A63C4137D7D3500389290 /* Emotion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Emotion.m; sourceTree = "<group>"; };
+		18189F8C1377E4D60020716D /* ConditionDataMiningNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionDataMiningNode.h; sourceTree = "<group>"; };
+		18189F8D1377E4D60020716D /* ConditionDataMiningNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionDataMiningNode.m; sourceTree = "<group>"; };
+		18189F911377F73B0020716D /* ConditionEmotionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionEmotionNode.h; sourceTree = "<group>"; };
+		18189F921377F73B0020716D /* ConditionEmotionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionEmotionNode.m; sourceTree = "<group>"; };
+		1847CE43136AD75800D6D0FF /* ActionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionNode.h; sourceTree = "<group>"; };
+		1847CE44136AD75800D6D0FF /* ActionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionNode.m; sourceTree = "<group>"; };
+		18888C061366CEC400F96F2B /* Perception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Perception.h; sourceTree = "<group>"; };
+		18888C071366CEC400F96F2B /* Perception.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Perception.m; sourceTree = "<group>"; };
+		18888C0B1366D80900F96F2B /* MemoryEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryEvent.h; sourceTree = "<group>"; };
+		18888C0C1366D80A00F96F2B /* MemoryEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemoryEvent.m; sourceTree = "<group>"; };
+		18888C151366FF6C00F96F2B /* CnotiMind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CnotiMind.h; sourceTree = "<group>"; };
+		18888C161366FF6C00F96F2B /* CnotiMind.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CnotiMind.m; sourceTree = "<group>"; };
+		18888C1A136703A200F96F2B /* ObjectToXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectToXML.h; sourceTree = "<group>"; };
+		18888C1F136707D900F96F2B /* RuleNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuleNode.h; sourceTree = "<group>"; };
+		18888C20136707D900F96F2B /* RuleNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RuleNode.m; sourceTree = "<group>"; };
+		18A7DCDF137823F000292D73 /* ConditionPerceptionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionPerceptionNode.m; sourceTree = "<group>"; };
+		18A7DCE0137823F000292D73 /* ConditionPerceptionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionPerceptionNode.h; sourceTree = "<group>"; };
+		18A7DCE41378330E00292D73 /* ConditionVariableNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionVariableNode.m; sourceTree = "<group>"; };
+		18A7DCE51378330E00292D73 /* ConditionVariableNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionVariableNode.h; sourceTree = "<group>"; };
+		18A7DCE813783C4F00292D73 /* DataMiningNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataMiningNode.h; sourceTree = "<group>"; };
+		18A7DCE913783C4F00292D73 /* DataMiningNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataMiningNode.m; sourceTree = "<group>"; };
+		18A7DCEC1378475C00292D73 /* EmotionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmotionNode.m; sourceTree = "<group>"; };
+		18A7DCED1378475C00292D73 /* EmotionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmotionNode.h; sourceTree = "<group>"; };
+		18DEE3F4136F181E00708EEE /* StorageNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorageNode.h; sourceTree = "<group>"; };
+		18DEE3F5136F181E00708EEE /* StorageNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorageNode.m; sourceTree = "<group>"; };
+		18EF043C136DF4FA00D0EFE5 /* ConditionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionNode.h; sourceTree = "<group>"; };
+		18EF043D136DF4FA00D0EFE5 /* ConditionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionNode.m; sourceTree = "<group>"; };
+		18EF2B37137AC44000CC14ED /* RootNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootNode.h; sourceTree = "<group>"; };
+		18EF2B38137AC44000CC14ED /* RootNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootNode.m; sourceTree = "<group>"; };
+		18F98A6D13603671006AE7F4 /* libCnotiMind.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCnotiMind.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		18F98A7013603671006AE7F4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		18F98A7413603671006AE7F4 /* CnotiMind-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CnotiMind-Prefix.pch"; sourceTree = "<group>"; };
+		18F98A7A13603671006AE7F4 /* CnotiMindTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CnotiMindTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		18F98A7B13603671006AE7F4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		18F98A7E13603671006AE7F4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		18F98A8513603671006AE7F4 /* CnotiMindTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CnotiMindTests-Info.plist"; sourceTree = "<group>"; };
+		18F98A8713603671006AE7F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		18F98A8913603671006AE7F4 /* CnotiMindTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CnotiMindTests-Prefix.pch"; sourceTree = "<group>"; };
+		18F98A8A13603671006AE7F4 /* CnotiMindTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CnotiMindTests.h; sourceTree = "<group>"; };
+		18F98A8C13603671006AE7F4 /* CnotiMindTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CnotiMindTests.m; sourceTree = "<group>"; };
+		18F98A961360411B006AE7F4 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
+		18F98A971360411B006AE7F4 /* Node.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Node.m; sourceTree = "<group>"; };
+		18F98A9A1360476E006AE7F4 /* Action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Action.h; sourceTree = "<group>"; };
+		18F98A9B1360476E006AE7F4 /* Action.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Action.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		18F98A6A13603671006AE7F4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18F98A7113603671006AE7F4 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18F98A7613603671006AE7F4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18F98A7C13603671006AE7F4 /* UIKit.framework in Frameworks */,
+				18F98A7D13603671006AE7F4 /* Foundation.framework in Frameworks */,
+				18F98A7F13603671006AE7F4 /* CoreGraphics.framework in Frameworks */,
+				18F98A8213603671006AE7F4 /* libCnotiMind.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1800506F1368252A00DB332E /* Auxiliary */ = {
+			isa = PBXGroup;
+			children = (
+				180051111368816F00DB332E /* GDataXML */,
+				180050701368254700DB332E /* NSMutableArray+QueueAdditions.h */,
+				180050711368254700DB332E /* NSMutableArray+QueueAdditions.m */,
+			);
+			name = Auxiliary;
+			sourceTree = "<group>";
+		};
+		180051111368816F00DB332E /* GDataXML */ = {
+			isa = PBXGroup;
+			children = (
+				180051121368816F00DB332E /* GDataXMLNode.h */,
+				180051131368816F00DB332E /* GDataXMLNode.m */,
+			);
+			path = GDataXML;
+			sourceTree = "<group>";
+		};
+		18888C1E136707B900F96F2B /* rules */ = {
+			isa = PBXGroup;
+			children = (
+				18A7DCEC1378475C00292D73 /* EmotionNode.m */,
+				18A7DCED1378475C00292D73 /* EmotionNode.h */,
+				18888C1F136707D900F96F2B /* RuleNode.h */,
+				18888C20136707D900F96F2B /* RuleNode.m */,
+				1847CE43136AD75800D6D0FF /* ActionNode.h */,
+				1847CE44136AD75800D6D0FF /* ActionNode.m */,
+				18DEE3F4136F181E00708EEE /* StorageNode.h */,
+				18DEE3F5136F181E00708EEE /* StorageNode.m */,
+				18EF043C136DF4FA00D0EFE5 /* ConditionNode.h */,
+				18EF043D136DF4FA00D0EFE5 /* ConditionNode.m */,
+				18189F8C1377E4D60020716D /* ConditionDataMiningNode.h */,
+				18189F8D1377E4D60020716D /* ConditionDataMiningNode.m */,
+				18189F911377F73B0020716D /* ConditionEmotionNode.h */,
+				18189F921377F73B0020716D /* ConditionEmotionNode.m */,
+				18A7DCDF137823F000292D73 /* ConditionPerceptionNode.m */,
+				18A7DCE0137823F000292D73 /* ConditionPerceptionNode.h */,
+				18A7DCE41378330E00292D73 /* ConditionVariableNode.m */,
+				18A7DCE51378330E00292D73 /* ConditionVariableNode.h */,
+				18A7DCE813783C4F00292D73 /* DataMiningNode.h */,
+				18A7DCE913783C4F00292D73 /* DataMiningNode.m */,
+				18EF2B37137AC44000CC14ED /* RootNode.h */,
+				18EF2B38137AC44000CC14ED /* RootNode.m */,
+			);
+			name = rules;
+			sourceTree = "<group>";
+		};
+		18F98A6213603671006AE7F4 = {
+			isa = PBXGroup;
+			children = (
+				18F98A7213603671006AE7F4 /* CnotiMind */,
+				18F98A8313603671006AE7F4 /* CnotiMindTests */,
+				18F98A6F13603671006AE7F4 /* Frameworks */,
+				18F98A6E13603671006AE7F4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		18F98A6E13603671006AE7F4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				18F98A6D13603671006AE7F4 /* libCnotiMind.a */,
+				18F98A7A13603671006AE7F4 /* CnotiMindTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		18F98A6F13603671006AE7F4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				18F98A7013603671006AE7F4 /* Foundation.framework */,
+				18F98A7B13603671006AE7F4 /* UIKit.framework */,
+				18F98A7E13603671006AE7F4 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		18F98A7213603671006AE7F4 /* CnotiMind */ = {
+			isa = PBXGroup;
+			children = (
+				180A63C3137D7D3500389290 /* Emotion.h */,
+				180A63C4137D7D3500389290 /* Emotion.m */,
+				1800506F1368252A00DB332E /* Auxiliary */,
+				18888C1E136707B900F96F2B /* rules */,
+				18F98A7313603671006AE7F4 /* Supporting Files */,
+				18F98A961360411B006AE7F4 /* Node.h */,
+				18F98A971360411B006AE7F4 /* Node.m */,
+				18F98A9A1360476E006AE7F4 /* Action.h */,
+				18F98A9B1360476E006AE7F4 /* Action.m */,
+				18888C061366CEC400F96F2B /* Perception.h */,
+				18888C071366CEC400F96F2B /* Perception.m */,
+				18888C0B1366D80900F96F2B /* MemoryEvent.h */,
+				18888C0C1366D80A00F96F2B /* MemoryEvent.m */,
+				18888C151366FF6C00F96F2B /* CnotiMind.h */,
+				18888C161366FF6C00F96F2B /* CnotiMind.m */,
+				18888C1A136703A200F96F2B /* ObjectToXML.h */,
+				1800506A136818D000DB332E /* Brain.h */,
+				1800506B136818D000DB332E /* Brain.m */,
+			);
+			path = CnotiMind;
+			sourceTree = "<group>";
+		};
+		18F98A7313603671006AE7F4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				18F98A7413603671006AE7F4 /* CnotiMind-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		18F98A8313603671006AE7F4 /* CnotiMindTests */ = {
+			isa = PBXGroup;
+			children = (
+				18F98A8A13603671006AE7F4 /* CnotiMindTests.h */,
+				18F98A8C13603671006AE7F4 /* CnotiMindTests.m */,
+				18F98A8413603671006AE7F4 /* Supporting Files */,
+			);
+			path = CnotiMindTests;
+			sourceTree = "<group>";
+		};
+		18F98A8413603671006AE7F4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				18F98A8513603671006AE7F4 /* CnotiMindTests-Info.plist */,
+				18F98A8613603671006AE7F4 /* InfoPlist.strings */,
+				18F98A8913603671006AE7F4 /* CnotiMindTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		18F98A6B13603671006AE7F4 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18F98A981360411B006AE7F4 /* Node.h in Headers */,
+				18F98A9C1360476E006AE7F4 /* Action.h in Headers */,
+				18888C081366CEC400F96F2B /* Perception.h in Headers */,
+				18888C0D1366D80A00F96F2B /* MemoryEvent.h in Headers */,
+				18888C171366FF6C00F96F2B /* CnotiMind.h in Headers */,
+				18888C1C136703A200F96F2B /* ObjectToXML.h in Headers */,
+				18888C21136707D900F96F2B /* RuleNode.h in Headers */,
+				1800506C136818D000DB332E /* Brain.h in Headers */,
+				180050721368254700DB332E /* NSMutableArray+QueueAdditions.h in Headers */,
+				180051141368816F00DB332E /* GDataXMLNode.h in Headers */,
+				1847CE45136AD75800D6D0FF /* ActionNode.h in Headers */,
+				18EF043E136DF4FA00D0EFE5 /* ConditionNode.h in Headers */,
+				18DEE3F6136F181E00708EEE /* StorageNode.h in Headers */,
+				18189F8E1377E4D60020716D /* ConditionDataMiningNode.h in Headers */,
+				18189F931377F73C0020716D /* ConditionEmotionNode.h in Headers */,
+				18A7DCE2137823F000292D73 /* ConditionPerceptionNode.h in Headers */,
+				18A7DCE71378330E00292D73 /* ConditionVariableNode.h in Headers */,
+				18A7DCEA13783C4F00292D73 /* DataMiningNode.h in Headers */,
+				18A7DCEF1378475C00292D73 /* EmotionNode.h in Headers */,
+				18EF2B39137AC44000CC14ED /* RootNode.h in Headers */,
+				180A63C5137D7D3500389290 /* Emotion.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		18F98A6C13603671006AE7F4 /* CnotiMind */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18F98A9013603671006AE7F4 /* Build configuration list for PBXNativeTarget "CnotiMind" */;
+			buildPhases = (
+				18F98A6913603671006AE7F4 /* Sources */,
+				18F98A6A13603671006AE7F4 /* Frameworks */,
+				18F98A6B13603671006AE7F4 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CnotiMind;
+			productName = CnotiMind;
+			productReference = 18F98A6D13603671006AE7F4 /* libCnotiMind.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		18F98A7913603671006AE7F4 /* CnotiMindTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18F98A9313603671006AE7F4 /* Build configuration list for PBXNativeTarget "CnotiMindTests" */;
+			buildPhases = (
+				18F98A7513603671006AE7F4 /* Sources */,
+				18F98A7613603671006AE7F4 /* Frameworks */,
+				18F98A7713603671006AE7F4 /* Resources */,
+				18F98A7813603671006AE7F4 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				18F98A8113603671006AE7F4 /* PBXTargetDependency */,
+			);
+			name = CnotiMindTests;
+			productName = CnotiMindTests;
+			productReference = 18F98A7A13603671006AE7F4 /* CnotiMindTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		18F98A6413603671006AE7F4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "Universidade de Coimbra";
+			};
+			buildConfigurationList = 18F98A6713603671006AE7F4 /* Build configuration list for PBXProject "CnotiMind" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 18F98A6213603671006AE7F4;
+			productRefGroup = 18F98A6E13603671006AE7F4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				18F98A6C13603671006AE7F4 /* CnotiMind */,
+				18F98A7913603671006AE7F4 /* CnotiMindTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		18F98A7713603671006AE7F4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18F98A8813603671006AE7F4 /* InfoPlist.strings in Resources */,
+				18F98A8B13603671006AE7F4 /* CnotiMindTests.h in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		18F98A7813603671006AE7F4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		18F98A6913603671006AE7F4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18F98A991360411B006AE7F4 /* Node.m in Sources */,
+				18F98A9D1360476E006AE7F4 /* Action.m in Sources */,
+				18888C091366CEC400F96F2B /* Perception.m in Sources */,
+				18888C0E1366D80A00F96F2B /* MemoryEvent.m in Sources */,
+				18888C181366FF6C00F96F2B /* CnotiMind.m in Sources */,
+				18888C22136707D900F96F2B /* RuleNode.m in Sources */,
+				1800506D136818D000DB332E /* Brain.m in Sources */,
+				180050731368254700DB332E /* NSMutableArray+QueueAdditions.m in Sources */,
+				180051151368816F00DB332E /* GDataXMLNode.m in Sources */,
+				1847CE46136AD75800D6D0FF /* ActionNode.m in Sources */,
+				18EF043F136DF4FA00D0EFE5 /* ConditionNode.m in Sources */,
+				18DEE3F7136F181E00708EEE /* StorageNode.m in Sources */,
+				18189F8F1377E4D60020716D /* ConditionDataMiningNode.m in Sources */,
+				18189F941377F73C0020716D /* ConditionEmotionNode.m in Sources */,
+				18A7DCE1137823F000292D73 /* ConditionPerceptionNode.m in Sources */,
+				18A7DCE61378330E00292D73 /* ConditionVariableNode.m in Sources */,
+				18A7DCEB13783C4F00292D73 /* DataMiningNode.m in Sources */,
+				18A7DCEE1378475C00292D73 /* EmotionNode.m in Sources */,
+				18EF2B3A137AC44000CC14ED /* RootNode.m in Sources */,
+				180A63C6137D7D3500389290 /* Emotion.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18F98A7513603671006AE7F4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18F98A8D13603671006AE7F4 /* CnotiMindTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		18F98A8113603671006AE7F4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 18F98A6C13603671006AE7F4 /* CnotiMind */;
+			targetProxy = 18F98A8013603671006AE7F4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		18F98A8613603671006AE7F4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18F98A8713603671006AE7F4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		18F98A8E13603671006AE7F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = "-lxml2";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		18F98A8F13603671006AE7F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = "-lxml2";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		18F98A9113603671006AE7F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				DSTROOT = /tmp/CnotiMind.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CnotiMind/CnotiMind-Prefix.pch";
+				HEADER_SEARCH_PATHS = "/usr/include/libxml2/**";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		18F98A9213603671006AE7F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				DSTROOT = /tmp/CnotiMind.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CnotiMind/CnotiMind-Prefix.pch";
+				HEADER_SEARCH_PATHS = "/usr/include/libxml2/**";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		18F98A9413603671006AE7F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CnotiMindTests/CnotiMindTests-Prefix.pch";
+				INFOPLIST_FILE = "CnotiMindTests/CnotiMindTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		18F98A9513603671006AE7F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CnotiMindTests/CnotiMindTests-Prefix.pch";
+				INFOPLIST_FILE = "CnotiMindTests/CnotiMindTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		18F98A6713603671006AE7F4 /* Build configuration list for PBXProject "CnotiMind" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18F98A8E13603671006AE7F4 /* Debug */,
+				18F98A8F13603671006AE7F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18F98A9013603671006AE7F4 /* Build configuration list for PBXNativeTarget "CnotiMind" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18F98A9113603671006AE7F4 /* Debug */,
+				18F98A9213603671006AE7F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18F98A9313603671006AE7F4 /* Build configuration list for PBXNativeTarget "CnotiMindTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18F98A9413603671006AE7F4 /* Debug */,
+				18F98A9513603671006AE7F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 18F98A6413603671006AE7F4 /* Project object */;
+}
