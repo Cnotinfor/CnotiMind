@@ -15,6 +15,7 @@ namespace CnotiMind
 	{
 	public:
 
+		MemoryEvent();
 		MemoryEvent( const QString& event );
 		MemoryEvent( const QString& event, const QVariant& value );
 		MemoryEvent( const QString& event, const QVariant& value, qint64 time );

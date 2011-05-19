@@ -2,6 +2,7 @@
 #define BRAINGUI_H
 
 #include <QWidget>
+#include "../Perception.h"
 
 namespace Ui {
 	class BrainGUI;
@@ -27,7 +28,7 @@ namespace CnotiMind
 	public slots:
 		void updateProperties();
 		void updateEmotions();
-		void updatePerceptions();
+		void updatePerceptions( const Perception& p );
 		void updateLongTermMemory();
 		void updateWorkingMemory();
 

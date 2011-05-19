@@ -6,6 +6,11 @@
 namespace CnotiMind
 {
 
+	Perception::Perception()
+	{
+
+	}
+
 	Perception::Perception(const QString& name, const QVariant& value):
 		_name( name ),
 		_value( value )

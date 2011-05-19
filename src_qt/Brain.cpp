@@ -348,8 +348,13 @@ namespace CnotiMind
 	{
 		_receivedPerceptions.enqueue( perception );
 
-		// changing the semaphore, so that
+		// changing the semaphore, to start executing the rules
 		_semaphoreBrain.release();
+
+		if( _gui != NULL )
+		{
+			_gui->updatePerceptions( perception );
+		}
 	}
 
 	/*

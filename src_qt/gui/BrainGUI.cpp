@@ -3,6 +3,8 @@
 #include "../Brain.h"
 #include "PropertiesModel.h"
 #include "EmotionsModel.h"
+#include "PerceptionsModel.h"
+#include "MemoryModel.h"
 
 
 namespace CnotiMind
@@ -17,14 +19,14 @@ namespace CnotiMind
 
 		_propertiesModel = new PropertiesModel( brain, this );
 		_emotionsModel = new EmotionsModel( brain, this );
-		//_perceptionsModel = new PerceptionsModel( brain, this );
-		//_longTermMemoryModel = new MemoryModel( brain, CnotiMind::LongTermMemory, this );
-		//_workingMemoryModel = new MemoryModel( brain, CnotiMind::WorkingMemory this );
+		_perceptionsModel = new PerceptionsModel( this );
+		_longTermMemoryModel = new MemoryModel( CnotiMind::LongTermMemory, brain, this );
+		_workingMemoryModel = new MemoryModel( CnotiMind::WorkingMemory, brain, this );
 
 
 		_ui->tableProperties->setModel( _propertiesModel );
 		_ui->tableEmotions->setModel( _emotionsModel );
-		//_ui->tableEmotions->setModel( _perceptionsModel );
+		_ui->tablePerceptions->setModel( _perceptionsModel );
 	}
 
 	BrainGUI::~BrainGUI()
@@ -42,18 +44,19 @@ namespace CnotiMind
 		_emotionsModel->update();
 	}
 
-	void BrainGUI::updatePerceptions()
+	void BrainGUI::updatePerceptions( const Perception& p )
 	{
-
+		_perceptionsModel->update( p );
 	}
 
 	void BrainGUI::updateLongTermMemory()
 	{
-
+		//_longTermMemoryModel->update();
 	}
 
 	void BrainGUI::updateWorkingMemory()
 	{
+		//_workingMemoryModel->update();
 
 	}
 

@@ -13,6 +13,7 @@ namespace CnotiMind
 	class CNOTIMIND_EXPORT Perception
 	{
 	public:
+		Perception();
 		Perception( const QString& name, const QVariant& value );
 
 		const QString& name() const;

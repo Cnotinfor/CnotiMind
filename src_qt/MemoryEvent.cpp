@@ -7,6 +7,11 @@
 
 namespace CnotiMind
 {
+	MemoryEvent::MemoryEvent():
+		_time( QDateTime::currentDateTime().toMSecsSinceEpoch() )
+	{
+
+	}
 
 	MemoryEvent::MemoryEvent( const QString& key ):
 		_event( key ),
