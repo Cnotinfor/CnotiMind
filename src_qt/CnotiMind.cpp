@@ -26,7 +26,7 @@ namespace CnotiMind
 	*/
 	ConditionOperator translateConditionOperator( const QString &text )
 	{
-		if( text.compare(">") == 0 || text.compare("bigger") == 0 )
+		if( text.compare(">") == 0 || text.compare("bigger", Qt::CaseInsensitive ) == 0 )
 		{
 			return ConditionOperatorBigger;
 		}
@@ -42,11 +42,11 @@ namespace CnotiMind
 		{
 			return ConditionOperatorSmallerOrEqual;
 		}
-		if( text.compare("==") == 0 || text.compare("=") == 0 )
+		if( text.compare("==") == 0 || text.compare("=") == 0 || text.compare("=") == 0 )
 		{
 			return ConditionOperatorEqual;
 		}
-		if( text.compare("!=") == 0 || text.compare("<>") == 0)
+		if( text.compare("!=") == 0 || text.compare("different") == 0)
 		{
 			return ConditionOperatorDifferent;
 		}

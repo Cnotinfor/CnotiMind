@@ -66,6 +66,8 @@ Form::Form(QWidget *parent) :
 	_brain->printRules();
 
 	_brain->start();
+
+	_brain->showGUI();
 }
 
 Form::~Form()

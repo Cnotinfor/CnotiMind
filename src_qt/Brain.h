@@ -30,6 +30,8 @@ namespace CnotiMind
 	class ConditionDataMiningNode;
 	class MemoryXmlHandler;
 
+	class BrainGUI;
+
 
 	class CNOTIMIND_EXPORT Brain: public QThread
 	{
@@ -72,7 +74,7 @@ namespace CnotiMind
 		void printMemory( MemoryType type );
 		void printProperties();
 
-		// Friend classes
+		// Friend classes Nodes
 		friend class RuleNode;
 		friend class RootNode;
 		friend class ActionNode;
@@ -91,12 +93,16 @@ namespace CnotiMind
 		friend class ClearMemoryNode;
 		friend class DeleteNode;
 
+		// Friend class Models
+		friend class PropertiesModel;
+
 
 	public:
 
 	public slots:
 		void receivePerception(const Perception& perception);
 		void stop();
+		void showGUI();
 
 	signals:
 		void sendAction( const QString& key, const QString& value );
@@ -107,6 +113,9 @@ namespace CnotiMind
 		// Methods to update the emotional state
 		void updateEmotionalValue(const QString& emotionName, qreal variation, qreal max, qreal min);
 		void updateEmotionalValue(const QString& emotionName, qreal variation);
+
+		// Methods to update a property
+		void updatePropertyValue( const QString& name, const QString& value );
 
 		// Methods to store information in memory
 		void storeToMemory( const MemoryEvent& event, MemoryType memory );
@@ -160,6 +169,8 @@ namespace CnotiMind
 		int _timerDecayEmotions;
 
 		bool _quit;
+
+		BrainGUI *_gui;
 	};
 
 }

@@ -6,8 +6,8 @@
 
 TARGET    = CnotiMind
 TEMPLATE  = lib
-QT       += xml
-QT       -= gui
+QT       += xml gui
+#QT       -= gui
 #CONFIG   += embed_manifest_exe create
 
 # ------------------------------------------------------------
@@ -51,5 +51,6 @@ INCLUDEPATH += $${OBJECTS_DIR} \
 include( "Files.pri" )
 include( "../include/Include.pri" )
 include( "rules/Rules.pri" )
+include( "gui/Gui.pri" )
 
 # ------------------------------------------------------------

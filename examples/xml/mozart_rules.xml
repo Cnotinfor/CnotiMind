@@ -2,7 +2,9 @@
 
 <Rules>
 	<Condition type="Perception" perception="Note">
-
+		
+		<Action name="Think" value="Note chosen [Perception.value]" />
+		
 		<!-- First Note added -->
 		<Condition type="DataMining" operation="Exists"	event="Note" compareValue="0" memory="WM">
 			<Action name="Think" value="First Note" />
@@ -387,6 +389,7 @@
 					<Condition type="Variable" variable="[Last Note]" compareValue="Do">
 						<Emotion name="Joy" increment="1" max="0" />
 						<Action name="Think" value ="Good Note" />
+						<Property name="Notes Option" value="Good" />
 					</Condition>
 					<Condition type="Variable" variable="[Last Note]" compareValue="Re">
 						<Emotion name="Joy" increment="-2" min="-10" />
@@ -471,6 +474,7 @@
 					</Condition>
 					
 					<!-- If it the last note has a pause -->
+					<!-- It can't have two pauses sequentially -->
 					<Condition type="property" name="Pause" value="true">
 						<Emotion name="Joy" increment="-2" min="-10" />
 						<Action name="Think" value ="Bad Note" />
@@ -498,8 +502,7 @@
 		<Condition type="Perception" perception="Note" value="Pause" operator="==" >
 			<Storage event="Pause" value="[Perception.value]" memory="WM" />
 		</Condition>
-		
-		
+
 		<!-- -->
 	</Condition>
 
@@ -974,7 +977,7 @@
 
 	<Condition type="Perception" perception="Delete Duration">
 		<Condition type="DataMining" operation="Exists"	event="Duration" compareValue="0" memory="WM">
-			<Action name="Think" value="Not possible to delete the duration" />
+			<Action name="Think" value="Not possible to delete a duration" />
 		</Condition>
 		<Condition type="DataMining" operation="Exists"	event="Duration" compareValue="1" memory="WM">
 			<Delete memory="WM" name="Duration" position="Last" />
@@ -990,6 +993,9 @@
 	<!-- Test if the it is a good spot to finish the melody -->
 	<Condition type="Perception" perception="Finish Melody">
 		<Action name="Think" value="Melody finished" />
+		
+		
+		<ClearMemory memory="WM" />
 	</Condition>
 	
 </Rules>

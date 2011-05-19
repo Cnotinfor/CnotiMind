@@ -9,7 +9,7 @@
 #include "SettingsXmlHandler.h"
 #include "rules/RuleNode.h"
 #include "rules/RulesXmlHandler.h"
-
+#include "gui/BrainGUI.h"
 
 namespace CnotiMind
 {
@@ -17,7 +17,8 @@ namespace CnotiMind
 	Brain::Brain( const QString& path, QObject* parent ):
 		QThread( parent ),\
 		_rules( NULL ),
-		_quit( false )
+		_quit( false ),
+		_gui( NULL )
 	{
 		loadXmlSettings( path );
 
@@ -28,7 +29,8 @@ namespace CnotiMind
 	Brain::Brain( QObject* parent ):
 		QThread( parent ),
 		_rules( NULL ),
-		_quit( false )
+		_quit( false ),
+		_gui( NULL )
 	{
 
 	}
@@ -38,6 +40,11 @@ namespace CnotiMind
 //		_quit = true;
 //		_semaphoreBrain.release();
 //		wait();
+
+		if( _gui != NULL )
+		{
+			delete _gui;
+		}
 	}
 
 	/**
@@ -355,6 +362,22 @@ namespace CnotiMind
 		wait();
 	}
 
+	/**
+	 * Show the a GUI with the Brain information
+	 */
+	void Brain::showGUI()
+	{
+		if( _gui == NULL )
+		{
+			_gui = new BrainGUI( this );
+			_gui->show();
+		}
+		else
+		{
+			_gui->show();
+		}
+	}
+
 	void Brain::updateEmotionalValue(const QString& emotionName, qreal variation, qreal max, qreal min)
 	{
 		QMutableListIterator<Emotion> it(_emotions);
@@ -381,6 +404,15 @@ namespace CnotiMind
 	void Brain::updateEmotionalValue(const QString& emotionName, qreal variation)
 	{
 		updateEmotionalValue( emotionName, variation, INT_MAX, INT_MIN);
+	}
+
+	void Brain::updatePropertyValue( const QString& name, const QString& value )
+	{
+		_properties.insert( name, value );
+		if( _gui != NULL )
+		{
+			_gui->updateProperties();
+		}
 	}
 
 	/*

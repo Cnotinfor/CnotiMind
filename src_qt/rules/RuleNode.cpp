@@ -30,7 +30,7 @@ namespace CnotiMind
 		QString info;
 		QListIterator<QObject*> it( children() );
 
-		QString s = space( depth );
+
 
 		// calls exec for each children;
 		while(it.hasNext())
@@ -39,7 +39,7 @@ namespace CnotiMind
 
 			RuleNode* node = qobject_cast<RuleNode*>( obj );
 
-			info += s + node->info( depth + 1 );
+			info += node->info( depth + 1 );
 		}
 
 		return info;
@@ -149,7 +149,7 @@ namespace CnotiMind
 	QString RuleNode::space(int depth) const
 	{
 		QString space = "\n";
-		for( int i=0; i <= depth; i++ )
+		for( int i=0; i < depth; i++ )
 		{
 			space += "\t";
 		}

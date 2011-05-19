@@ -14,7 +14,7 @@ namespace CnotiMind
 
 	void PropertyNode::exec()
 	{
-		_brain->_properties.insert( _key, _value );
+		_brain->updatePropertyValue( _key, _value );
 	}
 
 	void PropertyNode::exec( QHash<QString, QString>& variables )
@@ -23,7 +23,7 @@ namespace CnotiMind
 		QString value = _value;
 		this->tagsToValue( value, variables );
 
-		_brain->_properties.insert( _key, value );
+		_brain->updatePropertyValue( _key, _value );
 	}
 
 	QString PropertyNode::info( int depth ) const
