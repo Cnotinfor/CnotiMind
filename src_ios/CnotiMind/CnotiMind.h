@@ -1,0 +1,54 @@
+//
+//  CnotiMind.h
+//  CnotiMind
+//
+//  Created by Gonçalo Rodrigues on 11/04/26.
+//  Copyright 2011 Universidade de Coimbra. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+
+enum MemoryType
+{
+    LongTermMemory,
+    WorkingMemory,
+    UndefinedMemory
+};
+
+enum ConditionOperator
+{
+    ConditionOperatorEqual,
+    ConditionOperatorDifferent,
+    ConditionOperatorSmaller,
+    ConditionOperatorBigger,
+    ConditionOperatorBiggerOrEqual,
+    ConditionOperatorSmallerOrEqual,
+    ConditionOperatorUndefined
+};
+
+enum DataMiningOperation
+{
+    DMO_Max,
+    DMO_Min,
+    DMO_Sum,
+    DMO_Count,
+    DMO_Mean,
+    DMO_Exists,
+    DMO_Last,
+    DMO_First,
+    DMO_Duration,
+    DMO_Time,
+    DMO_Undefined
+};
+
+
+@interface CnotiMind : NSObject {
+    
+}
+
+- (enum MemoryType) translateMemoryType:(NSString*)aText;
+- (enum ConditionOperator) translateConditionOperator:(NSString*)aText;
+- (enum DataMiningOperation) translateDataMiningOperator:(NSString*)aText;
+
+@end

@@ -11,3 +11,4 @@ Makefile*
 /Debug
 /*-build-*
 /examples/bin
+xcuserdata
