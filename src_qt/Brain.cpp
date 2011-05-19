@@ -399,6 +399,12 @@ namespace CnotiMind
 				}
 			}
 		}
+
+		// Update the GUI
+		if( _gui != NULL )
+		{
+			_gui->updateEmotions();
+		}
 	}
 
 	void Brain::updateEmotionalValue(const QString& emotionName, qreal variation)

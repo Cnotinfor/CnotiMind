@@ -95,6 +95,10 @@ namespace CnotiMind
 
 		// Friend class Models
 		friend class PropertiesModel;
+		friend class EmotionsModel;
+		//friend class PerceptionsModel;
+		//friend class MemoryModel;
+
 
 
 	public:

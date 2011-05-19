@@ -11,6 +11,10 @@ namespace CnotiMind
 {
 	class Brain;
 	class PropertiesModel;
+	class EmotionsModel;
+	class PerceptionsModel;
+	class MemoryModel;
+
 
 	class BrainGUI : public QWidget
 	{
@@ -22,6 +26,10 @@ namespace CnotiMind
 
 	public slots:
 		void updateProperties();
+		void updateEmotions();
+		void updatePerceptions();
+		void updateLongTermMemory();
+		void updateWorkingMemory();
 
 	protected:
 		void changeEvent(QEvent *e);
@@ -29,6 +37,10 @@ namespace CnotiMind
 	private:
 		Ui::BrainGUI*      _ui;
 		PropertiesModel*   _propertiesModel;
+		EmotionsModel*     _emotionsModel;
+		PerceptionsModel*  _perceptionsModel;
+		MemoryModel*       _longTermMemoryModel;
+		MemoryModel*       _workingMemoryModel;
 	};
 
 }

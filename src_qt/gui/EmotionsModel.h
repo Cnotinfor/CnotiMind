@@ -1,5 +1,5 @@
-#ifndef PROPERTIESMODEL_H
-#define PROPERTIESMODEL_H
+#ifndef EMOTIONSMODEL_H
+#define EMOTIONSMODEL_H
 
 #include <QAbstractTableModel>
 
@@ -7,11 +7,12 @@ namespace CnotiMind
 {
 	class Brain;
 
-	class PropertiesModel : public QAbstractTableModel
+	class EmotionsModel : public QAbstractTableModel
 	{
 		Q_OBJECT
+
 	public:
-		PropertiesModel( const Brain* brain, QObject *parent = 0);
+		EmotionsModel( const Brain* brain, QObject *parent = 0 );
 
 		int rowCount(const QModelIndex &parent) const;
 		int columnCount(const QModelIndex &parent) const;
@@ -23,8 +24,7 @@ namespace CnotiMind
 
 	private:
 		const Brain* _brain;
-
 	};
 
 }
-#endif // PROPERTIESMODEL_H
+#endif // EMOTIONSMODEL_H
