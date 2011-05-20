@@ -100,10 +100,13 @@ namespace CnotiMind
 				}
 
 				// If one of the value is not a number
+				QString strValue = _value;
+				tagsToValue( strValue, variables );
+
 				switch( _operator ) // it's a string, just to this 2 operators
 				{
-					case ConditionOperatorEqual: return QString::compare( _value, v, Qt::CaseInsensitive ) == 0;
-					case ConditionOperatorDifferent: return QString::compare( _value, v, Qt::CaseInsensitive ) != 0;
+					case ConditionOperatorEqual: return QString::compare( strValue, v, Qt::CaseInsensitive ) == 0;
+					case ConditionOperatorDifferent: return QString::compare( strValue, v, Qt::CaseInsensitive ) != 0;
 				}
 				return false;
 			}

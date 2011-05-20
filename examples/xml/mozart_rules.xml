@@ -831,6 +831,7 @@
 			<!-- Test if there is only one 1 note left -->
 			<Condition type="DataMining" operation="Count" event="Note" compareValue="1" memory="WM">
 				<DataMining operation="Last" event="Note" variable="[Last Note]" memory="WM">
+					<Action name="Think" value="Inside delete note [Last Note]" />
 					<Condition type="variable" variable="[Last Note]" value="Do">
 						<Property name="Notes Option" value="Good" />
 						<Property name="Note Sequence" value="First Note Do" />
