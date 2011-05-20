@@ -15,6 +15,7 @@ namespace CnotiMind
 	class EmotionsModel;
 	class PerceptionsModel;
 	class MemoryModel;
+	class ActionsModel;
 
 
 	class BrainGUI : public QWidget
@@ -31,6 +32,7 @@ namespace CnotiMind
 		void updatePerceptions( const Perception& p );
 		void updateLongTermMemory();
 		void updateWorkingMemory();
+		void updateActions( const QString& key, const QString& value );
 
 	protected:
 		void changeEvent(QEvent *e);
@@ -42,6 +44,7 @@ namespace CnotiMind
 		PerceptionsModel*  _perceptionsModel;
 		MemoryModel*       _longTermMemoryModel;
 		MemoryModel*       _workingMemoryModel;
+		ActionsModel*      _actionsModel;
 	};
 
 }

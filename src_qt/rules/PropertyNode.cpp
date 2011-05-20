@@ -23,7 +23,7 @@ namespace CnotiMind
 		QString value = _value;
 		this->tagsToValue( value, variables );
 
-		_brain->updatePropertyValue( _key, _value );
+		_brain->updatePropertyValue( _key, value );
 	}
 
 	QString PropertyNode::info( int depth ) const

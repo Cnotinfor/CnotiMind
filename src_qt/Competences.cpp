@@ -27,10 +27,10 @@ namespace CnotiMind
 		return true;
 	}
 
-	void Competences::newAction( const Action& action )
-	{
+//	void Competences::newAction( const Action& action )
+//	{
 
-	}
+//	}
 
 	void Competences::changeEmotion( const QString& emotion, qreal newValue )
 	{

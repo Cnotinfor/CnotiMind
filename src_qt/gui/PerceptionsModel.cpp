@@ -36,17 +36,7 @@ namespace CnotiMind
 		switch(role)
 		{
 			case Qt::DisplayRole:
-
-				// Iterates hash values, n rows
-				QListIterator<Perception> i( _perceptions );
-				int r = index.row();
-				Perception p;
-				while( r >= 0 )
-				{
-					p = i.next();
-					r--;
-				}
-
+				Perception p = _perceptions.at( _perceptions.size() - index.row() - 1 );
 				if( index.column() == 0 )
 				{
 					return p.name();
@@ -55,7 +45,6 @@ namespace CnotiMind
 				{
 					return p.value();
 				}
-				break;
 		}
 		return QVariant();
 	}
@@ -81,14 +70,14 @@ namespace CnotiMind
 		}
 		else // Vertical
 		{
-			return section;
+			return _perceptions.size() - section;
 		}
 	}
 
 	void PerceptionsModel::update( const Perception& p )
 	{
 		_perceptions.append( p );
-		insertRow( _perceptions.size() - 1, QModelIndex() );
+		insertRow( 0, QModelIndex() );
 	}
 
 	bool PerceptionsModel::insertRow(int row, const QModelIndex &parent)

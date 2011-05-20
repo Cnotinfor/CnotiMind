@@ -38,15 +38,7 @@ namespace CnotiMind
 		{
 			case Qt::DisplayRole:
 
-				// Iterates hash values, n rows
-				QListIterator<MemoryEvent> i(*_memory);
-				int r = index.row();
-				MemoryEvent me;
-				while( r >= 0 )
-				{
-					me = i.next();
-					r--;
-				}
+				MemoryEvent me = _memory->at( _memory->size() - index.row() - 1 );
 
 				if( index.column() == 0 )
 				{
@@ -82,7 +74,7 @@ namespace CnotiMind
 		}
 		else // Vertical
 		{
-			return section;
+			return _memory->size() - section;
 		}
 	}
 
@@ -90,6 +82,5 @@ namespace CnotiMind
 	{
 		emit layoutChanged();
 	}
-
 
 }

@@ -251,12 +251,23 @@ namespace CnotiMind
 	void Brain::clearWorkingMemory()
 	{
 		_workingMemory.clear();
+
+		if( _gui != NULL )
+		{
+			_gui->updateWorkingMemory();
+		}
 	}
 
 	void Brain::clearMemory()
 	{
 		_longTermMemory.clear();
 		_workingMemory.clear();
+
+		if( _gui != NULL )
+		{
+			_gui->updateLongTermMemory();
+			_gui->updateWorkingMemory();
+		}
 	}
 
 
@@ -435,9 +446,17 @@ namespace CnotiMind
 		{
 		case LongTermMemory:
 			_longTermMemory.append( event );
+			if( _gui != NULL )
+			{
+				_gui->updateLongTermMemory();
+			}
 			break;
 		case WorkingMemory:
 			_workingMemory.append( event );
+			if( _gui != NULL )
+			{
+				_gui->updateWorkingMemory();
+			}
 			break;
 		}
 	}
@@ -447,6 +466,11 @@ namespace CnotiMind
 	*/
 	void Brain::executeAction( const QString& key, const QString& value )
 	{
+		if( _gui != NULL )
+		{
+			_gui->updateActions( key, value );
+		}
+
 		emit sendAction( key, value );
 	}
 
@@ -491,6 +515,18 @@ namespace CnotiMind
 					}
 				}
 				break;
+		}
+
+		if( _gui != NULL )
+		{
+			if( memory == LongTermMemory)
+			{
+				_gui->updateLongTermMemory();
+			}
+			else
+			{
+				_gui->updateWorkingMemory();
+			}
 		}
 	}
 

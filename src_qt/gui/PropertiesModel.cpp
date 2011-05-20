@@ -81,7 +81,7 @@ namespace CnotiMind
 		}
 		else // Vertical
 		{
-			return section;
+			return section + 1;
 		}
 	}
 

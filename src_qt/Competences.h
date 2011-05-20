@@ -6,7 +6,6 @@
 #include <QtCore/QList>
 
 #include "CnotiMind_global.h"
-#include "Action.h"
 #include "Brain.h"
 #include "Perception.h"
 
@@ -22,12 +21,11 @@ namespace CnotiMind
 		Competences( const QString& path, const Brain* brain, QObject* parent );
 
 		bool loadXML( const QString& path );
-		void newAction( const Action& action );
+		//void newAction( const Action& action );
 		void changeEmotion( const QString& emotion, qreal newValue );
 		void connectToBrain( const Brain* brain );
 
 	private:
-		QList<Action> _actionList;
 		QList<Perception> _perceptions;
 		QList<Emotion> _emotions;
 	};

@@ -8,7 +8,6 @@
 #include <QtCore/QQueue>
 
 #include "CnotiMind_global.h"
-#include "Action.h"
 #include "Perception.h"
 #include "Emotion.h"
 #include "MemoryEvent.h"

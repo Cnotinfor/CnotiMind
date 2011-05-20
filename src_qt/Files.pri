@@ -1,5 +1,4 @@
 HEADERS += \
-	Action.h \
 	Brain.h \
 	CnotiMind_global.h \
 	Competences.h \
@@ -13,7 +12,6 @@ HEADERS += \
 	MemoryXmlHandler.h
 
 SOURCES += \
-	Action.cpp \
 	Brain.cpp \
 	Competences.cpp \
 	Emotion.cpp \

@@ -54,3 +54,9 @@ include( "rules/Rules.pri" )
 include( "gui/Gui.pri" )
 
 # ------------------------------------------------------------
+
+HEADERS += \
+    ActionsModel.h
+
+SOURCES += \
+    ActionsModel.cpp
