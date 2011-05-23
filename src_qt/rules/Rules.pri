@@ -15,7 +15,8 @@ HEADERS += \
     rules/PropertyNode.h \
     rules/ConditionPropertyNode.h \
     rules/ClearMemoryNode.h \
-    rules/DeleteNode.h
+    rules/DeleteNode.h \
+    rules/RandomNode.h
 
 SOURCES += \
 	rules/ActionNode.cpp \
@@ -34,4 +35,5 @@ SOURCES += \
     rules/PropertyNode.cpp \
     rules/ConditionPropertyNode.cpp \
     rules/ClearMemoryNode.cpp \
-    rules/DeleteNode.cpp
+    rules/DeleteNode.cpp \
+    rules/RandomNode.cpp
