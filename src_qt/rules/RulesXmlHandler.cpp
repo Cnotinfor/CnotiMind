@@ -17,6 +17,7 @@
 #include "ConditionPropertyNode.h"
 #include "DeleteNode.h"
 #include "ClearMemoryNode.h"
+#include "RandomNode.h"
 #include "../Brain.h"
 
 namespace CnotiMind
@@ -410,6 +411,14 @@ namespace CnotiMind
 
 		_parentNode = _currentNode;
 		_currentNode =  new ClearMemoryNode( memory, _brain, _parentNode );
+
+		return true;
+	}
+
+	bool RulesXmlHandler::createRandomNode( const QXmlAttributes & atts )
+	{
+		_parentNode = _currentNode;
+		_currentNode =  new RandomNode( _brain, _parentNode );
 
 		return true;
 	}

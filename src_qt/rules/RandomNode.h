@@ -14,10 +14,10 @@ namespace CnotiMind
 		RandomNode(Brain* brain, QObject *parent = 0);
 
 
-		virtual void exec() = 0;
-		virtual void exec( QHash<QString, QString>& variables ) = 0;
+		virtual void exec();
+		virtual void exec( QHash<QString, QString>& variables );
 
-		virtual QString info( int depth = 0 ) const = 0;
+		virtual QString info( int depth = 0 ) const;
 
 	};
 

@@ -48,7 +48,7 @@ namespace CnotiMind
 		bool createPropertyNode( const QXmlAttributes & atts );
 		bool createDeleteNode( const QXmlAttributes & atts );
 		bool createClearMemoryNode( const QXmlAttributes & atts );
-
+		bool createRandomNode( const QXmlAttributes & atts );
 
 	protected:
 		RuleNode* _rootNode;
