@@ -154,7 +154,10 @@ void Form::on_pushButtonFinishMelody_clicked()
 
 void Form::actionReceived(const QString& action,const QString& value)
 {
-	ui->plainTextEditActions->insertPlainText( action + ": " + value + "\n");
+	if( action.compare("TALK", Qt::CaseInsensitive ) == 0 )
+	{
+		ui->plainTextEditActions->insertPlainText( action + ": " + value + "\n");
+	}
 }
 
 void Form::emotionReceived( const QString& emotion, qreal value)
