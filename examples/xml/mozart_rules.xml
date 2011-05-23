@@ -942,7 +942,7 @@
 							<Condition type="Variable" variable="[Music Duration]" compareValue="0" operator="bigger">
 							
 								<!-- Check if there are only pauses (Duration > 0, Note quantity == 0) -->
-								<Condition type="Datamining" operation="Exists" event="Note" compareValue="0">
+								<Condition type="Datamining" operation="Exists" event="Note" compareValue="0" memory="WM">
 								
 									<Action name="Talk" value="Not Start Pause"/>
 									<Action name="Talk" value="Start Do" />
@@ -951,55 +951,71 @@
 									<Action name="Talk" value="Start DoAgudo" /> -->
 								</Condition>
 								
-								<Condition type="Datamining" operation="Exists" event="Note" compareValue="1">
+								<Condition type="Datamining" operation="Exists" event="Note" compareValue="1" memory="WM">
 									<DataMining operation="Last" event="Note" variable="[Last Note]"  memory="WM">
 										<Condition type="Variable" variable="[Last Note]" compareValue="Do">
-											<Action name="Talk" value="Use Do" />
-											<!--<Action name="Talk" value="Use Re" />
-											<Action name="Talk" value="Use Mi" />
-											<Action name="Talk" value="Use Sol" />
-											<Action name="Talk" value="Use DoAgudo" />-->			
+											<Random>
+												<Action name="Talk" value="Use Do" />
+												<Action name="Talk" value="Use Re" />
+												<Action name="Talk" value="Use Mi" />
+												<Action name="Talk" value="Use Sol" />
+												<Action name="Talk" value="Use DoAgudo" />
+											</Random>
 										</Condition>
 										<Condition type="Variable" variable="[Last Note]" compareValue="Re">
-											<Action name="Talk" value="Use Do" />
-											<!--<Action name="Talk" value="Use Re" />
-											<Action name="Talk" value="Use Mi" />
-											<Action name="Talk" value="Use Sol" />-->
+											<Random>
+												<Action name="Talk" value="Use Do" />
+												<Action name="Talk" value="Use Re" />
+												<Action name="Talk" value="Use Mi" />
+												<Action name="Talk" value="Use Sol" />
+											</Random>
 										</Condition>
 										<Condition type="Variable" variable="[Last Note]" compareValue="Mi">
-											<Action name="Talk" value="Use Do" />
-											<!--<Action name="Talk" value="Use Re" />
-											<Action name="Talk" value="Use Mi" />
-											<Action name="Talk" value="Use Fa" />
-											<Action name="Talk" value="Use Sol" />-->
+											<Random>
+												<Action name="Talk" value="Use Do" />
+												<Action name="Talk" value="Use Re" />
+												<Action name="Talk" value="Use Mi" />
+												<Action name="Talk" value="Use Fa" />
+												<Action name="Talk" value="Use Sol" />
+											</Random>
 										</Condition>
 										<Condition type="Variable" variable="[Last Note]" compareValue="Fa">
-											<Action name="Talk" value="Use Mi" />
-											<!--<Action name="Talk" value="Fa" />
-											<Action name="Talk" value="Use Sol" />-->
+											<Random>
+												<Action name="Talk" value="Use Mi" />
+												<Action name="Talk" value="Fa" />
+												<Action name="Talk" value="Use Sol" />
+											</Random>
 										</Condition>
 										<Condition type="Variable" variable="[Last Note]" compareValue="Sol">
-											<Action name="Talk" value="Use Do" />
-											<!--<Action name="Talk" value="Use Mi" />
-											<Action name="Talk" value="Use Fa" />
-											<Action name="Talk" value="Use Sol" />
-											<Action name="Talk" value="Use La" />-->
+											<Random>
+												<Action name="Talk" value="Use Do" />
+												<Action name="Talk" value="Use Mi" />
+												<Action name="Talk" value="Use Fa" />
+												<Action name="Talk" value="Use Sol" />
+												<Action name="Talk" value="Use La" />
+											</Random>
 										</Condition>
 										<Condition type="Variable" variable="[Last Note]" compareValue="La">
-											<Action name="Talk" value="Use Sol" />
-											<!--<Action name="Talk" value="Use La" />
-											<Action name="Talk" value="Use Si" />-->
+											<Random>
+												<Action name="Talk" value="Use Sol" />
+												<Action name="Talk" value="Use La" />
+												<Action name="Talk" value="Use Si" />
+											</Random>
 										</Condition>
 										<Condition type="Variable" variable="[Last Note]" compareValue="Si">
-											<Action name="Talk" value="Use La" />
-											<!--<Action name="Talk" value="Use Si" />
-											<Action name="Talk" value="Use DoAgudo" />-->
+											<Random>
+												<Action name="Talk" value="Use La" />
+												<Action name="Talk" value="Use Si" />
+												<Action name="Talk" value="Use DoAgudo" />
+											</Random>
 										</Condition>
 										<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
-											<Action name="Talk" value="Use Do" />
-											<!--<Action name="Talk" value="Use Si" />
-											<Action name="Talk" value="Use Sol" />
-											<Action name="Talk" value="Use DoAgudo" />-->
+											<Random>
+												<Action name="Talk" value="Use Do" />
+												<Action name="Talk" value="Use Si" />
+												<Action name="Talk" value="Use Sol" />
+												<Action name="Talk" value="Use DoAgudo" />
+											</Random>
 										</Condition>
 									</DataMining>
 								</Condition>
@@ -1011,13 +1027,17 @@
 						<Condition type="Property" property="Duration Option" compareValue="Bad">
 							<!-- Duration is invalid -->
 							<Condition type="Variable" variable="[Used Tempos]" compareValue="1">
-								<Action name="Talk" value="Use Duration 2" />
-								<!-- <Action name="Talk" value="Use Duration 3" /> -->
-								<!-- <Action name="Talk" value="Use Duration 1" /> -->
+								<Random>
+									<Action name="Talk" value="Use Duration 2" />
+									<Action name="Talk" value="Use Duration 3" />
+									<Action name="Talk" value="Use Duration 1" />
+								</Random>
 							</Condition>
 							<Condition type="Variable" variable="[Used Tempos]" compareValue="2">
-								<Action name="Talk" value="Use Duration 2" />
-								<Action name="Talk" value="Use Duration 1" />	
+								<Random>
+									<Action name="Talk" value="Use Duration 2" />
+									<Action name="Talk" value="Use Duration 1" />	
+								</Random>
 							</Condition>
 							<Condition type="Variable" variable="[Used Tempos]" compareValue="3">
 								<Action name="Talk" value="Use Duration 1" />
@@ -1030,12 +1050,7 @@
 			</Condition>
 			
 			
-			
-			
-			
-			
-			
-			
+	
 			
 			
 			
