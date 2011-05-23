@@ -87,6 +87,10 @@ namespace CnotiMind
 		{
 			return createClearMemoryNode( atts );
 		}
+		if( QString::compare( qName, "Random", Qt::CaseInsensitive ) == 0 )
+		{
+			return createRandomNode( atts );
+		}
 
 		qDebug() << "[RulesXmlHandler::startElement] Invalid element" << qName;
 

@@ -24,23 +24,23 @@ namespace CnotiMind
 			const QString& k = it.key();
 			const QString& v = it.value();
 
-			// Test if found the variable
-			if( QString::compare( _key, k, Qt::CaseInsensitive ) == 0 )
+			// Test if found the property
+			if( _key.compare( k, Qt::CaseInsensitive ) == 0 )
 			{
 				// Try to convert the value from the variable to number
 				bool ok;
-				qreal value = v.toDouble(&ok);
+				qreal valueNumeric = v.toDouble(&ok);
 
 				if( ok && _isValueNumeric ) // if both values are numbers
 				{
 					switch( _operator )
 					{
-						case ConditionOperatorBigger: return _valueNumeric > value;
-						case ConditionOperatorBiggerOrEqual: return _valueNumeric >= value;
-						case ConditionOperatorSmaller: return _valueNumeric < value;
-						case ConditionOperatorSmallerOrEqual: return _valueNumeric <= value;
-						case ConditionOperatorEqual: return _valueNumeric == value;
-						case ConditionOperatorDifferent: return _valueNumeric != value;
+						case ConditionOperatorBigger: return _valueNumeric > valueNumeric;
+						case ConditionOperatorBiggerOrEqual: return _valueNumeric >= valueNumeric;
+						case ConditionOperatorSmaller: return _valueNumeric < valueNumeric;
+						case ConditionOperatorSmallerOrEqual: return _valueNumeric <= valueNumeric;
+						case ConditionOperatorEqual: return _valueNumeric == valueNumeric;
+						case ConditionOperatorDifferent: return _valueNumeric != valueNumeric;
 					}
 					return false;
 				}

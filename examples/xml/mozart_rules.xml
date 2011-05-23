@@ -396,7 +396,7 @@
 				<!-- Pause -->
 				<Condition type="Perception" perception="Note" value="Pause">
 					<Action name="Inside" value="Perception Pause" />
-					<Condition type="Property" name="Pause" value="false">
+					<Condition type="Property" property="Pause" compareValue="false">
 						<Emotion name="Joy" increment="1" max="0" />
 						<Property name="Notes Option" value="Good" />
 						<Action name="Inside" value="Property Pause false" />
@@ -404,7 +404,7 @@
 					
 					<!-- If it the last note has a pause -->
 					<!-- It can't have two pauses sequentially -->
-					<Condition type="Property" name="Pause" value="true">
+					<Condition type="Property" property="Pause" compareValue="true">
 						<Action name="Inside" value="Property Pause true" />
 						<Emotion name="Joy" increment="-2" min="-10" />
 						<Property name="Notes Option" value="Bad" />
@@ -576,6 +576,7 @@
 				<Action name="Think" value="Pause deleted" />
 
 			</Condition>
+			
 		</Condition>
 		
 		<Condition type="DataMining" operation="Exists"	event="Note" compareValue="1" memory="WM">
@@ -602,124 +603,7 @@
 				</DataMining>
 			</Condition>
 			
-			<!-- After deleting the note -->
-			
-			<!-- Test if it should help the user -->
-			<!-- test if made a previous suggestion or not and test if it should make a suggestion -->
-			<Condition type="Property" name="Make Suggestion" value="false">
-			
-				<!-- Check how much tempos from the compass have been used -->
-				<DataMining operation="Sum" event="Duration" variable="[Music Duration]" memory="WM">
-					<MathOperation name="Remainder" variable="[Music Duration]" value="4" result="[Used Tempos]">
-					
-						<Condition type="Property" name="Notes Option" value="Bad">
-							<Condition type="Property" name="Duration Option" value="Bad">
-								<!-- Both note and duration were invalid  -->
-								
-								
-								
-							</Condition>
-							<Condition type="Property" name="Duration Option" value="Good">
-								<!-- Note was invalid -->
-								
-								<!-- Test if the melody is empty -->
-								<Condition type="Variable" variable="[Music Duration]" compareValue="0">
-									<Action name="Talk" value="Start Do" />
-									<!--<Action name="Talk" value="Start Mi" />
-									<Action name="Talk" value="Start Sol" />
-									<Action name="Talk" value="Start DoAgudo" /> -->
-								
-								</Condition>
-								
-								<!-- Test if the melody is not empty -->
-								<Condition type="Variable" variable="[Music Duration]" compareValue="0" operator="bigger">
-								
-									<!-- Check if there are only pauses (Duration > 0, Note quantity == 0) -->
-									<Condition type="Datamining" operation="Exists" event="Note" compareValue="0">
-										<Action name="Talk" value="Not Start Pause"/>
-										<Action name="Talk" value="Start Do" />
-										<!--<Action name="Talk" value="Start Mi" />
-										<Action name="Talk" value="Start Sol" />
-										<Action name="Talk" value="Start DoAgudo" /> -->
-									</Condition>
-									
-									<Condition type="Datamining" operation="Exists" event="Note" compareValue="1">
-										<DataMining operation="Last" event="Note" variable="[Last Note]"  memory="WM">
-											<Condition type="Variable" variable="[Last Note]" compareValue="Do">
-												<Action name="Talk" value="Use Do" />
-												<!--<Action name="Talk" value="Use Re" />
-												<Action name="Talk" value="Use Mi" />
-												<Action name="Talk" value="Use Sol" />
-												<Action name="Talk" value="Use DoAgudo" />-->			
-											</Condition>
-											<Condition type="Variable" variable="[Last Note]" compareValue="Re">
-												<Action name="Talk" value="Use Do" />
-												<!--<Action name="Talk" value="Use Re" />
-												<Action name="Talk" value="Use Mi" />
-												<Action name="Talk" value="Use Sol" />-->
-											</Condition>
-											<Condition type="Variable" variable="[Last Note]" compareValue="Mi">
-												<Action name="Talk" value="Use Do" />
-												<!--<Action name="Talk" value="Use Re" />
-												<Action name="Talk" value="Use Mi" />
-												<Action name="Talk" value="Use Fa" />
-												<Action name="Talk" value="Use Sol" />-->
-											</Condition>
-											<Condition type="Variable" variable="[Last Note]" compareValue="Fa">
-												<Action name="Talk" value="Use Mi" />
-												<!--<Action name="Talk" value="Fa" />
-												<Action name="Talk" value="Use Sol" />-->
-											</Condition>
-											<Condition type="Variable" variable="[Last Note]" compareValue="Sol">
-												<Action name="Talk" value="Use Do" />
-												<!--<Action name="Talk" value="Use Mi" />
-												<Action name="Talk" value="Use Fa" />
-												<Action name="Talk" value="Use Sol" />
-												<Action name="Talk" value="Use La" />-->
-											</Condition>
-											<Condition type="Variable" variable="[Last Note]" compareValue="La">
-												<Action name="Talk" value="Use Sol" />
-												<!--<Action name="Talk" value="Use La" />
-												<Action name="Talk" value="Use Si" />-->
-											</Condition>
-											<Condition type="Variable" variable="[Last Note]" compareValue="Si">
-												<Action name="Talk" value="Use La" />
-												<!--<Action name="Talk" value="Use Si" />
-												<Action name="Talk" value="Use DoAgudo" />-->
-											</Condition>
-											<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
-												<Action name="Talk" value="Use Do" />
-												<!--<Action name="Talk" value="Use Si" />
-												<Action name="Talk" value="Use Sol" />
-												<Action name="Talk" value="Use DoAgudo" />-->
-											</Condition>
-										</DataMining>
-									</Condition>
-								
-								</Condition>
-							</Condition>	
-						</Condition>
-						<Condition type="Property" name="Notes Option" value="Good">
-							<Condition type="Property" name="Duration Option" value="Bad"
-								<!-- Duration is invalid -->
-								<Condition type="Variable" variable="[Used Tempos]" compareValue="1">
-									<Action name="Talk" value="Use Duration 2" />
-									<!-- <Action name="Talk" value="Use Duration 3" /> -->
-									<!-- <Action name="Talk" value="Use Duration 1" /> -->
-								</Condition>
-								<Condition type="Variable" variable="[Used Tempos]" compareValue="2">
-									<Action name="Talk" value="Use Duration 2" />
-									<Action name="Talk" value="Use Duration 1" />	
-								</Condition>
-								<Condition type="Variable" variable="[Used Tempos]" compareValue="3">
-									<Action name="Talk" value="Use Duration 1" />
-								</Condition>
-								
-							</Condition>
-						</Condition>
-					</MathOperation>
-				</DataMining>
-			</Condition>
+
 			
 			
 			<!-- Test if there are more then 2 notes, to update the Note Sequence -->
@@ -1022,6 +906,139 @@
 		<Condition type="DataMining" operation="Exists"	event="Duration" compareValue="1" memory="WM">
 			<Delete memory="WM" name="Duration" position="Last" />
 			<Action name="Think" value="Duration deleted" />
+			
+			<!-- After deleting the note and the duration -->
+			
+			<!-- Test if it should help the user -->
+			<!-- test if made a previous suggestion or not and test if it should make a suggestion -->
+			<Condition type="Property" property="Make Suggestion" compareValue="false">
+				<Action name="Think" value="Going to make a suggestion" />
+				<!-- Check how much tempos from the compass have been used -->
+				<DataMining operation="Sum" event="Duration" variable="[Music Duration]" memory="WM">
+					<Action name="Think" value="Duration calculated" />
+					<Condition type="Property" property="Notes Option" compareValue="Bad">
+						<Condition type="Property" property="Duration Option" compareValue="Bad">
+							<!-- Both note and duration were invalid  -->
+							<MathOperation name="Remainder" variable="[Music Duration]" value="4" result="[Used Tempos]">
+							
+							</MathOperation>
+							
+						</Condition>
+						
+						<Condition type="Property" property="Duration Option" compareValue="Good">
+							<!-- Note was invalid -->
+							<Action name="Think" value="Invalid Note" />
+							<!-- Test if the melody is empty -->
+							<Condition type="Variable" variable="[Music Duration]" compareValue="0">
+								<Random>
+									<Action name="Talk" value="Start Do" />
+									<Action name="Talk" value="Start Mi" />
+									<Action name="Talk" value="Start Sol" />
+									<Action name="Talk" value="Start DoAgudo" />
+								</Random>
+							</Condition>
+							
+							<!-- Test if the melody is not empty -->
+							<Condition type="Variable" variable="[Music Duration]" compareValue="0" operator="bigger">
+							
+								<!-- Check if there are only pauses (Duration > 0, Note quantity == 0) -->
+								<Condition type="Datamining" operation="Exists" event="Note" compareValue="0">
+								
+									<Action name="Talk" value="Not Start Pause"/>
+									<Action name="Talk" value="Start Do" />
+									<!--<Action name="Talk" value="Start Mi" />
+									<Action name="Talk" value="Start Sol" />
+									<Action name="Talk" value="Start DoAgudo" /> -->
+								</Condition>
+								
+								<Condition type="Datamining" operation="Exists" event="Note" compareValue="1">
+									<DataMining operation="Last" event="Note" variable="[Last Note]"  memory="WM">
+										<Condition type="Variable" variable="[Last Note]" compareValue="Do">
+											<Action name="Talk" value="Use Do" />
+											<!--<Action name="Talk" value="Use Re" />
+											<Action name="Talk" value="Use Mi" />
+											<Action name="Talk" value="Use Sol" />
+											<Action name="Talk" value="Use DoAgudo" />-->			
+										</Condition>
+										<Condition type="Variable" variable="[Last Note]" compareValue="Re">
+											<Action name="Talk" value="Use Do" />
+											<!--<Action name="Talk" value="Use Re" />
+											<Action name="Talk" value="Use Mi" />
+											<Action name="Talk" value="Use Sol" />-->
+										</Condition>
+										<Condition type="Variable" variable="[Last Note]" compareValue="Mi">
+											<Action name="Talk" value="Use Do" />
+											<!--<Action name="Talk" value="Use Re" />
+											<Action name="Talk" value="Use Mi" />
+											<Action name="Talk" value="Use Fa" />
+											<Action name="Talk" value="Use Sol" />-->
+										</Condition>
+										<Condition type="Variable" variable="[Last Note]" compareValue="Fa">
+											<Action name="Talk" value="Use Mi" />
+											<!--<Action name="Talk" value="Fa" />
+											<Action name="Talk" value="Use Sol" />-->
+										</Condition>
+										<Condition type="Variable" variable="[Last Note]" compareValue="Sol">
+											<Action name="Talk" value="Use Do" />
+											<!--<Action name="Talk" value="Use Mi" />
+											<Action name="Talk" value="Use Fa" />
+											<Action name="Talk" value="Use Sol" />
+											<Action name="Talk" value="Use La" />-->
+										</Condition>
+										<Condition type="Variable" variable="[Last Note]" compareValue="La">
+											<Action name="Talk" value="Use Sol" />
+											<!--<Action name="Talk" value="Use La" />
+											<Action name="Talk" value="Use Si" />-->
+										</Condition>
+										<Condition type="Variable" variable="[Last Note]" compareValue="Si">
+											<Action name="Talk" value="Use La" />
+											<!--<Action name="Talk" value="Use Si" />
+											<Action name="Talk" value="Use DoAgudo" />-->
+										</Condition>
+										<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
+											<Action name="Talk" value="Use Do" />
+											<!--<Action name="Talk" value="Use Si" />
+											<Action name="Talk" value="Use Sol" />
+											<Action name="Talk" value="Use DoAgudo" />-->
+										</Condition>
+									</DataMining>
+								</Condition>
+							</Condition>
+						</Condition>	
+					</Condition>
+					
+					<Condition type="Property" property="Notes Option" compareValue="Good">
+						<Condition type="Property" property="Duration Option" compareValue="Bad">
+							<!-- Duration is invalid -->
+							<Condition type="Variable" variable="[Used Tempos]" compareValue="1">
+								<Action name="Talk" value="Use Duration 2" />
+								<!-- <Action name="Talk" value="Use Duration 3" /> -->
+								<!-- <Action name="Talk" value="Use Duration 1" /> -->
+							</Condition>
+							<Condition type="Variable" variable="[Used Tempos]" compareValue="2">
+								<Action name="Talk" value="Use Duration 2" />
+								<Action name="Talk" value="Use Duration 1" />	
+							</Condition>
+							<Condition type="Variable" variable="[Used Tempos]" compareValue="3">
+								<Action name="Talk" value="Use Duration 1" />
+							</Condition>
+							
+						</Condition>
+					</Condition>
+
+				</DataMining>
+			</Condition>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		</Condition>
 	</Condition>
 
