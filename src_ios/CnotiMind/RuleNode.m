@@ -177,8 +177,6 @@
 -(void) execChildren
 {
     NSEnumerator* e = [children_ objectEnumerator];
-
-    
     NSLog(@"RuleNode: execChildren: %@", e);
     id object;
     
@@ -269,6 +267,8 @@
     while (objectNode == [eChildren nextObject]) {
         info = [info stringByAppendingFormat:@"%@%@", space, [objectNode info:aDepth + 1]];
     }
+    
+    
     return info;
 }
 

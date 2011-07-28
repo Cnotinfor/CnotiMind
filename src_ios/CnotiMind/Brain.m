@@ -965,6 +965,7 @@
     if (_rules!=nil) {
         
         NSLog(@"---2");
+        [_rules info:1];
         [_rules exec];        
     }
     

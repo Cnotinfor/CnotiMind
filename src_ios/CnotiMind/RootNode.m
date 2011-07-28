@@ -41,7 +41,7 @@
 {
     NSString* info = [NSString stringWithFormat:@""];
 //    NSString* space = [self space:aDepth];
-    
+    NSLog(@"RootNode: info: %@", [super info:aDepth]);
     info = [info stringByAppendingFormat:@"Root%@", [super info:aDepth]];
     
     return info;

@@ -55,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1895305513E1BE9700B41045 /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		1896134513811CFD00FEA73A /* SingleEmotion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SingleEmotion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1896134913811CFD00FEA73A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1896134B13811CFD00FEA73A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -243,6 +244,7 @@
 				189613A51381370B00FEA73A /* ObjectToXML.h */,
 				189613A61381370B00FEA73A /* Perception.h */,
 				189613A71381370B00FEA73A /* Perception.m */,
+				1895305513E1BE9700B41045 /* Macros.h */,
 			);
 			name = CnotiMind;
 			path = ../../src_ios/CnotiMind;
@@ -600,6 +602,7 @@
 				1896137E13811CFE00FEA73A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1896137F13811CFE00FEA73A /* Build configuration list for PBXNativeTarget "SingleEmotionTests" */ = {
 			isa = XCConfigurationList;
@@ -608,6 +611,7 @@
 				1896138113811CFE00FEA73A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
