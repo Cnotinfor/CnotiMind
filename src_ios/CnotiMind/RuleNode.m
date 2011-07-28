@@ -9,7 +9,6 @@
 #import "RuleNode.h"
 #import "Brain.h"
 
-
 @implementation RuleNode
 
 @synthesize children = children_;
@@ -33,6 +32,8 @@
 		
 		// children (lazy allocs)
 		children_ = nil;
+        if( ! children_ )
+            [self childrenAlloc];
 		
 		// userData is always inited as nil
 		userData_ = nil;
@@ -51,6 +52,8 @@
 		
 		// children (lazy allocs)
 		children_ = nil;
+        if( ! children_ )
+            [self childrenAlloc];
 		
 		// userData is always inited as nil
 		userData_ = nil;
@@ -174,10 +177,15 @@
 -(void) execChildren
 {
     NSEnumerator* e = [children_ objectEnumerator];
+
+    
+    NSLog(@"RuleNode: execChildren: %@", e);
     id object;
     
     while (object == [e nextObject]) {
         RuleNode* node = (RuleNode*)object;
+        NSLog(@"RuleNode: node: %@", node);
+
         [node exec];
     }
 }
@@ -185,10 +193,16 @@
 
 - (void) execChildren:(NSMutableDictionary*)aVariables
 {
+    
+    NSLog(@"RuleNode: execChildren");
+    
     NSEnumerator* e = [children_ objectEnumerator];
     id object;
     
     while (object == [e nextObject]) {
+        
+        NSLog(@"node exec");
+        
         RuleNode* node = (RuleNode*)object;
         [node exec: aVariables];
     }
@@ -198,9 +212,7 @@
 //  TODO
 - (void) exec
 {
-
-    
-
+    NSLog(@"RuleNode: exec");
 }
 
 
@@ -278,7 +290,8 @@
 
 -(void) childrenAlloc
 {
-	children_ = [[NSArray alloc] init];
+    NSLog(@"RuleNode: childrenAlloc");
+	children_ = [[NSMutableArray alloc] init];
 }
 
 

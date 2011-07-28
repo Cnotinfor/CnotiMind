@@ -18,6 +18,7 @@
 }
 
 - (id) init;
+- (id) initWithNameAndAValue:(NSString*)aName value:(NSString*)aValue;
 
 @property (readwrite, assign) id value;
 @property (readwrite, assign) NSString* name;

@@ -20,7 +20,6 @@
     if (self == [super initWithKeyAndValueAndBrainAndParent: aKey value:aValue operator:aOperator brain:aBrain parent:aParent])
     {
     
-    
     }
     return self;
 }

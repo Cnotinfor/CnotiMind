@@ -18,6 +18,8 @@
 #import "ActionNode.h"
 
 
+#import "CnotiMind.h"
+
 @implementation Brain
 
 @synthesize emotions = _emotions;
@@ -28,6 +30,9 @@
     if (self == [super init]) {
         _emotions = [[NSMutableArray alloc] init];
         _receivedPerceptions = [[NSMutableArray alloc] init];
+        
+//        _semaphoreBrain = [[NSRecursiveLock alloc] init];       
+//        [NSThread detachNewThreadSelector:@selector(startThreadRun) toTarget:self withObject:nil];
     }
     return self;
 }
@@ -37,15 +42,27 @@
 {
     if (self == [super init]) {
         
-        [self loadXmlSettings:aPath];
-        
+        _semaphoreBrain = [[NSLock alloc] init];
+    
+        //  [self loadXmlSettings:aPath];
         //  TODO
         //  [self initWithTarget:self selector:@selector(run) object:nil];
-        [self run];
+        //  [self run];
+
+//        [NSThread detachNewThreadSelector:@selector(startThreadRun) toTarget:self withObject:nil];
     }
     return self;
 }
 
+
+//- (IBAction) startThreadRun
+//{
+//    NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+//    // wait for 1 seconds before starting the thread, you don't have to do that. This is just an example how to stop the NSThread for some time  
+//    [NSThread sleepForTimeInterval:1];  
+//    [self performSelectorInBackground: @selector(run:) withObject:nil];  
+//    [pool release];
+//}
 
 
 /**
@@ -156,36 +173,49 @@
 - (BOOL) loadXmlRules:(NSString*)aFilename
 {
     
-    
     RootNode* rootNode = [[RootNode alloc] initWithBrainAndParent:self parent:nil];
+    _currentNode = rootNode;
     
-    ConditionPerceptionNode* conditionPerceptionNode = [[ConditionPerceptionNode alloc] initWithKeyAndValueAndOperatorAndBrainAndParent:@"User Talk" value:@"Hello" operator:ConditionOperatorEqual brain:self parent:rootNode];
-    ActionNode* actionNode = [[ActionNode alloc] initWithKeyAndValueAndBrainAndParent:@"Talk" value:@"Hi there!" brain:self parent:conditionPerceptionNode];
-
-    [actionNode exec];
+    ConditionPerceptionNode* conditionPerceptionNode = [[ConditionPerceptionNode alloc] initWithKeyAndValueAndOperatorAndBrainAndParent:@"User Talk" value:@"Hello" operator:ConditionOperatorUndefined brain:self parent:rootNode];
+    _parentNode = _currentNode;
+    _currentNode = conditionPerceptionNode;
+    
+    ConditionDataMiningNode* conditionDataMiningNode = [[ConditionDataMiningNode alloc] initWithKeyAndValueAndOperatorAndOperationAndMemoryAndVariableAndCompareValueBrainAndParent:@"last" value:@"Hello" operator:ConditionOperatorUndefined operation:DMO_Undefined memory:UndefinedMemory variable:@"" compareValue:@"" brain:self parent:conditionPerceptionNode];
+    _parentNode = _currentNode;
+    _currentNode = conditionDataMiningNode;
+    
+    ActionNode* actionNode = [[ActionNode alloc] initWithKeyAndValueAndBrainAndParent:@"Talk" value:@"Hi there!" brain:self parent:conditionDataMiningNode];
+    _parentNode = _currentNode;
+    _currentNode = actionNode;
+    
+    _rules = rootNode;
+    
+    NSLog(@"Brain: loadXmlRules");
+    
+//    [actionNode exec];
     
     
-//    NSData *xmlData = [[NSMutableData alloc] initWithContentsOfFile:aFilename];
-//    NSError *error;
-//    GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:xmlData 
-//														   options:0 error:&error];    
-//    
-//    if (error) {
-//        return false;
-//    }
-//    
-//    else {
-//        //  Make the parsing - must be recursive!!!
-//        NSArray *rulesMembers = [doc.rootElement elementsForName:@"Rules"];
-//        
-//        for (GDataXMLElement* rulesMember in rulesMembers) {
-//            
-//        }
-//    }
-//    
-//    [doc release];
-//    [xmlData release];
-//    
+    //    NSData *xmlData = [[NSMutableData alloc] initWithContentsOfFile:aFilename];
+    //    NSError *error;
+    //    GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:xmlData 
+    //														   options:0 error:&error];    
+    //    
+    //    if (error) {
+    //        return false;
+    //    }
+    //    
+    //    else {
+    //        //  Make the parsing - must be recursive!!!
+    //        NSArray *rulesMembers = [doc.rootElement elementsForName:@"Rules"];
+    //        
+    //        for (GDataXMLElement* rulesMember in rulesMembers) {
+    //            
+    //        }
+    //    }
+    //    
+    //    [doc release];
+    //    [xmlData release];
+    //    
     return true;
 }
 
@@ -347,7 +377,7 @@
     NSMutableDictionary* action = [[NSMutableDictionary alloc] init];
     [action setObject:aValue forKey:aKey];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"SEND_ACTION" object:action];
-
+    
 }
 
 
@@ -416,7 +446,7 @@
     
     [self setValid:aValid value:true];
     
-
+    
     switch (aOperation) {
         case DMO_Max:
             return [[NSNumber alloc] initWithFloat:[self dataMiningMax: aEvent memory: memory valid:aValid]];
@@ -447,9 +477,9 @@
         default:
             break;
     }
-
+    
     [self setValid: aValid value:false];
-
+    
     return [NSString stringWithFormat:@""];
 }
 
@@ -457,7 +487,7 @@
 
 - (id) dataMining: (enum DataMiningOperation)aOperation event:(NSString*)aEvent value:(NSString*)aValue memoryType:(enum MemoryType)aMemoryType valid:(BOOL*)aValid
 {
-
+    
     // test if parameters are valid for datamining
     if( [aEvent length]==0 )
     {
@@ -608,7 +638,7 @@
     bool ok;
     float sum = 0;
     float aux;
-
+    
     NSEnumerator* eMemoryEvent = [aMemory objectEnumerator];
     
     MemoryEvent* objectMemoryEvent;
@@ -748,12 +778,12 @@
     {
         return 0;
     }
-
+    
     BOOL ok;
     float sum = 0;
     int n = 0;
     float aux;
-
+    
     NSEnumerator* eMemoryEvent = [aMemory objectEnumerator];
     
     MemoryEvent* objectMemoryEvent;
@@ -842,18 +872,18 @@
 {
     // by defaulf the data mining is not valid
     [self setValid:aValid value:false];
-   
+    
     if([aMemory count] == 0)
     {
         return [NSString stringWithFormat:@""];
     }
     
     NSEnumerator* eMemoryEvent = [aMemory objectEnumerator];
-
+    
     NSArray* aMemoryEvents = [eMemoryEvent allObjects];
     // start search from back
     MemoryEvent* objectMemoryEvent;
-
+    
     for (int i = [aMemoryEvents count]-1; i>0; i--) {
         objectMemoryEvent = [aMemoryEvents objectAtIndex:i];
         
@@ -861,9 +891,9 @@
         {
             [self setValid:aValid value:true];
             return [objectMemoryEvent value];
-
+            
         }
-
+        
     }
     return [NSString stringWithFormat:@""];
 }
@@ -923,12 +953,20 @@
 }
 
 - (void) run
-{
+{        
+    NSLog(@"brain running...");
+    
     int nEmotions;
     nEmotions = [_emotionsChanged count];
+
     
+    NSLog(@"---1");
     // Execute the rules
-    [_rules exec];
+    if (_rules!=nil) {
+        
+        NSLog(@"---2");
+        [_rules exec];        
+    }
     
     // remove the emotions changed since the last rules exection
     // if new emotions were added during the rules execution, they are not removed,

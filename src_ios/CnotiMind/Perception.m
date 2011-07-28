@@ -23,6 +23,15 @@
     return self;
 }
 
+- (id) initWithNameAndAValue:(NSString*)aName value:(NSString*)aValue
+{
+    if (self == [super init]) {
+        _name = [NSString stringWithFormat:@"%@",aName];
+        _value = [NSString stringWithFormat:@"%@",aValue];
+    }
+    return self;
+}
+
 
 
 

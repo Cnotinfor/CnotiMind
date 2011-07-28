@@ -226,8 +226,6 @@
 		18F98A7213603671006AE7F4 /* CnotiMind */ = {
 			isa = PBXGroup;
 			children = (
-				180A63C3137D7D3500389290 /* Emotion.h */,
-				180A63C4137D7D3500389290 /* Emotion.m */,
 				1800506F1368252A00DB332E /* Auxiliary */,
 				18888C1E136707B900F96F2B /* rules */,
 				18F98A7313603671006AE7F4 /* Supporting Files */,
@@ -244,6 +242,8 @@
 				18888C1A136703A200F96F2B /* ObjectToXML.h */,
 				1800506A136818D000DB332E /* Brain.h */,
 				1800506B136818D000DB332E /* Brain.m */,
+				180A63C3137D7D3500389290 /* Emotion.h */,
+				180A63C4137D7D3500389290 /* Emotion.m */,
 			);
 			path = CnotiMind;
 			sourceTree = "<group>";

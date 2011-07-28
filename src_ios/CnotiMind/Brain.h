@@ -13,16 +13,24 @@
 #import "Perception.h"
 #import "MemoryEvent.h"
 
+#import "ConditionDataMiningNode.h"
+
 #import "CnotiMind.h"
 //#import "MemoryType.h"
 
 @interface Brain : NSObject {
     
     RuleNode* _rules;
+    RuleNode* _currentNode;
+    RuleNode* _parentNode;
+    
     NSMutableArray* _validPerceptions;
     NSMutableArray* _validActions;
     NSMutableArray* _emotions;
-//  QSemaphore _semaphoreBrain;
+
+    //  QSemaphore _semaphoreBrain;
+    NSRecursiveLock* _semaphoreBrain;
+    
     NSMutableArray* _receivedPerceptions;
     NSMutableArray* _emotionsChanged;
     NSMutableArray* _longTermMemory;
@@ -38,6 +46,8 @@
 
 - (id) init;
 - (id) initWithPath:(NSString*)aPath;
+//- (IBAction) startThreadRun;
+
 - (BOOL) loadXmlSettings:(NSString*)aFilename;
 
 - (void) addValidPerception:(NSString*)aPerception;

@@ -1,0 +1,615 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1896134A13811CFD00FEA73A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1896134913811CFD00FEA73A /* UIKit.framework */; };
+		1896134C13811CFD00FEA73A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1896134B13811CFD00FEA73A /* Foundation.framework */; };
+		1896134E13811CFD00FEA73A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1896134D13811CFD00FEA73A /* CoreGraphics.framework */; };
+		1896135413811CFD00FEA73A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1896135213811CFD00FEA73A /* InfoPlist.strings */; };
+		1896135713811CFD00FEA73A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1896135613811CFD00FEA73A /* main.m */; };
+		1896135A13811CFD00FEA73A /* SingleEmotionAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1896135913811CFD00FEA73A /* SingleEmotionAppDelegate.m */; };
+		1896135D13811CFD00FEA73A /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1896135B13811CFD00FEA73A /* MainWindow.xib */; };
+		1896136013811CFD00FEA73A /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1896135F13811CFD00FEA73A /* RootViewController.m */; };
+		1896136313811CFD00FEA73A /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1896136113811CFD00FEA73A /* RootViewController.xib */; };
+		1896136A13811CFE00FEA73A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1896134913811CFD00FEA73A /* UIKit.framework */; };
+		1896136B13811CFE00FEA73A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1896134B13811CFD00FEA73A /* Foundation.framework */; };
+		1896136C13811CFE00FEA73A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1896134D13811CFD00FEA73A /* CoreGraphics.framework */; };
+		1896137413811CFE00FEA73A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1896137213811CFE00FEA73A /* InfoPlist.strings */; };
+		1896137713811CFE00FEA73A /* SingleEmotionTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 1896137613811CFE00FEA73A /* SingleEmotionTests.h */; };
+		1896137913811CFE00FEA73A /* SingleEmotionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1896137813811CFE00FEA73A /* SingleEmotionTests.m */; };
+		189613AE1381370B00FEA73A /* Action.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613841381370B00FEA73A /* Action.m */; };
+		189613AF1381370B00FEA73A /* ActionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613861381370B00FEA73A /* ActionNode.m */; };
+		189613B01381370B00FEA73A /* Brain.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613881381370B00FEA73A /* Brain.m */; };
+		189613B11381370B00FEA73A /* CnotiMind.m in Sources */ = {isa = PBXBuildFile; fileRef = 1896138B1381370B00FEA73A /* CnotiMind.m */; };
+		189613B21381370B00FEA73A /* ConditionDataMiningNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1896138D1381370B00FEA73A /* ConditionDataMiningNode.m */; };
+		189613B31381370B00FEA73A /* ConditionEmotionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1896138F1381370B00FEA73A /* ConditionEmotionNode.m */; };
+		189613B41381370B00FEA73A /* ConditionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613911381370B00FEA73A /* ConditionNode.m */; };
+		189613B51381370B00FEA73A /* ConditionPerceptionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613931381370B00FEA73A /* ConditionPerceptionNode.m */; };
+		189613B61381370B00FEA73A /* ConditionVariableNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613951381370B00FEA73A /* ConditionVariableNode.m */; };
+		189613B71381370B00FEA73A /* DataMiningNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613971381370B00FEA73A /* DataMiningNode.m */; };
+		189613B81381370B00FEA73A /* Emotion.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613991381370B00FEA73A /* Emotion.m */; };
+		189613B91381370B00FEA73A /* EmotionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1896139B1381370B00FEA73A /* EmotionNode.m */; };
+		189613BA1381370B00FEA73A /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1896139E1381370B00FEA73A /* GDataXMLNode.m */; };
+		189613BB1381370B00FEA73A /* MemoryEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613A01381370B00FEA73A /* MemoryEvent.m */; };
+		189613BC1381370B00FEA73A /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613A21381370B00FEA73A /* Node.m */; };
+		189613BD1381370B00FEA73A /* NSMutableArray+QueueAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613A41381370B00FEA73A /* NSMutableArray+QueueAdditions.m */; };
+		189613BE1381370B00FEA73A /* Perception.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613A71381370B00FEA73A /* Perception.m */; };
+		189613BF1381370B00FEA73A /* RootNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613A91381370B00FEA73A /* RootNode.m */; };
+		189613C01381370B00FEA73A /* RuleNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613AB1381370B00FEA73A /* RuleNode.m */; };
+		189613C11381370B00FEA73A /* StorageNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613AD1381370B00FEA73A /* StorageNode.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1896136D13811CFE00FEA73A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1896133C13811CFD00FEA73A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1896134413811CFD00FEA73A;
+			remoteInfo = SingleEmotion;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1896134513811CFD00FEA73A /* SingleEmotion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SingleEmotion.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1896134913811CFD00FEA73A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		1896134B13811CFD00FEA73A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1896134D13811CFD00FEA73A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		1896135113811CFD00FEA73A /* SingleEmotion-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SingleEmotion-Info.plist"; sourceTree = "<group>"; };
+		1896135313811CFD00FEA73A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1896135513811CFD00FEA73A /* SingleEmotion-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SingleEmotion-Prefix.pch"; sourceTree = "<group>"; };
+		1896135613811CFD00FEA73A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1896135813811CFD00FEA73A /* SingleEmotionAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SingleEmotionAppDelegate.h; sourceTree = "<group>"; };
+		1896135913811CFD00FEA73A /* SingleEmotionAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SingleEmotionAppDelegate.m; sourceTree = "<group>"; };
+		1896135C13811CFD00FEA73A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		1896135E13811CFD00FEA73A /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		1896135F13811CFD00FEA73A /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		1896136213811CFD00FEA73A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RootViewController.xib; sourceTree = "<group>"; };
+		1896136913811CFE00FEA73A /* SingleEmotionTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SingleEmotionTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1896137113811CFE00FEA73A /* SingleEmotionTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SingleEmotionTests-Info.plist"; sourceTree = "<group>"; };
+		1896137313811CFE00FEA73A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1896137513811CFE00FEA73A /* SingleEmotionTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SingleEmotionTests-Prefix.pch"; sourceTree = "<group>"; };
+		1896137613811CFE00FEA73A /* SingleEmotionTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SingleEmotionTests.h; sourceTree = "<group>"; };
+		1896137813811CFE00FEA73A /* SingleEmotionTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SingleEmotionTests.m; sourceTree = "<group>"; };
+		189613831381370B00FEA73A /* Action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Action.h; sourceTree = "<group>"; };
+		189613841381370B00FEA73A /* Action.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Action.m; sourceTree = "<group>"; };
+		189613851381370B00FEA73A /* ActionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionNode.h; sourceTree = "<group>"; };
+		189613861381370B00FEA73A /* ActionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionNode.m; sourceTree = "<group>"; };
+		189613871381370B00FEA73A /* Brain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Brain.h; sourceTree = "<group>"; };
+		189613881381370B00FEA73A /* Brain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Brain.m; sourceTree = "<group>"; };
+		189613891381370B00FEA73A /* CnotiMind-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CnotiMind-Prefix.pch"; sourceTree = "<group>"; };
+		1896138A1381370B00FEA73A /* CnotiMind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CnotiMind.h; sourceTree = "<group>"; };
+		1896138B1381370B00FEA73A /* CnotiMind.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CnotiMind.m; sourceTree = "<group>"; };
+		1896138C1381370B00FEA73A /* ConditionDataMiningNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionDataMiningNode.h; sourceTree = "<group>"; };
+		1896138D1381370B00FEA73A /* ConditionDataMiningNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionDataMiningNode.m; sourceTree = "<group>"; };
+		1896138E1381370B00FEA73A /* ConditionEmotionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionEmotionNode.h; sourceTree = "<group>"; };
+		1896138F1381370B00FEA73A /* ConditionEmotionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionEmotionNode.m; sourceTree = "<group>"; };
+		189613901381370B00FEA73A /* ConditionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionNode.h; sourceTree = "<group>"; };
+		189613911381370B00FEA73A /* ConditionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionNode.m; sourceTree = "<group>"; };
+		189613921381370B00FEA73A /* ConditionPerceptionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionPerceptionNode.h; sourceTree = "<group>"; };
+		189613931381370B00FEA73A /* ConditionPerceptionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionPerceptionNode.m; sourceTree = "<group>"; };
+		189613941381370B00FEA73A /* ConditionVariableNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionVariableNode.h; sourceTree = "<group>"; };
+		189613951381370B00FEA73A /* ConditionVariableNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionVariableNode.m; sourceTree = "<group>"; };
+		189613961381370B00FEA73A /* DataMiningNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataMiningNode.h; sourceTree = "<group>"; };
+		189613971381370B00FEA73A /* DataMiningNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataMiningNode.m; sourceTree = "<group>"; };
+		189613981381370B00FEA73A /* Emotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Emotion.h; sourceTree = "<group>"; };
+		189613991381370B00FEA73A /* Emotion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Emotion.m; sourceTree = "<group>"; };
+		1896139A1381370B00FEA73A /* EmotionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmotionNode.h; sourceTree = "<group>"; };
+		1896139B1381370B00FEA73A /* EmotionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmotionNode.m; sourceTree = "<group>"; };
+		1896139D1381370B00FEA73A /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
+		1896139E1381370B00FEA73A /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
+		1896139F1381370B00FEA73A /* MemoryEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryEvent.h; sourceTree = "<group>"; };
+		189613A01381370B00FEA73A /* MemoryEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemoryEvent.m; sourceTree = "<group>"; };
+		189613A11381370B00FEA73A /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
+		189613A21381370B00FEA73A /* Node.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Node.m; sourceTree = "<group>"; };
+		189613A31381370B00FEA73A /* NSMutableArray+QueueAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+QueueAdditions.h"; sourceTree = "<group>"; };
+		189613A41381370B00FEA73A /* NSMutableArray+QueueAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+QueueAdditions.m"; sourceTree = "<group>"; };
+		189613A51381370B00FEA73A /* ObjectToXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectToXML.h; sourceTree = "<group>"; };
+		189613A61381370B00FEA73A /* Perception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Perception.h; sourceTree = "<group>"; };
+		189613A71381370B00FEA73A /* Perception.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Perception.m; sourceTree = "<group>"; };
+		189613A81381370B00FEA73A /* RootNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootNode.h; sourceTree = "<group>"; };
+		189613A91381370B00FEA73A /* RootNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootNode.m; sourceTree = "<group>"; };
+		189613AA1381370B00FEA73A /* RuleNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuleNode.h; sourceTree = "<group>"; };
+		189613AB1381370B00FEA73A /* RuleNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RuleNode.m; sourceTree = "<group>"; };
+		189613AC1381370B00FEA73A /* StorageNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorageNode.h; sourceTree = "<group>"; };
+		189613AD1381370B00FEA73A /* StorageNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorageNode.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1896134213811CFD00FEA73A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1896134A13811CFD00FEA73A /* UIKit.framework in Frameworks */,
+				1896134C13811CFD00FEA73A /* Foundation.framework in Frameworks */,
+				1896134E13811CFD00FEA73A /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1896136513811CFE00FEA73A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1896136A13811CFE00FEA73A /* UIKit.framework in Frameworks */,
+				1896136B13811CFE00FEA73A /* Foundation.framework in Frameworks */,
+				1896136C13811CFE00FEA73A /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1896133A13811CFD00FEA73A = {
+			isa = PBXGroup;
+			children = (
+				189613821381370B00FEA73A /* CnotiMind */,
+				1896139C1381370B00FEA73A /* GDataXML */,
+				1896134F13811CFD00FEA73A /* SingleEmotion */,
+				1896136F13811CFE00FEA73A /* SingleEmotionTests */,
+				1896134813811CFD00FEA73A /* Frameworks */,
+				1896134613811CFD00FEA73A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1896134613811CFD00FEA73A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1896134513811CFD00FEA73A /* SingleEmotion.app */,
+				1896136913811CFE00FEA73A /* SingleEmotionTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1896134813811CFD00FEA73A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1896134913811CFD00FEA73A /* UIKit.framework */,
+				1896134B13811CFD00FEA73A /* Foundation.framework */,
+				1896134D13811CFD00FEA73A /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1896134F13811CFD00FEA73A /* SingleEmotion */ = {
+			isa = PBXGroup;
+			children = (
+				1896135813811CFD00FEA73A /* SingleEmotionAppDelegate.h */,
+				1896135913811CFD00FEA73A /* SingleEmotionAppDelegate.m */,
+				1896135B13811CFD00FEA73A /* MainWindow.xib */,
+				1896135E13811CFD00FEA73A /* RootViewController.h */,
+				1896135F13811CFD00FEA73A /* RootViewController.m */,
+				1896136113811CFD00FEA73A /* RootViewController.xib */,
+				1896135013811CFD00FEA73A /* Supporting Files */,
+			);
+			path = SingleEmotion;
+			sourceTree = "<group>";
+		};
+		1896135013811CFD00FEA73A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1896135113811CFD00FEA73A /* SingleEmotion-Info.plist */,
+				1896135213811CFD00FEA73A /* InfoPlist.strings */,
+				1896135513811CFD00FEA73A /* SingleEmotion-Prefix.pch */,
+				1896135613811CFD00FEA73A /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1896136F13811CFE00FEA73A /* SingleEmotionTests */ = {
+			isa = PBXGroup;
+			children = (
+				1896137613811CFE00FEA73A /* SingleEmotionTests.h */,
+				1896137813811CFE00FEA73A /* SingleEmotionTests.m */,
+				1896137013811CFE00FEA73A /* Supporting Files */,
+			);
+			path = SingleEmotionTests;
+			sourceTree = "<group>";
+		};
+		1896137013811CFE00FEA73A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1896137113811CFE00FEA73A /* SingleEmotionTests-Info.plist */,
+				1896137213811CFE00FEA73A /* InfoPlist.strings */,
+				1896137513811CFE00FEA73A /* SingleEmotionTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		189613821381370B00FEA73A /* CnotiMind */ = {
+			isa = PBXGroup;
+			children = (
+				189613C213815B2200FEA73A /* Rules */,
+				189613831381370B00FEA73A /* Action.h */,
+				189613841381370B00FEA73A /* Action.m */,
+				189613871381370B00FEA73A /* Brain.h */,
+				189613881381370B00FEA73A /* Brain.m */,
+				189613891381370B00FEA73A /* CnotiMind-Prefix.pch */,
+				1896138A1381370B00FEA73A /* CnotiMind.h */,
+				1896138B1381370B00FEA73A /* CnotiMind.m */,
+				189613981381370B00FEA73A /* Emotion.h */,
+				189613991381370B00FEA73A /* Emotion.m */,
+				1896139A1381370B00FEA73A /* EmotionNode.h */,
+				1896139B1381370B00FEA73A /* EmotionNode.m */,
+				1896139F1381370B00FEA73A /* MemoryEvent.h */,
+				189613A01381370B00FEA73A /* MemoryEvent.m */,
+				189613A11381370B00FEA73A /* Node.h */,
+				189613A21381370B00FEA73A /* Node.m */,
+				189613A31381370B00FEA73A /* NSMutableArray+QueueAdditions.h */,
+				189613A41381370B00FEA73A /* NSMutableArray+QueueAdditions.m */,
+				189613A51381370B00FEA73A /* ObjectToXML.h */,
+				189613A61381370B00FEA73A /* Perception.h */,
+				189613A71381370B00FEA73A /* Perception.m */,
+			);
+			name = CnotiMind;
+			path = ../../src_ios/CnotiMind;
+			sourceTree = "<group>";
+		};
+		1896139C1381370B00FEA73A /* GDataXML */ = {
+			isa = PBXGroup;
+			children = (
+				1896139D1381370B00FEA73A /* GDataXMLNode.h */,
+				1896139E1381370B00FEA73A /* GDataXMLNode.m */,
+			);
+			name = GDataXML;
+			path = ../../src_ios/CnotiMind/GDataXML;
+			sourceTree = "<group>";
+		};
+		189613C213815B2200FEA73A /* Rules */ = {
+			isa = PBXGroup;
+			children = (
+				189613851381370B00FEA73A /* ActionNode.h */,
+				189613861381370B00FEA73A /* ActionNode.m */,
+				189613A81381370B00FEA73A /* RootNode.h */,
+				189613A91381370B00FEA73A /* RootNode.m */,
+				189613AA1381370B00FEA73A /* RuleNode.h */,
+				189613AB1381370B00FEA73A /* RuleNode.m */,
+				189613AC1381370B00FEA73A /* StorageNode.h */,
+				189613AD1381370B00FEA73A /* StorageNode.m */,
+				189613961381370B00FEA73A /* DataMiningNode.h */,
+				189613971381370B00FEA73A /* DataMiningNode.m */,
+				189613941381370B00FEA73A /* ConditionVariableNode.h */,
+				189613951381370B00FEA73A /* ConditionVariableNode.m */,
+				189613901381370B00FEA73A /* ConditionNode.h */,
+				189613911381370B00FEA73A /* ConditionNode.m */,
+				189613921381370B00FEA73A /* ConditionPerceptionNode.h */,
+				189613931381370B00FEA73A /* ConditionPerceptionNode.m */,
+				1896138C1381370B00FEA73A /* ConditionDataMiningNode.h */,
+				1896138D1381370B00FEA73A /* ConditionDataMiningNode.m */,
+				1896138E1381370B00FEA73A /* ConditionEmotionNode.h */,
+				1896138F1381370B00FEA73A /* ConditionEmotionNode.m */,
+			);
+			name = Rules;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1896134413811CFD00FEA73A /* SingleEmotion */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1896137C13811CFE00FEA73A /* Build configuration list for PBXNativeTarget "SingleEmotion" */;
+			buildPhases = (
+				1896134113811CFD00FEA73A /* Sources */,
+				1896134213811CFD00FEA73A /* Frameworks */,
+				1896134313811CFD00FEA73A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SingleEmotion;
+			productName = SingleEmotion;
+			productReference = 1896134513811CFD00FEA73A /* SingleEmotion.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1896136813811CFE00FEA73A /* SingleEmotionTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1896137F13811CFE00FEA73A /* Build configuration list for PBXNativeTarget "SingleEmotionTests" */;
+			buildPhases = (
+				1896136413811CFE00FEA73A /* Sources */,
+				1896136513811CFE00FEA73A /* Frameworks */,
+				1896136613811CFE00FEA73A /* Resources */,
+				1896136713811CFE00FEA73A /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1896136E13811CFE00FEA73A /* PBXTargetDependency */,
+			);
+			name = SingleEmotionTests;
+			productName = SingleEmotionTests;
+			productReference = 1896136913811CFE00FEA73A /* SingleEmotionTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1896133C13811CFD00FEA73A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "Universidade de Coimbra";
+			};
+			buildConfigurationList = 1896133F13811CFD00FEA73A /* Build configuration list for PBXProject "SingleEmotion" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 1896133A13811CFD00FEA73A;
+			productRefGroup = 1896134613811CFD00FEA73A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1896134413811CFD00FEA73A /* SingleEmotion */,
+				1896136813811CFE00FEA73A /* SingleEmotionTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1896134313811CFD00FEA73A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1896135413811CFD00FEA73A /* InfoPlist.strings in Resources */,
+				1896135D13811CFD00FEA73A /* MainWindow.xib in Resources */,
+				1896136313811CFD00FEA73A /* RootViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1896136613811CFE00FEA73A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1896137413811CFE00FEA73A /* InfoPlist.strings in Resources */,
+				1896137713811CFE00FEA73A /* SingleEmotionTests.h in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1896136713811CFE00FEA73A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1896134113811CFD00FEA73A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1896135713811CFD00FEA73A /* main.m in Sources */,
+				1896135A13811CFD00FEA73A /* SingleEmotionAppDelegate.m in Sources */,
+				1896136013811CFD00FEA73A /* RootViewController.m in Sources */,
+				189613AE1381370B00FEA73A /* Action.m in Sources */,
+				189613AF1381370B00FEA73A /* ActionNode.m in Sources */,
+				189613B01381370B00FEA73A /* Brain.m in Sources */,
+				189613B11381370B00FEA73A /* CnotiMind.m in Sources */,
+				189613B21381370B00FEA73A /* ConditionDataMiningNode.m in Sources */,
+				189613B31381370B00FEA73A /* ConditionEmotionNode.m in Sources */,
+				189613B41381370B00FEA73A /* ConditionNode.m in Sources */,
+				189613B51381370B00FEA73A /* ConditionPerceptionNode.m in Sources */,
+				189613B61381370B00FEA73A /* ConditionVariableNode.m in Sources */,
+				189613B71381370B00FEA73A /* DataMiningNode.m in Sources */,
+				189613B81381370B00FEA73A /* Emotion.m in Sources */,
+				189613B91381370B00FEA73A /* EmotionNode.m in Sources */,
+				189613BA1381370B00FEA73A /* GDataXMLNode.m in Sources */,
+				189613BB1381370B00FEA73A /* MemoryEvent.m in Sources */,
+				189613BC1381370B00FEA73A /* Node.m in Sources */,
+				189613BD1381370B00FEA73A /* NSMutableArray+QueueAdditions.m in Sources */,
+				189613BE1381370B00FEA73A /* Perception.m in Sources */,
+				189613BF1381370B00FEA73A /* RootNode.m in Sources */,
+				189613C01381370B00FEA73A /* RuleNode.m in Sources */,
+				189613C11381370B00FEA73A /* StorageNode.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1896136413811CFE00FEA73A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1896137913811CFE00FEA73A /* SingleEmotionTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1896136E13811CFE00FEA73A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1896134413811CFD00FEA73A /* SingleEmotion */;
+			targetProxy = 1896136D13811CFE00FEA73A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		1896135213811CFD00FEA73A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1896135313811CFD00FEA73A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		1896135B13811CFD00FEA73A /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1896135C13811CFD00FEA73A /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		1896136113811CFD00FEA73A /* RootViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1896136213811CFD00FEA73A /* en */,
+			);
+			name = RootViewController.xib;
+			sourceTree = "<group>";
+		};
+		1896137213811CFE00FEA73A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1896137313811CFE00FEA73A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1896137A13811CFE00FEA73A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = "-lxml2";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		1896137B13811CFE00FEA73A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = "-lxml2";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		1896137D13811CFE00FEA73A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SingleEmotion/SingleEmotion-Prefix.pch";
+				HEADER_SEARCH_PATHS = "/usr/include/libxml2/**";
+				INFOPLIST_FILE = "SingleEmotion/SingleEmotion-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		1896137E13811CFE00FEA73A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SingleEmotion/SingleEmotion-Prefix.pch";
+				HEADER_SEARCH_PATHS = "/usr/include/libxml2/**";
+				INFOPLIST_FILE = "SingleEmotion/SingleEmotion-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		1896138013811CFE00FEA73A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SingleEmotion.app/SingleEmotion";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SingleEmotionTests/SingleEmotionTests-Prefix.pch";
+				INFOPLIST_FILE = "SingleEmotionTests/SingleEmotionTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		1896138113811CFE00FEA73A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SingleEmotion.app/SingleEmotion";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SingleEmotionTests/SingleEmotionTests-Prefix.pch";
+				INFOPLIST_FILE = "SingleEmotionTests/SingleEmotionTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1896133F13811CFD00FEA73A /* Build configuration list for PBXProject "SingleEmotion" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1896137A13811CFE00FEA73A /* Debug */,
+				1896137B13811CFE00FEA73A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1896137C13811CFE00FEA73A /* Build configuration list for PBXNativeTarget "SingleEmotion" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1896137D13811CFE00FEA73A /* Debug */,
+				1896137E13811CFE00FEA73A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		1896137F13811CFE00FEA73A /* Build configuration list for PBXNativeTarget "SingleEmotionTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1896138013811CFE00FEA73A /* Debug */,
+				1896138113811CFE00FEA73A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1896133C13811CFD00FEA73A /* Project object */;
+}
