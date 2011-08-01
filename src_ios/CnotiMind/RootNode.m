@@ -5,9 +5,7 @@
 
 #import "RootNode.h"
 
-
 @implementation RootNode
-
 
 - (id) initWithBrainAndParent:(Brain*)aBrain parent:(id)aParent
 {
@@ -41,7 +39,7 @@
 {
     NSString* info = [NSString stringWithFormat:@""];
 //    NSString* space = [self space:aDepth];
-    NSLog(@"RootNode: info: %@", [super info:aDepth]);
+    DLog(@"RootNode: info: %@", [super info:1]);
     info = [info stringByAppendingFormat:@"Root%@", [super info:aDepth]];
     
     return info;

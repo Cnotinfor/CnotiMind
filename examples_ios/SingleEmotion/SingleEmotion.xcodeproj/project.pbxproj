@@ -55,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		184353CA13E2BDDD0092AFBD /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		1895305513E1BE9700B41045 /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		1896134513811CFD00FEA73A /* SingleEmotion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SingleEmotion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1896134913811CFD00FEA73A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -178,6 +179,7 @@
 		1896134F13811CFD00FEA73A /* SingleEmotion */ = {
 			isa = PBXGroup;
 			children = (
+				184353CA13E2BDDD0092AFBD /* Macros.h */,
 				1896135813811CFD00FEA73A /* SingleEmotionAppDelegate.h */,
 				1896135913811CFD00FEA73A /* SingleEmotionAppDelegate.m */,
 				1896135B13811CFD00FEA73A /* MainWindow.xib */,

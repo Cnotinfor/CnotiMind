@@ -180,13 +180,19 @@
     _parentNode = _currentNode;
     _currentNode = conditionPerceptionNode;
     
+    [rootNode insertChild:conditionPerceptionNode];
+    
     ConditionDataMiningNode* conditionDataMiningNode = [[ConditionDataMiningNode alloc] initWithKeyAndValueAndOperatorAndOperationAndMemoryAndVariableAndCompareValueBrainAndParent:@"last" value:@"Hello" operator:ConditionOperatorUndefined operation:DMO_Undefined memory:UndefinedMemory variable:@"" compareValue:@"" brain:self parent:conditionPerceptionNode];
     _parentNode = _currentNode;
     _currentNode = conditionDataMiningNode;
+
+    [conditionPerceptionNode insertChild:conditionDataMiningNode];
     
     ActionNode* actionNode = [[ActionNode alloc] initWithKeyAndValueAndBrainAndParent:@"Talk" value:@"Hi there!" brain:self parent:conditionDataMiningNode];
     _parentNode = _currentNode;
     _currentNode = actionNode;
+    
+    [conditionDataMiningNode insertChild:actionNode];
     
     _rules = rootNode;
     
@@ -954,17 +960,13 @@
 
 - (void) run
 {        
-    NSLog(@"brain running...");
+    DLog(@"brain running...");
     
     int nEmotions;
     nEmotions = [_emotionsChanged count];
 
-    
-    NSLog(@"---1");
     // Execute the rules
     if (_rules!=nil) {
-        
-        NSLog(@"---2");
         [_rules info:1];
         [_rules exec];        
     }

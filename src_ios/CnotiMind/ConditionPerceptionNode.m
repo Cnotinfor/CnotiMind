@@ -27,10 +27,12 @@
 
 - (void) exec
 {
+    DLog(@"TETE");
+    
     if ([self isTrue]) {
-        NSMutableDictionary* variables = [[NSDictionary alloc] init];
+        NSMutableDictionary* variables = [[NSMutableDictionary alloc] init];
         [variables setObject:_value forKey:@"[Perception.value]"];
-        
+        DLog(@"TETE 2");
         //  TODO
         [self execChildren:variables];
     }
@@ -39,6 +41,7 @@
 
 - (void) exec:(NSMutableDictionary*)aVariables
 {
+    DLog(@"TATA");
     if ([self isTrue]) {
         [aVariables setObject:_value forKey:@"[Perception.value]"];
         [self execChildren];
@@ -62,12 +65,14 @@
 - (BOOL) isTrue
 {
     
+    //  TODO
+    return TRUE;
+    
     // Check if there are perceptions to be processed in the brain
     if( [_brain.receivedPerceptions count]!=0 )
     {
         // Just test the first perception
         Perception* p = (Perception*)[_brain.receivedPerceptions objectAtIndex:0];
-        
         
         // Check if it is the percetion for this Node
         if( [p.name isEqual:_key] )

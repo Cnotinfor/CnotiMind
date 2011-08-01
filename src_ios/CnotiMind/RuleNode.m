@@ -176,30 +176,29 @@
 
 -(void) execChildren
 {
+    
+    DLog(@"RuleNode: execChildren: %@", children_);
     NSEnumerator* e = [children_ objectEnumerator];
     NSLog(@"RuleNode: execChildren: %@", e);
-    id object;
-    
-    while (object == [e nextObject]) {
-        RuleNode* node = (RuleNode*)object;
-        NSLog(@"RuleNode: node: %@", node);
 
-        [node exec];
+    id object;
+    while (object = [e nextObject]) {
+        
+        DLog(@"RuleNode: node: %@", object);
+        [object exec];
     }
 }
 
 
 - (void) execChildren:(NSMutableDictionary*)aVariables
 {
-    
     NSLog(@"RuleNode: execChildren");
     
     NSEnumerator* e = [children_ objectEnumerator];
     id object;
     
-    while (object == [e nextObject]) {
-        
-        NSLog(@"node exec");
+    while (object = [e nextObject]) {
+        DLog(@"node exec: %@", object);
         
         RuleNode* node = (RuleNode*)object;
         [node exec: aVariables];
@@ -210,15 +209,14 @@
 //  TODO
 - (void) exec
 {
-    NSLog(@"RuleNode: exec");
+    DLog(@"RuleNode: exec");
 }
 
 
 //  TODO
 - (void) exec:(NSMutableDictionary*)aVariables
 {
-
-
+    DLog(@"RuleNode: exec");
 }
 
 
@@ -258,16 +256,19 @@
  */
 - (NSString*) info:(int)aDepth
 {
-    NSString* info;
+    NSString* info = [NSString stringWithFormat:@""];
     NSString* space = [self space:aDepth];
     
     NSEnumerator* eChildren = [children_ objectEnumerator];
+    
+    DLog(@"RuleNode: info: 1");
     
     Node* objectNode;
     while (objectNode == [eChildren nextObject]) {
         info = [info stringByAppendingFormat:@"%@%@", space, [objectNode info:aDepth + 1]];
     }
     
+    DLog(@"RuleNode: info: 2");
     
     return info;
 }
