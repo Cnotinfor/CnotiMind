@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		184AEFC313E7129D00284F95 /* mozart_mind.xml in Resources */ = {isa = PBXBuildFile; fileRef = 184AEFBF13E7129D00284F95 /* mozart_mind.xml */; };
+		184AEFC413E7129D00284F95 /* mozart_rules.xml in Resources */ = {isa = PBXBuildFile; fileRef = 184AEFC013E7129D00284F95 /* mozart_rules.xml */; };
+		184AEFC513E7129D00284F95 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 184AEFC113E7129D00284F95 /* README */; };
+		184AEFC613E7129D00284F95 /* single_emotion_rules.xml in Resources */ = {isa = PBXBuildFile; fileRef = 184AEFC213E7129D00284F95 /* single_emotion_rules.xml */; };
 		1896134A13811CFD00FEA73A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1896134913811CFD00FEA73A /* UIKit.framework */; };
 		1896134C13811CFD00FEA73A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1896134B13811CFD00FEA73A /* Foundation.framework */; };
 		1896134E13811CFD00FEA73A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1896134D13811CFD00FEA73A /* CoreGraphics.framework */; };
@@ -19,9 +23,6 @@
 		1896136A13811CFE00FEA73A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1896134913811CFD00FEA73A /* UIKit.framework */; };
 		1896136B13811CFE00FEA73A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1896134B13811CFD00FEA73A /* Foundation.framework */; };
 		1896136C13811CFE00FEA73A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1896134D13811CFD00FEA73A /* CoreGraphics.framework */; };
-		1896137413811CFE00FEA73A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1896137213811CFE00FEA73A /* InfoPlist.strings */; };
-		1896137713811CFE00FEA73A /* SingleEmotionTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 1896137613811CFE00FEA73A /* SingleEmotionTests.h */; };
-		1896137913811CFE00FEA73A /* SingleEmotionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1896137813811CFE00FEA73A /* SingleEmotionTests.m */; };
 		189613AE1381370B00FEA73A /* Action.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613841381370B00FEA73A /* Action.m */; };
 		189613AF1381370B00FEA73A /* ActionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613861381370B00FEA73A /* ActionNode.m */; };
 		189613B01381370B00FEA73A /* Brain.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613881381370B00FEA73A /* Brain.m */; };
@@ -56,6 +57,10 @@
 
 /* Begin PBXFileReference section */
 		184353CA13E2BDDD0092AFBD /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
+		184AEFBF13E7129D00284F95 /* mozart_mind.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mozart_mind.xml; sourceTree = "<group>"; };
+		184AEFC013E7129D00284F95 /* mozart_rules.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mozart_rules.xml; sourceTree = "<group>"; };
+		184AEFC113E7129D00284F95 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		184AEFC213E7129D00284F95 /* single_emotion_rules.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = single_emotion_rules.xml; sourceTree = "<group>"; };
 		1895305513E1BE9700B41045 /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		1896134513811CFD00FEA73A /* SingleEmotion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SingleEmotion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1896134913811CFD00FEA73A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -72,11 +77,6 @@
 		1896135F13811CFD00FEA73A /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		1896136213811CFD00FEA73A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RootViewController.xib; sourceTree = "<group>"; };
 		1896136913811CFE00FEA73A /* SingleEmotionTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SingleEmotionTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1896137113811CFE00FEA73A /* SingleEmotionTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SingleEmotionTests-Info.plist"; sourceTree = "<group>"; };
-		1896137313811CFE00FEA73A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		1896137513811CFE00FEA73A /* SingleEmotionTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SingleEmotionTests-Prefix.pch"; sourceTree = "<group>"; };
-		1896137613811CFE00FEA73A /* SingleEmotionTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SingleEmotionTests.h; sourceTree = "<group>"; };
-		1896137813811CFE00FEA73A /* SingleEmotionTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SingleEmotionTests.m; sourceTree = "<group>"; };
 		189613831381370B00FEA73A /* Action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Action.h; sourceTree = "<group>"; };
 		189613841381370B00FEA73A /* Action.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Action.m; sourceTree = "<group>"; };
 		189613851381370B00FEA73A /* ActionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionNode.h; sourceTree = "<group>"; };
@@ -145,13 +145,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		184AEFBE13E7129D00284F95 /* xml */ = {
+			isa = PBXGroup;
+			children = (
+				184AEFBF13E7129D00284F95 /* mozart_mind.xml */,
+				184AEFC013E7129D00284F95 /* mozart_rules.xml */,
+				184AEFC113E7129D00284F95 /* README */,
+				184AEFC213E7129D00284F95 /* single_emotion_rules.xml */,
+			);
+			path = xml;
+			sourceTree = "<group>";
+		};
 		1896133A13811CFD00FEA73A = {
 			isa = PBXGroup;
 			children = (
 				189613821381370B00FEA73A /* CnotiMind */,
 				1896139C1381370B00FEA73A /* GDataXML */,
 				1896134F13811CFD00FEA73A /* SingleEmotion */,
-				1896136F13811CFE00FEA73A /* SingleEmotionTests */,
 				1896134813811CFD00FEA73A /* Frameworks */,
 				1896134613811CFD00FEA73A /* Products */,
 			);
@@ -179,6 +189,7 @@
 		1896134F13811CFD00FEA73A /* SingleEmotion */ = {
 			isa = PBXGroup;
 			children = (
+				184AEFBE13E7129D00284F95 /* xml */,
 				184353CA13E2BDDD0092AFBD /* Macros.h */,
 				1896135813811CFD00FEA73A /* SingleEmotionAppDelegate.h */,
 				1896135913811CFD00FEA73A /* SingleEmotionAppDelegate.m */,
@@ -198,26 +209,6 @@
 				1896135213811CFD00FEA73A /* InfoPlist.strings */,
 				1896135513811CFD00FEA73A /* SingleEmotion-Prefix.pch */,
 				1896135613811CFD00FEA73A /* main.m */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		1896136F13811CFE00FEA73A /* SingleEmotionTests */ = {
-			isa = PBXGroup;
-			children = (
-				1896137613811CFE00FEA73A /* SingleEmotionTests.h */,
-				1896137813811CFE00FEA73A /* SingleEmotionTests.m */,
-				1896137013811CFE00FEA73A /* Supporting Files */,
-			);
-			path = SingleEmotionTests;
-			sourceTree = "<group>";
-		};
-		1896137013811CFE00FEA73A /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				1896137113811CFE00FEA73A /* SingleEmotionTests-Info.plist */,
-				1896137213811CFE00FEA73A /* InfoPlist.strings */,
-				1896137513811CFE00FEA73A /* SingleEmotionTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -362,6 +353,10 @@
 				1896135413811CFD00FEA73A /* InfoPlist.strings in Resources */,
 				1896135D13811CFD00FEA73A /* MainWindow.xib in Resources */,
 				1896136313811CFD00FEA73A /* RootViewController.xib in Resources */,
+				184AEFC313E7129D00284F95 /* mozart_mind.xml in Resources */,
+				184AEFC413E7129D00284F95 /* mozart_rules.xml in Resources */,
+				184AEFC513E7129D00284F95 /* README in Resources */,
+				184AEFC613E7129D00284F95 /* single_emotion_rules.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,8 +364,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1896137413811CFE00FEA73A /* InfoPlist.strings in Resources */,
-				1896137713811CFE00FEA73A /* SingleEmotionTests.h in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,7 +420,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1896137913811CFE00FEA73A /* SingleEmotionTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,14 +456,6 @@
 				1896136213811CFD00FEA73A /* en */,
 			);
 			name = RootViewController.xib;
-			sourceTree = "<group>";
-		};
-		1896137213811CFE00FEA73A /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1896137313811CFE00FEA73A /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

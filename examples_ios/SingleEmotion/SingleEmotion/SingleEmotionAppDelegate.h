@@ -13,6 +13,9 @@
 #import "Action.h"
 #import "Emotion.h"
 
+#import "ConditionPerceptionNode.h"
+#import "RuleNode.h"
+
 
 @interface SingleEmotionAppDelegate : NSObject <UIApplicationDelegate> {
 
@@ -26,7 +29,8 @@
 
 - (IBAction) onClickButtonHello;
 
-- (void) actionReceived:(NSString*)aKey value:(NSString*)aValue;
+- (void) actionReceived;
+//- (void) actionReceived:(NSString*)aKey value:(NSString*)aValue;
 - (void) emotionReceived:(NSString*)aEmotion number:(NSNumber*)aValue;
 
 @end

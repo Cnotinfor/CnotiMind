@@ -43,6 +43,27 @@ enum DataMiningOperation
 };
 
 
+enum MathOperation
+{
+    MathOperationSum,
+    MathOperationMultiplication,
+    MathOperationDivision,
+    MathOperationRemainder,
+    MathOperationSubtraction,
+    MathOperationSquareRoot,
+    MathOperationUndefined
+};
+
+
+enum DeletePosition
+{
+    DeleteLast,
+    DeleteFirst,
+    DeleteItem, // Not implemente yeat
+    DeleteAll
+};
+
+
 @interface CnotiMind : NSObject {
     
 }

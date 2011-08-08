@@ -22,27 +22,53 @@
     if (self == [super init]) {
         _brain = [[Brain alloc] init];
         
-        [_brain loadXmlRules:@""];
-        
         //  load XML rulles;
+        DLog(@"--- load XML rulles ---");
+        [_brain loadXmlRules:@""];
+        DLog(@"--- start brain ---");
+        [_brain startThreadRun];
+        
     }
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(actionReceived:) 
+                                                 name:SEND_ACTION
+                                               object:nil];
+
     return self;
 }
 
 
 - (IBAction) onClickButtonHello
 {
-    NSLog(@"I clicked on the Button!");
-    Perception* p = [[Perception alloc] initWithNameAndAValue:@"User talk" value:@"Hello"];
+    DLog(@"I clicked on the Button!");
+
+    Perception* perception = [[Perception alloc] initWithNameAndAValue:@"User talk" value:@"Hello"];
+    [_brain receivePerception:perception];
     
-    [_brain receivePerception:p];
-    
-    //  return nil;
+//    //  print settings
+//    DLog(@"--- brain printSettings ---");
+//    [_brain printSettings];
+//    
+//    DLog(@"--- brain executeAction ---");
+//    [_brain executeAction:@"User Talk" value:@"BYE BYE!"];
+//    //  return nil;
 }
 
-- (void) actionReceived:(NSString*)aKey value:(NSString*)aValue
-{}
+
+- (void) actionReceived:(NSNotification*)aNotif
+{
+    
+    
+    DLog(@"actionReceived");
+    
+}
+
+//- (void) actionReceived:(NSString*)aKey value:(NSString*)aValue
+//{
+//    DLog(@"actionReceived");
+//    
+//}
 
 - (void) emotionReceived:(NSString*)aEmotion number:(NSNumber*)aValue
 {}
@@ -100,6 +126,7 @@
 {
     [_window release];
     [_navigationController release];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [super dealloc];
 }
 

@@ -44,7 +44,8 @@
 
 - (void) exec
 {
-
+    DLog(@" ConditionDataMining exec");
+    
     if ([self isTrue]) {
             
         if ([_variable length]==0) {
@@ -58,7 +59,6 @@
             [self execChildren:variables];
         }
     }
-
 }
 
 

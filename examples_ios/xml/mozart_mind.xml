@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- List of perceptions -->
+<!-- Things the agent perceives and can react to -->
+<Settings>
+	<Perception name="Add Note" type="string" />
+	<Perception name="Set Duration" type="int" />
+	<Perception name="Delete Note" />
+	<Perception name="User Talk" />
+
+	<!-- List of actions -->
+	<!-- Actions the agent can do -->
+	<Action name="Talk" />
+	<Action name="Think" />
+	<Action name="Information" />
+
+	<!-- List of emotions the agent has -->
+	<Emotion name="Joy" value="0" min="-10" max="10" decay="60" />
+</Settings>

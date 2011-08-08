@@ -27,12 +27,10 @@
 
 - (void) exec
 {
-    DLog(@"TETE");
-    
     if ([self isTrue]) {
         NSMutableDictionary* variables = [[NSMutableDictionary alloc] init];
         [variables setObject:_value forKey:@"[Perception.value]"];
-        DLog(@"TETE 2");
+
         //  TODO
         [self execChildren:variables];
     }

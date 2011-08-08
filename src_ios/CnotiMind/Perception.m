@@ -8,7 +8,6 @@
 
 #import "Perception.h"
 
-
 @implementation Perception
 
 @synthesize value = _value;
@@ -17,8 +16,8 @@
 - (id) init
 {
     if (self == [super init]) {
-        _name = [NSString stringWithFormat:@""];
-        _value = [NSNumber numberWithInt:0];
+        _name = [[NSString alloc] initWithString:@""];
+        _value = [[NSNumber alloc] initWithInt:0];
     }
     return self;
 }
@@ -26,13 +25,17 @@
 - (id) initWithNameAndAValue:(NSString*)aName value:(NSString*)aValue
 {
     if (self == [super init]) {
-        _name = [NSString stringWithFormat:@"%@",aName];
-        _value = [NSString stringWithFormat:@"%@",aValue];
+        _name = [[NSString alloc] initWithString:aName];
+        _value = [[NSNumber alloc] initWithInteger:[aValue intValue]];
     }
     return self;
 }
 
-
+- (void) dealloc
+{
+    [_name release];
+    [_value release];
+}
 
 
 @end

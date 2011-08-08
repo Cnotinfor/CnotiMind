@@ -22,13 +22,15 @@
 
 - (void) exec
 {
-    [_brain executeAction:_key value:_value]; 
+    DLog(@"ActionNode exec");
+//    [_brain executeAction:_key value:_value]; 
 }
 
 
 - (void) exec:(NSString*)aVariables
 {
-//    [_brain executeActionWithVariables:]; 
+    DLog(@"ActionNode exec");
+//    [_brain executeActionWithVariables:aVariables];
 }
 
 

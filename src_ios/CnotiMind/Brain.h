@@ -14,9 +14,15 @@
 #import "MemoryEvent.h"
 
 #import "ConditionDataMiningNode.h"
+#import "ActionNode.h"
 
 #import "CnotiMind.h"
 //#import "MemoryType.h"
+
+extern NSString* const SEND_ACTION;
+extern NSString* const SEND_EMOTIONAL_STATE;
+
+enum { HAS_DATA, NO_DATA };
 
 @interface Brain : NSObject {
     
@@ -29,7 +35,7 @@
     NSMutableArray* _emotions;
 
     //  QSemaphore _semaphoreBrain;
-    NSRecursiveLock* _semaphoreBrain;
+    NSConditionLock* _semaphoreBrain;
     
     NSMutableArray* _receivedPerceptions;
     NSMutableArray* _emotionsChanged;
@@ -46,7 +52,7 @@
 
 - (id) init;
 - (id) initWithPath:(NSString*)aPath;
-//- (IBAction) startThreadRun;
+- (IBAction) startThreadRun;
 
 - (BOOL) loadXmlSettings:(NSString*)aFilename;
 

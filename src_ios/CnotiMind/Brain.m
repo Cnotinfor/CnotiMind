@@ -22,17 +22,27 @@
 
 @implementation Brain
 
+NSString* const SEND_ACTION = @"SEND_ACTION";
+NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
+
 @synthesize emotions = _emotions;
 @synthesize receivedPerceptions = _receivedPerceptions;
 
 - (id) init
 {
     if (self == [super init]) {
+        _validPerceptions = [[NSMutableArray alloc] init];
+        _validActions = [[NSMutableArray alloc] init];
         _emotions = [[NSMutableArray alloc] init];
         _receivedPerceptions = [[NSMutableArray alloc] init];
         
-//        _semaphoreBrain = [[NSRecursiveLock alloc] init];       
-//        [NSThread detachNewThreadSelector:@selector(startThreadRun) toTarget:self withObject:nil];
+        _receivedPerceptions = [[NSMutableArray alloc] init];
+        _emotionsChanged = [[NSMutableArray alloc] init];
+        _longTermMemory = [[NSMutableArray alloc] init];
+        _workingMemory = [[NSMutableArray alloc] init];
+        
+        _semaphoreBrain = [[NSConditionLock alloc] initWithCondition:NO_DATA];       
+
     }
     return self;
 }
@@ -42,34 +52,29 @@
 {
     if (self == [super init]) {
         
-        _semaphoreBrain = [[NSLock alloc] init];
-    
+        _semaphoreBrain = [[NSConditionLock alloc] initWithCondition:NO_DATA];       
+        
+        
         //  [self loadXmlSettings:aPath];
         //  TODO
         //  [self initWithTarget:self selector:@selector(run) object:nil];
         //  [self run];
-
-//        [NSThread detachNewThreadSelector:@selector(startThreadRun) toTarget:self withObject:nil];
+        
+        //        [NSThread detachNewThreadSelector:@selector(startThreadRun) toTarget:self withObject:nil];
     }
     return self;
 }
 
 
-//- (IBAction) startThreadRun
-//{
-//    NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-//    // wait for 1 seconds before starting the thread, you don't have to do that. This is just an example how to stop the NSThread for some time  
-//    [NSThread sleepForTimeInterval:1];  
-//    [self performSelectorInBackground: @selector(run:) withObject:nil];  
-//    [pool release];
-//}
+- (IBAction) startThreadRun
+{
+    [NSThread detachNewThreadSelector:@selector(run) toTarget:self withObject:nil];
+}
 
 
 /**
  Load a XML file with settings.
- 
  This method can me called several times, append new settings to the Brain.
- 
  XML file can have Perceptions, Actions and Emotions
  */
 - (BOOL) loadXmlSettings:(NSString*)aFilename
@@ -77,8 +82,7 @@
     NSData *xmlData = [[NSMutableData alloc] initWithContentsOfFile:aFilename];
     NSError *error;
     GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:xmlData 
-														   options:0 error:&error];    
-    
+														   options:0 error:&error];
     if (error) {
         return false;
     }
@@ -142,7 +146,6 @@
                 
                 emotionsCounter++;
             }
-            
         }
     }
     
@@ -154,12 +157,14 @@
 
 - (void) addValidPerception:(NSString*)aPerception
 {
+    DLog(@"addValidPerception: %@ <-",aPerception);
     [_validPerceptions enqueue:aPerception];
 }
 
 
 - (void) addValidAction:(NSString*)aAction
 {
+    DLog(@"addValidAction: %@ <-",aAction);
     [_validActions enqueue:aAction];
 }
 
@@ -185,7 +190,7 @@
     ConditionDataMiningNode* conditionDataMiningNode = [[ConditionDataMiningNode alloc] initWithKeyAndValueAndOperatorAndOperationAndMemoryAndVariableAndCompareValueBrainAndParent:@"last" value:@"Hello" operator:ConditionOperatorUndefined operation:DMO_Undefined memory:UndefinedMemory variable:@"" compareValue:@"" brain:self parent:conditionPerceptionNode];
     _parentNode = _currentNode;
     _currentNode = conditionDataMiningNode;
-
+    
     [conditionPerceptionNode insertChild:conditionDataMiningNode];
     
     ActionNode* actionNode = [[ActionNode alloc] initWithKeyAndValueAndBrainAndParent:@"Talk" value:@"Hi there!" brain:self parent:conditionDataMiningNode];
@@ -196,9 +201,13 @@
     
     _rules = rootNode;
     
-    NSLog(@"Brain: loadXmlRules");
+    DLog(@"Brain loadXmlRules finished");
     
-//    [actionNode exec];
+    DLog(@"Brain add valid perceptions");
+    [self addValidPerception:@"User Talk"];
+    [self addValidAction:@"User Talk"];
+    
+    //    [actionNode exec];
     
     
     //    NSData *xmlData = [[NSMutableData alloc] initWithContentsOfFile:aFilename];
@@ -315,9 +324,9 @@
         settings = [settings stringByAppendingString:@"No Perceptions defined\n"];            
     }
     else {
-        NSEnumerator* ePerceptions = [_workingMemory objectEnumerator];
+        NSEnumerator* ePerceptions = [_validPerceptions objectEnumerator];
         Perception* objectPerception;
-        while (objectPerception == [ePerceptions nextObject]) {
+        while (objectPerception = [ePerceptions nextObject]) {
             settings = [settings stringByAppendingFormat:@"%@", [objectPerception description]];
         }
     }
@@ -331,7 +340,7 @@
     else {
         NSEnumerator* eActions = [_validActions objectEnumerator];
         Perception* objectAction;
-        while (objectAction == [eActions nextObject]) {
+        while (objectAction = [eActions nextObject]) {
             settings = [settings stringByAppendingFormat:@"%@", [objectAction description]];
         }
     }
@@ -339,18 +348,18 @@
     
     settings = [settings stringByAppendingString:@"--- Emotions ---\n"];    
     
-    if ([_validActions count] == 0) {
+    if ([_emotions count] == 0) {
         settings = [settings stringByAppendingString:@"No Emotions defined\n"];            
     }
     else {
         NSEnumerator* eEmotions = [_emotions objectEnumerator];
         Perception* objectEmotion;
-        while (objectEmotion == [eEmotions nextObject]) {
+        while (objectEmotion = [eEmotions nextObject]) {
             settings = [settings stringByAppendingFormat:@"%@", [objectEmotion description]];
         }
     }
     
-    NSLog(@"--- %@", settings);
+    DLog(@"printSettings: %@", settings);
 }
 
 
@@ -364,8 +373,12 @@
 {
     [_receivedPerceptions enqueue:aPerception];
     
+//    [_semaphoreBrain lockWhenCondition:OPERATION_FINISHED];
+    [_semaphoreBrain lockWhenCondition:NO_DATA];
+    [_semaphoreBrain unlockWithCondition:HAS_DATA];
+    
     //  Trigger the brain
-    [self run];
+//    [self run];
 }
 
 
@@ -376,26 +389,20 @@
 }
 
 
-//  TODO (just check if it's ok)
 - (void) sendAction:(NSString*)aKey value:(NSString*)aValue
 {
-    
     NSMutableDictionary* action = [[NSMutableDictionary alloc] init];
     [action setObject:aValue forKey:aKey];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"SEND_ACTION" object:action];
-    
+    [[NSNotificationCenter defaultCenter] postNotificationName:SEND_ACTION object:action];
 }
 
 
-//  TODO (just check if it's ok)
 - (void) sendEmotionalState:(NSString*)aKey value:(NSString*)aValue
 {
     NSMutableDictionary* action = [[NSMutableDictionary alloc] init];
     [action setObject:aValue forKey:aKey];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"SEND_EMOTIONAL_STATE" object:action];  
+    [[NSNotificationCenter defaultCenter] postNotificationName:SEND_EMOTIONAL_STATE object:action];  
 }
-
-
 
 
 - (void) updateEmotionValue:(NSString*)aEmotionName variation:(NSNumber*)aVariation
@@ -434,7 +441,7 @@
     //  TODO: send signal
     NSMutableDictionary* action = [[NSMutableDictionary alloc] init];
     [action setObject:aValue forKey:aKey];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"EXECUTE_ACTION" object:action];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SEND_ACTION" object:action];
 }
 
 
@@ -960,38 +967,51 @@
 
 - (void) run
 {        
-    DLog(@"brain running...");
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
-    int nEmotions;
-    nEmotions = [_emotionsChanged count];
+    while (true) {
+        
+        [_semaphoreBrain lockWhenCondition:HAS_DATA];
 
-    // Execute the rules
-    if (_rules!=nil) {
-        [_rules info:1];
-        [_rules exec];        
-    }
-    
-    // remove the emotions changed since the last rules exection
-    // if new emotions were added during the rules execution, they are not removed,
-    // so that in the next iteration they can be handled
-    for(int i = 0; i < nEmotions; i++)
-    {
-        NSString* emotionName = [_emotionsChanged dequeue];
+        DLog(@"...brain running...");
         
-        Emotion* e = [[Emotion alloc] init];
+        int nEmotions;
+        nEmotions = [_emotionsChanged count];
         
-        for (Emotion* objectE in _emotions) {
-            if ([[objectE key] isEqual:emotionName]) {
-                e = objectE;
+        // Execute the rules
+        if (_rules!=nil) {
+            //  [_rules info:1];
+            [_rules exec];       
+        }
+        
+        // remove the emotions changed since the last rules exection
+        // if new emotions were added during the rules execution, they are not removed,
+        // so that in the next iteration they can be handled
+        for(int i = 0; i < nEmotions; i++)
+        {
+            NSString* emotionName = [_emotionsChanged dequeue];
+            
+            Emotion* e = [[Emotion alloc] init];
+            
+            for (Emotion* objectE in _emotions) {
+                if ([[objectE key] isEqual:emotionName]) {
+                    e = objectE;
+                }
             }
         }
+        
+        // Remove first perception added.
+        if( [_receivedPerceptions count] != 0 )
+        {
+            Perception* p = [_receivedPerceptions dequeue];
+            DLog(@"dequeue from _receivedPerceptions: %@", [p name]);
+        }
+
+        [_semaphoreBrain unlockWithCondition:NO_DATA];
+        
     }
     
-    // Remove first perception added.
-    if( [_receivedPerceptions count] != 0 )
-    {
-        Perception* p = [_receivedPerceptions dequeue];
-    }
+    [pool release];
 }
 
 
