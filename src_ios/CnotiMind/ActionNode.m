@@ -14,9 +14,15 @@
 @implementation ActionNode
 
 
-- (id) initWithKeyAndValueAndBrainAndParent: (NSString*)aKey value:(NSString*)aValue brain:(Brain*)aBrain parent:(id)aParent
+- (id) initWithNameAndValueAndBrainAndParent: (NSString*)aName value:(NSString*)aValue brain:(Brain*)aBrain parent:(id)aParent
 {
-    return [super initWithKeyAndValueAndBrainAndParent:aKey value:aValue brain:aBrain parent:aParent];
+//    return [super initWithKeyAndValueAndBrainAndParent:aKey value:aValue brain:aBrain parent:aParent];
+    if (self = [super initWithBrainAndParent:aBrain parent:aParent]) {
+        _name = [NSString stringWithFormat:@"", aName];
+        _value = [NSString stringWithFormat:@"", aValue];
+    }
+    
+    return self;
 }
 
 
@@ -30,7 +36,8 @@
 - (void) exec:(NSString*)aVariables
 {
     DLog(@"ActionNode exec");
-//    [_brain executeActionWithVariables:aVariables];
+
+    [_brain executeAction:_name value:_value];
 }
 
 
@@ -39,7 +46,7 @@
     NSString* info = [NSString stringWithFormat:@""];
     NSString* space = [self space:aDepth];
 
-    info = [info stringByAppendingFormat:@"%@ Action (%@) value= ", space, _key, _value];
+    info = [info stringByAppendingFormat:@"%@ Action (%@) value= ", space, _name, _value];
     info = [info stringByAppendingFormat:@"%@", [super info:aDepth]];
     
     return info;

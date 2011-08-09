@@ -25,8 +25,8 @@
 @property (readwrite, assign) NSTimeInterval time;
 
 
-- (id) initWithKeyAndValue:(NSString*)aEvent value:(id)aValue;
-- (id) initWithKeyAndValueAndTime:(NSString*)aEvent value:(id)aValue time:(NSTimeInterval)aTime;
+- (id) initWithEventAndValue:(NSString*)aEvent value:(id)aValue;
+- (id) initWithEventAndValueAndTime:(NSString*)aEvent value:(id)aValue time:(NSTimeInterval)aTime;
 
 - (id) initWithPerception: (Perception*)aPerception;
 

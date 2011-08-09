@@ -12,7 +12,11 @@
 
 - (id) initWithKeyAndValueAndBrainAndParent: (NSString*)aKey value:(NSString*)aValue operator: (enum ConditionOperator)aOperator brain:(Brain*)aBrain parent:(id)aParent
 {
-    if (self == [super initWithKeyAndValueAndBrainAndParent:aKey value:aValue brain:aBrain parent:aParent]) {
+    if (self == [super initWithBrainAndParent:aBrain parent:aParent]) {
+        
+        
+        _key = aKey;
+        _value = aValue;
         
         // If not condition operator is set, it uses the Equal Operator
 		if(aOperator == ConditionOperatorUndefined)

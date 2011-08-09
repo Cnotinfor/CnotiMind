@@ -9,7 +9,7 @@
 
 - (id) initWithBrainAndParent:(Brain*)aBrain parent:(id)aParent
 {
-    if (self == [self initWithKeyAndValueAndBrainAndParent:@"Root" value:@"" brain:aBrain parent:aParent]) {
+    if (self == [super initWithBrainAndParent:aBrain parent:aParent]) {
         
     }
     
@@ -38,7 +38,7 @@
 - (NSString*) info:(int)aDepth
 {
     NSString* info = [NSString stringWithFormat:@""];
-//    NSString* space = [self space:aDepth];
+
     DLog(@"RootNode: info: %@", [super info:aDepth]);
     info = [info stringByAppendingFormat:@"Root%@", [super info:aDepth]];
     

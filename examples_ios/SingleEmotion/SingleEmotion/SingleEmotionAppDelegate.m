@@ -10,7 +10,6 @@
 
 @implementation SingleEmotionAppDelegate
 
-
 @synthesize window=_window;
 
 @synthesize navigationController=_navigationController;
@@ -18,7 +17,6 @@
 
 - (id)init
 {
-    
     if (self == [super init]) {
         _brain = [[Brain alloc] init];
         
@@ -58,10 +56,7 @@
 
 - (void) actionReceived:(NSNotification*)aNotif
 {
-    
-    
     DLog(@"actionReceived");
-    
 }
 
 //- (void) actionReceived:(NSString*)aKey value:(NSString*)aValue
@@ -71,7 +66,9 @@
 //}
 
 - (void) emotionReceived:(NSString*)aEmotion number:(NSNumber*)aValue
-{}
+{
+
+}
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

@@ -27,7 +27,7 @@
 //    // Event
 //};
 
-@interface RuleNode : Node {
+@interface RuleNode : NSObject {
     
     // array of children
 	NSMutableArray *children_;
@@ -65,7 +65,9 @@
 /** initializes the node */
 -(id) init;
 -(id) initWithParent: (RuleNode*)aParent;
-- (id) initWithKeyAndValueAndBrainAndParent: (NSString*)aKey value:(NSString*)aValue brain:(Brain*)aBrain parent:(id)aParent;
+//-(id) initWithKeyAndValueAndBrainAndParent: (NSString*)aKey value:(NSString*)aValue brain:(Brain*)aBrain parent:(id)aParent;
+-(id) initWithBrainAndParent: (Brain*)aBrain parent:(id)aParent;
+
 
 -(void) addChild: (RuleNode*)node;
 -(void) insertChild:(RuleNode*)child;
@@ -84,6 +86,10 @@
 - (NSString*)variableToValue:(NSString*)aValue variables:(NSDictionary*)aVariables;
 
 - (NSString*) info:(int)aDepth;
+
+
+- (void) tagsToValue:(NSString*)aValue variables:(NSMutableDictionary*)aVariables;
+
 - (NSString*) space:(int)aDepth;
 
 - (void) childrenAlloc;

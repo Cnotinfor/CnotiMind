@@ -14,14 +14,16 @@
 @interface StorageNode : RuleNode {
     
     enum MemoryType _memory;
+    NSString* _event;
+    NSString* _value;
+    BOOL _clearStorage;
 }
 
-- (id) initWithKeyAndValueAndAndBrainAndParent: (NSString*)aKey 
-                                         value:(NSString*)aValue 
-                                        memory:(enum MemoryType)aMemory
-                                         brain:(Brain*)aBrain 
-                                        parent:(id)aParent;
-
+- (id) initWithEventAndValueAndAndBrainAndParent: (NSString*)aEvent 
+                                           value:(NSString*)aValue 
+                                          memory:(enum MemoryType)aMemory
+                                           brain:(Brain*)aBrain 
+                                          parent:(id)aParent;
 - (void) exec;
 - (void) exec:(NSMutableDictionary*)aVariables;
 

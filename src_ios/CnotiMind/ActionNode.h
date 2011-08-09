@@ -13,10 +13,11 @@
 @class Brain;
 
 @interface ActionNode : RuleNode {
-    
+    NSString* _name;
+    NSString* _value;
 }
 
-- (id) initWithKeyAndValueAndBrainAndParent: (NSString*)aKey value:(NSString*)aValue brain:(Brain*)aBrain parent:(id)aParent;
+- (id) initWithNameAndValueAndBrainAndParent: (NSString*)aName value:(NSString*)aValue brain:(Brain*)aBrain parent:(id)aParent;
 
 - (void) exec;
 - (void) exec:(NSString*)aVariables;

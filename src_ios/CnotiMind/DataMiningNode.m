@@ -14,21 +14,28 @@
 @implementation DataMiningNode
 
 
-- (id) initWithKeyAndValueAndOperatorAndBrainAndParent: (NSString*)aKey 
-                                                 value:(NSString*)aValue 
-                                              operator:(enum DataMiningOperation)aDataMiningOperation 
-                                                memory:(enum MemoryType)aMemory
-                                              variable:(NSString*)aVariable
-                                                 brain:(Brain*)aBrain 
-                                                parent:(id)aParent
+- (id) initWithEventAndValueAndOperatorAndBrainAndParent: (NSString*)aEvent 
+                                                   value:(NSString*)aValue 
+                                                operator:(enum DataMiningOperation)aDataMiningOperation 
+                                                  memory:(enum MemoryType)aMemory
+                                                variable:(NSString*)aVariable
+                                                   brain:(Brain*)aBrain 
+                                                  parent:(id)aParent
 {
     
-    if ( self == [super initWithKeyAndValueAndBrainAndParent:aKey value:aValue brain:aBrain parent:aParent] )
+    if ( self == [super initWithBrainAndParent:aBrain parent:aParent] )
     {
+        _event = aEvent;
+        _value = aValue;
+        
         _operation = aDataMiningOperation;
         _memory = aMemory;
         _variable = aVariable;
         _valueNumeric = [NSNumber numberWithFloat:[aValue floatValue]];
+        
+        
+//      _position( position ),
+//		_positionNumeric( position.toInt( &_isPositionNumeric ) )
     }
     return self;
 }
@@ -88,12 +95,12 @@
     // If the values are numbers it should use the
     if( _isValueNumeric )
     {
-        _result = [_brain dataMining: _operation event:_key value:_valueNumeric memoryType:_memory valid:&valid];
+        _result = [_brain dataMining: _operation event:_event value:_valueNumeric memoryType:_memory valid:&valid];
         return valid;
     }
     else // If the value is QString
     {
-        _result = [_brain dataMining: _operation event:_key value:_value memoryType:_memory valid:&valid];
+        _result = [_brain dataMining: _operation event:_event value:_value memoryType:_memory valid:&valid];
         
         return valid;
     }

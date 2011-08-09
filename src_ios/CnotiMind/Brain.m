@@ -193,7 +193,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     
     [conditionPerceptionNode insertChild:conditionDataMiningNode];
     
-    ActionNode* actionNode = [[ActionNode alloc] initWithKeyAndValueAndBrainAndParent:@"Talk" value:@"Hi there!" brain:self parent:conditionDataMiningNode];
+    ActionNode* actionNode = [[ActionNode alloc] initWithNameAndValueAndBrainAndParent:@"Talk" value:@"Hi there!" brain:self parent:conditionDataMiningNode];
     _parentNode = _currentNode;
     _currentNode = actionNode;
     
@@ -436,12 +436,26 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 }
 
 
-- (void) executeAction:(NSString*)aKey value:(NSString*)aValue
+- (void) executeActionWithVariables:(NSString*)aKey value:(NSString*)aValue
 {
     //  TODO: send signal
     NSMutableDictionary* action = [[NSMutableDictionary alloc] init];
     [action setObject:aValue forKey:aKey];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"SEND_ACTION" object:action];
+    
+    
+    DLog(@"TOOOOOO");
+}
+
+
+- (void)executeAction:(NSString *)aKey value:(NSString *)aValue
+{
+    NSMutableDictionary* action = [[NSMutableDictionary alloc] init];
+    [action setObject:aValue forKey:aKey];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:SEND_ACTION object:action];
+    
+    DLog(@"Signal SEND_ACTION sent");
 }
 
 

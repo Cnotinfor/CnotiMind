@@ -35,6 +35,8 @@
 {
     [_name release];
     [_value release];
+    
+    [super dealloc];
 }
 
 

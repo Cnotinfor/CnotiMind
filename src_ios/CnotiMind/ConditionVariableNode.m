@@ -66,10 +66,10 @@
     NSEnumerator* eVariables = [aVariables objectEnumerator];
     
     MemoryEvent* objectVariable;
-    while (objectVariable == [eVariables nextObject]) {
+    while (objectVariable = [eVariables nextObject]) {
         
         
-        NSString* k = [NSString stringWithFormat:@"%@", [objectVariable key]];
+        NSString* k = [NSString stringWithFormat:@"%@", [objectVariable event]];
         NSString* v = [NSString stringWithFormat:@"%@", [objectVariable value]];
 
         // Test if found the variable

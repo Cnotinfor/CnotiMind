@@ -39,7 +39,7 @@
 
 + (BOOL) insertEmotionIntoArray:(Emotion*)aEmotion array:(NSMutableArray*)aArray;
 
-- (NSString *)description;
+//- (NSString *)description;
 
 
 

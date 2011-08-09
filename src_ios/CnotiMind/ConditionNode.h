@@ -13,8 +13,10 @@
 
 @interface ConditionNode : RuleNode {
 
-    enum ConditionOperator _operator;
+    NSString* _key;
+    NSString* _value;
     
+    enum ConditionOperator _operator;
     
     float _valueNumeric;
     BOOL _isValueNumeric;

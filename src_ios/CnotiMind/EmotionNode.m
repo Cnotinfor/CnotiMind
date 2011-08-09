@@ -15,13 +15,15 @@
 
 
 
-- (id) initWithKeyAndValueAndAndBrainAndParent: (NSString*)aKey 
-                                         value:(NSString*)aValue 
-                                         brain:(Brain*)aBrain 
-                                        parent:(id)aParent
+- (id) initWithEmotionAndValueAndAndBrainAndParent:(NSString*)aEmotion 
+                                             value:(NSString*)aValue 
+                                             brain:(Brain*)aBrain 
+                                            parent:(id)aParent
 {
-    if ( self == [super initWithKeyAndValueAndBrainAndParent:aKey value:aValue brain:aBrain parent:aParent] ) {
+    if ( self == [super initWithBrainAndParent:aBrain parent:aParent] ) {
     
+        _emotion = aEmotion;
+        _value = aValue;
         _min = [NSNumber numberWithInt:INT_MIN];
         _max = [NSNumber numberWithInt:INT_MAX];
         
@@ -31,15 +33,17 @@
     return self;
 }
 
-- (id) initWithKeyAndValueAndAndBrainAndParent: (NSString*)aKey 
-                                         value:(NSString*)aValue 
-                                           max:(NSNumber*)aMax
-                                           min:(NSNumber*)aMin
-                                         brain:(Brain*)aBrain 
-                                        parent:(id)aParent
+- (id) initWithEmotionAndValueAndAndBrainAndParent:(NSString*)aEmotion 
+                                             value:(NSString*)aValue 
+                                               max:(NSNumber*)aMax
+                                               min:(NSNumber*)aMin
+                                             brain:(Brain*)aBrain 
+                                            parent:(id)aParent
 {
-    if ( self == [super initWithKeyAndValueAndBrainAndParent:aKey value:aValue brain:aBrain parent:aParent] ) {
-        
+    if ( self == [super initWithBrainAndParent:aBrain parent:aParent] ) {        
+        _emotion = aEmotion;
+        _value = aValue;
+
         _min = aMin;
         _max = aMax;
         
@@ -58,8 +62,8 @@
         return; // it doesn't do nothing
     }
     
-
-    [_brain updateEmotionValue:_key variation:_valueNumeric max:_max min:_min];
+    // TODO
+    [_brain updateEmotionValue:_emotion variation:_valueNumeric max:_max min:_min];
 }
 
 
@@ -83,7 +87,7 @@
         _valueNumeric = newValueInt;
     }
     
-    [_brain updateEmotionValue:_key variation:_valueNumeric max:_max min:_min];
+    [_brain updateEmotionValue:_emotion variation:_valueNumeric max:_max min:_min];
 }
 
 - (NSString*) info:(int)aDepth

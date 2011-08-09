@@ -16,15 +16,18 @@
 @implementation StorageNode
 
 
-- (id) initWithKeyAndValueAndAndBrainAndParent: (NSString*)aKey 
-                                         value:(NSString*)aValue 
-                                        memory:(enum MemoryType)aMemory
-                                         brain:(Brain*)aBrain 
-                                        parent:(id)aParent
+- (id) initWithEventAndValueAndAndBrainAndParent: (NSString*)aEvent 
+                                           value:(NSString*)aValue 
+                                          memory:(enum MemoryType)aMemory
+                                           brain:(Brain*)aBrain 
+                                          parent:(id)aParent
 {
-    if (self == [super initWithKeyAndValueAndBrainAndParent:aKey value:aValue brain:aBrain parent:aParent]) {
-    
+    if (self == [super initWithBrainAndParent:aBrain parent:aParent]) {
+        
         _memory = aMemory;
+        _event = aEvent;
+        _value = aValue;
+        _clearStorage = FALSE;
     }
 
     return self;
@@ -35,7 +38,7 @@
  */
 - (void) exec
 {
-    MemoryEvent* m = [[MemoryEvent alloc] initWithKeyAndValue:_key value:_value];
+    MemoryEvent* m = [[MemoryEvent alloc] initWithEventAndValue:_event value:_value];
     //  TODO
     //  [_brain storeToMemory:m memory:_memory];
 
@@ -44,7 +47,7 @@
 
 - (void) exec:(NSMutableDictionary*)aVariables
 {
-    MemoryEvent* m = [[MemoryEvent alloc] initWithKeyAndValue:_key value: [self variableToValue:_value variables:aVariables]];
+    MemoryEvent* m = [[MemoryEvent alloc] initWithEventAndValue:_event value: [self variableToValue:_value variables:aVariables]];
     //  TODO
     //  [_brain storeToMemory:m memory:_memory];
 
@@ -56,7 +59,7 @@
     NSString* info = [NSString stringWithFormat:@""];
     NSString* space = [self space:aDepth];
     
-    info = [info stringByAppendingFormat:@"%@ Storage key=%@ value=%@", space, _key, _value];
+    info = [info stringByAppendingFormat:@"%@ Storage key=%@ value=%@", space, _event, _value];
     
     return info;
 }
