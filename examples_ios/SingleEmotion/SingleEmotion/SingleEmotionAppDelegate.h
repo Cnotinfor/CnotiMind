@@ -18,19 +18,14 @@
 
 
 @interface SingleEmotionAppDelegate : NSObject <UIApplicationDelegate> {
-
-    IBOutlet UILabel* labelHelloField;
-
     Brain* _brain;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
 
 - (IBAction) onClickButtonHello;
 
-- (void) actionReceived;
-//- (void) actionReceived:(NSString*)aKey value:(NSString*)aValue;
+- (void) actionReceived:(NSNotification*)aNotif;
 - (void) emotionReceived:(NSString*)aEmotion number:(NSNumber*)aValue;
 
 @end

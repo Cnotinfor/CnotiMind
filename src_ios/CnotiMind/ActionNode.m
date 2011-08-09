@@ -18,8 +18,8 @@
 {
 //    return [super initWithKeyAndValueAndBrainAndParent:aKey value:aValue brain:aBrain parent:aParent];
     if (self = [super initWithBrainAndParent:aBrain parent:aParent]) {
-        _name = [NSString stringWithFormat:@"", aName];
-        _value = [NSString stringWithFormat:@"", aValue];
+        _name = aName;
+        _value = aValue;
     }
     
     return self;
@@ -35,7 +35,10 @@
 
 - (void) exec:(NSString*)aVariables
 {
+    
     DLog(@"ActionNode exec");
+    DLog(@"ActionNode exec name: %@", _name);
+    DLog(@"ActionNode exec value: %@", _value);
 
     [_brain executeAction:_name value:_value];
 }

@@ -455,7 +455,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 
     [[NSNotificationCenter defaultCenter] postNotificationName:SEND_ACTION object:action];
     
-    DLog(@"Signal SEND_ACTION sent");
+    DLog(@"Signal SEND_ACTION sent: %@", action);
 }
 
 

@@ -12,12 +12,12 @@
 
 @synthesize window=_window;
 
-@synthesize navigationController=_navigationController;
-
 
 - (id)init
 {
     if (self == [super init]) {
+        
+        
         _brain = [[Brain alloc] init];
         
         //  load XML rulles;
@@ -43,27 +43,21 @@
 
     Perception* perception = [[Perception alloc] initWithNameAndAValue:@"User talk" value:@"Hello"];
     [_brain receivePerception:perception];
-    
-//    //  print settings
-//    DLog(@"--- brain printSettings ---");
-//    [_brain printSettings];
-//    
-//    DLog(@"--- brain executeAction ---");
-//    [_brain executeAction:@"User Talk" value:@"BYE BYE!"];
-//    //  return nil;
 }
 
 
 - (void) actionReceived:(NSNotification*)aNotif
 {
-    DLog(@"actionReceived");
+    
+    NSArray* values = [[aNotif object] allValues]; 
+    for (id value in values) {
+        DLog(@"setText: %@", value);
+
+    }
+
+    DLog(@"actionReceived: %@", aNotif);
 }
 
-//- (void) actionReceived:(NSString*)aKey value:(NSString*)aValue
-//{
-//    DLog(@"actionReceived");
-//    
-//}
 
 - (void) emotionReceived:(NSString*)aEmotion number:(NSNumber*)aValue
 {
@@ -122,7 +116,6 @@
 - (void)dealloc
 {
     [_window release];
-    [_navigationController release];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [super dealloc];
 }
