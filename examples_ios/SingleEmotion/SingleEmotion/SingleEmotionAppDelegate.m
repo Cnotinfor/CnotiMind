@@ -46,7 +46,7 @@
 {
     DLog(@"I clicked on the Button!");
 
-    Perception* perception = [[Perception alloc] initWithNameAndAValue:@"User talk" value:@"Hello"];
+    Perception* perception = [[Perception alloc] initWithNameAndAValue:@"User talk" value:@"Bye"];
     [_brain receivePerception:perception];
     [_brain printSettings];
     [_brain printMemory:LongTermMemory];

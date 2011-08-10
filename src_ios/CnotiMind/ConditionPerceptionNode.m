@@ -29,7 +29,9 @@
 {
     if ([self isTrue]) {
         NSMutableDictionary* variables = [[NSMutableDictionary alloc] init];
-        [variables setObject:_value forKey:@"[Perception.value]"];
+
+        Perception* p = [[_brain receivedPerceptions] objectAtIndex:0];
+        [variables setObject:[p value] forKey:@"[Perception.value]"];
 
         //  TODO
         [self execChildren:variables];
@@ -39,7 +41,6 @@
 
 - (void) exec:(NSMutableDictionary*)aVariables
 {
-    DLog(@"TATA");
     if ([self isTrue]) {
         [aVariables setObject:_value forKey:@"[Perception.value]"];
         [self execChildren];

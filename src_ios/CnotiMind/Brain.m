@@ -184,41 +184,78 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     _currentNode = conditionPerceptionNode;
     [rootNode insertChild:conditionPerceptionNode];
     
-    
+    //    -----------
     ConditionDataMiningNode* conditionDataMiningNode = [[ConditionDataMiningNode alloc] initWithKeyAndValueAndOperatorAndOperationAndMemoryAndVariableAndCompareValueBrainAndParent:@"last" value:@"Hello" operator:ConditionOperatorUndefined operation:DMO_Last memory:LongTermMemory variable:@"" compareValue:@"" brain:self parent:conditionPerceptionNode];
     _parentNode = _currentNode;
     _currentNode = conditionDataMiningNode;
     [conditionPerceptionNode insertChild:conditionDataMiningNode];
     
-    
     ActionNode* actionNode = [[ActionNode alloc] initWithNameAndValueAndBrainAndParent:@"Talk" value:@"Again??" brain:self parent:conditionDataMiningNode];
     _parentNode = _currentNode;
     _currentNode = actionNode;
     [conditionDataMiningNode insertChild:actionNode];
+    //    -----------
     
-    
+    //    -----------
     ConditionDataMiningNode* conditionDataMiningNode2 = [[ConditionDataMiningNode alloc] initWithKeyAndValueAndOperatorAndOperationAndMemoryAndVariableAndCompareValueBrainAndParent:@"last" value:@"Bye" operator:ConditionOperatorUndefined operation:DMO_Last memory:UndefinedMemory variable:@"" compareValue:@"" brain:self parent:conditionPerceptionNode];
     _parentNode = _currentNode;
     _currentNode = conditionDataMiningNode2;
     [conditionPerceptionNode insertChild:conditionDataMiningNode2];
     
-    
-    ActionNode* actionNode2 = [[ActionNode alloc] initWithNameAndValueAndBrainAndParent:@"Talk" value:@"Hello" brain:self parent:conditionDataMiningNode];
+    ActionNode* actionNode2 = [[ActionNode alloc] initWithNameAndValueAndBrainAndParent:@"Talk" value:@"Hello" brain:self parent:conditionDataMiningNode2];
     _parentNode = _currentNode;
     _currentNode = actionNode2;
     [conditionDataMiningNode2 insertChild:actionNode2];
-    
     
     EmotionNode* emotionNode = [[EmotionNode alloc] initWithEmotionAndValueAndAndBrainAndParent:@"Happiness" value:@"1" max:5 min:INT8_MIN brain:self parent:conditionDataMiningNode2];
     _parentNode = _currentNode;
     _currentNode = emotionNode;
     [conditionDataMiningNode2 insertChild:emotionNode];
     
-    
     StorageNode* storageNode = [[StorageNode alloc] initWithEventAndValueAndAndBrainAndParent:@"User Talk" value:@"Hello" memory: LongTermMemory brain:self parent:conditionDataMiningNode2];
     _parentNode = _currentNode;
     _currentNode = storageNode;
     [conditionDataMiningNode2 insertChild:storageNode];
+    //    -----------    
+    
+    
+    //    -----------
+    ConditionDataMiningNode* conditionDataMiningNode3 = [[ConditionDataMiningNode alloc] initWithKeyAndValueAndBrainAndParent:@"count" value:@"0" operator:ConditionOperatorUndefined brain:self parent:conditionPerceptionNode];
+    _parentNode = _currentNode;
+    _currentNode = conditionDataMiningNode3;
+    [conditionPerceptionNode insertChild:conditionDataMiningNode3];
+    
+    ActionNode* actionNode3 = [[ActionNode alloc] initWithNameAndValueAndBrainAndParent:@"Talk" value:@"Hello" brain:self parent:conditionDataMiningNode3];
+    _parentNode = _currentNode;
+    _currentNode = actionNode3;
+    [conditionDataMiningNode3 insertChild:actionNode3];
+    
+    StorageNode* storageNode2 = [[StorageNode alloc] initWithEventAndValueAndAndBrainAndParent:@"User Talk" value:@"Hello" memory: LongTermMemory brain:self parent:conditionDataMiningNode3];
+    _parentNode = _currentNode;
+    _currentNode = storageNode2;
+    [conditionDataMiningNode3 insertChild:storageNode2];
+    //    -----------    
+
+    //    -----------    
+    ConditionPerceptionNode* conditionPerceptionNode2 = [[ConditionPerceptionNode alloc] initWithKeyAndValueAndOperatorAndBrainAndParent:@"User Talk" value:@"Bye" operator:ConditionOperatorUndefined brain:self parent:rootNode];
+    _parentNode = _currentNode;
+    _currentNode = conditionPerceptionNode2;
+    [rootNode insertChild:conditionPerceptionNode2];
+    
+    ActionNode* actionNode4 = [[ActionNode alloc] initWithNameAndValueAndBrainAndParent:@"Talk" value:@"Hello" brain:self parent:conditionPerceptionNode2];
+    _parentNode = _currentNode;
+    _currentNode = actionNode4;
+    [conditionPerceptionNode2 insertChild:actionNode4];
+    
+    EmotionNode* emotionNode2 = [[EmotionNode alloc] initWithEmotionAndValueAndAndBrainAndParent:@"Happiness" value:@"1" max:5 min:INT8_MIN brain:self parent:conditionPerceptionNode2];
+    _parentNode = _currentNode;
+    _currentNode = emotionNode2;
+    [conditionPerceptionNode2 insertChild:emotionNode2];
+    
+    StorageNode* storageNode3 = [[StorageNode alloc] initWithEventAndValueAndAndBrainAndParent:@"User Talk" value:@"Bye" memory: LongTermMemory brain:self parent:conditionDataMiningNode3];
+    _parentNode = _currentNode;
+    _currentNode = storageNode3;
+    [conditionPerceptionNode2 insertChild:storageNode3];
     
     _rules = rootNode;
     
@@ -522,7 +559,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 
     [[NSNotificationCenter defaultCenter] postNotificationName:SEND_ACTION object:action];
     
-    DLog(@"Signal SEND_ACTION sent: %@", action);
+//    DLog(@"Signal SEND_ACTION sent: %@", action);
 }
 
 
