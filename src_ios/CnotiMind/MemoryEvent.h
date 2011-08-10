@@ -10,17 +10,15 @@
 
 #import "Perception.h"
 
-
-@interface MemoryEvent : NSObject {
-    
+@interface MemoryEvent : NSObject 
+{
     id _value;
     NSString* _event;
-    NSTimeInterval _time; 
-    
+    NSTimeInterval _time;
 }
 
-@property (readwrite, assign) id value;
-@property (readwrite, assign) NSString* event;
+@property (readwrite, retain) id value;
+@property (readwrite, retain) NSString* event;
 
 @property (readwrite, assign) NSTimeInterval time;
 

@@ -28,18 +28,12 @@
 
 - (void) exec
 {
-    DLog(@"ActionNode exec");
-//    [_brain executeAction:_key value:_value]; 
+    [_brain executeAction:_name value:_value]; 
 }
 
 
 - (void) exec:(NSString*)aVariables
 {
-    
-    DLog(@"ActionNode exec");
-    DLog(@"ActionNode exec name: %@", _name);
-    DLog(@"ActionNode exec value: %@", _value);
-
     [_brain executeAction:_name value:_value];
 }
 

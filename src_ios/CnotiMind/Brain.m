@@ -140,7 +140,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
                 NSString* decay = [NSString stringWithFormat:@"%@", [emotion attributeForName:@"decay"]];
                 
                 //  TODO set brain
-                Emotion* e = [[Emotion alloc] initWithKeyAndValueAndMaxAndMin:name value:[value floatValue] max:[max floatValue] min:[min floatValue]];
+                Emotion* e = [[Emotion alloc] initWithNameAndValueAndMaxAndMin:name value:[value floatValue] max:[max floatValue] min:[min floatValue]];
                 
                 [self addEmotion:e];
                 
@@ -163,7 +163,6 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 
 - (void) addValidAction:(NSString*)aAction
 {
-    DLog(@"addValidAction: %@ <-",aAction);
     [_validActions enqueue:aAction];
 }
 
@@ -186,7 +185,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     [rootNode insertChild:conditionPerceptionNode];
     
     
-    ConditionDataMiningNode* conditionDataMiningNode = [[ConditionDataMiningNode alloc] initWithKeyAndValueAndOperatorAndOperationAndMemoryAndVariableAndCompareValueBrainAndParent:@"last" value:@"Hello" operator:ConditionOperatorUndefined operation:DMO_Last memory:UndefinedMemory variable:@"" compareValue:@"" brain:self parent:conditionPerceptionNode];
+    ConditionDataMiningNode* conditionDataMiningNode = [[ConditionDataMiningNode alloc] initWithKeyAndValueAndOperatorAndOperationAndMemoryAndVariableAndCompareValueBrainAndParent:@"last" value:@"Hello" operator:ConditionOperatorUndefined operation:DMO_Last memory:LongTermMemory variable:@"" compareValue:@"" brain:self parent:conditionPerceptionNode];
     _parentNode = _currentNode;
     _currentNode = conditionDataMiningNode;
     [conditionPerceptionNode insertChild:conditionDataMiningNode];
@@ -223,9 +222,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     
     _rules = rootNode;
     
-    DLog(@"Brain loadXmlRules finished");
     
-    DLog(@"Brain add valid perceptions");
     [self addValidPerception:@"User Talk"];
     [self addValidAction:@"User Talk"];
     
@@ -287,7 +284,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     
     NSEnumerator* eLongTermMemory = [_longTermMemory objectEnumerator];
     MemoryEvent* objectLongTermMemory;
-    while (objectLongTermMemory == [eLongTermMemory nextObject]) {
+    while (objectLongTermMemory = [eLongTermMemory nextObject]) {
         xmlMemory = [xmlMemory stringByAppendingFormat:@"%@", [objectLongTermMemory toXML]];
     }
     
@@ -296,7 +293,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     
     NSEnumerator* eWorkingMemory = [_workingMemory objectEnumerator];
     MemoryEvent* objectWorkingMemory;
-    while (objectWorkingMemory == [eWorkingMemory nextObject]) {
+    while (objectWorkingMemory = [eWorkingMemory nextObject]) {
         xmlMemory = [xmlMemory stringByAppendingFormat:@"%@", [objectWorkingMemory toXML]];
     }
     
@@ -350,49 +347,49 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 
 - (void) printSettings;
 {
-    NSString* settings = [NSString stringWithFormat:@""];
-    settings = [settings stringByAppendingString:@"--- Valid Perceptions ---\n"];    
+    NSString* settings = [NSString stringWithFormat:@"\n--- Print Brain Settings ---"];
+    settings = [settings stringByAppendingString:@"\n--- Valid Perceptions ---"];    
     
     if ([_validPerceptions count] == 0) {
-        settings = [settings stringByAppendingString:@"No Perceptions defined\n"];            
+        settings = [settings stringByAppendingString:@"No Perceptions defined"];            
     }
     else {
         NSEnumerator* ePerceptions = [_validPerceptions objectEnumerator];
         Perception* objectPerception;
         while (objectPerception = [ePerceptions nextObject]) {
-            settings = [settings stringByAppendingFormat:@"%@", [objectPerception description]];
+            settings = [settings stringByAppendingFormat:@"\n%@", [objectPerception description]];
         }
     }
     
     
-    settings = [settings stringByAppendingString:@"--- Valid Actions ---\n"];    
+    settings = [settings stringByAppendingString:@"\n--- Valid Actions ---"];    
     
     if ([_validActions count] == 0) {
-        settings = [settings stringByAppendingString:@"No Actions defined\n"];            
+        settings = [settings stringByAppendingString:@"\nNo Actions defined"];            
     }
     else {
         NSEnumerator* eActions = [_validActions objectEnumerator];
         Perception* objectAction;
         while (objectAction = [eActions nextObject]) {
-            settings = [settings stringByAppendingFormat:@"%@", [objectAction description]];
+            settings = [settings stringByAppendingFormat:@"\n%@", [objectAction description]];
         }
     }
     
     
-    settings = [settings stringByAppendingString:@"--- Emotions ---\n"];    
+    settings = [settings stringByAppendingString:@"\n--- Emotions ---"];    
     
     if ([_emotions count] == 0) {
-        settings = [settings stringByAppendingString:@"No Emotions defined\n"];            
+        settings = [settings stringByAppendingString:@"\nNo Emotions defined"];            
     }
     else {
         NSEnumerator* eEmotions = [_emotions objectEnumerator];
         Perception* objectEmotion;
         while (objectEmotion = [eEmotions nextObject]) {
-            settings = [settings stringByAppendingFormat:@"%@", [objectEmotion description]];
+            settings = [settings stringByAppendingFormat:@"\n%@", [objectEmotion description]];
         }
     }
     
-    DLog(@"printSettings: %@", settings);
+    DLog(@"%@",settings);
 }
 
 
@@ -401,14 +398,30 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     [_rules description];
 }
 
+- (void) printMemory:(enum MemoryType) aType
+{
+    NSEnumerator* eMemory;
+    
+    if (aType == WorkingMemory) {
+        eMemory = [_workingMemory objectEnumerator];
+    }
+    else if (aType == LongTermMemory) {
+        eMemory = [_longTermMemory objectEnumerator];
+    }
+    
+    MemoryEvent* objectMemoryEvent;
+    NSLog(@"--- Print Memory ---");
+    while (objectMemoryEvent = [eMemory nextObject]) {
+        DLog(@"\nEvent: %@ Value: %@", [objectMemoryEvent event], [objectMemoryEvent value]);
+    }
+}
+
 
 - (void) receivePerception:(Perception*)aPerception
 {
     [_semaphoreBrain lockWhenCondition:NO_DATA];
     [_receivedPerceptions enqueue:aPerception];
     
-//    [_semaphoreBrain lockWhenCondition:OPERATION_FINISHED];
-
     [_semaphoreBrain unlockWithCondition:HAS_DATA];
     
     //  Trigger the brain
@@ -433,13 +446,9 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 
 - (void) sendEmotionalState:(NSString*)aKey value:(NSString*)aValue
 {
-    
-    DLog(@"kkkkkkk%@",aValue);
     NSMutableDictionary* action = [[NSMutableDictionary alloc] init];
     [action setObject:aValue forKey:aKey];
     [[NSNotificationCenter defaultCenter] postNotificationName:SEND_EMOTIONAL_STATE object:action];
-    DLog(@"Signal SEND_EMOTIONAL_STATE sent: %@", action);
-
 }
 
 
@@ -471,6 +480,30 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     }
 }
 
+
+- (void) storeToMemory:(MemoryEvent*)aMemoryEvent memoryType:(enum MemoryType)aMemoryType
+{
+    switch((int)aMemoryType)
+    {
+		case LongTermMemory:
+			[_longTermMemory addObject:aMemoryEvent];
+
+//			if( _gui != NULL )
+//			{
+//				_gui->updateLongTermMemory();
+//			}
+			break;
+		case WorkingMemory:
+			[_workingMemory addObject:aMemoryEvent];
+//			if( _gui != NULL )
+//			{
+//				_gui->updateWorkingMemory();
+//			}
+			break;
+ 
+    
+    DLog(@"stored to memory");   }
+}
 
 - (void) executeActionWithVariables:(NSString*)aKey value:(NSString*)aValue
 {
@@ -609,7 +642,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     NSEnumerator* eMemoryEvent = [aMemory objectEnumerator];
     
     MemoryEvent* objectMemoryEvent;
-    while( objectMemoryEvent == [eMemoryEvent nextObject] ) // Iterate all memory
+    while( objectMemoryEvent = [eMemoryEvent nextObject] ) // Iterate all memory
     {
         //  MemoryEvent* me = [eMemoryEvent nextObject];
         
@@ -656,7 +689,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     NSEnumerator* eMemoryEvent = [aMemory objectEnumerator];
     
     MemoryEvent* objectMemoryEvent;
-    while( objectMemoryEvent == [eMemoryEvent nextObject] ) // Iterate all memory
+    while( objectMemoryEvent = [eMemoryEvent nextObject] ) // Iterate all memory
     {
         //  MemoryEvent* me = [eMemoryEvent nextObject];
         
@@ -703,7 +736,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     NSEnumerator* eMemoryEvent = [aMemory objectEnumerator];
     
     MemoryEvent* objectMemoryEvent;
-    while( objectMemoryEvent == [eMemoryEvent nextObject] ) // Iterate all memory
+    while( objectMemoryEvent = [eMemoryEvent nextObject] ) // Iterate all memory
     {
         if( [[objectMemoryEvent event] isEqualToString:aEvent] ) // Event found
         {
@@ -741,7 +774,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     NSEnumerator* eMemoryEvent = [aMemory objectEnumerator];
     
     MemoryEvent* objectMemoryEvent;
-    while( objectMemoryEvent == [eMemoryEvent nextObject] ) // Iterate all memory
+    while( objectMemoryEvent = [eMemoryEvent nextObject] ) // Iterate all memory
     {
         if( [[objectMemoryEvent event] isEqualToString:aEvent] ) // Event found
         {
@@ -785,7 +818,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     NSEnumerator* eMemoryEvent = [aMemory objectEnumerator];
     
     MemoryEvent* objectMemoryEvent;
-    while( objectMemoryEvent == [eMemoryEvent nextObject] ) // Iterate all memory
+    while( objectMemoryEvent = [eMemoryEvent nextObject] ) // Iterate all memory
     {
         if( [[objectMemoryEvent event] isEqualToString:aEvent] ) // Event found
         {
@@ -814,7 +847,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     NSEnumerator* eMemoryEvent = [aMemory objectEnumerator];
     
     MemoryEvent* objectMemoryEvent;
-    while( objectMemoryEvent == [eMemoryEvent nextObject] ) // Iterate all memory
+    while( objectMemoryEvent = [eMemoryEvent nextObject] ) // Iterate all memory
     {
         if( [[objectMemoryEvent event] isEqualToString:aEvent] && [[objectMemoryEvent value] isEqual:aValue]) // Event found
         {
@@ -848,7 +881,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     NSEnumerator* eMemoryEvent = [aMemory objectEnumerator];
     
     MemoryEvent* objectMemoryEvent;
-    while( objectMemoryEvent == [eMemoryEvent nextObject] ) // Iterate all memory
+    while( objectMemoryEvent = [eMemoryEvent nextObject] ) // Iterate all memory
     {
         if( [[objectMemoryEvent event] isEqualToString:aEvent] ) // Event found
         {
@@ -888,7 +921,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     NSEnumerator* eMemoryEvent = [aMemory objectEnumerator];
     
     MemoryEvent* objectMemoryEvent;
-    while( objectMemoryEvent == [eMemoryEvent nextObject] ) // Iterate all memory
+    while( objectMemoryEvent = [eMemoryEvent nextObject] ) // Iterate all memory
     {
         if( [[objectMemoryEvent event] isEqualToString:aEvent] ) // Event found
         {
@@ -914,7 +947,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     NSEnumerator* eMemoryEvent = [aMemory objectEnumerator];
     
     MemoryEvent* objectMemoryEvent;
-    while( objectMemoryEvent == [eMemoryEvent nextObject] ) // Iterate all memory
+    while( objectMemoryEvent = [eMemoryEvent nextObject] ) // Iterate all memory
     {
         if( [[objectMemoryEvent event] isEqualToString:aEvent] && [[objectMemoryEvent value] isEqual:aValue]) // Event found
         {

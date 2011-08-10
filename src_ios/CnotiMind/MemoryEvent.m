@@ -13,7 +13,6 @@
  is the local time.
  */
 
-
 @implementation MemoryEvent
 
 @synthesize value = _value;
@@ -56,7 +55,6 @@
     }
     return self;
 }
-
 
 - (NSString*) toXML
 {

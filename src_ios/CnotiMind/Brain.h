@@ -77,7 +77,7 @@ enum { HAS_DATA, NO_DATA };
 // Methods for printing brain data in console
 - (void) printSettings;
 - (void) printRules;
-//- (void) printMemory:(MemoryType*) aType;
+- (void) printMemory:(enum MemoryType) aType;
 
 
 - (void) receivePerception:(Perception*)aPerception;
@@ -94,7 +94,7 @@ enum { HAS_DATA, NO_DATA };
 - (void) updateEmotionValue:(NSString*)aEmotionName variation:(double)aVariation;
 
 
-//- (void) storeToMemory:(MemoryEvent*)aMemoryEvent memoryType:(MemoryType*)aMemoryType;
+- (void) storeToMemory:(MemoryEvent*)aMemoryEvent memoryType:(enum MemoryType)aMemoryType;
 
 
 - (void) executeAction:(NSString*)aKey value:(NSString*)aValue;

@@ -7,9 +7,7 @@
 //
 
 #import "StorageNode.h"
-
 #import "MemoryEvent.h"
-
 #import "Brain.h"
 
 
@@ -38,19 +36,37 @@
  */
 - (void) exec
 {
+    // Test if the node is for clearing the memory
+    if( _clearStorage )
+    {
+        if( _memory == WorkingMemory )
+        {
+            [_brain clearWorkingMemory];
+        }
+        else
+        {
+            [_brain clearMemory];
+        }
+        return;
+    }
+    // If it is not for clearing, check if the value and event are valid
+    if( [_event length]==0 || [_value length]==0 )
+    {
+        return;
+    }
+    
+    // Create memory event to add to the memory
     MemoryEvent* m = [[MemoryEvent alloc] initWithEventAndValue:_event value:_value];
-    //  TODO
-    //  [_brain storeToMemory:m memory:_memory];
+    
+    [_brain storeToMemory:m memoryType:_memory];
 
 }
 
 
 - (void) exec:(NSMutableDictionary*)aVariables
 {
-    MemoryEvent* m = [[MemoryEvent alloc] initWithEventAndValue:_event value: [self variableToValue:_value variables:aVariables]];
-    //  TODO
-    //  [_brain storeToMemory:m memory:_memory];
-
+//    MemoryEvent* m = [[MemoryEvent alloc] initWithEventAndValue:_event value: [self variableToValue:_value variables:aVariables]];
+    [self exec];
 }
 
 

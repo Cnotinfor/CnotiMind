@@ -212,14 +212,14 @@
 //  TODO? virtual method
 - (void) exec
 {
-    DLog(@"RuleNode: exec TODO");
+
 }
 
 
 //  TODO? virtual method
 - (void) exec:(NSMutableDictionary*)aVariables
 {
-    DLog(@"RuleNode: exec TODO");
+
 }
 
 
@@ -354,7 +354,6 @@
 
 -(void) childrenAlloc
 {
-    NSLog(@"RuleNode: childrenAlloc");
 	children_ = [[NSMutableArray alloc] init];
 }
 
