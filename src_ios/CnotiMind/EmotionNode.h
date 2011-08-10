@@ -21,10 +21,10 @@
     NSString* _emotion;
     NSString* _value;
     
-    NSNumber* _min;
-    NSNumber* _max;
+    double _min;
+    double _max;
     
-    NSNumber* _valueNumeric;
+    double _valueNumeric;
     BOOL _valueNumericOk;
 }
 
@@ -33,10 +33,10 @@
                                              brain:(Brain*)aBrain 
                                             parent:(id)aParent;
 
-- (id) initWithEmotionAndValueAndAndBrainAndParent:(NSString*)aEmotion
+- (id) initWithEmotionAndValueAndAndBrainAndParent:(NSString*)aEmotion 
                                              value:(NSString*)aValue 
-                                               max:(NSNumber*)aMax
-                                               min:(NSNumber*)aMin
+                                               max:(double)aMax
+                                               min:(double)aMin
                                              brain:(Brain*)aBrain 
                                             parent:(id)aParent;
 

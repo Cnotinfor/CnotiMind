@@ -13,8 +13,6 @@
 
 @implementation EmotionNode
 
-
-
 - (id) initWithEmotionAndValueAndAndBrainAndParent:(NSString*)aEmotion 
                                              value:(NSString*)aValue 
                                              brain:(Brain*)aBrain 
@@ -24,10 +22,10 @@
     
         _emotion = aEmotion;
         _value = aValue;
-        _min = [NSNumber numberWithInt:INT_MIN];
-        _max = [NSNumber numberWithInt:INT_MAX];
-        
-        _valueNumeric = [NSNumber numberWithFloat:[aValue floatValue]];
+        _min = INT_MIN;
+        _max = INT_MAX;
+        _valueNumericOk = TRUE;
+        _valueNumeric = [aValue floatValue];
     }
     
     return self;
@@ -35,8 +33,8 @@
 
 - (id) initWithEmotionAndValueAndAndBrainAndParent:(NSString*)aEmotion 
                                              value:(NSString*)aValue 
-                                               max:(NSNumber*)aMax
-                                               min:(NSNumber*)aMin
+                                               max:(double)aMax
+                                               min:(double)aMin
                                              brain:(Brain*)aBrain 
                                             parent:(id)aParent
 {
@@ -46,8 +44,8 @@
 
         _min = aMin;
         _max = aMax;
-        
-        _valueNumeric = [NSNumber numberWithFloat:[aValue floatValue]];
+        _valueNumericOk = TRUE;        
+        _valueNumeric = [aValue floatValue];
     }
     
     return self;
@@ -75,7 +73,7 @@
         
         // Test if the value from the variable is a valid number
         BOOL ok = ([[NSScanner scannerWithString:value] scanFloat:NULL]) ? TRUE : FALSE;
-        NSNumber* newValueInt = [NSNumber numberWithFloat:[value floatValue]];
+        double newValueInt = [value floatValue];
         
         
         if( !ok )

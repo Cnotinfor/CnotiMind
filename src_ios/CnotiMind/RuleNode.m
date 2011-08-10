@@ -197,7 +197,7 @@
 
 - (void) execChildren:(NSMutableDictionary*)aVariables
 {
-    NSLog(@"RuleNode: execChildren");
+//    DLog(@"RuleNode: execChildren");
     
     NSEnumerator* e = [children_ objectEnumerator];
     id object;

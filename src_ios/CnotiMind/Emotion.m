@@ -12,7 +12,7 @@
 @implementation Emotion
 
 @synthesize value = _value;
-@synthesize key = _key;
+@synthesize name = _name;
 
 @synthesize min = _min;
 @synthesize max = _max;
@@ -21,7 +21,7 @@
 - (id) init
 {
     if (self == [super init]) {
-        _key = [NSString stringWithFormat:@""];
+        _name = [NSString stringWithFormat:@""];
         _value = 0;
         _min = INT8_MIN;
         _max = INT8_MAX;
@@ -30,10 +30,10 @@
 }
 
 
-- (id) initWithKeyAndValue:(NSString*)aKey value:(double)aValue
+- (id) initWithNameAndValue:(NSString*)aName value:(double)aValue
 {
     if (self == [super init]) {
-        _key = aKey;
+        _name = aName;
         _value = aValue;
         _min = INT8_MIN;
         _max = INT8_MAX;
@@ -42,10 +42,10 @@
 }
 
 
-- (id) initWithKeyAndValueAndMaxAndMin:(NSString*)aKey value:(double)aValue max:(double)aMax min:(double)aMin
+- (id) initWithNameAndValueAndMaxAndMin:(NSString*)aName value:(double)aValue max:(double)aMax min:(double)aMin
 {
     if (self == [super init]) {
-        _key = aKey;
+        _name = aName;
         _value = aValue;
         _min = INT8_MIN;
         _max = INT8_MAX;
@@ -54,14 +54,11 @@
 }
 
 
-- (void) setValue:(double)aValue max:(double)aMax min:(double)aMin
+- (void) setEmotionValue:(double)aValue max:(double)aMax min:(double)aMin
 {
-
 //    double oldValue = _value;
-    
     double newMax = MAX(aMax, _max);
     double newMin = MIN(aMin, _min);
-    
     
     _value = MAX(newMin, MIN(aValue, newMax));
     
@@ -69,15 +66,15 @@
 }
 
 
-- (void) setValue:(double)aValue
+- (void) setEmotionValue:(double)aValue
 {
-    [self setValue:aValue max:_max min:_min];
+    [self setEmotionValue:aValue max:_max min:_min];
 }
 
 
 - (void) addValue:(double)aIncrement max:(double)aMax min:(double)aMin
 {
-    [self setValue:_value + aIncrement max:aMax min:aMin];
+    [self setEmotionValue:_value + aIncrement max:aMax min:aMin];
 }
 
 
@@ -89,19 +86,19 @@
 
 + (BOOL) compareWithEmotionAndString:(Emotion*)aEmotion name:(NSString*)aEmotionName
 {
-    return [aEmotion.key isEqualToString:aEmotionName];
+    return [aEmotion.name isEqualToString:aEmotionName];
 }
 
 
 + (BOOL) compareWithStringAndEmotion:(NSString*)aEmotionName emotion:(Emotion*)aEmotion
 {
-    return [aEmotionName isEqualToString:aEmotion.key];
+    return [aEmotionName isEqualToString:aEmotion.name];
 }
 
 
 + (BOOL) compareWithEmotions:(Emotion*)aEmotion1 emotion:(Emotion*)aEmotion2
 {
-    return [aEmotion1.key isEqualToString:aEmotion2.key];
+    return [aEmotion1.name isEqualToString:aEmotion2.name];
 }
 
 
@@ -115,7 +112,7 @@
 - (NSString *)description:(Emotion*)aEmotion
 {
 
-    NSString* res = [NSString stringWithFormat:@"Emotion: %@; value: %@; min: %f; max: %f;", aEmotion.key, aEmotion.value, aEmotion.min, aEmotion.max];
+    NSString* res = [NSString stringWithFormat:@"Emotion: %@; value: %@; min: %f; max: %f;", aEmotion.name, aEmotion.value, aEmotion.min, aEmotion.max];
 
     NSLog(@"%@", res);
     return res;

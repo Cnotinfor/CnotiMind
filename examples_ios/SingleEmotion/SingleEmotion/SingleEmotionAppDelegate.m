@@ -22,7 +22,7 @@
         
         //  load XML rulles;
         DLog(@"--- load XML rulles ---");
-        [_brain loadXmlRules:@""];
+        [_brain loadXmlRulesWithoutXML];
         DLog(@"--- start brain ---");
         [_brain startThreadRun];
         
@@ -31,6 +31,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(actionReceived:) 
                                                  name:SEND_ACTION
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(emotionReceived:) 
+                                                 name:SEND_EMOTIONAL_STATE
                                                object:nil];
 
     return self;
@@ -51,17 +56,16 @@
     
     NSArray* values = [[aNotif object] allValues]; 
     for (id value in values) {
-        DLog(@"setText: %@", value);
-
+//        DLog(@"setText: %@", value);
     }
 
     DLog(@"actionReceived: %@", aNotif);
 }
 
 
-- (void) emotionReceived:(NSString*)aEmotion number:(NSNumber*)aValue
+- (void) emotionReceived:(NSNotification*)aNotif
 {
-
+    DLog(@"emotionReceived: %@", aNotif);
 }
 
 

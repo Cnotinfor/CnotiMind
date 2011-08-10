@@ -218,8 +218,6 @@
 				1896138B1381370B00FEA73A /* CnotiMind.m */,
 				189613981381370B00FEA73A /* Emotion.h */,
 				189613991381370B00FEA73A /* Emotion.m */,
-				1896139A1381370B00FEA73A /* EmotionNode.h */,
-				1896139B1381370B00FEA73A /* EmotionNode.m */,
 				1896139F1381370B00FEA73A /* MemoryEvent.h */,
 				189613A01381370B00FEA73A /* MemoryEvent.m */,
 				189613A11381370B00FEA73A /* Node.h */,
@@ -248,6 +246,8 @@
 		189613C213815B2200FEA73A /* Rules */ = {
 			isa = PBXGroup;
 			children = (
+				1896139A1381370B00FEA73A /* EmotionNode.h */,
+				1896139B1381370B00FEA73A /* EmotionNode.m */,
 				189613851381370B00FEA73A /* ActionNode.h */,
 				189613861381370B00FEA73A /* ActionNode.m */,
 				189613A81381370B00FEA73A /* RootNode.h */,

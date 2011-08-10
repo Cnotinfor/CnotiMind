@@ -157,7 +157,6 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 
 - (void) addValidPerception:(NSString*)aPerception
 {
-    DLog(@"addValidPerception: %@ <-",aPerception);
     [_validPerceptions enqueue:aPerception];
 }
 
@@ -175,29 +174,52 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 }
 
 //  TODO
-- (BOOL) loadXmlRules:(NSString*)aFilename
+
+- (BOOL) loadXmlRulesWithoutXML
 {
-    
     RootNode* rootNode = [[RootNode alloc] initWithBrainAndParent:self parent:nil];
     _currentNode = rootNode;
     
     ConditionPerceptionNode* conditionPerceptionNode = [[ConditionPerceptionNode alloc] initWithKeyAndValueAndOperatorAndBrainAndParent:@"User Talk" value:@"Hello" operator:ConditionOperatorUndefined brain:self parent:rootNode];
     _parentNode = _currentNode;
     _currentNode = conditionPerceptionNode;
-    
     [rootNode insertChild:conditionPerceptionNode];
     
-    ConditionDataMiningNode* conditionDataMiningNode = [[ConditionDataMiningNode alloc] initWithKeyAndValueAndOperatorAndOperationAndMemoryAndVariableAndCompareValueBrainAndParent:@"last" value:@"Hello" operator:ConditionOperatorUndefined operation:DMO_Undefined memory:UndefinedMemory variable:@"" compareValue:@"" brain:self parent:conditionPerceptionNode];
+    
+    ConditionDataMiningNode* conditionDataMiningNode = [[ConditionDataMiningNode alloc] initWithKeyAndValueAndOperatorAndOperationAndMemoryAndVariableAndCompareValueBrainAndParent:@"last" value:@"Hello" operator:ConditionOperatorUndefined operation:DMO_Last memory:UndefinedMemory variable:@"" compareValue:@"" brain:self parent:conditionPerceptionNode];
     _parentNode = _currentNode;
     _currentNode = conditionDataMiningNode;
-    
     [conditionPerceptionNode insertChild:conditionDataMiningNode];
     
-    ActionNode* actionNode = [[ActionNode alloc] initWithNameAndValueAndBrainAndParent:@"Talk" value:@"Hi there!" brain:self parent:conditionDataMiningNode];
+    
+    ActionNode* actionNode = [[ActionNode alloc] initWithNameAndValueAndBrainAndParent:@"Talk" value:@"Again??" brain:self parent:conditionDataMiningNode];
     _parentNode = _currentNode;
     _currentNode = actionNode;
-    
     [conditionDataMiningNode insertChild:actionNode];
+    
+    
+    ConditionDataMiningNode* conditionDataMiningNode2 = [[ConditionDataMiningNode alloc] initWithKeyAndValueAndOperatorAndOperationAndMemoryAndVariableAndCompareValueBrainAndParent:@"last" value:@"Bye" operator:ConditionOperatorUndefined operation:DMO_Last memory:UndefinedMemory variable:@"" compareValue:@"" brain:self parent:conditionPerceptionNode];
+    _parentNode = _currentNode;
+    _currentNode = conditionDataMiningNode2;
+    [conditionPerceptionNode insertChild:conditionDataMiningNode2];
+    
+    
+    ActionNode* actionNode2 = [[ActionNode alloc] initWithNameAndValueAndBrainAndParent:@"Talk" value:@"Hello" brain:self parent:conditionDataMiningNode];
+    _parentNode = _currentNode;
+    _currentNode = actionNode2;
+    [conditionDataMiningNode2 insertChild:actionNode2];
+    
+    
+    EmotionNode* emotionNode = [[EmotionNode alloc] initWithEmotionAndValueAndAndBrainAndParent:@"Happiness" value:@"1" max:5 min:INT8_MIN brain:self parent:conditionDataMiningNode2];
+    _parentNode = _currentNode;
+    _currentNode = emotionNode;
+    [conditionDataMiningNode2 insertChild:emotionNode];
+    
+    
+    StorageNode* storageNode = [[StorageNode alloc] initWithEventAndValueAndAndBrainAndParent:@"User Talk" value:@"Hello" memory: LongTermMemory brain:self parent:conditionDataMiningNode2];
+    _parentNode = _currentNode;
+    _currentNode = storageNode;
+    [conditionDataMiningNode2 insertChild:storageNode];
     
     _rules = rootNode;
     
@@ -206,6 +228,17 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     DLog(@"Brain add valid perceptions");
     [self addValidPerception:@"User Talk"];
     [self addValidAction:@"User Talk"];
+    
+    Emotion* emotion = [[Emotion alloc] initWithNameAndValue:@"Happiness" value:1];
+    [self addEmotion:emotion];
+    
+    return TRUE;
+
+}
+
+
+- (BOOL) loadXmlRules:(NSString*)aFilename
+{
     
     //    [actionNode exec];
     
@@ -371,10 +404,11 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 
 - (void) receivePerception:(Perception*)aPerception
 {
+    [_semaphoreBrain lockWhenCondition:NO_DATA];
     [_receivedPerceptions enqueue:aPerception];
     
 //    [_semaphoreBrain lockWhenCondition:OPERATION_FINISHED];
-    [_semaphoreBrain lockWhenCondition:NO_DATA];
+
     [_semaphoreBrain unlockWithCondition:HAS_DATA];
     
     //  Trigger the brain
@@ -399,38 +433,40 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 
 - (void) sendEmotionalState:(NSString*)aKey value:(NSString*)aValue
 {
+    
+    DLog(@"kkkkkkk%@",aValue);
     NSMutableDictionary* action = [[NSMutableDictionary alloc] init];
     [action setObject:aValue forKey:aKey];
-    [[NSNotificationCenter defaultCenter] postNotificationName:SEND_EMOTIONAL_STATE object:action];  
+    [[NSNotificationCenter defaultCenter] postNotificationName:SEND_EMOTIONAL_STATE object:action];
+    DLog(@"Signal SEND_EMOTIONAL_STATE sent: %@", action);
+
 }
 
 
-- (void) updateEmotionValue:(NSString*)aEmotionName variation:(NSNumber*)aVariation
+- (void) updateEmotionValue:(NSString*)aEmotionName variation:(double)aVariation
 {
-    [self updateEmotionValue:aEmotionName variation:aVariation max:[NSNumber numberWithInt: INT8_MAX] min:[NSNumber numberWithInt: INT8_MIN] ];
+    [self updateEmotionValue:aEmotionName variation:aVariation max:INT8_MAX min:INT8_MIN];
 }
 
-- (void) updateEmotionValue:(NSString*)aEmotionName variation:(NSNumber*)aVariation max:(NSNumber*)aMax min:(NSNumber*)aMin
+- (void) updateEmotionValue:(NSString*)aEmotionName variation:(double)aVariation max:(double)aMax min:(double)aMin
 {
-    
     NSEnumerator* eEmotions = [_emotions objectEnumerator];
-    Perception* objectEmotion;
-    while (objectEmotion == [eEmotions nextObject]) {
+    Emotion* objectEmotion;
+    while (objectEmotion = [eEmotions nextObject]) {
         
-        if ([[objectEmotion value] isEqual:aEmotionName] == TRUE) {
-            
-            //  TODO: send signal
-            //  emit sendEmotionalState( emotionName, e.value() );
+        if ([[objectEmotion name] isEqual:aEmotionName] == TRUE) {
+        
+            [objectEmotion addValue:aVariation max:aMax min:aMin];
+
+            [self sendEmotionalState:[objectEmotion name] value:[NSString stringWithFormat:@"%f", [objectEmotion value]]];
             
             [_emotionsChanged enqueue:aEmotionName];
-            [self run];
+
+            if ([_semaphoreBrain tryLock]) {
+                [_semaphoreBrain unlockWithCondition:HAS_DATA];
+            }
             
-            //  TODO: release signal
-            //  if(_semaphoreBrain.available() == 0)
-            //  {
-            //      _semaphoreBrain.release();
-            //  }
-            //  break;
+            break;
         }
     }
 }
@@ -443,8 +479,6 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     [action setObject:aValue forKey:aKey];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"SEND_ACTION" object:action];
     
-    
-    DLog(@"TOOOOOO");
 }
 
 
@@ -1008,7 +1042,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
             Emotion* e = [[Emotion alloc] init];
             
             for (Emotion* objectE in _emotions) {
-                if ([[objectE key] isEqual:emotionName]) {
+                if ([[objectE name] isEqual:emotionName]) {
                     e = objectE;
                 }
             }

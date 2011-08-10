@@ -15,6 +15,8 @@
 
 #import "ConditionDataMiningNode.h"
 #import "ActionNode.h"
+#import "EmotionNode.h"
+#import "StorageNode.h"
 
 #import "CnotiMind.h"
 //#import "MemoryType.h"
@@ -59,6 +61,7 @@ enum { HAS_DATA, NO_DATA };
 - (void) addValidPerception:(NSString*)aPerception;
 - (void) addValidAction:(NSString*)aAction;
 - (void) addEmotion:(Emotion*)aEmotion;
+- (BOOL) loadXmlRulesWithoutXML;
 - (BOOL) loadXmlRules:(NSString*)aFilename;
 
 - (BOOL) validateXml:(NSString*)aFilename;
@@ -87,8 +90,8 @@ enum { HAS_DATA, NO_DATA };
 
 // private
 
-- (void) updateEmotionValue:(NSString*)aEmotionName variation:(NSNumber*)aVariation max:(NSNumber*)aMax min:(NSNumber*)aMin;
-- (void) updateEmotionValue:(NSString*)aEmotionName variation:(NSNumber*)aVariation;
+- (void) updateEmotionValue:(NSString*)aEmotionName variation:(double)aVariation max:(double)aMax min:(double)aMin;
+- (void) updateEmotionValue:(NSString*)aEmotionName variation:(double)aVariation;
 
 
 //- (void) storeToMemory:(MemoryEvent*)aMemoryEvent memoryType:(MemoryType*)aMemoryType;

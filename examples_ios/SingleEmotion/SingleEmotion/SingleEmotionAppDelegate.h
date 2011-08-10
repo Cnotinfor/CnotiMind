@@ -26,6 +26,6 @@
 - (IBAction) onClickButtonHello;
 
 - (void) actionReceived:(NSNotification*)aNotif;
-- (void) emotionReceived:(NSString*)aEmotion number:(NSNumber*)aValue;
+- (void) emotionReceived:(NSNotification*)aNotif;
 
 @end
