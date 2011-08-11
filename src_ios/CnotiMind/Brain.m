@@ -185,7 +185,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     [rootNode insertChild:conditionPerceptionNode];
     
     //    -----------
-    ConditionDataMiningNode* conditionDataMiningNode = [[ConditionDataMiningNode alloc] initWithKeyAndValueAndOperatorAndOperationAndMemoryAndVariableAndCompareValueBrainAndParent:@"last" value:@"Hello" operator:ConditionOperatorUndefined operation:DMO_Last memory:LongTermMemory variable:@"" compareValue:@"" brain:self parent:conditionPerceptionNode];
+    ConditionDataMiningNode* conditionDataMiningNode = [[ConditionDataMiningNode alloc] initWithKeyAndValueAndOperatorAndOperationAndMemoryAndVariableAndCompareValueBrainAndParent:@"User Talk" value:@"Hello" operator:ConditionOperatorUndefined operation:DMO_Last memory:LongTermMemory variable:@"" compareValue:@"" brain:self parent:conditionPerceptionNode];
     _parentNode = _currentNode;
     _currentNode = conditionDataMiningNode;
     [conditionPerceptionNode insertChild:conditionDataMiningNode];
@@ -197,7 +197,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     //    -----------
     
     //    -----------
-    ConditionDataMiningNode* conditionDataMiningNode2 = [[ConditionDataMiningNode alloc] initWithKeyAndValueAndOperatorAndOperationAndMemoryAndVariableAndCompareValueBrainAndParent:@"last" value:@"Bye" operator:ConditionOperatorUndefined operation:DMO_Last memory:UndefinedMemory variable:@"" compareValue:@"" brain:self parent:conditionPerceptionNode];
+    ConditionDataMiningNode* conditionDataMiningNode2 = [[ConditionDataMiningNode alloc] initWithKeyAndValueAndOperatorAndOperationAndMemoryAndVariableAndCompareValueBrainAndParent:@"User Talk" value:@"Bye" operator:ConditionOperatorUndefined operation:DMO_Last memory:UndefinedMemory variable:@"" compareValue:@"" brain:self parent:conditionPerceptionNode];
     _parentNode = _currentNode;
     _currentNode = conditionDataMiningNode2;
     [conditionPerceptionNode insertChild:conditionDataMiningNode2];
@@ -220,7 +220,8 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     
     
     //    -----------
-    ConditionDataMiningNode* conditionDataMiningNode3 = [[ConditionDataMiningNode alloc] initWithKeyAndValueAndBrainAndParent:@"count" value:@"0" operator:ConditionOperatorUndefined brain:self parent:conditionPerceptionNode];
+    ConditionDataMiningNode* conditionDataMiningNode3 = [[ConditionDataMiningNode alloc] initWithKeyAndValueAndOperatorAndOperationAndMemoryAndVariableAndCompareValueBrainAndParent:@"User Talk" value:@"0" operator:ConditionOperatorUndefined operation:DMO_Count memory:UndefinedMemory variable:@"" compareValue:@"" brain:self parent:conditionPerceptionNode];
+    
     _parentNode = _currentNode;
     _currentNode = conditionDataMiningNode3;
     [conditionPerceptionNode insertChild:conditionDataMiningNode3];
@@ -242,12 +243,12 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     _currentNode = conditionPerceptionNode2;
     [rootNode insertChild:conditionPerceptionNode2];
     
-    ActionNode* actionNode4 = [[ActionNode alloc] initWithNameAndValueAndBrainAndParent:@"Talk" value:@"Hello" brain:self parent:conditionPerceptionNode2];
+    ActionNode* actionNode4 = [[ActionNode alloc] initWithNameAndValueAndBrainAndParent:@"Talk" value:@"Bye" brain:self parent:conditionPerceptionNode2];
     _parentNode = _currentNode;
     _currentNode = actionNode4;
     [conditionPerceptionNode2 insertChild:actionNode4];
     
-    EmotionNode* emotionNode2 = [[EmotionNode alloc] initWithEmotionAndValueAndAndBrainAndParent:@"Happiness" value:@"1" max:5 min:INT8_MIN brain:self parent:conditionPerceptionNode2];
+    EmotionNode* emotionNode2 = [[EmotionNode alloc] initWithEmotionAndValueAndAndBrainAndParent:@"Happiness" value:@"-1" max:5 min:INT8_MIN brain:self parent:conditionPerceptionNode2];
     _parentNode = _currentNode;
     _currentNode = emotionNode2;
     [conditionPerceptionNode2 insertChild:emotionNode2];
@@ -622,11 +623,13 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 - (id) dataMining: (enum DataMiningOperation)aOperation event:(NSString*)aEvent value:(NSString*)aValue memoryType:(enum MemoryType)aMemoryType valid:(BOOL*)aValid
 {
     
+    NSString* result = [[NSString alloc] initWithString:@""];
+    
     // test if parameters are valid for datamining
     if( [aEvent length]==0 )
     {
         [self setValid: aValid value:false];
-        return [NSString stringWithFormat:@""];
+        return result;
     }
     
     
@@ -642,10 +645,10 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     
     switch (aOperation) {
         case DMO_Count:
-            return [[NSNumber alloc] initWithFloat:[self dataMiningCount:aEvent value:aValue memory:memory valid:aValid]];
+            return [[NSString alloc] initWithFormat:@"%f",[self dataMiningCount:aEvent value:aValue memory:memory valid:aValid]];
             break;
         case DMO_Exists:
-            return [[NSNumber alloc] initWithBool:[self dataMiningExists:aEvent value:aValue memory:memory valid:aValid]];
+            return [[NSString alloc] initWithFormat:@"%d",[self dataMiningExists:aEvent value:aValue memory:memory valid:aValid]];
             break;
             
         default:
@@ -653,7 +656,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     }
     
     [self setValid: aValid value:false];
-    return [NSString stringWithFormat:@""];
+    return result;
 }
 
 /*

@@ -48,8 +48,8 @@
 
     Perception* perception = [[Perception alloc] initWithNameAndAValue:@"User talk" value:@"Bye"];
     [_brain receivePerception:perception];
-    [_brain printSettings];
-    [_brain printMemory:LongTermMemory];
+//    [_brain printSettings];
+//    [_brain printMemory:LongTermMemory];
 }
 
 

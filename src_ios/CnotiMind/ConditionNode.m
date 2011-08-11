@@ -37,6 +37,8 @@
             _isValueNumeric = FALSE;
         }
         
+        DLog(@"_isValueNumeric: %d", _isValueNumeric);
+        
     }
     
     return self;

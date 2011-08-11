@@ -31,10 +31,10 @@
         _isCompareValueNumeric = FALSE;
 
         if ([[NSScanner scannerWithString:_compareValue] scanFloat:NULL]){
-            _compareValueNumeric = TRUE;
+            _isCompareValueNumeric = TRUE;
         }
         else {
-            _compareValueNumeric = FALSE;
+            _isCompareValueNumeric = FALSE;
         }
     }
     
@@ -126,8 +126,9 @@
         
         return false;
     }
-    else // If the value is QString
+    else // If the value is String
     {
+
         id result = [_brain dataMining: _dataMiningOperation event:_key value:_value memoryType:_memory valid:&valid];
         
         if(!valid)
@@ -135,7 +136,8 @@
             return false;
         }
         
-        _result = (NSString*)result;
+        DLog(@"result");
+        _result = result;
         
         switch( (int)_operator )
         {

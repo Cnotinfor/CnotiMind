@@ -117,26 +117,8 @@
 
 // helper used by reorderChild & add
 -(void) insertChild:(RuleNode*)child
-{
-	NSUInteger index=0;
-	RuleNode *a = [children_ lastObject];
-	
-	// quick comparison to improve performance
-	if (!a)
-        [children_ addObject:child];
-	
-	else
-	{
-		for (RuleNode* a in children_) {
-            
-			[children_ insertObject:child atIndex:index];
-			break;
-            
-			index++;
-		}
-	}
-	
-    //	[child _setZOrder:z];
+{	
+	[children_ addObject:child];
 }
 
 
@@ -196,9 +178,7 @@
 
 
 - (void) execChildren:(NSMutableDictionary*)aVariables
-{
-//    DLog(@"RuleNode: execChildren");
-    
+{    
     NSEnumerator* e = [children_ objectEnumerator];
     id object;
     
