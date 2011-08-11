@@ -252,7 +252,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     _currentNode = emotionNode2;
     [conditionPerceptionNode2 insertChild:emotionNode2];
     
-    StorageNode* storageNode3 = [[StorageNode alloc] initWithEventAndValueAndAndBrainAndParent:@"User Talk" value:@"Bye" memory: LongTermMemory brain:self parent:conditionDataMiningNode3];
+    StorageNode* storageNode3 = [[StorageNode alloc] initWithEventAndValueAndAndBrainAndParent:@"User Talk" value:@"Bye" memory: LongTermMemory brain:self parent:conditionPerceptionNode2];
     _parentNode = _currentNode;
     _currentNode = storageNode3;
     [conditionPerceptionNode2 insertChild:storageNode3];
@@ -457,6 +457,9 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 - (void) receivePerception:(Perception*)aPerception
 {
     [_semaphoreBrain lockWhenCondition:NO_DATA];
+    
+    DLog(@"name: %@. value: %@", [aPerception name], [aPerception value]);
+    
     [_receivedPerceptions enqueue:aPerception];
     
     [_semaphoreBrain unlockWithCondition:HAS_DATA];

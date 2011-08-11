@@ -27,6 +27,7 @@
 
 - (void) exec
 {
+    
     if ([self isTrue]) {
         NSMutableDictionary* variables = [[NSMutableDictionary alloc] init];
 
@@ -42,10 +43,15 @@
 - (void) exec:(NSMutableDictionary*)aVariables
 {
     if ([self isTrue]) {
-        [aVariables setObject:_value forKey:@"[Perception.value]"];
+        // if the perception value is not in the variables list
+        if ([aVariables objectForKey:@"[Perception.value]"]) {
+            
+            Perception* p = [[_brain receivedPerceptions] objectAtIndex:0];
+            [aVariables setObject:[p value] forKey:@"[Perception.value]"];
+        }
+        
         [self execChildren];
     }
-
 }
 
 
