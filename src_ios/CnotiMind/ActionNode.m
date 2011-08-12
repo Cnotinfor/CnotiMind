@@ -43,7 +43,7 @@
     NSString* info = [NSString stringWithFormat:@""];
     NSString* space = [self space:aDepth];
 
-    info = [info stringByAppendingFormat:@"%@ Action (%@) value= ", space, _name, _value];
+    info = [info stringByAppendingFormat:@"%@ Action (%@) value=%@", space, _name, _value];
     info = [info stringByAppendingFormat:@"%@", [super info:aDepth]];
     
     return info;

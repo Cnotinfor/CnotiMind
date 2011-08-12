@@ -23,6 +23,7 @@
         //  load XML rulles;
         DLog(@"--- load XML rulles ---");
         [_brain loadXmlRulesWithoutXML];
+        
         DLog(@"--- start brain ---");
         [_brain startThreadRun];
         
@@ -46,8 +47,13 @@
 {
     DLog(@"I clicked on the Button!");
 
-    Perception* perception = [[Perception alloc] initWithNameAndAValue:@"User talk" value:@"Bye"];
+
+    
+    Perception* perception = [[Perception alloc] initWithNameAndAValue:@"User Talk" value:@"Hello"];
     [_brain receivePerception:perception];
+    
+    
+    [_brain printMemory:LongTermMemory];
 //    [_brain printSettings];
 //    [_brain printMemory:LongTermMemory];
 }

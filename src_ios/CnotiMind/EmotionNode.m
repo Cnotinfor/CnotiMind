@@ -93,7 +93,15 @@
     NSString* info = [NSString stringWithFormat:@""];
     NSString* space = [self space:aDepth];
     
-    info = [info stringByAppendingFormat:@"%@ DataMining", space];
+    info = [info stringByAppendingFormat:@"%@ Emotion (%@) increment=%@", space, _emotion, _value];
+    
+    if (_min != INT8_MIN) {
+        [info stringByAppendingFormat:@" min= %@", _min ];
+    }
+    if (_max != INT8_MAX) {
+        [info stringByAppendingFormat:@" max= %@", _max ];
+    }
+    
     info = [info stringByAppendingFormat:@"%@", [super info:aDepth]];
     
     return info;

@@ -57,7 +57,6 @@
     
     // Create memory event to add to the memory
     MemoryEvent* m = [[MemoryEvent alloc] initWithEventAndValue:_event value:_value];
-    
     [_brain storeToMemory:m memoryType:_memory];
 
 }

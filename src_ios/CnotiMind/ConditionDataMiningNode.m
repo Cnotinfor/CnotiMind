@@ -44,7 +44,7 @@
 
 - (void) exec
 {
-    DLog(@" ConditionDataMining exec");
+    DLog(@"ConditionDataMining exec");
     
     if ([self isTrue]) {
             
@@ -64,6 +64,8 @@
 
 - (void) exec:(NSMutableDictionary*)aVariables
 {
+    DLog(@"ConditionDataMining exec aVariables");
+    
     if ([self isTrue]) {
     
         if ([_variable length]!=0) {
@@ -91,14 +93,13 @@
 
 - (BOOL) isTrue
 {
-
     BOOL valid;
     
     // If the values are numbers it should use the
     if( _isValueNumeric && _isCompareValueNumeric )
     {
-        id result = [_brain dataMining:_dataMiningOperation event:_key value:[NSString stringWithFormat:@"%d",_valueNumeric] memoryType:_memory valid:&valid];
-        
+        id result = [_brain dataMining:_dataMiningOperation event:_key value:[NSString stringWithFormat:@"%f", _valueNumeric] memoryType:_memory valid:&valid];
+                     
         if(!valid)
         {
             return false;
@@ -106,7 +107,11 @@
         
         _result = (NSString*)result;
         
-        float _resultNumeric = [result floatValue];
+        NSLog(@"0 - isTrue result: %@",result);
+        
+        int _resultNumeric = [result intValue];
+
+        NSLog(@"0 - isTrue resultNumeric: %d",_resultNumeric);
         
         switch( (int)_operator )
         {
@@ -128,15 +133,16 @@
     }
     else // If the value is String
     {
-
-        id result = [_brain dataMining: _dataMiningOperation event:_key value:_value memoryType:_memory valid:&valid];
+        id result = [_brain dataMining: _dataMiningOperation event:_key memoryType:_memory valid:&valid];
         
         if(!valid)
         {
             return false;
         }
         
-        DLog(@"result");
+        DLog(@"1 - isTrue result: %@", result);
+        DLog(@"1 - isTrue _compareValue: %@", _compareValue);
+        
         _result = result;
         
         switch( (int)_operator )
