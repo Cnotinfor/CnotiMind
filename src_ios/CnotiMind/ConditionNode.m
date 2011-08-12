@@ -17,7 +17,8 @@
         
         _key = aKey;
         _value = aValue;
-        
+        DLog(@"---: %@", _key);
+        DLog(@"---: %@", _value);        
         // If not condition operator is set, it uses the Equal Operator
 		if(aOperator == ConditionOperatorUndefined)
 		{
@@ -28,16 +29,20 @@
             _operator = aOperator;
         }
         
-        _valueNumeric = [aValue floatValue];
-        
-        if ( strcmp([[NSNumber numberWithDouble:[aValue floatValue]] objCType], "f") ) {
-            _isValueNumeric = TRUE;
-        }
-        else {
+        if ([aValue length]==0) {
             _isValueNumeric = FALSE;
         }
-        
+        else {
+            if ([self isNumeric:aValue]) {
+                _isValueNumeric = TRUE;
+            }
+            else {
+                _isValueNumeric = FALSE;
+            }
+        }
         DLog(@"_isValueNumeric: %d", _isValueNumeric);
+        DLog(@"aValue: %@", aValue);
+        DLog(@"_valueNumeric :%f", _valueNumeric);
         
     }
     
@@ -46,7 +51,7 @@
 
 - (void) exec
 {
-
+    
     // TODO Test if the condition is true. If it is, execute the node
     if( true )
     {

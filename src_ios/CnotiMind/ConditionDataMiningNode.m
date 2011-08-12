@@ -30,13 +30,16 @@
         _memory = aMemory;
         _isCompareValueNumeric = FALSE;
 
-        if ([[NSScanner scannerWithString:_compareValue] scanFloat:NULL]){
+
+        if ([self isNumeric:_compareValue]){
             _isCompareValueNumeric = TRUE;
         }
         else {
             _isCompareValueNumeric = FALSE;
         }
     }
+    
+    DLog(@"_isCompareValueNumeric: %d", _isCompareValueNumeric);
     
     return self;
 }
@@ -143,14 +146,23 @@
         DLog(@"1 - isTrue result: %@", result);
         DLog(@"1 - isTrue _compareValue: %@", _compareValue);
         
-        _result = result;
+
+        if ([result isKindOfClass:[NSNumber class]]) {
+            _result = [result stringValue];
+        }
+        else {
+            _result = result;
+        }
+        
+        DLog(@"1.1 - isTrue result: %@", _result);
+        DLog(@"1.1 - isTrue _compareValue: %@", _compareValue);
         
         switch( (int)_operator )
         {
             case ConditionOperatorEqual: 
                 return [_result isEqualToString:_compareValue];
             case ConditionOperatorDifferent: 
-                return [_result isEqualToString:_compareValue];
+                return ![_result isEqualToString:_compareValue];
         }
         
         return false;

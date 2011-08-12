@@ -30,11 +30,11 @@
 
 - (id) initWithEventAndValueAndOperatorAndBrainAndParent: (NSString*)aKey 
                                                    value:(NSString*)aValue 
-                                                    operator:(enum DataMiningOperation)aDataMiningOperation 
-                                                    memory:(enum MemoryType)aMemory
-                                                    variable:(NSString*)aVariable
-                                                    brain:(Brain*)aBrain 
-                                                    parent:(id)aParent;
+                                                operator:(enum DataMiningOperation)aDataMiningOperation 
+                                                memory:(enum MemoryType)aMemory
+                                                variable:(NSString*)aVariable
+                                                brain:(Brain*)aBrain 
+                                                parent:(id)aParent;
 
 - (void) exec;
 - (void) exec:(NSMutableDictionary*)aVariables;

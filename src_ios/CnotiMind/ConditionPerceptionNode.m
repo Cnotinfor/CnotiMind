@@ -78,17 +78,17 @@
     {
         // Just test the first perception
         Perception* p = (Perception*)[_brain.receivedPerceptions objectAtIndex:0];
-        DLog(@"0 - %@ - %@",p.name, p.value);
-        DLog(@"0 - %@",_key);
+//        DLog(@"0 - %@ - %@",p.name, p.value);
+//        DLog(@"0 - %@",_key);
 
         // Check if it is the percetion for this Node
         if( [p.name isEqualToString:_key] )
         {
-            DLog(@"1 - %@ - %@",p.name,p.value);
+//            DLog(@"1 - %@ - %@",p.name,p.value);
             
             if( [_value length]==0 )
             {
-                DLog(@"2 - %@ - %@",p.name,p.value);
+//                DLog(@"2 - %@ - %@",p.name,p.value);
                 return true;
             }
             else // test if it should be a perception with a specific value

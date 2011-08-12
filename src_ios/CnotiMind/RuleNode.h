@@ -98,4 +98,6 @@
 
 - (void) dealloc;
 
+- (BOOL)isNumeric:(NSString*)s;
+
 @end

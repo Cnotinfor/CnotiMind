@@ -218,7 +218,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     
     
     //    -----------
-    ConditionDataMiningNode* conditionDataMiningNode3 = [[ConditionDataMiningNode alloc] initWithKeyAndValueAndOperatorAndOperationAndMemoryAndVariableAndCompareValueBrainAndParent:@"User Talk" value:@"0" operator:ConditionOperatorEqual operation:DMO_Count memory:LongTermMemory variable:@"" compareValue:@"0" brain:self parent:conditionPerceptionNode];
+    ConditionDataMiningNode* conditionDataMiningNode3 = [[ConditionDataMiningNode alloc] initWithKeyAndValueAndOperatorAndOperationAndMemoryAndVariableAndCompareValueBrainAndParent:@"User Talk" value:@"" operator:ConditionOperatorEqual operation:DMO_Count memory:LongTermMemory variable:@"" compareValue:@"0" brain:self parent:conditionPerceptionNode];
     
 
     _currentNode = conditionDataMiningNode3;
@@ -504,7 +504,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     Emotion* objectEmotion;
     while (objectEmotion = [eEmotions nextObject]) {
         
-        if ([[objectEmotion name] isEqual:aEmotionName] == TRUE) {
+        if ([[objectEmotion name] isEqualToString:aEmotionName] == TRUE) {
         
             [objectEmotion addValue:aVariation max:aMax min:aMin];
 
@@ -573,6 +573,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     // test if parameters are valid for datamining
     if( [aEvent length]==0 )
     {
+        DLog(@"aEvent: %@", aEvent);
         [self setValid: aValid value:false];
         return [NSString stringWithFormat:@""];
     }
@@ -580,6 +581,8 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     NSMutableArray* memory = (aMemoryType == WorkingMemory ? _workingMemory : _longTermMemory);
     
     [self setValid:aValid value:true];
+    
+    DLog(@"aValid: %d", *aValid);
     
     switch (aOperation) {
         case DMO_Max:
@@ -597,7 +600,6 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         case DMO_Mean:
             return [[NSNumber alloc] initWithFloat:[self dataMiningMean: aEvent memory: memory valid:aValid]];
             break;
-            
         case DMO_Exists:
             return [[NSNumber alloc] initWithFloat:[self dataMiningExists: aEvent memory: memory valid:aValid]];
             break;
@@ -629,12 +631,11 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         [self setValid: aValid value:false];
         return result;
     }
-    
-    
+    DLog(@"aValue: %@", aValue);
     // if value is empty, do datamining without the value
     if( [aValue length]==0 )
     {
-        return [self dataMining:aOperation event:aEvent value:aValue memoryType:aMemoryType valid:aValid];
+        return [self dataMining:aOperation event:aEvent memoryType:aMemoryType valid:aValid];
     }
     
     // get the memory to performe data mining
@@ -857,7 +858,6 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     int n = 0;
     
     NSEnumerator* eMemoryEvent = [aMemory objectEnumerator];
-    
     MemoryEvent* objectMemoryEvent;
     while( objectMemoryEvent = [eMemoryEvent nextObject] ) // Iterate all memory
     {
@@ -890,7 +890,10 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     MemoryEvent* objectMemoryEvent;
     while( objectMemoryEvent = [eMemoryEvent nextObject] ) // Iterate all memory
     {
-        if( [[objectMemoryEvent event] isEqualToString:aEvent] && [[objectMemoryEvent value] isEqual:aValue]) // Event found
+        DLog(@"%@ - %@", [objectMemoryEvent event], [objectMemoryEvent value]);
+        DLog(@"%@ - %@", aEvent, aValue);
+        
+        if( [[objectMemoryEvent event] isEqualToString:aEvent] && [[objectMemoryEvent value] isEqualToString:aValue]) // Event found
         {
             n++;
         }   
@@ -991,7 +994,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     MemoryEvent* objectMemoryEvent;
     while( objectMemoryEvent = [eMemoryEvent nextObject] ) // Iterate all memory
     {
-        if( [[objectMemoryEvent event] isEqualToString:aEvent] && [[objectMemoryEvent value] isEqual:aValue]) // Event found
+        if( [[objectMemoryEvent event] isEqualToString:aEvent] && [[objectMemoryEvent value] isEqualToString:aValue]) // Event found
         {
             return true;
         }
@@ -1007,10 +1010,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 - (NSString*) dataMiningLast: (NSString*)aEvent memory:(NSMutableArray*)aMemory valid:(BOOL*)aValid
 {
     
-    
-    
     DLog(@"dataMiningLast: %@",aEvent);
-    
     
     // by defaulf the data mining is not valid
     [self setValid:aValid value:false];
@@ -1090,7 +1090,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 - (void) setValid:(BOOL*)aValid value:(BOOL)aValue
 {
     if (aValid != NULL) {
-        aValid = &aValue;
+        *aValid = aValue;
     }
 }
 
@@ -1123,7 +1123,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
             Emotion* e = [[Emotion alloc] init];
             
             for (Emotion* objectE in _emotions) {
-                if ([[objectE name] isEqual:emotionName]) {
+                if ([[objectE name] isEqualToString:emotionName]) {
                     e = objectE;
                 }
             }

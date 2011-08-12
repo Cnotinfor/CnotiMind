@@ -2,15 +2,15 @@
 
 <Rules>
 	<Condition perception="User Talk" value="Hello">
-		<Condition datamining="last" event="User Talk" value="Hello" >
+		<Condition datamining="last" event="User Talk" comparevalue="Hello" >
 			<Action key="Talk" value="Again??" />
 		</Condition>
-		<Condition datamining="last" event="User Talk" value="Bye" >
+		<Condition datamining="last" event="User Talk" comparevalue="Bye" >
 			<Action key="Talk" value="Hello" />
 			<Emotion key="Happiness" value="1" max="5" />
 			<Storage key="User Talk" value="Hello" memory="LTM" />
 		</Condition>
-		<Condition datamining="count" event="User Talk" value="0" >
+		<Condition datamining="count" event="User Talk" comparevalue="0" >
 			<Action key="Talk" value="Hello" />
 			<Storage key="User Talk" value="Hello" memory="LTM" />
 		</Condition>
