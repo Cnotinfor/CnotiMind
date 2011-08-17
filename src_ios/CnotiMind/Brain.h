@@ -62,6 +62,7 @@ enum { HAS_DATA, NO_DATA };
 - (void) addValidAction:(NSString*)aAction;
 - (void) addEmotion:(Emotion*)aEmotion;
 - (BOOL) loadXmlRulesWithoutXML;
+- (BOOL) loadXmlRulesWithoutXMLKickMe;
 - (BOOL) loadXmlRules:(NSString*)aFilename;
 
 - (BOOL) validateXml:(NSString*)aFilename;

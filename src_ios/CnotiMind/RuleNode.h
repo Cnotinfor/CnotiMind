@@ -88,7 +88,7 @@
 - (NSString*) info:(int)aDepth;
 
 
-- (void) tagsToValue:(NSString*)aValue variables:(NSMutableDictionary*)aVariables;
+- (void) tagsToValue:(NSString**)aValue variables:(NSMutableDictionary**)aVariables;
 
 - (NSString*) space:(int)aDepth;
 
@@ -99,5 +99,7 @@
 - (void) dealloc;
 
 - (BOOL)isNumeric:(NSString*)s;
+
+- (NSString *)captureRegex:(NSString *)pattern;
 
 @end

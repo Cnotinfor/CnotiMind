@@ -272,6 +272,58 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 }
 
 
+- (BOOL) loadXmlRulesWithoutXMLKickMe
+{
+    RootNode* rootNode = [[RootNode alloc] initWithBrainAndParent:self parent:nil];
+    _currentNode = rootNode;
+    
+    ConditionPerceptionNode* conditionPerceptionNode = [[ConditionPerceptionNode alloc] initWithKeyAndValueAndOperatorAndBrainAndParent:@"kicked" value:@"being kicked" operator:ConditionOperatorEqual brain:self parent:rootNode];
+    
+    _currentNode = conditionPerceptionNode;
+    [rootNode insertChild:conditionPerceptionNode];
+    
+    
+    ConditionDataMiningNode* conditionDataMiningNode = [[ConditionDataMiningNode alloc] initWithKeyAndValueAndOperatorAndOperationAndMemoryAndVariableAndCompareValueBrainAndParent:@"kicker" value:@"being kicked" operator:ConditionOperatorEqual operation:DMO_Last memory:WorkingMemory variable:@"" compareValue:@"being kicked" brain:self parent:conditionPerceptionNode];
+    
+    _currentNode = conditionDataMiningNode;
+    [conditionPerceptionNode insertChild:conditionDataMiningNode];
+    
+    ActionNode* actionNode = [[ActionNode alloc] initWithNameAndValueAndBrainAndParent:@"talk" value:@"again? are you crazy?" brain:self parent:conditionDataMiningNode];
+    
+    _currentNode = actionNode;
+    [conditionDataMiningNode insertChild:actionNode];
+    
+    
+    
+    EmotionNode* emotionNode = [[EmotionNode alloc] initWithEmotionAndValueAndAndBrainAndParent:@"joy" value:@"-2" max:5 min:INT8_MIN brain:self parent:conditionPerceptionNode];
+    
+    _currentNode = emotionNode;
+    [conditionPerceptionNode insertChild:emotionNode];
+    
+    StorageNode* storageNode = [[StorageNode alloc] initWithEventAndValueAndAndBrainAndParent:@"kicker" value:@"being kicked" memory: WorkingMemory brain:self parent:conditionPerceptionNode];
+    _parentNode = _currentNode;
+    _currentNode = storageNode;
+    [conditionPerceptionNode insertChild:storageNode];
+    
+    
+    
+    DLog(@"INFO");
+    [rootNode info:1];
+    _rules = rootNode;
+    
+    
+    [self addValidPerception:@"kicked"];
+//    [self addValidAction:@"Talk"];
+    
+    Emotion* emotion = [[Emotion alloc] initWithNameAndValue:@"joy" value:1];
+    [self addEmotion:emotion];
+    
+    return TRUE;
+    
+}
+
+
+
 - (BOOL) loadXmlRules:(NSString*)aFilename
 {
     

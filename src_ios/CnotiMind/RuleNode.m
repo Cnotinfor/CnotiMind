@@ -264,36 +264,37 @@
  */
 
 // TODO
-//- (void) tagsToValue:(NSString**)aValue variables:(NSMutableDictionary**)aVariables
-//{
-//    NSString* empty = [NSString stringWithFormat:@""];
-//    
-//    // VARIABLES
-//    NSString* regex_variables_tags = @"(\\[[a-zA-Z0-9_\\- \\.]+\\])";
-//    
-//    // Search for variable value is between square brackets
-//    int pos = 0;
-//    while( (pos = regex_variables_tags.indexIn( value, pos ) ) != -1 )
-//    {
-//        QString var = regex_variables_tags.cap( 1 );
-//        //pos += regex.matchedLength();
-//        
-//        // Search for the variable in the variables list
-//        QHash<QString,QString>::const_iterator it = variables.find( var );
-//        if( it != variables.end()  )
-//        {
-//            // found it, replace by the variable tag, by the variable value
-//            value.replace( var, it.value(), Qt::CaseInsensitive );
-//            pos += it.value().length();
-//        }
-//        else
-//        {
-//            // not found replace by an empty string
-//            value.replace( var, empty, Qt::CaseInsensitive );
-//        }
-//    }
-//    
-//    // PROPERTIES
+- (void) tagsToValue:(NSString**)aValue variables:(NSMutableDictionary**)aVariables
+{
+    NSString* empty = [NSString stringWithFormat:@""];
+    
+    // VARIABLES
+    NSRegularExpression *regex_variables_tags = [NSRegularExpression regularExpressionWithPattern:@"(\\[[a-zA-Z0-9_\\- \\.]+\\])"
+                                                                           options:NSRegularExpressionCaseInsensitive
+                                                                             error:nil];
+    // Search for variable value is between square brackets
+    int pos = 0;    
+    
+//  while( (pos = regex_variables_tags.indexIn( aValue, pos ) ) != -1 )
+    NSRange rangeOfFirstMatch = [regex_variables_tags rangeOfFirstMatchInString:*aValue options:0 range:NSMakeRange(0, [*aValue length])];
+    while( (pos = rangeOfFirstMatch.location ) != -1 )
+    {
+        
+        NSString* var = [*aValue substringWithRange:rangeOfFirstMatch];
+        NSString* valueFromKey = [*aVariables valueForKey:var];
+        
+        if ([valueFromKey length]>0) {
+            // found it, replace by the variable tag, by the variable value
+            [*aValue setValue:var forKey:valueFromKey];
+            pos += [valueFromKey length];
+        }
+        else {
+            // not found replace by an empty string
+            [*aValue setValue:var forKey:empty];
+        }
+    }
+    
+    // PROPERTIES
 //    QRegExp regex_properties_tags( "\\{([a-zA-Z0-9_\\- \\.]+)\\}", Qt::CaseInsensitive );
 //    // Search for variable value is between curl brackets
 //    pos = 0;
@@ -315,8 +316,8 @@
 //            value = [NSString stringWithValue:empty];
 //        }
 //    }
-//    
-//}
+    
+}
 
 - (NSString*) space:(int)aDepth
 {
@@ -376,6 +377,19 @@
 	[super dealloc];
 }
 
-
+- (NSString *)captureRegex:(NSString *)pattern {
+    
+    NSError *error = nil;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:NSRegularExpressionDotMatchesLineSeparators error:&error];
+    if(regex == nil) {
+        NSLog(@"-- %@", error);
+        return nil;
+    }
+    
+    NSRange rangeOfFirstMatch = [regex rangeOfFirstMatchInString:self options:0 range:NSMakeRange(0, [self length])];
+    if(rangeOfFirstMatch.location == NSNotFound) return nil;
+    
+    return [self substringWithRange:rangeOfFirstMatch];
+}
 
 @end
