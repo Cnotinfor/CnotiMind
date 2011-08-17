@@ -17,8 +17,8 @@
         
         _key = aKey;
         _value = aValue;
-        DLog(@"---: %@", _key);
-        DLog(@"---: %@", _value);        
+//        DLog(@"---: %@", _key);
+//        DLog(@"---: %@", _value);     
         // If not condition operator is set, it uses the Equal Operator
 		if(aOperator == ConditionOperatorUndefined)
 		{
@@ -40,9 +40,9 @@
                 _isValueNumeric = FALSE;
             }
         }
-        DLog(@"_isValueNumeric: %d", _isValueNumeric);
-        DLog(@"aValue: %@", aValue);
-        DLog(@"_valueNumeric :%f", _valueNumeric);
+//        DLog(@"_isValueNumeric: %d", _isValueNumeric);
+//        DLog(@"aValue: %@", aValue);
+//        DLog(@"_valueNumeric :%f", _valueNumeric);
         
     }
     

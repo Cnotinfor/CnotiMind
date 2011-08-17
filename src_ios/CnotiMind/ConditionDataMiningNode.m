@@ -39,7 +39,7 @@
         }
     }
     
-    DLog(@"_isCompareValueNumeric: %d", _isCompareValueNumeric);
+//    DLog(@"_isCompareValueNumeric: %d", _isCompareValueNumeric);
     
     return self;
 }
@@ -47,7 +47,7 @@
 
 - (void) exec
 {
-    DLog(@"ConditionDataMining exec");
+//    DLog(@"ConditionDataMining exec");
     
     if ([self isTrue]) {
             
@@ -67,7 +67,7 @@
 
 - (void) exec:(NSMutableDictionary*)aVariables
 {
-    DLog(@"ConditionDataMining exec aVariables");
+//    DLog(@"ConditionDataMining exec aVariables");
     
     if ([self isTrue]) {
     
@@ -143,8 +143,8 @@
             return false;
         }
         
-        DLog(@"1 - isTrue result: %@", result);
-        DLog(@"1 - isTrue _compareValue: %@", _compareValue);
+//        DLog(@"1 - isTrue result: %@", result);
+//        DLog(@"1 - isTrue _compareValue: %@", _compareValue);
         
 
         if ([result isKindOfClass:[NSNumber class]]) {
@@ -154,8 +154,8 @@
             _result = result;
         }
         
-        DLog(@"1.1 - isTrue result: %@", _result);
-        DLog(@"1.1 - isTrue _compareValue: %@", _compareValue);
+//        DLog(@"1.1 - isTrue result: %@", _result);
+//        DLog(@"1.1 - isTrue _compareValue: %@", _compareValue);
         
         switch( (int)_operator )
         {

@@ -200,7 +200,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     _currentNode = conditionDataMiningNode2;
     [conditionPerceptionNode insertChild:conditionDataMiningNode2];
     
-    ActionNode* actionNode2 = [[ActionNode alloc] initWithNameAndValueAndBrainAndParent:@"Talk" value:@"Hello" brain:self parent:conditionDataMiningNode2];
+    ActionNode* actionNode2 = [[ActionNode alloc] initWithNameAndValueAndBrainAndParent:@"Talk" value:@"I already said Bye!" brain:self parent:conditionDataMiningNode2];
 
     _currentNode = actionNode2;
     [conditionDataMiningNode2 insertChild:actionNode2];
@@ -210,7 +210,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     _currentNode = emotionNode;
     [conditionDataMiningNode2 insertChild:emotionNode];
     
-    StorageNode* storageNode = [[StorageNode alloc] initWithEventAndValueAndAndBrainAndParent:@"User Talk" value:@"Hello" memory: LongTermMemory brain:self parent:conditionDataMiningNode2];
+    StorageNode* storageNode = [[StorageNode alloc] initWithEventAndValueAndAndBrainAndParent:@"User Talk" value:@"I already said Bye!" memory: LongTermMemory brain:self parent:conditionDataMiningNode2];
 
     _currentNode = storageNode;
     [conditionDataMiningNode2 insertChild:storageNode];
@@ -246,7 +246,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     _currentNode = actionNode4;
     [conditionPerceptionNode2 insertChild:actionNode4];
     
-    EmotionNode* emotionNode2 = [[EmotionNode alloc] initWithEmotionAndValueAndAndBrainAndParent:@"Happiness" value:@"-1" max:5 min:INT8_MIN brain:self parent:conditionPerceptionNode2];
+    EmotionNode* emotionNode2 = [[EmotionNode alloc] initWithEmotionAndValueAndAndBrainAndParent:@"Happiness" value:@"-1" max:5 min:0 brain:self parent:conditionPerceptionNode2];
     _parentNode = _currentNode;
     _currentNode = emotionNode2;
     [conditionPerceptionNode2 insertChild:emotionNode2];
@@ -564,7 +564,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 
     [[NSNotificationCenter defaultCenter] postNotificationName:SEND_ACTION object:action];
     
-//    DLog(@"Signal SEND_ACTION sent: %@", action);
+    DLog(@"Signal SEND_ACTION sent: %@", action);
 }
 
 

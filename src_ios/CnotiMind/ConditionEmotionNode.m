@@ -83,7 +83,6 @@
 
 - (BOOL) testEmotion:(Emotion*)aEmotion
 {
-    
     if( _isValueNumeric )
     {
         switch( (int)_operator )

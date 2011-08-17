@@ -45,17 +45,11 @@
 
 - (IBAction) onClickButtonHello
 {
-    DLog(@"I clicked on the Button!");
+//    DLog(@"I clicked on the Button!");
 
-
-    
-    Perception* perception = [[Perception alloc] initWithNameAndAValue:@"User Talk" value:@"Hello"];
+    Perception* perception = [[Perception alloc] initWithNameAndAValue:@"User Talk" value:@"Bye"];
     [_brain receivePerception:perception];
-    
-    
     [_brain printMemory:LongTermMemory];
-//    [_brain printSettings];
-//    [_brain printMemory:LongTermMemory];
 }
 
 

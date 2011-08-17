@@ -6,9 +6,9 @@
 			<Action key="Talk" value="Again??" />
 		</Condition>
 		<Condition datamining="last" event="User Talk" comparevalue="Bye" >
-			<Action key="Talk" value="Hello" />
+			<Action key="Talk" value="I already said Bye!" />
 			<Emotion key="Happiness" value="1" max="5" />
-			<Storage key="User Talk" value="Hello" memory="LTM" />
+			<Storage key="User Talk" value="I already said Bye!" memory="LTM" />
 		</Condition>
 		<Condition datamining="count" event="User Talk" comparevalue="0" >
 			<Action key="Talk" value="Hello" />
