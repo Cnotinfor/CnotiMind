@@ -106,4 +106,38 @@
     }
 }
 
+/*
+ Check if in the value string there are variable or property tags
+ 
+ If it is a variable tag try to get the value from the variables lists.
+ 
+ Variables tags are betweeen square brackets [].
+ Property tags are between curl brackets {}.
+ 
+ If the variable/property tag is not found, it is replaced by an empty string.
+ */
+
+- (BOOL) isTrue:(NSMutableDictionary*)aVariables
+{
+    
+    BOOL valid;
+    int position = 0;
+    
+    // TODO stuff
+//    [self tagsToValue:<#(NSString **)#> variables:<#(NSMutableDictionary **)#>]
+    
+    // If the values are numbers it should use the
+    if( _isValueNumeric )
+    {
+        _result = [_brain dataMining: _operation event:_event value:_valueNumeric memoryType:_memory valid:&valid];
+        return valid;
+    }
+    else // If the value is QString
+    {
+        _result = [_brain dataMining: _operation event:_event value:_value memoryType:_memory valid:&valid];
+        
+        return valid;
+    }
+}
+
 @end

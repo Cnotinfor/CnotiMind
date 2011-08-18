@@ -42,7 +42,7 @@
 - (NSString*) info:(int)aDepth;
 
 - (BOOL) isTrue;
-//- (BOOL) isTrue:(NSMutableDictionary*)aVariables;
+- (BOOL) isTrue:(NSMutableDictionary*)aVariables;
 
 
 @end

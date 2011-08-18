@@ -14,11 +14,11 @@
 @implementation StorageNode
 
 
-- (id) initWithEventAndValueAndAndBrainAndParent: (NSString*)aEvent 
-                                           value:(NSString*)aValue 
-                                          memory:(enum MemoryType)aMemory
-                                           brain:(Brain*)aBrain 
-                                          parent:(id)aParent
+- (id) initWithEventAndValueAndMemoryAndBrainAndParent: (NSString*)aEvent 
+                                                 value:(NSString*)aValue 
+                                                memory:(enum MemoryType)aMemory
+                                                 brain:(Brain*)aBrain 
+                                                parent:(id)aParent
 {
     if (self == [super initWithBrainAndParent:aBrain parent:aParent]) {
         
@@ -30,6 +30,24 @@
 
     return self;
 }
+
+
+- (id) initWithClearAndMemoryAndBrainAndParent: (BOOL)aClear 
+                                        memory:(enum MemoryType)aMemory
+                                         brain:(Brain*)aBrain 
+                                        parent:(id)aParent
+{
+    if (self == [super initWithBrainAndParent:aBrain parent:aParent]) {
+    
+        _memory = aMemory;
+        _clearStorage = aClear;
+        _event = @"";
+        _value = @"";
+    }
+    
+    return self;
+}
+
 
 /*
  Creates a memory Event and store it in the brain memory

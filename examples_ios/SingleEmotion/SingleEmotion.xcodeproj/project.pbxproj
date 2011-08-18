@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1813F3CE13FC1C10005DEC76 /* RulesXmlHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1813F3CD13FC1C10005DEC76 /* RulesXmlHandler.m */; };
+		1813F3D313FC1C80005DEC76 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1813F3D213FC1C80005DEC76 /* GDataXMLNode.m */; };
 		184AEFC313E7129D00284F95 /* mozart_mind.xml in Resources */ = {isa = PBXBuildFile; fileRef = 184AEFBF13E7129D00284F95 /* mozart_mind.xml */; };
 		184AEFC413E7129D00284F95 /* mozart_rules.xml in Resources */ = {isa = PBXBuildFile; fileRef = 184AEFC013E7129D00284F95 /* mozart_rules.xml */; };
 		184AEFC513E7129D00284F95 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 184AEFC113E7129D00284F95 /* README */; };
@@ -33,7 +35,6 @@
 		189613B71381370B00FEA73A /* DataMiningNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613971381370B00FEA73A /* DataMiningNode.m */; };
 		189613B81381370B00FEA73A /* Emotion.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613991381370B00FEA73A /* Emotion.m */; };
 		189613B91381370B00FEA73A /* EmotionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1896139B1381370B00FEA73A /* EmotionNode.m */; };
-		189613BA1381370B00FEA73A /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1896139E1381370B00FEA73A /* GDataXMLNode.m */; };
 		189613BB1381370B00FEA73A /* MemoryEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613A01381370B00FEA73A /* MemoryEvent.m */; };
 		189613BC1381370B00FEA73A /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613A21381370B00FEA73A /* Node.m */; };
 		189613BD1381370B00FEA73A /* NSMutableArray+QueueAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613A41381370B00FEA73A /* NSMutableArray+QueueAdditions.m */; };
@@ -54,6 +55,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1813F3CC13FC1C10005DEC76 /* RulesXmlHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RulesXmlHandler.h; sourceTree = "<group>"; };
+		1813F3CD13FC1C10005DEC76 /* RulesXmlHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RulesXmlHandler.m; sourceTree = "<group>"; };
+		1813F3D113FC1C80005DEC76 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
+		1813F3D213FC1C80005DEC76 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		184353CA13E2BDDD0092AFBD /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		184AEFBF13E7129D00284F95 /* mozart_mind.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mozart_mind.xml; sourceTree = "<group>"; };
 		184AEFC013E7129D00284F95 /* mozart_rules.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mozart_rules.xml; sourceTree = "<group>"; };
@@ -97,8 +102,6 @@
 		189613991381370B00FEA73A /* Emotion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Emotion.m; sourceTree = "<group>"; };
 		1896139A1381370B00FEA73A /* EmotionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmotionNode.h; sourceTree = "<group>"; };
 		1896139B1381370B00FEA73A /* EmotionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmotionNode.m; sourceTree = "<group>"; };
-		1896139D1381370B00FEA73A /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
-		1896139E1381370B00FEA73A /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		1896139F1381370B00FEA73A /* MemoryEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryEvent.h; sourceTree = "<group>"; };
 		189613A01381370B00FEA73A /* MemoryEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemoryEvent.m; sourceTree = "<group>"; };
 		189613A11381370B00FEA73A /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
@@ -140,6 +143,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1813F3CF13FC1C80005DEC76 /* 3rdParty */ = {
+			isa = PBXGroup;
+			children = (
+				1813F3D013FC1C80005DEC76 /* GDataXML */,
+			);
+			path = 3rdParty;
+			sourceTree = "<group>";
+		};
+		1813F3D013FC1C80005DEC76 /* GDataXML */ = {
+			isa = PBXGroup;
+			children = (
+				1813F3D113FC1C80005DEC76 /* GDataXMLNode.h */,
+				1813F3D213FC1C80005DEC76 /* GDataXMLNode.m */,
+			);
+			path = GDataXML;
+			sourceTree = "<group>";
+		};
 		184AEFBE13E7129D00284F95 /* xml */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,7 +175,6 @@
 			isa = PBXGroup;
 			children = (
 				189613821381370B00FEA73A /* CnotiMind */,
-				1896139C1381370B00FEA73A /* GDataXML */,
 				1896134F13811CFD00FEA73A /* SingleEmotion */,
 				1896134813811CFD00FEA73A /* Frameworks */,
 				1896134613811CFD00FEA73A /* Products */,
@@ -208,6 +227,7 @@
 		189613821381370B00FEA73A /* CnotiMind */ = {
 			isa = PBXGroup;
 			children = (
+				1813F3CF13FC1C80005DEC76 /* 3rdParty */,
 				189613C213815B2200FEA73A /* Rules */,
 				189613831381370B00FEA73A /* Action.h */,
 				189613841381370B00FEA73A /* Action.m */,
@@ -228,19 +248,11 @@
 				189613A61381370B00FEA73A /* Perception.h */,
 				189613A71381370B00FEA73A /* Perception.m */,
 				1895305513E1BE9700B41045 /* Macros.h */,
+				1813F3CC13FC1C10005DEC76 /* RulesXmlHandler.h */,
+				1813F3CD13FC1C10005DEC76 /* RulesXmlHandler.m */,
 			);
 			name = CnotiMind;
 			path = ../../src_ios/CnotiMind;
-			sourceTree = "<group>";
-		};
-		1896139C1381370B00FEA73A /* GDataXML */ = {
-			isa = PBXGroup;
-			children = (
-				1896139D1381370B00FEA73A /* GDataXMLNode.h */,
-				1896139E1381370B00FEA73A /* GDataXMLNode.m */,
-			);
-			name = GDataXML;
-			path = ../../src_ios/CnotiMind/GDataXML;
 			sourceTree = "<group>";
 		};
 		189613C213815B2200FEA73A /* Rules */ = {
@@ -395,7 +407,6 @@
 				189613B71381370B00FEA73A /* DataMiningNode.m in Sources */,
 				189613B81381370B00FEA73A /* Emotion.m in Sources */,
 				189613B91381370B00FEA73A /* EmotionNode.m in Sources */,
-				189613BA1381370B00FEA73A /* GDataXMLNode.m in Sources */,
 				189613BB1381370B00FEA73A /* MemoryEvent.m in Sources */,
 				189613BC1381370B00FEA73A /* Node.m in Sources */,
 				189613BD1381370B00FEA73A /* NSMutableArray+QueueAdditions.m in Sources */,
@@ -403,6 +414,8 @@
 				189613BF1381370B00FEA73A /* RootNode.m in Sources */,
 				189613C01381370B00FEA73A /* RuleNode.m in Sources */,
 				189613C11381370B00FEA73A /* StorageNode.m in Sources */,
+				1813F3CE13FC1C10005DEC76 /* RulesXmlHandler.m in Sources */,
+				1813F3D313FC1C80005DEC76 /* GDataXMLNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

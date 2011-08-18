@@ -19,11 +19,18 @@
     BOOL _clearStorage;
 }
 
-- (id) initWithEventAndValueAndAndBrainAndParent: (NSString*)aEvent 
-                                           value:(NSString*)aValue 
-                                          memory:(enum MemoryType)aMemory
-                                           brain:(Brain*)aBrain 
-                                          parent:(id)aParent;
+- (id) initWithEventAndValueAndMemoryAndBrainAndParent: (NSString*)aEvent 
+                                                 value:(NSString*)aValue 
+                                                memory:(enum MemoryType)aMemory
+                                                 brain:(Brain*)aBrain 
+                                                parent:(id)aParent;
+
+- (id) initWithClearAndMemoryAndBrainAndParent: (BOOL)aClear 
+                                        memory:(enum MemoryType)aMemory
+                                         brain:(Brain*)aBrain 
+                                        parent:(id)aParent;
+
+
 - (void) exec;
 - (void) exec:(NSMutableDictionary*)aVariables;
 
