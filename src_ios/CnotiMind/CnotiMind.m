@@ -28,6 +28,9 @@
 
 + (enum ConditionOperator) translateConditionOperator:(NSString*)aText
 {
+    if (aText==nil) {
+        return ConditionOperatorUndefined;
+    }
     if( [aText isEqualToString:@">"])
     {
         return ConditionOperatorBigger;
@@ -48,7 +51,7 @@
     {
         return ConditionOperatorEqual;
     }
-    if( [aText isEqualToString:@"!="] || [aText isEqualToString:@"<>"] == 0)
+    if( ([aText isEqualToString:@"!="] ==0) || ([aText isEqualToString:@"<>"] == 0) )
     {
         return ConditionOperatorDifferent;
     }

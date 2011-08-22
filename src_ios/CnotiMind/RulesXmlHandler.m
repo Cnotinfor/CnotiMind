@@ -21,16 +21,112 @@
 #import "CnotiMind.h"
 #import "Brain.h"
 
+
+
 @implementation RulesXmlHandler
+
+@synthesize rootNode = _rootNode;
 
 - (id)init
 {
     self = [super init];
     if (self) {
+
         // Initialization code here.
+        _rootNode = NULL;
+        _currentNode = NULL;
+        _parentNode = NULL;
+//        _brain = [[Brain alloc] init];
+        _parentObject = [[RuleNode alloc] init];
+        _line = 0;
+    }
+    return self;
+}
+
+- (id)initWithBrain:(Brain*)aBrain
+{
+    self = [super init];
+    if (self) {
+        // Initialization code here.
+        _rootNode = NULL;
+        _currentNode = NULL;
+        _parentNode = NULL;
+        _brain = aBrain;
+        _parentObject = [[RuleNode alloc] init];
+        _line = 0;
+
+    }
+    return self;
+}
+
+
+- (BOOL) startElement:(NSString*)aNamespaceURI localName:(NSString*)aLocalName qName:(NSString*)aQName atts:(GDataXMLElement*)atts
+{
+    _line++;
+    
+    if( [aQName isEqualToString:@"Rules"] == 0 )
+    {
+        return [self createRootNode:atts];
+    }
+    if( [aQName isEqualToString:@"Condition"] == 0 )
+    {
+        return [self createConditionNode:atts];
+    }
+    if( [aQName isEqualToString:@"Action"] == 0 )
+    {
+        return [self createActionNode:atts];
+    }
+    if( [aQName isEqualToString:@"Storage"] == 0 )
+    {
+        return [self createStorageNode:atts];
+    }
+    if( [aQName isEqualToString:@"Emotion"] == 0 )
+    {
+        return [self createEmotionNode:atts];
+    }
+    if( [aQName isEqualToString:@"DataMining"] == 0 )
+    {
+        return [self createDataMiningNode:atts];
+    }
+    if( [aQName isEqualToString:@"MathOperation"] == 0 )
+    {
+        return [self createMathOperationNode:atts];
+    }
+    if( [aQName isEqualToString:@"Property"] == 0 )
+    {
+        return [self createPropertyNode:atts];
+    }
+    if( [aQName isEqualToString:@"Delete"] == 0 )
+    {
+        return [self createDeleteNode:atts];
+    }
+    if( [aQName isEqualToString:@"ClearMemory"] == 0 )
+    {
+        return [self createClearMemoryNode:atts];
+    }
+    if( [aQName isEqualToString:@"Random"] == 0 )
+    {
+        return [self createRandomNode:atts];
     }
     
-    return self;
+    DLog(@"[RulesXmlHandler::startElement] Invalid element: %@",aQName);
+    
+    return false;
+}
+
+
+- (BOOL) endElement:(NSString*)aNamespaceURI localName:(NSString*)aLocalName qName:(NSString*)aQName
+{
+    if( _rootNode == _currentNode )
+    {
+        _currentNode = NULL;
+        return true;
+    }
+    
+    _currentNode = _parentNode;
+    _parentNode = (RuleNode*)_currentNode.parent;
+    
+    return true;
 }
 
 
@@ -108,20 +204,20 @@
     }
     
     NSString* emotion = [[atts attributeForName:@"name"] stringValue];
-    NSString* value = [[atts attributeForName:@"increment"] stringValue];
+    NSString* value = [[atts attributeForName:@"increase"] stringValue];
     BOOL okMin = [CnotiMind isNumeric: [[atts attributeForName:@"min"] stringValue]];
     double min = [[[atts attributeForName:@"min"] stringValue] floatValue];
     BOOL okMax = [CnotiMind isNumeric: [[atts attributeForName:@"max"] stringValue]];
     double max = [[[atts attributeForName:@"max"] stringValue] floatValue];
         
     if (!okMin) {
-        max = INT_MAX;
+        min = INT_MIN;
     }
     if (!okMax) {
         max = INT_MAX;
     }
     _parentNode = _currentNode;
-    _currentNode = [[EmotionNode alloc] initWithEmotionAndValueAndAndBrainAndParent:emotion value:value max:max min:min brain:_brain parent:_parentNode];
+    _currentNode = [[EmotionNode alloc] initWithEmotionAndValueAndMaxAndMinAndBrainAndParent:emotion value:value max:max min:min brain:_brain parent:_parentNode];
     
     return true;
 }
@@ -193,6 +289,8 @@
 
     enum ConditionOperator opConditionType;
     opConditionType = [CnotiMind translateConditionOperator: opCondition];
+    
+    DLog(@"createConditionPerceptionNode: %@ - %@ - %@", perception, value, opCondition);
     
     _parentNode = _currentNode;
     _currentNode = [[ConditionPerceptionNode alloc] initWithPerceptionAndValueAndOperatorAndBrainAndParent:perception value:value operator:opConditionType brain:_brain parent:_parentNode];
@@ -277,6 +375,7 @@
     mathOperationType = [CnotiMind translateMathOperation:operation];
 //    TODO
 //    _currentNode = [MathOperationNode]
+    return false;
     
 }
 

@@ -21,6 +21,8 @@
 #import "CnotiMind.h"
 //#import "MemoryType.h"
 
+#import "RulesXmlHandler.h"
+
 extern NSString* const SEND_ACTION;
 extern NSString* const SEND_EMOTIONAL_STATE;
 
@@ -45,7 +47,9 @@ enum { HAS_DATA, NO_DATA };
     NSMutableArray* _workingMemory;
     int _timerDecayEmotions;
     
-    bool _quit;    
+    bool _quit;
+    
+    RulesXmlHandler* _rulesXMLHandler;
 }
 
 
@@ -62,6 +66,7 @@ enum { HAS_DATA, NO_DATA };
 - (void) addValidAction:(NSString*)aAction;
 - (void) addEmotion:(Emotion*)aEmotion;
 - (BOOL) loadXmlRulesWithoutXML;
+- (BOOL) loadXmlRulesWithoutXMLKickMeWithHandler;
 - (BOOL) loadXmlRulesWithoutXMLKickMe;
 - (BOOL) loadXmlRules:(NSString*)aFilename;
 

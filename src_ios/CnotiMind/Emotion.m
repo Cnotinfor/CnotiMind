@@ -21,7 +21,7 @@
 - (id) init
 {
     if (self == [super init]) {
-        _name = [NSString stringWithFormat:@""];
+        _name = [[NSString alloc] initWithString:@""];
         _value = 0;
         _min = INT8_MIN;
         _max = INT8_MAX;
@@ -33,7 +33,7 @@
 - (id) initWithNameAndValue:(NSString*)aName value:(double)aValue
 {
     if (self == [super init]) {
-        _name = aName;
+        _name = [[NSString alloc] initWithString:aName];
         _value = aValue;
         _min = INT8_MIN;
         _max = INT8_MAX;
@@ -45,7 +45,7 @@
 - (id) initWithNameAndValueAndMaxAndMin:(NSString*)aName value:(double)aValue max:(double)aMax min:(double)aMin
 {
     if (self == [super init]) {
-        _name = aName;
+        _name = [[NSString alloc] initWithString:aName];
         _value = aValue;
         _min = INT8_MIN;
         _max = INT8_MAX;
@@ -117,6 +117,12 @@
 
     NSLog(@"%@", res);
     return res;
+}
+
+- (void) dealloc
+{
+    [_name release];
+    [super dealloc];
 }
 
 @end

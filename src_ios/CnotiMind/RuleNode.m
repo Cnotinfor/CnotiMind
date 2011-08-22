@@ -39,7 +39,7 @@
 		userData_ = nil;
         
 		//initialize parent to nil
-		parent_ = nil;        
+		parent_ = nil;
 	}
 	
 	return self;
@@ -59,7 +59,11 @@
 		userData_ = nil;
         
 		//initialize parent to nil
-		parent_ = aParent;
+//		parent_ = aParent;
+        
+        if (aParent != nil) {
+            [aParent insertChild:self];
+        }
 	}
 	
 	return self;
@@ -386,10 +390,10 @@
         return nil;
     }
     
-    NSRange rangeOfFirstMatch = [regex rangeOfFirstMatchInString:self options:0 range:NSMakeRange(0, [self length])];
+    NSRange rangeOfFirstMatch = [regex rangeOfFirstMatchInString:pattern options:0 range:NSMakeRange(0, [pattern length])];
     if(rangeOfFirstMatch.location == NSNotFound) return nil;
     
-    return [self substringWithRange:rangeOfFirstMatch];
+    return [pattern substringWithRange:rangeOfFirstMatch];
 }
 
 @end

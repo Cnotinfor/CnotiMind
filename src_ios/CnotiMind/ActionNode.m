@@ -18,8 +18,8 @@
 {
 //    return [super initWithKeyAndValueAndBrainAndParent:aKey value:aValue brain:aBrain parent:aParent];
     if (self = [super initWithBrainAndParent:aBrain parent:aParent]) {
-        _name = aName;
-        _value = aValue;
+        _name = [[NSString alloc] initWithString:aName];
+        _value = [[NSString alloc] initWithString:aValue];
     }
     
     return self;
@@ -48,5 +48,14 @@
     
     return info;
 }
+
+- (void) dealloc
+{
+    [_name release];
+    [_value release];
+    
+    [super dealloc];
+}
+
 
 @end

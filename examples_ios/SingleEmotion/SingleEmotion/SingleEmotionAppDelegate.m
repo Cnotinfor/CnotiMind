@@ -22,8 +22,10 @@
         
         //  load XML rulles;
         DLog(@"--- load XML rulles ---");
-        [_brain loadXmlRulesWithoutXML];
-        [_brain loadXmlRulesWithoutXMLKickMe];
+//        [_brain loadXmlRulesWithoutXML];
+//        [_brain loadXmlRulesWithoutXMLKickMe];
+        
+        [_brain loadXmlRulesWithoutXMLKickMeWithHandler];
         
         DLog(@"--- start brain ---");
         [_brain startThreadRun];
@@ -46,7 +48,7 @@
 
 - (IBAction) onClickButtonHello
 {
-//    DLog(@"I clicked on the Button!");
+    DLog(@"I clicked on the Button!");
 
 //    Perception* perception = [[Perception alloc] initWithNameAndAValue:@"User Talk" value:@"Bye"];
 //    [_brain receivePerception:perception];

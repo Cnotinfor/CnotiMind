@@ -14,11 +14,11 @@
 {
     if (self == [super initWithBrainAndParent:aBrain parent:aParent]) {
         
-        
-        _key = aKey;
-        _value = aValue;
-//        DLog(@"---: %@", _key);
-//        DLog(@"---: %@", _value);     
+//        _key = aKey;
+        _key = [[NSString alloc] initWithString:aKey];        
+        _value = [[NSString alloc] initWithString:aValue];;
+        DLog(@"---: %@", _key);
+        DLog(@"---: %@", _value);     
         // If not condition operator is set, it uses the Equal Operator
 		if(aOperator == ConditionOperatorUndefined)
 		{
@@ -81,5 +81,11 @@
     return info;
 }
 
+
+- (void) dealloc
+{
+    [_key release];
+    [super dealloc];
+}
 
 @end

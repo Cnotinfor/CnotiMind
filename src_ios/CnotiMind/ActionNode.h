@@ -24,4 +24,6 @@
 
 - (NSString*) info:(int)aDepth;
 
+- (void) dealloc;
+
 @end

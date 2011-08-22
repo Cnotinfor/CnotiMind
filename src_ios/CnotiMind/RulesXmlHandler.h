@@ -9,7 +9,6 @@
 #ifndef RULESXMLHANDLER_H
 #define RULESXMLHANDLER_H
 
-
 @class CnotiMind;
 @class RuleNode;
 @class RootNode;
@@ -36,7 +35,16 @@
     int _line;
 }
 
+@property (readwrite, retain) RuleNode* rootNode;
+
 - (id)init;
+- (id)initWithBrain:(Brain*)aBrain;
+
+- (BOOL) startElement:(NSString*)aNamespaceURI localName:(NSString*)aLocalName qName:(NSString*)aQName atts:(GDataXMLElement*)atts;
+- (BOOL) endElement:(NSString*)aNamespaceURI localName:(NSString*)aLocalName qName:(NSString*)aQName;
+
+//RuleNode* rootNode() const;
+//int line() const;
 
 - (BOOL) createRootNode:(GDataXMLElement*)atts;
 - (BOOL) createActionNode:(GDataXMLElement*)atts;
@@ -54,8 +62,6 @@
 - (BOOL) createDeleteNode:(GDataXMLElement*)atts;
 - (BOOL) createClearMemoryNode:(GDataXMLElement*)atts;
 - (BOOL) createRandomNode:(GDataXMLElement*)atts;
-
-
 
 @end
 #endif // RULESXMLHANDLER_H

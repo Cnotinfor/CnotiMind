@@ -25,12 +25,12 @@
     
     if ( self == [super initWithBrainAndParent:aBrain parent:aParent] )
     {
-        _event = aEvent;
-        _value = aValue;
+        _event = [[NSString alloc] initWithString:aEvent];
+        _value = [[NSString alloc] initWithString:aValue];
         
         _operation = aDataMiningOperation;
         _memory = aMemory;
-        _variable = aVariable;
+        _variable = [[NSString alloc] initWithString:aVariable];
         _valueNumeric = [NSNumber numberWithFloat:[aValue floatValue]];
         
         
@@ -139,5 +139,15 @@
         return valid;
     }
 }
+
+- (void) dealloc
+{
+    [_event release];
+    [_value release];
+    [_variable release];
+    
+    [super dealloc];
+}
+
 
 @end

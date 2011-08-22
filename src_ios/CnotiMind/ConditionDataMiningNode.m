@@ -25,8 +25,8 @@
     if (self == [super initWithKeyAndValueAndBrainAndParent: aKey value:aValue operator: aOperator brain:aBrain parent:aParent]) {
     
         _dataMiningOperation = aOperation;
-        _variable = aVariable;
-        _compareValue = aCompareValue;
+        _variable = [[NSString alloc] initWithString:aVariable];
+        _compareValue = [[NSString alloc] initWithString:aCompareValue];
         _memory = aMemory;
         _isCompareValueNumeric = FALSE;
 
@@ -168,5 +168,14 @@
         return false;
     }
 }
+
+- (void) dealloc
+{
+    [_variable release];
+    [_compareValue release];
+    
+    [super dealloc];
+}
+
 
 @end

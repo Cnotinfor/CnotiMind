@@ -23,8 +23,8 @@
     if (self == [super initWithBrainAndParent:aBrain parent:aParent]) {
         
         _memory = aMemory;
-        _event = aEvent;
-        _value = aValue;
+        _event = [[NSString alloc] initWithString:aEvent];
+        _value = [[NSString alloc] initWithString:aValue];
         _clearStorage = FALSE;
     }
 
@@ -97,6 +97,12 @@
     return info;
 }
 
-
+- (void) dealloc
+{
+    [_event release];
+    [_value release];
+    
+    [super dealloc];
+}
 
 @end

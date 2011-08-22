@@ -20,8 +20,8 @@
 {
     if ( self == [super initWithBrainAndParent:aBrain parent:aParent] ) {
     
-        _emotion = aEmotion;
-        _value = aValue;
+        _emotion = [[NSString alloc] initWithString:aEmotion];
+        _value = [[NSString alloc] initWithString:aValue];
         _min = INT_MIN;
         _max = INT_MAX;
         _valueNumericOk = TRUE;
@@ -31,17 +31,23 @@
     return self;
 }
 
-- (id) initWithEmotionAndValueAndAndBrainAndParent:(NSString*)aEmotion 
-                                             value:(NSString*)aValue 
-                                               max:(double)aMax
-                                               min:(double)aMin
-                                             brain:(Brain*)aBrain 
-                                            parent:(id)aParent
+- (id) initWithEmotionAndValueAndMaxAndMinAndBrainAndParent:(NSString*)aEmotion 
+                                                      value:(NSString*)aValue 
+                                                        max:(double)aMax
+                                                        min:(double)aMin
+                                                      brain:(Brain*)aBrain 
+                                                     parent:(id)aParent
 {
     if ( self == [super initWithBrainAndParent:aBrain parent:aParent] ) {        
-        _emotion = aEmotion;
-        _value = aValue;
 
+        DLog(@"->%@", aEmotion);
+        DLog(@"->%@", aValue);        
+        _emotion = [[NSString alloc] initWithString:aEmotion];
+        _value = [[NSString alloc] initWithString:aValue];
+        
+        DLog(@"->%@", _emotion);
+        DLog(@"->%@", _value);
+        
         _min = aMin;
         _max = aMax;
         _valueNumericOk = TRUE;        
@@ -91,14 +97,17 @@
 - (NSString*) info:(int)aDepth
 {
     NSString* info = [NSString stringWithFormat:@""];
-    NSString* space = [self space:aDepth];
+//    NSString* space = [self space:aDepth];
+//    DLog(@"---");
+//    DLog(@"- %@ -", space);
+//    DLog(@"- %@ -", _emotion);
+//    DLog(@"- %@ -", _value);
+//    info = [info stringByAppendingFormat:@"%@ Emotion (%@) increment=%@", space, _emotion, _value];
     
-    info = [info stringByAppendingFormat:@"%@ Emotion (%@) increment=%@", space, _emotion, _value];
-    
-    if (_min != INT8_MIN) {
+    if (_min != INT_MIN) {
         [info stringByAppendingFormat:@" min= %@", _min ];
     }
-    if (_max != INT8_MAX) {
+    if (_max != INT_MAX) {
         [info stringByAppendingFormat:@" max= %@", _max ];
     }
     

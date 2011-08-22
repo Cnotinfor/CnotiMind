@@ -33,12 +33,12 @@
                                              brain:(Brain*)aBrain 
                                             parent:(id)aParent;
 
-- (id) initWithEmotionAndValueAndAndBrainAndParent:(NSString*)aEmotion 
-                                             value:(NSString*)aValue 
-                                               max:(double)aMax
-                                               min:(double)aMin
-                                             brain:(Brain*)aBrain 
-                                            parent:(id)aParent;
+- (id) initWithEmotionAndValueAndMaxAndMinAndBrainAndParent:(NSString*)aEmotion 
+                                                      value:(NSString*)aValue 
+                                                        max:(double)aMax
+                                                        min:(double)aMin
+                                                      brain:(Brain*)aBrain 
+                                                     parent:(id)aParent;
 
 - (void) exec;
 - (void) exec:(NSMutableDictionary*)aVariables;

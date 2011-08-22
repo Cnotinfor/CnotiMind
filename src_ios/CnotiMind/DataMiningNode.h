@@ -44,5 +44,6 @@
 - (BOOL) isTrue;
 - (BOOL) isTrue:(NSMutableDictionary*)aVariables;
 
+- (void) dealloc;
 
 @end
