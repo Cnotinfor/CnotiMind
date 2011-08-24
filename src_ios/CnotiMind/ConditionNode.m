@@ -14,11 +14,9 @@
 {
     if (self == [super initWithBrainAndParent:aBrain parent:aParent]) {
         
-//        _key = aKey;
-        _key = [[NSString alloc] initWithString:aKey];        
-        _value = [[NSString alloc] initWithString:aValue];;
-        DLog(@"---: %@", _key);
-        DLog(@"---: %@", _value);     
+        _key = (aKey == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aKey];
+        _value = (aValue == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aValue];
+        
         // If not condition operator is set, it uses the Equal Operator
 		if(aOperator == ConditionOperatorUndefined)
 		{

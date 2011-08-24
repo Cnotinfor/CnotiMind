@@ -23,11 +23,12 @@
     if (self == [super initWithBrainAndParent:aBrain parent:aParent]) {
         
         _memory = aMemory;
-        _event = [[NSString alloc] initWithString:aEvent];
-        _value = [[NSString alloc] initWithString:aValue];
+        _event = (aEvent == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aEvent];
+        _value = (aValue == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aValue];
+        
         _clearStorage = FALSE;
     }
-
+    
     return self;
 }
 
@@ -38,7 +39,7 @@
                                         parent:(id)aParent
 {
     if (self == [super initWithBrainAndParent:aBrain parent:aParent]) {
-    
+        
         _memory = aMemory;
         _clearStorage = aClear;
         _event = @"";
@@ -76,13 +77,13 @@
     // Create memory event to add to the memory
     MemoryEvent* m = [[MemoryEvent alloc] initWithEventAndValue:_event value:_value];
     [_brain storeToMemory:m memoryType:_memory];
-
+    
 }
 
 
 - (void) exec:(NSMutableDictionary*)aVariables
 {
-//    MemoryEvent* m = [[MemoryEvent alloc] initWithEventAndValue:_event value: [self variableToValue:_value variables:aVariables]];
+    //    MemoryEvent* m = [[MemoryEvent alloc] initWithEventAndValue:_event value: [self variableToValue:_value variables:aVariables]];
     [self exec];
 }
 
@@ -91,7 +92,6 @@
 {
     NSString* info = [NSString stringWithFormat:@""];
     NSString* space = [self space:aDepth];
-    
     info = [info stringByAppendingFormat:@"%@ Storage key=%@ value=%@", space, _event, _value];
     
     return info;

@@ -25,8 +25,8 @@
     
     if ( self == [super initWithBrainAndParent:aBrain parent:aParent] )
     {
-        _event = [[NSString alloc] initWithString:aEvent];
-        _value = [[NSString alloc] initWithString:aValue];
+        _event = (aEvent == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aEvent];
+        _value = (aValue == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aValue];
         
         _operation = aDataMiningOperation;
         _memory = aMemory;
@@ -34,8 +34,8 @@
         _valueNumeric = [NSNumber numberWithFloat:[aValue floatValue]];
         
         
-//      _position( position ),
-//		_positionNumeric( position.toInt( &_isPositionNumeric ) )
+        //      _position( position ),
+        //		_positionNumeric( position.toInt( &_isPositionNumeric ) )
     }
     return self;
 }
@@ -72,7 +72,7 @@
         
         [self execChildren];
     }
-
+    
 }
 
 
@@ -124,7 +124,7 @@
     int position = 0;
     
     // TODO stuff
-//    [self tagsToValue:<#(NSString **)#> variables:<#(NSMutableDictionary **)#>]
+    //    [self tagsToValue:<#(NSString **)#> variables:<#(NSMutableDictionary **)#>]
     
     // If the values are numbers it should use the
     if( _isValueNumeric )

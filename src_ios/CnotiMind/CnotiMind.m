@@ -51,7 +51,7 @@
     {
         return ConditionOperatorEqual;
     }
-    if( ([aText isEqualToString:@"!="] ==0) || ([aText isEqualToString:@"<>"] == 0) )
+    if( ([aText isEqualToString:@"!="] ) || ([aText isEqualToString:@"<>"]) )
     {
         return ConditionOperatorDifferent;
     }
@@ -112,37 +112,37 @@
  */
 + (enum MathOperation) translateMathOperation:(NSString*)text
 {
-    if( [text isEqualToString: @"sum"] == 0 ||
-       [text isEqualToString: @"+"] == 0 )
+    if( [text isEqualToString: @"sum"]  ||
+       [text isEqualToString: @"+"]  )
     {
         return MathOperationSum;
     }
-    if( [text isEqualToString: @"sub"] == 0 ||
-       [text isEqualToString: @"subtraction"] == 0 ||
-       [text isEqualToString: @"-"] == 0 )
+    if( [text isEqualToString: @"sub"]  ||
+       [text isEqualToString: @"subtraction"]  ||
+       [text isEqualToString: @"-"]  )
     {
         return MathOperationSubtraction;
     }
-    if( [text isEqualToString: @"mul"] == 0 ||
-       [text isEqualToString: @"multiplication"] == 0 ||
-       [text isEqualToString: @"x"] == 0 ||
-       [text isEqualToString: @"*"] == 0 )
+    if( [text isEqualToString: @"mul"]  ||
+       [text isEqualToString: @"multiplication"]  ||
+       [text isEqualToString: @"x"]  ||
+       [text isEqualToString: @"*"]  )
     {
         return MathOperationMultiplication;
     }
-    if( [text isEqualToString: @"div"] == 0 ||
-       [text isEqualToString: @"division"] == 0 ||
-       [text isEqualToString: @"quotient"] == 0 ||
-       [text isEqualToString: @"/"] == 0 )
+    if( [text isEqualToString: @"div"]  ||
+       [text isEqualToString: @"division"]  ||
+       [text isEqualToString: @"quotient"]  ||
+       [text isEqualToString: @"/"]  )
     {
         return MathOperationDivision;
     }
-    if( [text isEqualToString: @"remainder"] == 0 ||
-       [text isEqualToString: @"%"] == 0 )
+    if( [text isEqualToString: @"remainder"]  ||
+       [text isEqualToString: @"%"]  )
     {
         return MathOperationRemainder;
     }
-    if( [text isEqualToString: @"sqrt"] == 0 )
+    if( [text isEqualToString: @"sqrt"]  )
     {
         return MathOperationSquareRoot;
     }

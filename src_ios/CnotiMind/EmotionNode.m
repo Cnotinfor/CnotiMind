@@ -20,8 +20,8 @@
 {
     if ( self == [super initWithBrainAndParent:aBrain parent:aParent] ) {
     
-        _emotion = [[NSString alloc] initWithString:aEmotion];
-        _value = [[NSString alloc] initWithString:aValue];
+        _emotion = (aEmotion == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aEmotion];
+        _value = (aValue == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aValue];
         _min = INT_MIN;
         _max = INT_MAX;
         _valueNumericOk = TRUE;
@@ -40,14 +40,9 @@
 {
     if ( self == [super initWithBrainAndParent:aBrain parent:aParent] ) {        
 
-        DLog(@"->%@", aEmotion);
-        DLog(@"->%@", aValue);        
-        _emotion = [[NSString alloc] initWithString:aEmotion];
-        _value = [[NSString alloc] initWithString:aValue];
-        
-        DLog(@"->%@", _emotion);
-        DLog(@"->%@", _value);
-        
+        _emotion = (aEmotion == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aEmotion];
+        _value = (aValue == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aValue];
+                
         _min = aMin;
         _max = aMax;
         _valueNumericOk = TRUE;        
@@ -97,12 +92,8 @@
 - (NSString*) info:(int)aDepth
 {
     NSString* info = [NSString stringWithFormat:@""];
-//    NSString* space = [self space:aDepth];
-//    DLog(@"---");
-//    DLog(@"- %@ -", space);
-//    DLog(@"- %@ -", _emotion);
-//    DLog(@"- %@ -", _value);
-//    info = [info stringByAppendingFormat:@"%@ Emotion (%@) increment=%@", space, _emotion, _value];
+    NSString* space = [self space:aDepth];
+    info = [info stringByAppendingFormat:@"%@ Emotion (%@) increment=%@", space, _emotion, _value];
     
     if (_min != INT_MIN) {
         [info stringByAppendingFormat:@" min= %@", _min ];

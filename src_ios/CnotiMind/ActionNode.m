@@ -16,10 +16,9 @@
 
 - (id) initWithNameAndValueAndBrainAndParent: (NSString*)aName value:(NSString*)aValue brain:(Brain*)aBrain parent:(id)aParent
 {
-//    return [super initWithKeyAndValueAndBrainAndParent:aKey value:aValue brain:aBrain parent:aParent];
     if (self = [super initWithBrainAndParent:aBrain parent:aParent]) {
-        _name = [[NSString alloc] initWithString:aName];
-        _value = [[NSString alloc] initWithString:aValue];
+        _name = (aName == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aName];
+        _value = (aValue == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aValue];
     }
     
     return self;
@@ -42,7 +41,7 @@
 {
     NSString* info = [NSString stringWithFormat:@""];
     NSString* space = [self space:aDepth];
-
+    
     info = [info stringByAppendingFormat:@"%@ Action (%@) value=%@", space, _name, _value];
     info = [info stringByAppendingFormat:@"%@", [super info:aDepth]];
     

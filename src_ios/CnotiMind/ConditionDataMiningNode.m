@@ -25,8 +25,10 @@
     if (self == [super initWithKeyAndValueAndBrainAndParent: aKey value:aValue operator: aOperator brain:aBrain parent:aParent]) {
     
         _dataMiningOperation = aOperation;
-        _variable = [[NSString alloc] initWithString:aVariable];
-        _compareValue = [[NSString alloc] initWithString:aCompareValue];
+        
+        _variable = (aVariable == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aVariable];
+        _compareValue = (aCompareValue == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aCompareValue];
+        
         _memory = aMemory;
         _isCompareValueNumeric = FALSE;
 

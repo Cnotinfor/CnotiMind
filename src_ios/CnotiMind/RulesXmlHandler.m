@@ -65,47 +65,49 @@
 {
     _line++;
     
-    if( [aQName isEqualToString:@"Rules"] == 0 )
+    DLog(@"aQName: %@", aQName);
+    
+    if( [aQName isEqualToString:@"Rules"] )
     {
         return [self createRootNode:atts];
     }
-    if( [aQName isEqualToString:@"Condition"] == 0 )
+    if( [aQName isEqualToString:@"Condition"] )
     {
         return [self createConditionNode:atts];
     }
-    if( [aQName isEqualToString:@"Action"] == 0 )
+    if( [aQName isEqualToString:@"Action"] )
     {
         return [self createActionNode:atts];
     }
-    if( [aQName isEqualToString:@"Storage"] == 0 )
+    if( [aQName isEqualToString:@"Storage"] )
     {
         return [self createStorageNode:atts];
     }
-    if( [aQName isEqualToString:@"Emotion"] == 0 )
+    if( [aQName isEqualToString:@"Emotion"] )
     {
         return [self createEmotionNode:atts];
     }
-    if( [aQName isEqualToString:@"DataMining"] == 0 )
+    if( [aQName isEqualToString:@"DataMining"] )
     {
         return [self createDataMiningNode:atts];
     }
-    if( [aQName isEqualToString:@"MathOperation"] == 0 )
+    if( [aQName isEqualToString:@"MathOperation"] )
     {
         return [self createMathOperationNode:atts];
     }
-    if( [aQName isEqualToString:@"Property"] == 0 )
+    if( [aQName isEqualToString:@"Property"] )
     {
         return [self createPropertyNode:atts];
     }
-    if( [aQName isEqualToString:@"Delete"] == 0 )
+    if( [aQName isEqualToString:@"Delete"] )
     {
         return [self createDeleteNode:atts];
     }
-    if( [aQName isEqualToString:@"ClearMemory"] == 0 )
+    if( [aQName isEqualToString:@"ClearMemory"] )
     {
         return [self createClearMemoryNode:atts];
     }
-    if( [aQName isEqualToString:@"Random"] == 0 )
+    if( [aQName isEqualToString:@"Random"] )
     {
         return [self createRandomNode:atts];
     }
@@ -258,6 +260,7 @@
         return false;
     }
     
+    DLog(@"atts: %@", atts);
     NSString* typeCondition = [[atts attributeForName:@"type"] stringValue];
 
     

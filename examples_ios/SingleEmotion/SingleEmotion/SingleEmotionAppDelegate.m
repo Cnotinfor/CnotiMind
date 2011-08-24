@@ -25,8 +25,15 @@
 //        [_brain loadXmlRulesWithoutXML];
 //        [_brain loadXmlRulesWithoutXMLKickMe];
         
-        [_brain loadXmlRulesWithoutXMLKickMeWithHandler];
+//        [_brain loadXmlRulesWithoutXMLKickMeWithHandler];
+
+        NSString* XMLFile = [NSString stringWithString:@""];
+        XMLFile = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"KickMeRules.xml"];	
+
+        [_brain loadXmlRules:XMLFile];
+
         [_brain printRules];
+        
         DLog(@"--- start brain ---");
         [_brain startThreadRun];
         

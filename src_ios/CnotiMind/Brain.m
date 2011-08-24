@@ -379,15 +379,9 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     NSError *error;
     GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:xmlData 
 														   options:0 error:&error];
-
-    DLog(@"...%@", doc.rootElement);
-    DLog(@"....%@", [doc XMLData]);
     
-    NSString *content = [[NSString alloc]  initWithBytes:[xmlData bytes]
-                                                  length:[xmlData length] encoding: NSUTF8StringEncoding];
-    
-    DLog(@"%@", content);
-    
+//    NSString *content = [[NSString alloc]  initWithBytes:[xmlData bytes]
+//                                                  length:[xmlData length] encoding: NSUTF8StringEncoding];
     
     if (error) {
         DLog(@"[Brain::loadXmlRules] File not found");
@@ -397,9 +391,11 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     else {
         //  Make the parsing - must be recursive!!!
         NSArray *rulesMembers = [doc.rootElement children];
-
-        [self loadXMLRecursive: rulesMembers];
         
+        [_rulesXMLHandler startElement:nil localName:nil qName:@"Rules" atts:nil];
+        [self loadXMLRecursive: rulesMembers];
+        [_rulesXMLHandler endElement:nil localName:nil qName:@"Rules"];
+
     }
     
     [doc release];
@@ -418,23 +414,24 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         return false;
     }
     
+    DLog(@"rulesMembers: %@", rulesMembers);
+    
     for (GDataXMLElement* rulesMember in rulesMembers) {
-        
-        NSString* elementName = [NSString stringWithFormat:@"%@",[rulesMember name]];
-        NSArray* elementAtts = [rulesMember attributes];
+        NSString* elementName = [[NSString alloc] initWithFormat:@"%@",[rulesMember name]];
 
-        GDataXMLElement* elementAttsObject = [[GDataXMLElement alloc] init];
+        DLog(@"elementName: %@", elementName);
         
-        for ( GDataXMLNode* att in elementAtts) {
-            DLog("---> %@", att);
-            [elementAttsObject addChild:att];
-        }
-        
-//        GDataXMLElement* elementAtts = [[GDataXMLElement alloc] init];
-        
-        
-        
-        [_rulesXMLHandler startElement:nil localName:nil qName:elementName atts:elementAttsObject];
+        //element attributes        
+//        NSArray* elementAtts = [rulesMember attributes];
+//
+//        GDataXMLElement* elementAttsObject = [[GDataXMLElement alloc] init];
+//        
+//        for ( GDataXMLNode* att in elementAtts) {
+//            DLog("att: %@", att);
+//            [elementAttsObject addChild:att];
+//        }
+                
+        [_rulesXMLHandler startElement:nil localName:nil qName:elementName atts:rulesMember];
     
         NSArray* childArray = [rulesMember elementsForName:elementName];        
         [self loadXMLRecursive:childArray];
