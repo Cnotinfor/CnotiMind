@@ -36,6 +36,7 @@
 }
 
 @property (readwrite, retain) RuleNode* rootNode;
+@property (readwrite, retain) RuleNode* currentNode;
 
 - (id)init;
 - (id)initWithBrain:(Brain*)aBrain;

@@ -23,6 +23,8 @@
 
 #import "RulesXmlHandler.h"
 
+
+
 extern NSString* const SEND_ACTION;
 extern NSString* const SEND_EMOTIONAL_STATE;
 
@@ -69,6 +71,7 @@ enum { HAS_DATA, NO_DATA };
 - (BOOL) loadXmlRulesWithoutXMLKickMeWithHandler;
 - (BOOL) loadXmlRulesWithoutXMLKickMe;
 - (BOOL) loadXmlRules:(NSString*)aFilename;
+- (BOOL) loadXMLRecursive:(NSArray*)rulesMembers;
 
 - (BOOL) validateXml:(NSString*)aFilename;
 - (BOOL) saveMemory:(NSString*)aFilename;

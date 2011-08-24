@@ -26,6 +26,7 @@
 @implementation RulesXmlHandler
 
 @synthesize rootNode = _rootNode;
+@synthesize currentNode = _currentNode;
 
 - (id)init
 {

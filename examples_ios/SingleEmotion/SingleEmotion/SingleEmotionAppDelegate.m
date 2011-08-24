@@ -26,7 +26,7 @@
 //        [_brain loadXmlRulesWithoutXMLKickMe];
         
         [_brain loadXmlRulesWithoutXMLKickMeWithHandler];
-        
+        [_brain printRules];
         DLog(@"--- start brain ---");
         [_brain startThreadRun];
         
@@ -57,6 +57,7 @@
     [_brain receivePerception:perception2];
     
     [_brain printMemory:LongTermMemory];
+    [_brain printMemory:WorkingMemory];
 }
 
 
