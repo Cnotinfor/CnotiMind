@@ -327,7 +327,7 @@
 
 - (NSString*) space:(int)aDepth
 {
-    NSString* space = [NSString stringWithFormat:@",,,\n"];
+    NSString* space = [NSString stringWithFormat:@"\n"];
     for( int i=0; i <= aDepth; i++ )
     {
         space = [space stringByAppendingFormat:@"---\t"];

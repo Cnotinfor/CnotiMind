@@ -403,10 +403,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     
     _rules = [_rulesXMLHandler rootNode];
     DLog(@"[Brain::loadXmlRules] done");
-    
-    DLog(@"[Brain::printRules]");
-    [self printRules];
-    
+
     return true;
 }
 
@@ -1254,7 +1251,6 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         
         // Execute the rules
         if (_rules!=nil) {
-            [_rules info:1];
             [_rules exec];       
         }
         
