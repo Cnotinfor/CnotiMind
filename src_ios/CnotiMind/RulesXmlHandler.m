@@ -21,8 +21,6 @@
 #import "CnotiMind.h"
 #import "Brain.h"
 
-
-
 @implementation RulesXmlHandler
 
 @synthesize rootNode = _rootNode;
@@ -64,8 +62,6 @@
 - (BOOL) startElement:(NSString*)aNamespaceURI localName:(NSString*)aLocalName qName:(NSString*)aQName atts:(GDataXMLElement*)atts
 {
     _line++;
-    
-    DLog(@"aQName: %@", aQName);
     
     if( [aQName isEqualToString:@"Rules"] )
     {
@@ -117,7 +113,9 @@
     return false;
 }
 
-
+/*
+ When an element is closed the currentNode and parentNode are updated
+*/
 - (BOOL) endElement:(NSString*)aNamespaceURI localName:(NSString*)aLocalName qName:(NSString*)aQName
 {
     if( _rootNode == _currentNode )
@@ -166,16 +164,12 @@
     
     _parentNode = _currentNode;
     _currentNode = [[ActionNode alloc] initWithNameAndValueAndBrainAndParent: name value:value brain:_brain parent:_parentNode];
-    DLog(@"%@", _currentNode);
     
     return true;
 }
 
 - (BOOL) createStorageNode:(GDataXMLElement*)atts
 {
-    
-    DLog(@"%@", _rootNode);
-    DLog(@"%@", _currentNode);
     
     if( _rootNode == NULL || _currentNode == NULL )
     {
@@ -268,7 +262,6 @@
         return false;
     }
     
-    DLog(@"atts: %@", atts);
     NSString* typeCondition = [[atts attributeForName:@"type"] stringValue];
 
     
@@ -293,6 +286,7 @@
     return false;    
 }
 
+
 - (BOOL) createConditionPerceptionNode:(GDataXMLElement*)atts
 {
     NSString* perception = [[atts attributeForName:@"perception"] stringValue];
@@ -302,13 +296,12 @@
     enum ConditionOperator opConditionType;
     opConditionType = [CnotiMind translateConditionOperator: opCondition];
     
-    DLog(@"createConditionPerceptionNode: %@ - %@ - %@", perception, value, opCondition);
-    
     _parentNode = _currentNode;
     _currentNode = [[ConditionPerceptionNode alloc] initWithPerceptionAndValueAndOperatorAndBrainAndParent:perception value:value operator:opConditionType brain:_brain parent:_parentNode];
     
     return true;
 }
+
 
 - (BOOL) createConditionVariableNode:(GDataXMLElement*)atts
 {
@@ -378,17 +371,17 @@
         return false;
     }
     
-    NSString* operation = [[atts attributeForName:@"name"] stringValue];
-    NSString* value = [[atts attributeForName:@"value"] stringValue];
-    NSString* variable = [[atts attributeForName:@"variable"] stringValue];
-    NSString* result = [[atts attributeForName:@"result"] stringValue];
-    
-    enum MathOperation mathOperationType;
-    mathOperationType = [CnotiMind translateMathOperation:operation];
+//    NSString* operation = [[atts attributeForName:@"name"] stringValue];
+//    NSString* value = [[atts attributeForName:@"value"] stringValue];
+//    NSString* variable = [[atts attributeForName:@"variable"] stringValue];
+//    NSString* result = [[atts attributeForName:@"result"] stringValue];
+//    
+//    enum MathOperation mathOperationType;
+//    mathOperationType = [CnotiMind translateMathOperation:operation];
 //    TODO
 //    _currentNode = [MathOperationNode]
-    return false;
     
+    return false;
 }
 
 - (BOOL) createPropertyNode:(GDataXMLElement*)atts

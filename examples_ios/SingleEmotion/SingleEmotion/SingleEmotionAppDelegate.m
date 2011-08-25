@@ -28,7 +28,7 @@
 //        [_brain loadXmlRulesWithoutXMLKickMeWithHandler];
 
         NSString* XMLFile = [NSString stringWithString:@""];
-        XMLFile = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"KickMeRules.xml"];	
+        XMLFile = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"single_emotion_rules.xml"];	
 
         [_brain loadXmlRules:XMLFile];
 

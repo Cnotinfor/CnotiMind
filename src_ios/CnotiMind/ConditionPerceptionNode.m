@@ -71,15 +71,14 @@
 {
     // Check if there are perceptions to be processed in the brain
     
-    
-    DLog(@"%d", [_brain.receivedPerceptions count]);
+//    DLog(@"%d", [_brain.receivedPerceptions count]);
     
     if( [_brain.receivedPerceptions count]!=0 )
     {
         // Just test the first perception
         Perception* p = (Perception*)[_brain.receivedPerceptions objectAtIndex:0];
-        DLog(@"0 - %@ - %@",p.name, p.value);
-        DLog(@"0 - %@",_key);
+//        DLog(@"0 - %@ - %@",p.name, p.value);
+//        DLog(@"0 - %@",_key);
 
         // Check if it is the percetion for this Node
         if( [p.name isEqualToString:_key] )
@@ -103,7 +102,6 @@
                 
                 if( ok && ok2 )
                 {
-                    
                     switch( (int)_operator )
                     {
                         case ConditionOperatorBigger: 

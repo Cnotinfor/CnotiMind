@@ -410,28 +410,13 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 
 - (BOOL) loadXMLRecursive:(NSArray*)rulesMembers
 {
-    
     if ([rulesMembers count]==0) {
         return false;
     }
     
-    DLog(@"rulesMembers: %@", rulesMembers);
-    
     for (GDataXMLElement* rulesMember in rulesMembers) {
         NSString* elementName = [[NSString alloc] initWithFormat:@"%@",[rulesMember name]];
-
-        DLog(@"elementName: %@", elementName);
         
-        //element attributes        
-//        NSArray* elementAtts = [rulesMember attributes];
-//
-//        GDataXMLElement* elementAttsObject = [[GDataXMLElement alloc] init];
-//        
-//        for ( GDataXMLNode* att in elementAtts) {
-//            DLog("att: %@", att);
-//            [elementAttsObject addChild:att];
-//        }
-                
         [_rulesXMLHandler startElement:nil localName:nil qName:elementName atts:rulesMember];
     
         NSArray* childArray = [rulesMember children];        
@@ -439,7 +424,6 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     
         [_rulesXMLHandler endElement:nil localName:nil qName:elementName];
     }
-    
     return true;
 }
 
@@ -583,14 +567,15 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     NSEnumerator* eMemory;
     
     if (aType == WorkingMemory) {
+        DLog(@"--- Print Memory WorkingMemory---");
         eMemory = [_workingMemory objectEnumerator];
     }
     else if (aType == LongTermMemory) {
+        DLog(@"--- Print Memory LongTermMemory---");
         eMemory = [_longTermMemory objectEnumerator];
     }
     
     MemoryEvent* objectMemoryEvent;
-    NSLog(@"--- Print Memory ---");
     while (objectMemoryEvent = [eMemory nextObject]) {
         DLog(@"\nEvent: %@ Value: %@", [objectMemoryEvent event], [objectMemoryEvent value]);
     }
@@ -705,8 +690,6 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     [action setObject:aValue forKey:aKey];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:SEND_ACTION object:action];
-    
-    DLog(@"Signal SEND_ACTION sent: %@", action);
 }
 
 
@@ -715,7 +698,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     // test if parameters are valid for datamining
     if( [aEvent length]==0 )
     {
-        DLog(@"aEvent: %@", aEvent);
+//        DLog(@"aEvent: %@", aEvent);
         [self setValid: aValid value:false];
         return [NSString stringWithFormat:@""];
     }
@@ -724,7 +707,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     
     [self setValid:aValid value:true];
     
-    DLog(@"aValid: %d", *aValid);
+//    DLog(@"aValid: %d", *aValid);
     
     switch (aOperation) {
         case DMO_Max:
@@ -1152,7 +1135,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 - (NSString*) dataMiningLast: (NSString*)aEvent memory:(NSMutableArray*)aMemory valid:(BOOL*)aValid
 {
     
-    DLog(@"dataMiningLast: %@",aEvent);
+//    DLog(@"dataMiningLast: %@",aEvent);
     
     // by defaulf the data mining is not valid
     [self setValid:aValid value:false];
@@ -1244,8 +1227,6 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         
         [_semaphoreBrain lockWhenCondition:HAS_DATA];
         
-        DLog(@"...brain running...");
-        
         int nEmotions;
         nEmotions = [_emotionsChanged count];
         
@@ -1273,7 +1254,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         if( [_receivedPerceptions count] != 0 )
         {
             Perception* p = [_receivedPerceptions dequeue];
-            DLog(@"dequeue from _receivedPerceptions: %@ %@", [p name], [p value]);
+//          DLog(@"dequeue from _receivedPerceptions: %@ %@", [p name], [p value]);
         }
         
         [_semaphoreBrain unlockWithCondition:NO_DATA];
