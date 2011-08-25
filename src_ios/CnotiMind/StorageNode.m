@@ -92,7 +92,8 @@
 {
     NSString* info = [NSString stringWithFormat:@""];
     NSString* space = [self space:aDepth];
-    info = [info stringByAppendingFormat:@"%@ Storage key=%@ value=%@", space, _event, _value];
+    info = [info stringByAppendingFormat:@"%@ Storage event=%@ value=%@", space, _event, _value];
+    info = [info stringByAppendingFormat:@"%@", [super info:aDepth]];
     
     return info;
 }

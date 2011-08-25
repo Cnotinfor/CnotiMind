@@ -59,11 +59,13 @@
 		userData_ = nil;
         
 		//initialize parent to nil
-//		parent_ = aParent;
+		parent_ = aParent;
         
         if (aParent != nil) {
             [aParent insertChild:self];
         }
+        
+        DLog(@"%@", parent_);
 	}
 	
 	return self;
@@ -244,13 +246,13 @@
 - (NSString*) info:(int)aDepth
 {
     NSString* info = [NSString stringWithFormat:@""];
-    NSString* space = [self space:aDepth];
+//    NSString* space = [self space:aDepth];
     
     NSEnumerator* eChildren = [children_ objectEnumerator];
     
     Node* objectNode;
     while (objectNode = [eChildren nextObject]) {
-        info = [info stringByAppendingFormat:@"%@%@", space, [objectNode info:aDepth + 1]];
+        info = [info stringByAppendingFormat:@"%@", [objectNode info:aDepth + 1]];
     }
     
     return info;
@@ -325,10 +327,10 @@
 
 - (NSString*) space:(int)aDepth
 {
-    NSString* space = [NSString stringWithFormat:@"\n"];
+    NSString* space = [NSString stringWithFormat:@",,,\n"];
     for( int i=0; i <= aDepth; i++ )
     {
-        [space stringByAppendingFormat:@"\t"];
+        space = [space stringByAppendingFormat:@"---\t"];
     }
     
     return space;

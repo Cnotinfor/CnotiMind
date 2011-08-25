@@ -166,12 +166,17 @@
     
     _parentNode = _currentNode;
     _currentNode = [[ActionNode alloc] initWithNameAndValueAndBrainAndParent: name value:value brain:_brain parent:_parentNode];
+    DLog(@"%@", _currentNode);
     
     return true;
 }
 
 - (BOOL) createStorageNode:(GDataXMLElement*)atts
 {
+    
+    DLog(@"%@", _rootNode);
+    DLog(@"%@", _currentNode);
+    
     if( _rootNode == NULL || _currentNode == NULL )
     {
         return false;
@@ -201,6 +206,9 @@
 
 - (BOOL) createEmotionNode:(GDataXMLElement*)atts
 {
+    
+    
+    
     if( _rootNode == NULL || _currentNode == NULL )
     {
         return false;

@@ -401,7 +401,11 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     [doc release];
     [xmlData release];
     
+    _rules = [_rulesXMLHandler rootNode];
     DLog(@"[Brain::loadXmlRules] done");
+    
+    DLog(@"[Brain::printRules]");
+    [self printRules];
     
     return true;
 }
@@ -433,9 +437,9 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
                 
         [_rulesXMLHandler startElement:nil localName:nil qName:elementName atts:rulesMember];
     
-        NSArray* childArray = [rulesMember elementsForName:elementName];        
+        NSArray* childArray = [rulesMember children];        
         [self loadXMLRecursive:childArray];
-
+    
         [_rulesXMLHandler endElement:nil localName:nil qName:elementName];
     }
     
