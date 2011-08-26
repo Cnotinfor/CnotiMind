@@ -60,7 +60,7 @@
 //    Perception* perception = [[Perception alloc] initWithNameAndAValue:@"User Talk" value:@"Bye"];
 //    [_brain receivePerception:perception];
     
-    Perception* perception2 = [[Perception alloc] initWithNameAndAValue:@"kicked" value:@"being kicked"];
+    Perception* perception2 = [[Perception alloc] initWithNameAndAValue:@"User Talk" value:@"Hello"];
     [_brain receivePerception:perception2];
     
     [_brain printMemory:LongTermMemory];

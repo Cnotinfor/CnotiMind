@@ -2,23 +2,12 @@
 
 <Rules>
 	<Condition type="perception" perception="User Talk" value="Hello">
-		<Condition type="datamining" event="User Talk" comparevalue="Hello" >
-			<Action name="Talk" value="Again??" />
-		</Condition>
-		<Condition type="datamining" operation="last" event="User Talk" comparevalue="Bye" >
-			<Action name="Talk" value="I already said Bye!" />
-			<Emotion name="Happiness" value="1" max="5" />
-			<Storage event="User Talk" value="I already said Bye!" memory="LTM" />
-		</Condition>
-		<Condition type="datamining" operation="count" event="User Talk" comparevalue="0" >
+
+        <Condition type="datamining" operation="count" event="User Talk" compareValue="0" >
             <Action name="Talk" value="Hello" />
 			<Storage event="User Talk" value="Hello" memory="LTM" />
 		</Condition>
 	</Condition>
 
-	<Condition type="perception" perception="User Talk" value="Bye">
-		<Action name="Talk" value="Bye" />
-		<Emotion name="Happiness" value="-1" min="0" />
-		<Storage event="User Talk" value="Bye" memory="LTM" />
-	</Condition>
+
 </Rules>

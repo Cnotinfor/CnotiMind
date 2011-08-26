@@ -112,11 +112,11 @@
         
         _result = (NSString*)result;
         
-        NSLog(@"0 - isTrue result: %@",result);
+        DLog(@"0 - isTrue result: %@",result);
         
         int _resultNumeric = [result intValue];
 
-        NSLog(@"0 - isTrue resultNumeric: %d",_resultNumeric);
+        DLog(@"0 - isTrue resultNumeric: %d",_resultNumeric);
         
         switch( (int)_operator )
         {
@@ -161,7 +161,8 @@
         
         switch( (int)_operator )
         {
-            case ConditionOperatorEqual: 
+            case ConditionOperatorEqual:
+                DLog(@"_compareValue: %@", _compareValue);
                 return [_result isEqualToString:_compareValue];
             case ConditionOperatorDifferent: 
                 return ![_result isEqualToString:_compareValue];
