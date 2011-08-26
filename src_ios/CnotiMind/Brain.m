@@ -570,17 +570,25 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     
     if (aType == WorkingMemory) {
         DLog(@"--- Print Memory WorkingMemory---");
-        eMemory = [_workingMemory objectEnumerator];
+        @synchronized(_workingMemory) {
+            eMemory = [_workingMemory objectEnumerator];
+            MemoryEvent* objectMemoryEvent;
+            while (objectMemoryEvent = [eMemory nextObject]) {
+                DLog(@"\nEvent: %@ Value: %@", [objectMemoryEvent event], [objectMemoryEvent value]);
+            }
+        }
     }
     else if (aType == LongTermMemory) {
         DLog(@"--- Print Memory LongTermMemory---");
-        eMemory = [_longTermMemory objectEnumerator];
+        @synchronized(_longTermMemory) {
+            eMemory = [_longTermMemory objectEnumerator];
+            MemoryEvent* objectMemoryEvent;
+            while (objectMemoryEvent = [eMemory nextObject]) {
+                DLog(@"\nEvent: %@ Value: %@", [objectMemoryEvent event], [objectMemoryEvent value]);
+            }
+        }
     }
     
-    MemoryEvent* objectMemoryEvent;
-    while (objectMemoryEvent = [eMemory nextObject]) {
-        DLog(@"\nEvent: %@ Value: %@", [objectMemoryEvent event], [objectMemoryEvent value]);
-    }
 }
 
 
@@ -656,7 +664,9 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     switch((int)aMemoryType)
     {
 		case LongTermMemory:
-			[_longTermMemory addObject:aMemoryEvent];
+            @synchronized(_longTermMemory) {
+                [_longTermMemory addObject:aMemoryEvent];
+            }
             
             //			if( _gui != NULL )
             //			{
@@ -664,7 +674,9 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
             //			}
 			break;
 		case WorkingMemory:
-			[_workingMemory addObject:aMemoryEvent];
+            @synchronized(_workingMemory) {
+                [_workingMemory addObject:aMemoryEvent];
+            }
             //			if( _gui != NULL )
             //			{
             //				_gui->updateWorkingMemory();
