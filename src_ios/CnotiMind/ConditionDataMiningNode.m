@@ -32,7 +32,6 @@
         _memory = aMemory;
         _isCompareValueNumeric = FALSE;
 
-
         if ([self isNumeric:_compareValue]){
             _isCompareValueNumeric = TRUE;
         }

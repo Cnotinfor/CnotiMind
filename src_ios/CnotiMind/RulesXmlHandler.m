@@ -236,11 +236,15 @@
     
     NSString* event = [[atts attributeForName:@"event"] stringValue];
     NSString* value = [[atts attributeForName:@"value"] stringValue];
+    NSString* op = [[atts attributeForName:@"operator"] stringValue];
     NSString* opDataMining = [[atts attributeForName:@"operation"] stringValue];
     NSString* variable = [[atts attributeForName:@"variable"] stringValue];
 //TODO
     //    NSString* position = [[atts attributeForName:@"position"] stringValue];
     NSString* memory = [[atts attributeForName:@"memory"] stringValue];
+
+    enum ConditionOperator opType;
+    opType = [CnotiMind translateConditionOperator: op];
     
     enum DataMiningOperation opDataMiningType;
     opDataMiningType = [CnotiMind translateDataMiningOperator: opDataMining];
@@ -359,7 +363,15 @@
     memoryType = [CnotiMind translateMemoryType: memory];
     
     _parentNode = _currentNode;
-    _currentNode = [[ConditionDataMiningNode alloc] initWithKeyAndValueAndOperatorAndOperationAndMemoryAndVariableAndCompareValueBrainAndParent:event value:value operator:operatorType operation:operationType memory:memoryType variable:variable compareValue:compareValue brain:_brain parent:_parentNode];
+    _currentNode = [[ConditionDataMiningNode alloc] initWithKeyAndValueAndOperatorAndOperationAndMemoryAndVariableAndCompareValueBrainAndParent:event 
+                                                                                                                                          value:value
+                                                                                                                                       operator:operatorType
+                                                                                                                                      operation:operationType 
+                                                                                                                                         memory:memoryType 
+                                                                                                                                       variable:variable 
+                                                                                                                                   compareValue:compareValue 
+                                                                                                                                          brain:_brain 
+                                                                                                                                         parent:_parentNode];
     
     return true;     
 }
