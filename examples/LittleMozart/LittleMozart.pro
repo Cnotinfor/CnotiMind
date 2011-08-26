@@ -27,16 +27,6 @@ CONFIG( release, debug|release ) {
 TMP_PATH      = ../../tmp/examples/$${TARGET}
 DESTDIR       = ../bin/$${BUILD_NAME}
 
-OBJECTS_DIR += $${TMP_PATH}/$${BUILD_NAME}
-MOC_DIR     += $${TMP_PATH}/moc
-UI_DIR      += $${TMP_PATH}/ui
-RCC_DIR     += $${TMP_PATH}/rcc
-
-INCLUDEPATH += $${OBJECTS_DIR} \
-			   $${MOC_DIR} \
-			   $${UI_DIR} \
-			   $${RCC_DIR}
-
 # ------------------------------------------------------------
 #  Path for CnotiMind
 # ------------------------------------------------------------

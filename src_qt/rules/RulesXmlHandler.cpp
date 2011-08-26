@@ -23,9 +23,9 @@
 namespace CnotiMind
 {
 
-	RulesXmlHandler::RulesXmlHandler( Brain* brain) :
+	RulesXmlHandler::RulesXmlHandler(Brain* brain, RuleNode* rules) :
 		QXmlDefaultHandler(),
-		_rootNode( NULL ),
+		_rootNode( rules ),
 		_currentNode( NULL ),
 		_parentNode( NULL ),
 		_brain( brain ),
@@ -143,12 +143,11 @@ namespace CnotiMind
 		Q_UNUSED( atts );
 
 		// it can only exist 1 root node.
-		if( _rootNode != NULL )
+		if( _rootNode == NULL )
 		{
-			return false;
+			_rootNode = new RootNode( _brain, _parentObject );
 		}
 
-		_rootNode = new RootNode( _brain, _parentObject );
 		_currentNode = _rootNode;
 
 		return true;

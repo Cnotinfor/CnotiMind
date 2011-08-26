@@ -112,7 +112,7 @@ namespace CnotiMind
 	{
 		QFile f( filename );
 
-		RulesXmlHandler *handler = new RulesXmlHandler( this );
+		RulesXmlHandler *handler = new RulesXmlHandler( this, _rules );
 		QXmlInputSource source( &f );
 		if( source.data() == "" )
 		{

@@ -63,6 +63,11 @@ Form::Form(QWidget *parent) :
 		qWarning() << "[Form::Form] Error loading Xml rules.";
 	}
 
+	if(!_brain->loadXmlRules( "../../xml/mozart_tutoring.xml" ) )
+	{
+		qWarning() << "[Form::Form] Error loading tutoring Xml.";
+	}
+
 	_brain->printRules();
 
 	_brain->start();

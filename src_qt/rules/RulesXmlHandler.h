@@ -22,7 +22,7 @@ namespace CnotiMind
 	{
 
 	public:
-		explicit RulesXmlHandler( Brain* brain );
+		explicit RulesXmlHandler(Brain* brain, RuleNode* _rules = NULL);
 		~RulesXmlHandler();
 
 		bool startElement ( const QString & namespaceURI, const QString & localName, const QString & qName, const QXmlAttributes & atts );
