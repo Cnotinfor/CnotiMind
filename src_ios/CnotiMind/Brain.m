@@ -392,6 +392,8 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         //  Make the parsing - must be recursive!!!
         NSArray *rulesMembers = [doc.rootElement children];
         
+        NSLog(@"rulesMembers: %@", rulesMembers);
+        
         [_rulesXMLHandler startElement:nil localName:nil qName:@"Rules" atts:nil];
         [self loadXMLRecursive: rulesMembers];
         [_rulesXMLHandler endElement:nil localName:nil qName:@"Rules"];
@@ -416,7 +418,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     
     for (GDataXMLElement* rulesMember in rulesMembers) {
         NSString* elementName = [[NSString alloc] initWithFormat:@"%@",[rulesMember name]];
-        
+
         [_rulesXMLHandler startElement:nil localName:nil qName:elementName atts:rulesMember];
     
         NSArray* childArray = [rulesMember children];        
