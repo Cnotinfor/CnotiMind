@@ -15,7 +15,7 @@
 
 
 @interface DataMiningNode : RuleNode {
-
+    
     
     NSString* _event;
     NSString* _value;
@@ -26,16 +26,19 @@
     NSNumber* _valueNumeric;
     BOOL _isValueNumeric;
     id _result;
+    NSString* _position;
+    BOOL _isPositionNumeric;
+    int _positionNumeric;
 }
 
-- (id) initWithEventAndValueAndOperatorAndBrainAndParent: (NSString*)aKey 
-                                                   value:(NSString*)aValue 
-                                                operator:(enum DataMiningOperation)aDataMiningOperation 
-                                                memory:(enum MemoryType)aMemory
-                                                variable:(NSString*)aVariable
-                                                brain:(Brain*)aBrain 
-                                                parent:(id)aParent;
-
+- (id) initWithEventAndValueAndOperatorAndMemoryAndVariableAndPositionAndBrainAndParent: (NSString*)aEvent 
+                                                                                  value:(NSString*)aValue 
+                                                                               operator:(enum DataMiningOperation)aDataMiningOperation 
+                                                                                 memory:(enum MemoryType)aMemory
+                                                                               variable:(NSString*)aVariable
+                                                                               position:(NSString*)aPosition
+                                                                                  brain:(Brain*)aBrain 
+                                                                                 parent:(id)aParent;
 - (void) exec;
 - (void) exec:(NSMutableDictionary*)aVariables;
 

@@ -88,7 +88,7 @@
     NSString* info = [NSString stringWithFormat:@""];
     NSString* space = [self space:aDepth];
     
-    info = [info stringByAppendingFormat:@"%@ Condition type=DataMining", space];
+    info = [info stringByAppendingFormat:@"%@ Condition type=DataMining event=%@ compareValue=%@", space, _key, _compareValue];
     info = [info stringByAppendingFormat:@"%@", [super info:aDepth]];
     
     return info;

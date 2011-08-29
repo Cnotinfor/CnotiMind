@@ -195,14 +195,14 @@
 }
 
 
-//  TODO? virtual method
+// virtual method
 - (void) exec
 {
 
 }
 
 
-//  TODO? virtual method
+// virtual method
 - (void) exec:(NSMutableDictionary*)aVariables
 {
 
@@ -274,6 +274,8 @@
 {
     NSString* empty = [NSString stringWithFormat:@""];
     
+    DLog(@"%@", *aValue);
+    
     // VARIABLES
     NSRegularExpression *regex_variables_tags = [NSRegularExpression regularExpressionWithPattern:@"(\\[[a-zA-Z0-9_\\- \\.]+\\])"
                                                                            options:NSRegularExpressionCaseInsensitive
@@ -281,23 +283,36 @@
     // Search for variable value is between square brackets
     int pos = 0;    
     
-//  while( (pos = regex_variables_tags.indexIn( aValue, pos ) ) != -1 )
     NSRange rangeOfFirstMatch = [regex_variables_tags rangeOfFirstMatchInString:*aValue options:0 range:NSMakeRange(0, [*aValue length])];
-    while( (pos = rangeOfFirstMatch.location ) != -1 )
+    while( (pos = [regex_variables_tags firstMatchInString:*aValue options:0 range:NSMakeRange(0, [*aValue length])].range.length ) != 0 )
     {
         
         NSString* var = [*aValue substringWithRange:rangeOfFirstMatch];
-        NSString* valueFromKey = [*aVariables valueForKey:var];
+        
+        DLog(@"var: %@", var);
+        DLog(@"aVariables: %@", *aVariables);
+
+        
+        NSString* valueFromKey = [[NSString alloc] initWithString: [*aVariables valueForKey:var]];
+        
+        DLog(@"valueFromKey: %@", valueFromKey);
+
         
         if ([valueFromKey length]>0) {
             // found it, replace by the variable tag, by the variable value
-            [*aValue setValue:var forKey:valueFromKey];
+            
+            *aValue = [*aValue stringByReplacingOccurrencesOfString:var
+                                                         withString:valueFromKey];
             pos += [valueFromKey length];
         }
         else {
             // not found replace by an empty string
-            [*aValue setValue:var forKey:empty];
+            *aValue = [*aValue stringByReplacingOccurrencesOfString:var
+                                                         withString:empty];
+            
         }
+        
+        DLog(@"aValue: %@", *aValue);
     }
     
     // PROPERTIES

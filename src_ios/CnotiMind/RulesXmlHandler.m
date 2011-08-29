@@ -239,8 +239,8 @@
     NSString* op = [[atts attributeForName:@"operator"] stringValue];
     NSString* opDataMining = [[atts attributeForName:@"operation"] stringValue];
     NSString* variable = [[atts attributeForName:@"variable"] stringValue];
-//TODO
-    //    NSString* position = [[atts attributeForName:@"position"] stringValue];
+    
+    NSString* position = [[atts attributeForName:@"position"] stringValue];
     NSString* memory = [[atts attributeForName:@"memory"] stringValue];
 
     enum ConditionOperator opType;
@@ -254,7 +254,7 @@
 
     
     _parentNode = _currentNode;
-    _currentNode = [[DataMiningNode alloc] initWithEventAndValueAndOperatorAndBrainAndParent:event value:value operator:opDataMiningType memory:memoryType variable:variable brain:_brain parent:_parentNode];
+    _currentNode = [[DataMiningNode alloc] initWithEventAndValueAndOperatorAndMemoryAndVariableAndPositionAndBrainAndParent:event value:value operator:opDataMiningType memory:memoryType variable:variable position:position brain:_brain parent:_parentNode];
     
     return true;
 }

@@ -60,7 +60,7 @@
     NSString* info = [NSString stringWithFormat:@""];
     NSString* space = [self space:aDepth];
     
-    info = [info stringByAppendingFormat:@"%@ Condition type=Perception", space];
+    info = [info stringByAppendingFormat:@"%@ Condition type=Perception perception=%@ value=%@", space, _key, _value];
     info = [info stringByAppendingFormat:@"%@", [super info:aDepth]];
     
     return info;

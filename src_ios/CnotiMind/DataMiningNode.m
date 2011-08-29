@@ -14,13 +14,14 @@
 @implementation DataMiningNode
 
 
-- (id) initWithEventAndValueAndOperatorAndBrainAndParent: (NSString*)aEvent 
-                                                   value:(NSString*)aValue 
-                                                operator:(enum DataMiningOperation)aDataMiningOperation 
-                                                  memory:(enum MemoryType)aMemory
-                                                variable:(NSString*)aVariable
-                                                   brain:(Brain*)aBrain 
-                                                  parent:(id)aParent
+- (id) initWithEventAndValueAndOperatorAndMemoryAndVariableAndPositionAndBrainAndParent: (NSString*)aEvent 
+                                                                                  value:(NSString*)aValue 
+                                                                               operator:(enum DataMiningOperation)aDataMiningOperation 
+                                                                                 memory:(enum MemoryType)aMemory
+                                                                               variable:(NSString*)aVariable
+                                                                               position:(NSString*)aPosition
+                                                                                  brain:(Brain*)aBrain 
+                                                                                 parent:(id)aParent
 {
     
     if ( self == [super initWithBrainAndParent:aBrain parent:aParent] )
@@ -32,10 +33,26 @@
         _memory = aMemory;
         _variable = [[NSString alloc] initWithString:aVariable];
         _valueNumeric = [NSNumber numberWithFloat:[aValue floatValue]];
+
+        if (aPosition != nil) {
+            _position = [[NSString alloc] initWithString:aPosition];
+            
+            _positionNumeric = [aPosition intValue];
+            
+            if ([self isNumeric:aPosition]) {
+                _isPositionNumeric = TRUE;
+            }
+            else {
+                _isPositionNumeric = FALSE;
+            }            
+        }
+        else {
+            _position = [[NSString alloc] initWithString:@""];
+            _isPositionNumeric = FALSE;
+//            _positionNumeric = [aPosition intValue];
+        }
         
         
-        //      _position( position ),
-        //		_positionNumeric( position.toInt( &_isPositionNumeric ) )
     }
     return self;
 }
@@ -64,7 +81,7 @@
 
 - (void) exec:(NSMutableDictionary*)aVariables
 {
-    if ([self isTrue]) {
+    if ([self isTrue: aVariables]) {
         
         if ( [_variable length] != 0 ) {
             [aVariables setObject:_result forKey:_variable];
@@ -123,9 +140,20 @@
     BOOL valid;
     int position = 0;
     
-    // TODO stuff
-    //    [self tagsToValue:<#(NSString **)#> variables:<#(NSMutableDictionary **)#>]
-    
+    if (_isPositionNumeric) {
+        position = _positionNumeric;
+    }
+//    It sould be a variable tag
+    else { 
+        NSString* positionStr = [NSString stringWithFormat:@"%@", _position];
+        BOOL ok;
+        
+        [self tagsToValue:&positionStr variables:&aVariables];
+        
+        int p = [positionStr intValue];
+        position = p;
+    }
+        
     // If the values are numbers it should use the
     if( _isValueNumeric )
     {
