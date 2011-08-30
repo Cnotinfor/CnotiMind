@@ -535,33 +535,7 @@
 
 			</MathOperation>
 
-
-
 			<Storage event="Duration" value="[Perception.value]" memory="WM" />
-
-			<!-- Test what sentence it should speak -->
-			<Condition type="Property" property="Duration Option" compareValue="Bad">
-				<!-- It send the music length and the duration choosen -->
-				<Action name="Talk" value="Wrong Duration [Music Duration] [Perception.value]" />
-			</Condition>
-			<Condition type="Property" property="Duration Option" compareValue="Good">
-				<Condition type="Property" property="Notes Option" compareValue="Bad">
-					<Condition type="Property" property="Pause" compareValue="false">
-						<Action name="Talk" value="Wrong Note {Note Sequence}" probability="0.9" />
-					</Condition>
-					<Condition type="Property" property="Pause" compareValue="true">
-						<Action name="Talk" value="Wrong Note Pause" probability="0.9" />
-					</Condition>
-				</Condition>
-				<Condition type="Property" property="Notes Option" compareValue="Good">
-					<Condition type="Property" property="Pause" compareValue="false">
-						<Action name="Talk" value="Good Note {Note Sequence}" probability="0.3" />
-					</Condition>
-					<Condition type="Property" property="Pause" compareValue="true">
-						<Action name="Talk" value="Good Note Pause" probability="0.3" />
-					</Condition>
-				</Condition>
-			</Condition>
 
 		</DataMining>
 	</Condition>
@@ -880,9 +854,6 @@
 				</DataMining>
 			</Condition>
 		</Condition>
-						
-				
-		
 		
 		<!-- Check if there are still notes in the memory. If not remove the StartNote Event -->
 		<DataMining operation="Count" event="Note" memory="WM" variable="[Count Notes]">
@@ -898,7 +869,6 @@
 		</DataMining>
 	</Condition>
 
-
 	<Condition type="Perception" perception="Delete Duration">
 		<Condition type="DataMining" operation="Exists"	event="Duration" compareValue="0" memory="WM">
 			<Action name="Think" value="Not possible to delete a duration" />
@@ -906,154 +876,6 @@
 		<Condition type="DataMining" operation="Exists"	event="Duration" compareValue="1" memory="WM">
 			<Delete memory="WM" name="Duration" position="Last" />
 			<Action name="Think" value="Duration deleted" />
-			
-			<!-- After deleting the note and the duration -->
-			
-			<!-- Test if it should help the user -->
-			<!-- test if made a previous suggestion or not and test if it should make a suggestion -->
-			<Condition type="Property" property="Make Suggestion" compareValue="false">
-				<Action name="Think" value="Going to make a suggestion" />
-				<!-- Check how much tempos from the compass have been used -->
-				<DataMining operation="Sum" event="Duration" variable="[Music Duration]" memory="WM">
-					<Action name="Think" value="Duration calculated" />
-					<Condition type="Property" property="Notes Option" compareValue="Bad">
-						<Condition type="Property" property="Duration Option" compareValue="Bad">
-							<!-- Both note and duration were invalid  -->
-							<MathOperation name="Remainder" variable="[Music Duration]" value="4" result="[Used Tempos]">
-							
-							</MathOperation>
-							
-						</Condition>
-						
-						<Condition type="Property" property="Duration Option" compareValue="Good">
-							<!-- Note was invalid -->
-							<Action name="Think" value="Invalid Note" />
-							<!-- Test if the melody is empty -->
-							<Condition type="Variable" variable="[Music Duration]" compareValue="0">
-								<Random>
-									<Action name="Talk" value="Start Do" />
-									<Action name="Talk" value="Start Mi" />
-									<Action name="Talk" value="Start Sol" />
-									<Action name="Talk" value="Start DoAgudo" />
-								</Random>
-							</Condition>
-							
-							<!-- Test if the melody is not empty -->
-							<Condition type="Variable" variable="[Music Duration]" compareValue="0" operator="bigger">
-							
-								<!-- Check if there are only pauses (Duration > 0, Note quantity == 0) -->
-								<Condition type="Datamining" operation="Exists" event="Note" compareValue="0" memory="WM">
-								
-									<Action name="Talk" value="Not Start Pause"/>
-									<Action name="Talk" value="Start Do" />
-									<!--<Action name="Talk" value="Start Mi" />
-									<Action name="Talk" value="Start Sol" />
-									<Action name="Talk" value="Start DoAgudo" /> -->
-								</Condition>
-								
-								<Condition type="Datamining" operation="Exists" event="Note" compareValue="1" memory="WM">
-									<DataMining operation="Last" event="Note" variable="[Last Note]"  memory="WM">
-										<Condition type="Variable" variable="[Last Note]" compareValue="Do">
-											<Random>
-												<Action name="Talk" value="Use Do" />
-												<Action name="Talk" value="Use Re" />
-												<Action name="Talk" value="Use Mi" />
-												<Action name="Talk" value="Use Sol" />
-												<Action name="Talk" value="Use DoAgudo" />
-											</Random>
-										</Condition>
-										<Condition type="Variable" variable="[Last Note]" compareValue="Re">
-											<Random>
-												<Action name="Talk" value="Use Do" />
-												<Action name="Talk" value="Use Re" />
-												<Action name="Talk" value="Use Mi" />
-												<Action name="Talk" value="Use Sol" />
-											</Random>
-										</Condition>
-										<Condition type="Variable" variable="[Last Note]" compareValue="Mi">
-											<Random>
-												<Action name="Talk" value="Use Do" />
-												<Action name="Talk" value="Use Re" />
-												<Action name="Talk" value="Use Mi" />
-												<Action name="Talk" value="Use Fa" />
-												<Action name="Talk" value="Use Sol" />
-											</Random>
-										</Condition>
-										<Condition type="Variable" variable="[Last Note]" compareValue="Fa">
-											<Random>
-												<Action name="Talk" value="Use Mi" />
-												<Action name="Talk" value="Fa" />
-												<Action name="Talk" value="Use Sol" />
-											</Random>
-										</Condition>
-										<Condition type="Variable" variable="[Last Note]" compareValue="Sol">
-											<Random>
-												<Action name="Talk" value="Use Do" />
-												<Action name="Talk" value="Use Mi" />
-												<Action name="Talk" value="Use Fa" />
-												<Action name="Talk" value="Use Sol" />
-												<Action name="Talk" value="Use La" />
-											</Random>
-										</Condition>
-										<Condition type="Variable" variable="[Last Note]" compareValue="La">
-											<Random>
-												<Action name="Talk" value="Use Sol" />
-												<Action name="Talk" value="Use La" />
-												<Action name="Talk" value="Use Si" />
-											</Random>
-										</Condition>
-										<Condition type="Variable" variable="[Last Note]" compareValue="Si">
-											<Random>
-												<Action name="Talk" value="Use La" />
-												<Action name="Talk" value="Use Si" />
-												<Action name="Talk" value="Use DoAgudo" />
-											</Random>
-										</Condition>
-										<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
-											<Random>
-												<Action name="Talk" value="Use Do" />
-												<Action name="Talk" value="Use Si" />
-												<Action name="Talk" value="Use Sol" />
-												<Action name="Talk" value="Use DoAgudo" />
-											</Random>
-										</Condition>
-									</DataMining>
-								</Condition>
-							</Condition>
-						</Condition>	
-					</Condition>
-					
-					<Condition type="Property" property="Notes Option" compareValue="Good">
-						<Condition type="Property" property="Duration Option" compareValue="Bad">
-							<!-- Duration is invalid -->
-							<Condition type="Variable" variable="[Used Tempos]" compareValue="1">
-								<Random>
-									<Action name="Talk" value="Use Duration 2" />
-									<Action name="Talk" value="Use Duration 3" />
-									<Action name="Talk" value="Use Duration 1" />
-								</Random>
-							</Condition>
-							<Condition type="Variable" variable="[Used Tempos]" compareValue="2">
-								<Random>
-									<Action name="Talk" value="Use Duration 2" />
-									<Action name="Talk" value="Use Duration 1" />	
-								</Random>
-							</Condition>
-							<Condition type="Variable" variable="[Used Tempos]" compareValue="3">
-								<Action name="Talk" value="Use Duration 1" />
-							</Condition>
-							
-						</Condition>
-					</Condition>
-
-				</DataMining>
-			</Condition>
-			
-			
-	
-			
-			
-			
 		</Condition>
 	</Condition>
 

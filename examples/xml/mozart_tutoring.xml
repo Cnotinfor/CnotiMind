@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+	Tutoring rules for Little Mozart.
+	
+	Try to make Little Mozart a tutor with emotions, that can help the user to build music
+
+	There are 2 actions made by Mozart
+	- Talk -> Mozart should talk
+	- Think -> For debugging purpose
+	
+	What should be really said by Mozart and how it is at the competences level, not in the brain.
+	
+	The only emotion that currently is being changed is Joy
+-->
+
+<Rules>
+	<!-- Note added (note + duration) -->
+	<Condition type="Perception" perception="Duration">
+		<DataMining operation="Count" event="Note" memory="WM" variable="[Count Notes]">
+			<DataMining operation="Count" event="Pause" memory="WM" variable="[Count Pause]">
+				<!-- math operation to calculate the number of notes and pause -->
+				<MathOperation name="Sum" variable="[Count Pause]" value="[Count Notes]" result="[Number Notes]">
+					<!-- It's the first note -->
+					<Condition type="Variable" variable="[Number Notes]" compareValue="1">
+						<!-- Get the note added -->
+						<DataMining operation="Last" event="Note" variable="[Last Note]"  memory="WM">
+							<!-- Compare to DO -->
+							<Condition type="Variable" variable="[Last Note]" compareValue="Do">
+								<Action name="Talk" value="Start Good" />
+							</Condition>
+							<!-- Compare to RE -->
+							<Condition type="Variable" variable="[Last Note]" compareValue="Re">
+								<Action name="Talk" value="Start Bad [Last Note]" />
+							</Condition>
+							<!-- Compare to MI -->
+							<Condition type="Variable" variable="[Last Note]" compareValue="Mi">
+								<Action name="Talk" value="Start Good" />
+							</Condition>
+							<!-- Compare to FA -->
+							<Condition type="Variable" variable="[Last Note]" compareValue="Fa">
+								<Action name="Talk" value="Start Bad [Last Note]" />
+							</Condition>
+							<!-- Compare to SOL -->
+							<Condition type="Variable" variable="[Last Note]" compareValue="Sol">
+								<Action name="Talk" value="Start Good" />
+							</Condition>
+							<!-- Compare to LA -->
+							<Condition type="Variable" variable="[Last Note]" compareValue="La">
+								<Action name="Talk" value="Start Bad [Last Note]" />
+							</Condition>
+							<!-- Compare to SI -->
+							<Condition type="Variable" variable="[Last Note]" compareValue="Si">
+								<Action name="Talk" value="Start Bad [Last Note]" />
+							</Condition>
+							<!-- Compare to DO AGUDO -->
+							<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
+								<Action name="Talk" value="Start Good" />
+							</Condition>
+							<!-- Compare to PAUSE -->
+							<Condition type="Variable" variable="[Last Note]" compareValue="Pause">
+								<Action name="Talk" value="Start Bad [Last Note]" />
+							</Condition>
+						</DataMining>
+					</Condition>
+					<!-- Isn't the first note -->
+					<Condition type="Variable" variable="[Number Notes]" compareValue="1" operator="Bigger">
+						<!-- Bad note and duration -->
+						<Condition type="Property" property="Notes Option" compareValue="Bad">
+							<Condition type="Property" property="Duration Option" compareValue="Bad">
+								<Random>
+									<Action name="Talk" value="Bad Choice" />
+									<Action name="Talk" value="Both Bad" />
+								</Random>
+							</Condition>
+						</Condition>
+						<!-- Bad note and Good duration -->
+						<Condition type="Property" property="Notes Option" compareValue="Bad">
+							<Condition type="Property" property="Duration Option" compareValue="Good">
+								<Random>
+									<Action name="Talk" value="Bad Choice" />
+									<Action name="Talk" value="Bad Note" />
+								</Random>
+							</Condition>
+						</Condition>
+						<!-- Good note but Bad duration -->
+						<Condition type="Property" property="Notes Option" compareValue="Good">
+							<Condition type="Property" property="Duration Option" compareValue="Bad">
+								<Action name="Talk" value="Bad Duration" />
+							</Condition>
+						</Condition>
+						
+						<!-- Good note and duration -->
+							<!-- TODO ????? -->
+
+						<!-- Bad durations -->
+
+						<!-- Music time -->
+<!-- TODO: is missing a OR between the conditions -->
+<!--       var that is changed when enters in a condition -->
+						<DataMining operation="Sum" event="Duration" memory="WM" variable="[Music Size]">
+							<!-- Bigger the 12 -->
+							<Condition type="Variable" variable="[Music Size]" compareValue="12"  operator=">=">
+								<!-- It's a good time to finish -->
+								<MathOperation name="remainder" variable="[Music Size]" value="4" result="[Rest]">
+									<!-- Can be divided by 4 -->
+									<Condition type="Variable" variable="[Rest]" compareValue="0">
+										<!-- Get the last note added -->
+										<DataMining operation="Last" event="Note" variable="[Last Note]"  memory="WM">
+											<!-- End in Do or Do Agudo -->
+											<Condition type="Variable" variable="[Last Note]" compareValue="Do">
+												<Action name="Talk" value="Finish Time" />
+											</Condition>
+											<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
+												<Action name="Talk" value="Finish Time" />
+											</Condition>
+										</DataMining>
+									</Condition>
+								</MathOperation>
+							</Condition>
+							<!-- Next compass is good to finish the music-->
+							<Condition type="Variable" variable="[Music Size]" compareValue="12">
+								<Action name="Talk" value="Finish Compass" />
+							</Condition>
+							<Condition type="Variable" variable="[Music Size]" compareValue="28">
+								<Action name="Talk" value="Finish Compass" />
+							</Condition>
+							<!-- Say the music current time -->
+							<MathOperation name="remainder" variable="[Music Size]" value="4" result="[Rest]">
+								<Condition type="Variable" variable="[Rest]" compareValue="0">
+									<Action name="Talk" value="Music Has [Music Size]" />
+								</Condition>
+							</MathOperation>
+						</DataMining>
+						<!-- Remember the pauses, on 10% of the times -->
+						<!-- Get the last note added -->
+						<DataMining operation="Last" event="Note" variable="[Last Note]"  memory="WM">
+							<Condition type="Variable" variable="[Last Note]" compareValue="Pause" operator="different">
+								<Random>
+									<Action name="Talk" value="Try Pause" />
+									<Action name="Discard" />
+									<Action name="Discard" />
+									<Action name="Discard" />
+									<Action name="Discard" />
+									<Action name="Discard" />
+									<Action name="Discard" />
+									<Action name="Discard" />
+									<Action name="Discard" />
+									<Action name="Discard" />
+								</Random>
+							</Condition>
+						</DataMining>
+					</Condition>
+				</MathOperation>
+			</DataMining>
+		</DataMining>
+	</Condition>
+</Rules>
