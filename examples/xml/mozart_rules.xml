@@ -27,11 +27,13 @@
 -->
 
 <Rules>
+	<!-- When a note is added -->
 	<Condition type="Perception" perception="Note">
-	
-		
 		<Action name="Think" value="Note chosen [Perception.value]" />
+	
 		<Property name="Make Suggestion" value="false" />
+		<!-- Holds the Notes Option value prior to a note being deleted -->
+		<Property name="Deleted Notes Option" value="" />
 		
 		<!-- First Note added -->
 		<Condition type="DataMining" operation="Exists"	event="Note" compareValue="0" memory="WM">
@@ -442,6 +444,10 @@
 
 	<!-- When a duration is added -->
 	<Condition type="Perception" perception="Duration">
+
+		<!-- Holds the Duration Option value prior to a duration being deleted -->
+		<Property name="Deleted Duration Option" value="" />
+
 		<!-- Calculate the music lenght -->
 		<DataMining operation="Sum" event="Duration" variable="[Music Duration]" memory="WM">
 			<Action name="Think" value ="Music length [Music Duration]" />
@@ -548,13 +554,12 @@
 			<Condition type="DataMining" operation="Exists"	event="Pause" compareValue="1" memory="WM">
 				<Delete memory="WM" name="Pause" position="Last" />
 				<Action name="Think" value="Pause deleted" />
-
 			</Condition>
-			
 		</Condition>
 		
 		<Condition type="DataMining" operation="Exists"	event="Note" compareValue="1" memory="WM">
 			<Condition type="DataMining" operation="Exists"	event="Pause" compareValue="0" memory="WM">
+				<Property name="Deleted Notes Option" value="[Notes Option]" />
 				<Delete memory="WM" name="Note" position="Last" />
 				<Action name="Think" value="Note deleted" />
 			</Condition>
@@ -565,11 +570,13 @@
 					<DataMining operation="Time" event="Pause" variable="[Pause Time]" memory="WM">
 						<Condition type="Variable" variable="[Note Time]" operator="bigger" compareValue="[Pause Time]"  >
 							<Action name="Think" value="Note is more recent then pause" />
+							<Property name="Deleted Notes Option" value="[Notes Option]" />
 							<Delete memory="WM" name="Note" position="Last" />
 							<Action name="Think" value="Note deleted" />
 						</Condition>
 						<Condition type="Variable" variable="[Note Time]" operator="smaller" compareValue="[Pause Time]"  >
 							<Action name="Think" value="Pause is more recent then note" />
+							<Property name="Deleted Notes Option" value="[Notes Option]" />
 							<Delete memory="WM" name="Pause" position="Last" />
 							<Action name="Think" value="Pause deleted" />
 						</Condition>
@@ -874,6 +881,7 @@
 			<Action name="Think" value="Not possible to delete a duration" />
 		</Condition>
 		<Condition type="DataMining" operation="Exists"	event="Duration" compareValue="1" memory="WM">
+			<Property name="Deleted Duration Option" value="[Duration Option]" />
 			<Delete memory="WM" name="Duration" position="Last" />
 			<Action name="Think" value="Duration deleted" />
 		</Condition>
