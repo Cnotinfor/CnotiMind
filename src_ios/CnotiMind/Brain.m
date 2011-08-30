@@ -641,7 +641,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     Emotion* objectEmotion;
     while (objectEmotion = [eEmotions nextObject]) {
         
-        if ([[objectEmotion name] isEqualToString:aEmotionName] == TRUE) {
+        if (![[objectEmotion name] caseInsensitiveCompare:aEmotionName] == TRUE) {
             
             [objectEmotion addValue:aVariation max:aMax min:aMin];
             
@@ -827,7 +827,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     {
         //  MemoryEvent* me = [eMemoryEvent nextObject];
         
-        if( [[objectMemoryEvent event] isEqualToString:aEvent] ) // Event found
+        if( ![[objectMemoryEvent event] caseInsensitiveCompare:aEvent] ) // Event found
         {
             if (strcmp([[objectMemoryEvent value] objCType], "f") || strcmp([[objectMemoryEvent value] objCType], "i") || strcmp([[objectMemoryEvent value] objCType], "d") || strcmp([[objectMemoryEvent value] objCType], "l")) {
                 ok = true;
@@ -874,7 +874,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     {
         //  MemoryEvent* me = [eMemoryEvent nextObject];
         
-        if( [[objectMemoryEvent event] isEqualToString:aEvent] ) // Event found
+        if( ![[objectMemoryEvent event] caseInsensitiveCompare:aEvent] ) // Event found
         {
             if (strcmp([[objectMemoryEvent value] objCType], "f") || strcmp([[objectMemoryEvent value] objCType], "i") || strcmp([[objectMemoryEvent value] objCType], "d") || strcmp([[objectMemoryEvent value] objCType], "l")) {
                 ok = true;
@@ -919,7 +919,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     MemoryEvent* objectMemoryEvent;
     while( objectMemoryEvent = [eMemoryEvent nextObject] ) // Iterate all memory
     {
-        if( [[objectMemoryEvent event] isEqualToString:aEvent] ) // Event found
+        if( ![[objectMemoryEvent event] caseInsensitiveCompare:aEvent] ) // Event found
         {
             if (strcmp([[objectMemoryEvent value] objCType], "f") || strcmp([[objectMemoryEvent value] objCType], "i") || strcmp([[objectMemoryEvent value] objCType], "d") || strcmp([[objectMemoryEvent value] objCType], "l")) {
                 ok = true;
@@ -957,7 +957,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     MemoryEvent* objectMemoryEvent;
     while( objectMemoryEvent = [eMemoryEvent nextObject] ) // Iterate all memory
     {
-        if( [[objectMemoryEvent event] isEqualToString:aEvent] ) // Event found
+        if( ![[objectMemoryEvent event] caseInsensitiveCompare:aEvent] ) // Event found
         {
             if (strcmp([[objectMemoryEvent value] objCType], "f") || strcmp([[objectMemoryEvent value] objCType], "i") || strcmp([[objectMemoryEvent value] objCType], "d") || strcmp([[objectMemoryEvent value] objCType], "l")) {
                 ok = true;
@@ -1000,7 +1000,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     MemoryEvent* objectMemoryEvent;
     while( objectMemoryEvent = [eMemoryEvent nextObject] ) // Iterate all memory
     {
-        if( [[objectMemoryEvent event] isEqualToString:aEvent] ) // Event found
+        if( ![[objectMemoryEvent event] caseInsensitiveCompare:aEvent] ) // Event found
         {
             n++;
         }   
@@ -1032,7 +1032,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         DLog(@"%@ - %@", [objectMemoryEvent event], [objectMemoryEvent value]);
         DLog(@"%@ - %@", aEvent, aValue);
         
-        if( [[objectMemoryEvent event] isEqualToString:aEvent] && [[objectMemoryEvent value] isEqualToString:aValue]) // Event found
+        if( ![[objectMemoryEvent event] caseInsensitiveCompare:aEvent] && ![[objectMemoryEvent value] caseInsensitiveCompare:aValue]) // Event found
         {
             n++;
         }   
@@ -1067,7 +1067,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     MemoryEvent* objectMemoryEvent;
     while( objectMemoryEvent = [eMemoryEvent nextObject] ) // Iterate all memory
     {
-        if( [[objectMemoryEvent event] isEqualToString:aEvent] ) // Event found
+        if( ![[objectMemoryEvent event] caseInsensitiveCompare:aEvent] ) // Event found
         {
             if (strcmp([[objectMemoryEvent value] objCType], "f") || strcmp([[objectMemoryEvent value] objCType], "i") || strcmp([[objectMemoryEvent value] objCType], "d") || strcmp([[objectMemoryEvent value] objCType], "l")) {
                 ok = true;
@@ -1107,7 +1107,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     MemoryEvent* objectMemoryEvent;
     while( objectMemoryEvent = [eMemoryEvent nextObject] ) // Iterate all memory
     {
-        if( [[objectMemoryEvent event] isEqualToString:aEvent] ) // Event found
+        if( ![[objectMemoryEvent event] caseInsensitiveCompare:aEvent] ) // Event found
         {
             return true;
         }
@@ -1133,7 +1133,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     MemoryEvent* objectMemoryEvent;
     while( objectMemoryEvent = [eMemoryEvent nextObject] ) // Iterate all memory
     {
-        if( [[objectMemoryEvent event] isEqualToString:aEvent] && [[objectMemoryEvent value] isEqualToString:aValue]) // Event found
+        if( ![[objectMemoryEvent event] caseInsensitiveCompare:aEvent] && ![[objectMemoryEvent value] caseInsensitiveCompare:aValue]) // Event found
         {
             return true;
         }
@@ -1168,7 +1168,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     for (int i = [aMemoryEvents count]-1; i>=0; i--) {
         objectMemoryEvent = [aMemoryEvents objectAtIndex:i];
         
-        if( [[objectMemoryEvent event] isEqualToString:aEvent] ) // Event found
+        if( ![[objectMemoryEvent event] caseInsensitiveCompare:aEvent] ) // Event found
         {
             [self setValid:aValid value:true];
             return [objectMemoryEvent value];
@@ -1202,7 +1202,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     for (int i = 0; i<[aMemoryEvents count]-1; i++) {
         objectMemoryEvent = [aMemoryEvents objectAtIndex:i];
         
-        if( [[objectMemoryEvent event] isEqualToString:aEvent] ) // Event found
+        if( ![[objectMemoryEvent event] caseInsensitiveCompare:aEvent] ) // Event found
         {
             [self setValid:aValid value:true];
             return [objectMemoryEvent value];
@@ -1258,7 +1258,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
             Emotion* e = [[Emotion alloc] init];
             
             for (Emotion* objectE in _emotions) {
-                if ([[objectE name] isEqualToString:emotionName]) {
+                if (![[objectE name] caseInsensitiveCompare:emotionName]) {
                     e = objectE;
                 }
             }

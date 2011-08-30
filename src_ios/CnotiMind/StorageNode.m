@@ -42,8 +42,8 @@
         
         _memory = aMemory;
         _clearStorage = aClear;
-        _event = @"";
-        _value = @"";
+        _event = [[NSString alloc] initWithString:@""];
+        _value = [[NSString alloc] initWithString:@""];
     }
     
     return self;

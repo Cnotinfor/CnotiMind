@@ -229,7 +229,7 @@
         NSDictionary* objectVariable;
         
         while (objectVariable = [eVariables nextObject]) {
-            if ([[objectVariable valueForKey:aValue] isEqualToString:aValue]) {
+            if (![[objectVariable valueForKey:aValue] caseInsensitiveCompare:aValue]) {
                 return [objectVariable valueForKey:aValue];
             }
         }
@@ -281,8 +281,7 @@
                                                                            options:NSRegularExpressionCaseInsensitive
                                                                              error:nil];
     // Search for variable value is between square brackets
-    int pos = 0;    
-    
+    int pos = 0;
     NSRange rangeOfFirstMatch = [regex_variables_tags rangeOfFirstMatchInString:*aValue options:0 range:NSMakeRange(0, [*aValue length])];
     while( (pos = [regex_variables_tags firstMatchInString:*aValue options:0 range:NSMakeRange(0, [*aValue length])].range.length ) != 0 )
     {
@@ -291,7 +290,6 @@
         
         DLog(@"var: %@", var);
         DLog(@"aVariables: %@", *aVariables);
-
         
         NSString* valueFromKey = [[NSString alloc] initWithString: [*aVariables valueForKey:var]];
         
@@ -309,35 +307,45 @@
             // not found replace by an empty string
             *aValue = [*aValue stringByReplacingOccurrencesOfString:var
                                                          withString:empty];
-            
         }
-        
         DLog(@"aValue: %@", *aValue);
     }
     
-    // PROPERTIES
-//    QRegExp regex_properties_tags( "\\{([a-zA-Z0-9_\\- \\.]+)\\}", Qt::CaseInsensitive );
-//    // Search for variable value is between curl brackets
-//    pos = 0;
-//    while( (pos = regex_properties_tags.indexIn( value, pos ) ) != -1 )
-//    {
-//        QString var = regex_properties_tags.cap( 1 );
-//        
-//        // Search for the variable in the variables list
-//        QHash<QString,QString>::const_iterator it = _brain->_properties.find( var );
-//        if( it != _brain->_properties.end()  )
-//        {
-//            // found it, replace by the property tag, by the property value
-//            value.replace( "{" + var + "}", it.value(), Qt::CaseInsensitive );
-//            pos += it.value().length();
-//        }
-//        else
-//        {
-//            // not found replace by an empty string
-//            value = [NSString stringWithValue:empty];
-//        }
-//    }
+    // PROPERTIES - TODO
+    NSRegularExpression *regex_properties_tags = [NSRegularExpression regularExpressionWithPattern:@"\\{([a-zA-Z0-9_\\- \\.]+)\\}"
+                                                                                          options:NSRegularExpressionCaseInsensitive
+                                                                                            error:nil];
+    // Search for variable value is between curl brackets
+    pos = 0;    
     
+    rangeOfFirstMatch = [regex_properties_tags rangeOfFirstMatchInString:*aValue options:0 range:NSMakeRange(0, [*aValue length])];
+    while( (pos = [regex_properties_tags firstMatchInString:*aValue options:0 range:NSMakeRange(0, [*aValue length])].range.length ) != 0 )
+    {
+        
+        NSString* var = [*aValue substringWithRange:rangeOfFirstMatch];
+        
+        DLog(@"var: %@", var);
+        DLog(@"aVariables: %@", *aVariables);
+        NSString* valueFromKey = [[NSString alloc] initWithString: [*aVariables valueForKey:var]];
+        DLog(@"valueFromKey: %@", valueFromKey);
+        
+        if ([valueFromKey length]>0) {
+            
+            NSString* var2 = [NSString stringWithFormat:@""];
+            var2 = [NSString stringWithFormat:@"{%@}",var];
+            
+            *aValue = [*aValue stringByReplacingOccurrencesOfString:var2
+                                                         withString:valueFromKey];
+            pos += [valueFromKey length];
+        }
+        else {
+            // not found replace by an empty string
+            *aValue = [*aValue stringByReplacingOccurrencesOfString:var
+                                                         withString:empty];
+            
+        }
+        DLog(@"aValue: %@", *aValue);
+    }
 }
 
 - (NSString*) space:(int)aDepth

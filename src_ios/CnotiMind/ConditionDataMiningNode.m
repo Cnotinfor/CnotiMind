@@ -162,9 +162,9 @@
         {
             case ConditionOperatorEqual:
                 DLog(@"_compareValue: %@", _compareValue);
-                return [_result isEqualToString:_compareValue];
+                return ![_result caseInsensitiveCompare:_compareValue];
             case ConditionOperatorDifferent: 
-                return ![_result isEqualToString:_compareValue];
+                return [_result caseInsensitiveCompare:_compareValue];
         }
         
         return false;

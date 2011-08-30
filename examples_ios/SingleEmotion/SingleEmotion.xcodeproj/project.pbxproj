@@ -38,6 +38,8 @@
 		189613BF1381370B00FEA73A /* RootNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613A91381370B00FEA73A /* RootNode.m */; };
 		189613C01381370B00FEA73A /* RuleNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613AB1381370B00FEA73A /* RuleNode.m */; };
 		189613C11381370B00FEA73A /* StorageNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613AD1381370B00FEA73A /* StorageNode.m */; };
+		18AA1B29140BDF78003301E7 /* single_emotion_rules_with_variables.xml in Resources */ = {isa = PBXBuildFile; fileRef = 18AA1B28140BDF78003301E7 /* single_emotion_rules_with_variables.xml */; };
+		18AA1B2C140BE0AA003301E7 /* KickMeRules_with_variables.xml in Resources */ = {isa = PBXBuildFile; fileRef = 18AA1B2B140BE0AA003301E7 /* KickMeRules_with_variables.xml */; };
 		18E02CDD1405262E00BD7343 /* KickMeRules.xml in Resources */ = {isa = PBXBuildFile; fileRef = 18E02CD81405262E00BD7343 /* KickMeRules.xml */; };
 		18E02CDE1405262E00BD7343 /* mozart_mind.xml in Resources */ = {isa = PBXBuildFile; fileRef = 18E02CD91405262E00BD7343 /* mozart_mind.xml */; };
 		18E02CDF1405262E00BD7343 /* mozart_rules.xml in Resources */ = {isa = PBXBuildFile; fileRef = 18E02CDA1405262E00BD7343 /* mozart_rules.xml */; };
@@ -114,6 +116,8 @@
 		189613AB1381370B00FEA73A /* RuleNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RuleNode.m; sourceTree = "<group>"; };
 		189613AC1381370B00FEA73A /* StorageNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorageNode.h; sourceTree = "<group>"; };
 		189613AD1381370B00FEA73A /* StorageNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorageNode.m; sourceTree = "<group>"; };
+		18AA1B28140BDF78003301E7 /* single_emotion_rules_with_variables.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = single_emotion_rules_with_variables.xml; sourceTree = "<group>"; };
+		18AA1B2B140BE0AA003301E7 /* KickMeRules_with_variables.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = KickMeRules_with_variables.xml; sourceTree = "<group>"; };
 		18E02CD81405262E00BD7343 /* KickMeRules.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = KickMeRules.xml; sourceTree = "<group>"; };
 		18E02CD91405262E00BD7343 /* mozart_mind.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mozart_mind.xml; sourceTree = "<group>"; };
 		18E02CDA1405262E00BD7343 /* mozart_rules.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mozart_rules.xml; sourceTree = "<group>"; };
@@ -278,6 +282,8 @@
 		18E02CD71405262E00BD7343 /* xml */ = {
 			isa = PBXGroup;
 			children = (
+				18AA1B2B140BE0AA003301E7 /* KickMeRules_with_variables.xml */,
+				18AA1B28140BDF78003301E7 /* single_emotion_rules_with_variables.xml */,
 				18E02CD81405262E00BD7343 /* KickMeRules.xml */,
 				18E02CD91405262E00BD7343 /* mozart_mind.xml */,
 				18E02CDA1405262E00BD7343 /* mozart_rules.xml */,
@@ -365,6 +371,8 @@
 				18E02CDF1405262E00BD7343 /* mozart_rules.xml in Resources */,
 				18E02CE01405262E00BD7343 /* README in Resources */,
 				18E02CE11405262E00BD7343 /* single_emotion_rules.xml in Resources */,
+				18AA1B29140BDF78003301E7 /* single_emotion_rules_with_variables.xml in Resources */,
+				18AA1B2C140BE0AA003301E7 /* KickMeRules_with_variables.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

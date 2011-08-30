@@ -81,7 +81,7 @@
 //        DLog(@"0 - %@",_key);
 
         // Check if it is the percetion for this Node
-        if( [p.name isEqualToString:_key] )
+        if( ![p.name caseInsensitiveCompare:_key] )
         {
 //            DLog(@"1 - %@ - %@",p.name,p.value);
             
@@ -127,9 +127,9 @@
                     switch( (int)_operator )
                     {
 						case ConditionOperatorEqual:
-							return [_value isEqualToString:s];
+							return ![_value caseInsensitiveCompare:s];
 						case ConditionOperatorDifferent:
-							return ![_value isEqualToString:s];
+							return [_value caseInsensitiveCompare:s];
                     }
                     return false;
                 }

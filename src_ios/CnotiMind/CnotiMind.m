@@ -14,11 +14,11 @@
 + (enum MemoryType) translateMemoryType:(NSString*)aText
 {
     
-    if([aText isEqualToString:@"WM"])
+    if(![aText caseInsensitiveCompare:@"WM"])
     {
         return WorkingMemory;
     }
-    if([aText isEqualToString:@"LTM"])
+    if(![aText caseInsensitiveCompare:@"LTM"])
     {
         return LongTermMemory;
     }
@@ -31,27 +31,27 @@
     if (aText==nil) {
         return ConditionOperatorUndefined;
     }
-    if( [aText isEqualToString:@">"])
+    if( ![aText caseInsensitiveCompare:@">"])
     {
         return ConditionOperatorBigger;
     }
-    if( [aText isEqualToString:@">="])
+    if( ![aText caseInsensitiveCompare:@">="])
     {
         return ConditionOperatorBiggerOrEqual;
     }
-    if( [aText isEqualToString:@"<"])
+    if( ![aText caseInsensitiveCompare:@"<"])
     {
         return ConditionOperatorSmaller;
     }
-    if( [aText isEqualToString:@"<="])
+    if( ![aText caseInsensitiveCompare:@"<="])
     {
         return ConditionOperatorSmallerOrEqual;
     }
-    if( [aText isEqualToString:@"=="])
+    if( ![aText caseInsensitiveCompare:@"=="])
     {
         return ConditionOperatorEqual;
     }
-    if( ([aText isEqualToString:@"!="] ) || ([aText isEqualToString:@"<>"]) )
+    if( (![aText caseInsensitiveCompare:@"!="] ) || (![aText caseInsensitiveCompare:@"<>"]) )
     {
         return ConditionOperatorDifferent;
     }
@@ -63,43 +63,43 @@
 + (enum DataMiningOperation) translateDataMiningOperator:(NSString*)aText
 {
     
-    if( [aText isEqualToString:@"max"] )
+    if( ![aText caseInsensitiveCompare:@"max"] )
     {
         return DMO_Max;
     }
-    if( [aText isEqualToString:@"min"] )
+    if( ![aText caseInsensitiveCompare:@"min"] )
     {
         return DMO_Min;
     }
-    if( [aText isEqualToString:@"sum"] )
+    if( ![aText caseInsensitiveCompare:@"sum"] )
     {
         return DMO_Sum;
     }
-    if( [aText isEqualToString:@"count"] )
+    if( ![aText caseInsensitiveCompare:@"count"] )
     {
         return DMO_Count;
     }
-    if( [aText isEqualToString:@"mean"] )
+    if( ![aText caseInsensitiveCompare:@"mean"] )
     {
         return DMO_Mean;
     }
-    if( [aText isEqualToString:@"exists"] )
+    if( ![aText caseInsensitiveCompare:@"exists"] )
     {
         return DMO_Exists;
     }
-    if( [aText isEqualToString:@"last"] )
+    if( ![aText caseInsensitiveCompare:@"last"] )
     {
         return DMO_Last;
     }
-    if( [aText isEqualToString:@"first"] )
+    if( ![aText caseInsensitiveCompare:@"first"] )
     {
         return DMO_First;
     }
-    if( [aText isEqualToString:@"duration"] )
+    if( ![aText caseInsensitiveCompare:@"duration"] )
     {
         return DMO_Duration;
     }
-    if( [aText isEqualToString:@"time"] )
+    if( ![aText caseInsensitiveCompare:@"time"] )
     {
         return DMO_Time;
     }
@@ -112,37 +112,37 @@
  */
 + (enum MathOperation) translateMathOperation:(NSString*)text
 {
-    if( [text isEqualToString: @"sum"]  ||
-       [text isEqualToString: @"+"]  )
+    if( [text caseInsensitiveCompare: @"sum"]  ||
+       [text caseInsensitiveCompare: @"+"]  )
     {
         return MathOperationSum;
     }
-    if( [text isEqualToString: @"sub"]  ||
-       [text isEqualToString: @"subtraction"]  ||
-       [text isEqualToString: @"-"]  )
+    if( [text caseInsensitiveCompare: @"sub"]  ||
+       [text caseInsensitiveCompare: @"subtraction"]  ||
+       [text caseInsensitiveCompare: @"-"]  )
     {
         return MathOperationSubtraction;
     }
-    if( [text isEqualToString: @"mul"]  ||
-       [text isEqualToString: @"multiplication"]  ||
-       [text isEqualToString: @"x"]  ||
-       [text isEqualToString: @"*"]  )
+    if( [text caseInsensitiveCompare: @"mul"]  ||
+       [text caseInsensitiveCompare: @"multiplication"]  ||
+       [text caseInsensitiveCompare: @"x"]  ||
+       [text caseInsensitiveCompare: @"*"]  )
     {
         return MathOperationMultiplication;
     }
-    if( [text isEqualToString: @"div"]  ||
-       [text isEqualToString: @"division"]  ||
-       [text isEqualToString: @"quotient"]  ||
-       [text isEqualToString: @"/"]  )
+    if( [text caseInsensitiveCompare: @"div"]  ||
+       [text caseInsensitiveCompare: @"division"]  ||
+       [text caseInsensitiveCompare: @"quotient"]  ||
+       [text caseInsensitiveCompare: @"/"]  )
     {
         return MathOperationDivision;
     }
-    if( [text isEqualToString: @"remainder"]  ||
-       [text isEqualToString: @"%"]  )
+    if( [text caseInsensitiveCompare: @"remainder"]  ||
+       [text caseInsensitiveCompare: @"%"]  )
     {
         return MathOperationRemainder;
     }
-    if( [text isEqualToString: @"sqrt"]  )
+    if( [text caseInsensitiveCompare: @"sqrt"]  )
     {
         return MathOperationSquareRoot;
     }

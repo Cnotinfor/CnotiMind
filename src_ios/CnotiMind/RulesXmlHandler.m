@@ -63,47 +63,47 @@
 {
     _line++;
     
-    if( [aQName isEqualToString:@"Rules"] )
+    if( ![aQName caseInsensitiveCompare:@"Rules"] )
     {
         return [self createRootNode:atts];
     }
-    if( [aQName isEqualToString:@"Condition"] )
+    if( ![aQName caseInsensitiveCompare:@"Condition"] )
     {
         return [self createConditionNode:atts];
     }
-    if( [aQName isEqualToString:@"Action"] )
+    if( ![aQName caseInsensitiveCompare:@"Action"] )
     {
         return [self createActionNode:atts];
     }
-    if( [aQName isEqualToString:@"Storage"] )
+    if( ![aQName caseInsensitiveCompare:@"Storage"] )
     {
         return [self createStorageNode:atts];
     }
-    if( [aQName isEqualToString:@"Emotion"] )
+    if( ![aQName caseInsensitiveCompare:@"Emotion"] )
     {
         return [self createEmotionNode:atts];
     }
-    if( [aQName isEqualToString:@"DataMining"] )
+    if( ![aQName caseInsensitiveCompare:@"DataMining"] )
     {
         return [self createDataMiningNode:atts];
     }
-    if( [aQName isEqualToString:@"MathOperation"] )
+    if( ![aQName caseInsensitiveCompare:@"MathOperation"] )
     {
         return [self createMathOperationNode:atts];
     }
-    if( [aQName isEqualToString:@"Property"] )
+    if( ![aQName caseInsensitiveCompare:@"Property"] )
     {
         return [self createPropertyNode:atts];
     }
-    if( [aQName isEqualToString:@"Delete"] )
+    if( ![aQName caseInsensitiveCompare:@"Delete"] )
     {
         return [self createDeleteNode:atts];
     }
-    if( [aQName isEqualToString:@"ClearMemory"] )
+    if( ![aQName caseInsensitiveCompare:@"ClearMemory"] )
     {
         return [self createClearMemoryNode:atts];
     }
-    if( [aQName isEqualToString:@"Random"] )
+    if( ![aQName caseInsensitiveCompare:@"Random"] )
     {
         return [self createRandomNode:atts];
     }
@@ -187,7 +187,9 @@
     
     _parentNode = _currentNode;
     
-    if ([clear isEqualToString:@"yes"]) {
+    
+    
+    if ( (![clear caseInsensitiveCompare:@"yes"]) && (clear!=nil) ) {
         _currentNode = [[StorageNode alloc] initWithClearAndMemoryAndBrainAndParent:true memory:memoryType brain:_brain parent:_parentNode];
     }
     else {
@@ -269,19 +271,19 @@
     NSString* typeCondition = [[atts attributeForName:@"type"] stringValue];
 
     
-    if ([typeCondition isEqualToString:@"perception"]) {
+    if (![typeCondition caseInsensitiveCompare:@"perception"]) {
         return [self createConditionPerceptionNode:atts];
     }
-    else if ([typeCondition isEqualToString:@"datamining"]) {
+    else if (![typeCondition caseInsensitiveCompare:@"datamining"]) {
         return [self createConditionDataMiningNode:atts];
     }
-    else if ([typeCondition isEqualToString:@"emotion"]) {
+    else if (![typeCondition caseInsensitiveCompare:@"emotion"]) {
         return [self createConditionEmotionNode:atts];
     }
-    else if ([typeCondition isEqualToString:@"variable"]) {
+    else if (![typeCondition caseInsensitiveCompare:@"variable"]) {
         return [self createConditionVariableNode:atts];
     }
-    else if ([typeCondition isEqualToString:@"property"]) {
+    else if (![typeCondition caseInsensitiveCompare:@"property"]) {
         return [self createConditionPropertyNode:atts];
     }
     

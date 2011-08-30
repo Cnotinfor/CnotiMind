@@ -73,7 +73,7 @@
         NSString* v = [NSString stringWithFormat:@"%@", [objectVariable value]];
 
         // Test if found the variable
-        if ([_key isEqualToString:k]) {
+        if (![_key caseInsensitiveCompare:k]) {
             
             // Try to convert the value from the variable to number
             float value = [v floatValue];
@@ -99,8 +99,8 @@
             {
                 switch( (int)_operator ) // it's a string, just to this 2 operators
                 {
-                    case ConditionOperatorEqual: return [_value isEqualToString:v];
-                    case ConditionOperatorDifferent: return ![_value isEqualToString:v];
+                    case ConditionOperatorEqual: return ![_value caseInsensitiveCompare:v];
+                    case ConditionOperatorDifferent: return [_value caseInsensitiveCompare:v];
                 }
                 return false;
             }

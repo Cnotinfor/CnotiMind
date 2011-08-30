@@ -146,7 +146,7 @@
 //    It sould be a variable tag
     else { 
         NSString* positionStr = [NSString stringWithFormat:@"%@", _position];
-        BOOL ok;
+//        BOOL ok;
         
         [self tagsToValue:&positionStr variables:&aVariables];
         

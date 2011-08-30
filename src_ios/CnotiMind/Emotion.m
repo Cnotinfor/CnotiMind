@@ -87,19 +87,19 @@
 
 + (BOOL) compareWithEmotionAndString:(Emotion*)aEmotion name:(NSString*)aEmotionName
 {
-    return [aEmotion.name isEqualToString:aEmotionName];
+    return ![aEmotion.name caseInsensitiveCompare:aEmotionName];
 }
 
 
 + (BOOL) compareWithStringAndEmotion:(NSString*)aEmotionName emotion:(Emotion*)aEmotion
 {
-    return [aEmotionName isEqualToString:aEmotion.name];
+    return ![aEmotionName caseInsensitiveCompare:aEmotion.name];
 }
 
 
 + (BOOL) compareWithEmotions:(Emotion*)aEmotion1 emotion:(Emotion*)aEmotion2
 {
-    return [aEmotion1.name isEqualToString:aEmotion2.name];
+    return ![aEmotion1.name caseInsensitiveCompare:aEmotion2.name];
 }
 
 
