@@ -14,10 +14,18 @@
 @implementation ConditionVariableNode
 
 
-- (id) initWithVariableAndValueAndOperatorAndBrainAndParent: (NSString*)aKey value:(NSString*)aValue operator: (enum ConditionOperator)aOperator brain:(Brain*)aBrain parent:(id)aParent
+- (id) initWithVariableAndValueAndOperatorAndBrainAndParent: (NSString*)aKey 
+                                                      value:(NSString*)aValue 
+                                                   operator: (enum ConditionOperator)aOperator 
+                                                      brain:(Brain*)aBrain 
+                                                     parent:(id)aParent
 {
     
-    if (self == [super initWithKeyAndValueAndBrainAndParent: aKey value:aValue operator:aOperator brain:aBrain parent:aParent])
+    if (self == [super initWithKeyAndValueAndBrainAndParent: aKey 
+                                                      value:aValue 
+                                                   operator:aOperator 
+                                                      brain:aBrain 
+                                                     parent:aParent])
     {
     
     
@@ -35,9 +43,9 @@
 
 - (void) exec:(NSMutableDictionary*)aVariables
 {
-    if ([self isTrue]) {
-        [aVariables setObject:_value forKey:@"[Perception.value]"];
-        [self execChildren];
+    if ([self isTrue:aVariables]) {
+        [aVariables setObject:_value forKey:@"[perception.value]"];
+        [self execChildren:aVariables];
     }
 
 }
@@ -54,7 +62,9 @@
     return info;
 }
 
-
+/*
+ Returns false, since it requires variables to work correctly
+ */
 - (BOOL) isTrue
 {
     return FALSE;

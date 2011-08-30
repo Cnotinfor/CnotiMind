@@ -31,12 +31,13 @@
         
         _operation = aDataMiningOperation;
         _memory = aMemory;
-        _variable = [[NSString alloc] initWithString:aVariable];
+        
+        _variable = (aVariable == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aVariable];
+        
         _valueNumeric = [NSNumber numberWithFloat:[aValue floatValue]];
 
         if (aPosition != nil) {
             _position = [[NSString alloc] initWithString:aPosition];
-            
             _positionNumeric = [aPosition intValue];
             
             if ([self isNumeric:aPosition]) {
@@ -49,7 +50,7 @@
         else {
             _position = [[NSString alloc] initWithString:@""];
             _isPositionNumeric = FALSE;
-//            _positionNumeric = [aPosition intValue];
+            //  _positionNumeric = [aPosition intValue];
         }
         
         
@@ -87,7 +88,7 @@
             [aVariables setObject:_result forKey:_variable];
         }
         
-        [self execChildren];
+        [self execChildren: aVariables];
     }
     
 }
@@ -105,23 +106,6 @@
 }
 
 
-- (BOOL) isTrue
-{
-    BOOL valid;
-    
-    // If the values are numbers it should use the
-    if( _isValueNumeric )
-    {
-        _result = [_brain dataMining: _operation event:_event value:_valueNumeric memoryType:_memory valid:&valid];
-        return valid;
-    }
-    else // If the value is QString
-    {
-        _result = [_brain dataMining: _operation event:_event value:_value memoryType:_memory valid:&valid];
-        
-        return valid;
-    }
-}
 
 /*
  Check if in the value string there are variable or property tags

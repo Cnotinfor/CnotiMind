@@ -32,7 +32,7 @@
         NSMutableDictionary* variables = [[NSMutableDictionary alloc] init];
 
         Perception* p = [[_brain receivedPerceptions] objectAtIndex:0];
-        [variables setObject:[p value] forKey:@"[Perception.value]"];
+        [variables setObject:[p value] forKey:@"[perception.value]"];
 
         //  TODO
         [self execChildren:variables];
@@ -44,10 +44,10 @@
 {
     if ([self isTrue]) {
         // if the perception value is not in the variables list
-        if ([aVariables objectForKey:@"[Perception.value]"]) {
+        if ([aVariables objectForKey:@"[perception.value]"]) {
             
             Perception* p = [[_brain receivedPerceptions] objectAtIndex:0];
-            [aVariables setObject:[p value] forKey:@"[Perception.value]"];
+            [aVariables setObject:[p value] forKey:@"[perception.value]"];
         }
         
         [self execChildren: aVariables];
