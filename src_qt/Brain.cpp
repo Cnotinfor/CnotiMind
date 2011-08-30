@@ -15,7 +15,7 @@ namespace CnotiMind
 {
 
 	Brain::Brain( const QString& path, QObject* parent ):
-		QThread( parent ),\
+		QThread( parent ),
 		_rules( NULL ),
 		_quit( false ),
 		_gui( NULL )

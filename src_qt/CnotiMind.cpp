@@ -34,7 +34,7 @@ namespace CnotiMind
 		{
 			return ConditionOperatorBiggerOrEqual;
 		}
-		if( text.compare("<") == 0 || text.compare("smaller") == 0 )
+		if( text.compare("<") == 0 || text.compare("smaller", Qt::CaseInsensitive ) == 0 )
 		{
 			return ConditionOperatorSmaller;
 		}
@@ -42,11 +42,11 @@ namespace CnotiMind
 		{
 			return ConditionOperatorSmallerOrEqual;
 		}
-		if( text.compare("==") == 0 || text.compare("=") == 0 || text.compare("=") == 0 )
+		if( text.compare("==") == 0 || text.compare("=") == 0 || text.compare("equal", Qt::CaseInsensitive ) == 0 )
 		{
 			return ConditionOperatorEqual;
 		}
-		if( text.compare("!=") == 0 || text.compare("different") == 0)
+		if( text.compare("!=") == 0 || text.compare("different", Qt::CaseInsensitive ) == 0)
 		{
 			return ConditionOperatorDifferent;
 		}
