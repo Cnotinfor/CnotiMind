@@ -17,7 +17,10 @@
     NSString* _value;
 }
 
-- (id) initWithNameAndValueAndBrainAndParent: (NSString*)aName value:(NSString*)aValue brain:(Brain*)aBrain parent:(id)aParent;
+- (id) initWithNameAndValueAndBrainAndParent: (NSString*)aName 
+                                       value:(NSString*)aValue 
+                                       brain:(Brain*)aBrain 
+                                      parent:(id)aParent;
 
 - (void) exec;
 - (void) exec:(NSMutableDictionary*)aVariables;
