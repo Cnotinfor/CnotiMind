@@ -7,11 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1813F3CE13FC1C10005DEC76 /* RulesXmlHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1813F3CD13FC1C10005DEC76 /* RulesXmlHandler.m */; };
 		1813F3D313FC1C80005DEC76 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1813F3D213FC1C80005DEC76 /* GDataXMLNode.m */; };
 		187C441E140E36AF0033DD6B /* KickMeRules_emotion_reaction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 187C441B140E36AF0033DD6B /* KickMeRules_emotion_reaction.xml */; };
 		187C4423140E36E20033DD6B /* KickMeRules_remember_how_many_times_it_was_kicked.xml in Resources */ = {isa = PBXBuildFile; fileRef = 187C4421140E36E20033DD6B /* KickMeRules_remember_how_many_times_it_was_kicked.xml */; };
 		187C4424140E36E20033DD6B /* KickMeRules_remember_who_last_kick_the_brain.xml in Resources */ = {isa = PBXBuildFile; fileRef = 187C4422140E36E20033DD6B /* KickMeRules_remember_who_last_kick_the_brain.xml */; };
+		187C44C3140E72C60033DD6B /* ActionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 187C44AC140E72C60033DD6B /* ActionNode.m */; };
+		187C44C4140E72C60033DD6B /* ConditionDataMiningNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 187C44AE140E72C60033DD6B /* ConditionDataMiningNode.m */; };
+		187C44C5140E72C60033DD6B /* ConditionEmotionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 187C44B0140E72C60033DD6B /* ConditionEmotionNode.m */; };
+		187C44C6140E72C60033DD6B /* ConditionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 187C44B2140E72C60033DD6B /* ConditionNode.m */; };
+		187C44C7140E72C60033DD6B /* ConditionPerceptionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 187C44B4140E72C60033DD6B /* ConditionPerceptionNode.m */; };
+		187C44C8140E72C60033DD6B /* ConditionVariableNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 187C44B6140E72C60033DD6B /* ConditionVariableNode.m */; };
+		187C44C9140E72C60033DD6B /* DataMiningNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 187C44B8140E72C60033DD6B /* DataMiningNode.m */; };
+		187C44CA140E72C60033DD6B /* EmotionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 187C44BA140E72C60033DD6B /* EmotionNode.m */; };
+		187C44CB140E72C60033DD6B /* RootNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 187C44BC140E72C60033DD6B /* RootNode.m */; };
+		187C44CC140E72C60033DD6B /* RuleNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 187C44BE140E72C60033DD6B /* RuleNode.m */; };
+		187C44CD140E72C60033DD6B /* RulesXmlHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 187C44C0140E72C60033DD6B /* RulesXmlHandler.m */; };
+		187C44CE140E72C60033DD6B /* StorageNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 187C44C2140E72C60033DD6B /* StorageNode.m */; };
 		1896134A13811CFD00FEA73A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1896134913811CFD00FEA73A /* UIKit.framework */; };
 		1896134C13811CFD00FEA73A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1896134B13811CFD00FEA73A /* Foundation.framework */; };
 		1896134E13811CFD00FEA73A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1896134D13811CFD00FEA73A /* CoreGraphics.framework */; };
@@ -23,24 +34,13 @@
 		1896136B13811CFE00FEA73A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1896134B13811CFD00FEA73A /* Foundation.framework */; };
 		1896136C13811CFE00FEA73A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1896134D13811CFD00FEA73A /* CoreGraphics.framework */; };
 		189613AE1381370B00FEA73A /* Action.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613841381370B00FEA73A /* Action.m */; };
-		189613AF1381370B00FEA73A /* ActionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613861381370B00FEA73A /* ActionNode.m */; };
 		189613B01381370B00FEA73A /* Brain.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613881381370B00FEA73A /* Brain.m */; };
 		189613B11381370B00FEA73A /* CnotiMind.m in Sources */ = {isa = PBXBuildFile; fileRef = 1896138B1381370B00FEA73A /* CnotiMind.m */; };
-		189613B21381370B00FEA73A /* ConditionDataMiningNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1896138D1381370B00FEA73A /* ConditionDataMiningNode.m */; };
-		189613B31381370B00FEA73A /* ConditionEmotionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1896138F1381370B00FEA73A /* ConditionEmotionNode.m */; };
-		189613B41381370B00FEA73A /* ConditionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613911381370B00FEA73A /* ConditionNode.m */; };
-		189613B51381370B00FEA73A /* ConditionPerceptionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613931381370B00FEA73A /* ConditionPerceptionNode.m */; };
-		189613B61381370B00FEA73A /* ConditionVariableNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613951381370B00FEA73A /* ConditionVariableNode.m */; };
-		189613B71381370B00FEA73A /* DataMiningNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613971381370B00FEA73A /* DataMiningNode.m */; };
 		189613B81381370B00FEA73A /* Emotion.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613991381370B00FEA73A /* Emotion.m */; };
-		189613B91381370B00FEA73A /* EmotionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1896139B1381370B00FEA73A /* EmotionNode.m */; };
 		189613BB1381370B00FEA73A /* MemoryEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613A01381370B00FEA73A /* MemoryEvent.m */; };
 		189613BC1381370B00FEA73A /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613A21381370B00FEA73A /* Node.m */; };
 		189613BD1381370B00FEA73A /* NSMutableArray+QueueAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613A41381370B00FEA73A /* NSMutableArray+QueueAdditions.m */; };
 		189613BE1381370B00FEA73A /* Perception.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613A71381370B00FEA73A /* Perception.m */; };
-		189613BF1381370B00FEA73A /* RootNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613A91381370B00FEA73A /* RootNode.m */; };
-		189613C01381370B00FEA73A /* RuleNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613AB1381370B00FEA73A /* RuleNode.m */; };
-		189613C11381370B00FEA73A /* StorageNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613AD1381370B00FEA73A /* StorageNode.m */; };
 		18E02CDE1405262E00BD7343 /* mozart_mind.xml in Resources */ = {isa = PBXBuildFile; fileRef = 18E02CD91405262E00BD7343 /* mozart_mind.xml */; };
 		18E02CDF1405262E00BD7343 /* mozart_rules.xml in Resources */ = {isa = PBXBuildFile; fileRef = 18E02CDA1405262E00BD7343 /* mozart_rules.xml */; };
 		18E02CE01405262E00BD7343 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 18E02CDB1405262E00BD7343 /* README */; };
@@ -58,14 +58,36 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1813F3CC13FC1C10005DEC76 /* RulesXmlHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RulesXmlHandler.h; sourceTree = "<group>"; };
-		1813F3CD13FC1C10005DEC76 /* RulesXmlHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RulesXmlHandler.m; sourceTree = "<group>"; };
 		1813F3D113FC1C80005DEC76 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
 		1813F3D213FC1C80005DEC76 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		184353CA13E2BDDD0092AFBD /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		187C441B140E36AF0033DD6B /* KickMeRules_emotion_reaction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = KickMeRules_emotion_reaction.xml; sourceTree = "<group>"; };
 		187C4421140E36E20033DD6B /* KickMeRules_remember_how_many_times_it_was_kicked.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = KickMeRules_remember_how_many_times_it_was_kicked.xml; sourceTree = "<group>"; };
 		187C4422140E36E20033DD6B /* KickMeRules_remember_who_last_kick_the_brain.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = KickMeRules_remember_who_last_kick_the_brain.xml; sourceTree = "<group>"; };
+		187C44AB140E72C60033DD6B /* ActionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionNode.h; sourceTree = "<group>"; };
+		187C44AC140E72C60033DD6B /* ActionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionNode.m; sourceTree = "<group>"; };
+		187C44AD140E72C60033DD6B /* ConditionDataMiningNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionDataMiningNode.h; sourceTree = "<group>"; };
+		187C44AE140E72C60033DD6B /* ConditionDataMiningNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionDataMiningNode.m; sourceTree = "<group>"; };
+		187C44AF140E72C60033DD6B /* ConditionEmotionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionEmotionNode.h; sourceTree = "<group>"; };
+		187C44B0140E72C60033DD6B /* ConditionEmotionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionEmotionNode.m; sourceTree = "<group>"; };
+		187C44B1140E72C60033DD6B /* ConditionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionNode.h; sourceTree = "<group>"; };
+		187C44B2140E72C60033DD6B /* ConditionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionNode.m; sourceTree = "<group>"; };
+		187C44B3140E72C60033DD6B /* ConditionPerceptionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionPerceptionNode.h; sourceTree = "<group>"; };
+		187C44B4140E72C60033DD6B /* ConditionPerceptionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionPerceptionNode.m; sourceTree = "<group>"; };
+		187C44B5140E72C60033DD6B /* ConditionVariableNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionVariableNode.h; sourceTree = "<group>"; };
+		187C44B6140E72C60033DD6B /* ConditionVariableNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionVariableNode.m; sourceTree = "<group>"; };
+		187C44B7140E72C60033DD6B /* DataMiningNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataMiningNode.h; sourceTree = "<group>"; };
+		187C44B8140E72C60033DD6B /* DataMiningNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataMiningNode.m; sourceTree = "<group>"; };
+		187C44B9140E72C60033DD6B /* EmotionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmotionNode.h; sourceTree = "<group>"; };
+		187C44BA140E72C60033DD6B /* EmotionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmotionNode.m; sourceTree = "<group>"; };
+		187C44BB140E72C60033DD6B /* RootNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootNode.h; sourceTree = "<group>"; };
+		187C44BC140E72C60033DD6B /* RootNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootNode.m; sourceTree = "<group>"; };
+		187C44BD140E72C60033DD6B /* RuleNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuleNode.h; sourceTree = "<group>"; };
+		187C44BE140E72C60033DD6B /* RuleNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RuleNode.m; sourceTree = "<group>"; };
+		187C44BF140E72C60033DD6B /* RulesXmlHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RulesXmlHandler.h; sourceTree = "<group>"; };
+		187C44C0140E72C60033DD6B /* RulesXmlHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RulesXmlHandler.m; sourceTree = "<group>"; };
+		187C44C1140E72C60033DD6B /* StorageNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorageNode.h; sourceTree = "<group>"; };
+		187C44C2140E72C60033DD6B /* StorageNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorageNode.m; sourceTree = "<group>"; };
 		1895305513E1BE9700B41045 /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		1896134513811CFD00FEA73A /* SingleEmotion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SingleEmotion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1896134913811CFD00FEA73A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -81,29 +103,13 @@
 		1896136913811CFE00FEA73A /* SingleEmotionTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SingleEmotionTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		189613831381370B00FEA73A /* Action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Action.h; sourceTree = "<group>"; };
 		189613841381370B00FEA73A /* Action.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Action.m; sourceTree = "<group>"; };
-		189613851381370B00FEA73A /* ActionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionNode.h; sourceTree = "<group>"; };
-		189613861381370B00FEA73A /* ActionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionNode.m; sourceTree = "<group>"; };
 		189613871381370B00FEA73A /* Brain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Brain.h; sourceTree = "<group>"; };
 		189613881381370B00FEA73A /* Brain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Brain.m; sourceTree = "<group>"; };
 		189613891381370B00FEA73A /* CnotiMind-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CnotiMind-Prefix.pch"; sourceTree = "<group>"; };
 		1896138A1381370B00FEA73A /* CnotiMind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CnotiMind.h; sourceTree = "<group>"; };
 		1896138B1381370B00FEA73A /* CnotiMind.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CnotiMind.m; sourceTree = "<group>"; };
-		1896138C1381370B00FEA73A /* ConditionDataMiningNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionDataMiningNode.h; sourceTree = "<group>"; };
-		1896138D1381370B00FEA73A /* ConditionDataMiningNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionDataMiningNode.m; sourceTree = "<group>"; };
-		1896138E1381370B00FEA73A /* ConditionEmotionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionEmotionNode.h; sourceTree = "<group>"; };
-		1896138F1381370B00FEA73A /* ConditionEmotionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionEmotionNode.m; sourceTree = "<group>"; };
-		189613901381370B00FEA73A /* ConditionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionNode.h; sourceTree = "<group>"; };
-		189613911381370B00FEA73A /* ConditionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionNode.m; sourceTree = "<group>"; };
-		189613921381370B00FEA73A /* ConditionPerceptionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionPerceptionNode.h; sourceTree = "<group>"; };
-		189613931381370B00FEA73A /* ConditionPerceptionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionPerceptionNode.m; sourceTree = "<group>"; };
-		189613941381370B00FEA73A /* ConditionVariableNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionVariableNode.h; sourceTree = "<group>"; };
-		189613951381370B00FEA73A /* ConditionVariableNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionVariableNode.m; sourceTree = "<group>"; };
-		189613961381370B00FEA73A /* DataMiningNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataMiningNode.h; sourceTree = "<group>"; };
-		189613971381370B00FEA73A /* DataMiningNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataMiningNode.m; sourceTree = "<group>"; };
 		189613981381370B00FEA73A /* Emotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Emotion.h; sourceTree = "<group>"; };
 		189613991381370B00FEA73A /* Emotion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Emotion.m; sourceTree = "<group>"; };
-		1896139A1381370B00FEA73A /* EmotionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmotionNode.h; sourceTree = "<group>"; };
-		1896139B1381370B00FEA73A /* EmotionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmotionNode.m; sourceTree = "<group>"; };
 		1896139F1381370B00FEA73A /* MemoryEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryEvent.h; sourceTree = "<group>"; };
 		189613A01381370B00FEA73A /* MemoryEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemoryEvent.m; sourceTree = "<group>"; };
 		189613A11381370B00FEA73A /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
@@ -113,12 +119,6 @@
 		189613A51381370B00FEA73A /* ObjectToXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectToXML.h; sourceTree = "<group>"; };
 		189613A61381370B00FEA73A /* Perception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Perception.h; sourceTree = "<group>"; };
 		189613A71381370B00FEA73A /* Perception.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Perception.m; sourceTree = "<group>"; };
-		189613A81381370B00FEA73A /* RootNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootNode.h; sourceTree = "<group>"; };
-		189613A91381370B00FEA73A /* RootNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootNode.m; sourceTree = "<group>"; };
-		189613AA1381370B00FEA73A /* RuleNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuleNode.h; sourceTree = "<group>"; };
-		189613AB1381370B00FEA73A /* RuleNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RuleNode.m; sourceTree = "<group>"; };
-		189613AC1381370B00FEA73A /* StorageNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorageNode.h; sourceTree = "<group>"; };
-		189613AD1381370B00FEA73A /* StorageNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorageNode.m; sourceTree = "<group>"; };
 		18E02CD91405262E00BD7343 /* mozart_mind.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mozart_mind.xml; sourceTree = "<group>"; };
 		18E02CDA1405262E00BD7343 /* mozart_rules.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mozart_rules.xml; sourceTree = "<group>"; };
 		18E02CDB1405262E00BD7343 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
@@ -164,6 +164,37 @@
 				1813F3D213FC1C80005DEC76 /* GDataXMLNode.m */,
 			);
 			path = GDataXML;
+			sourceTree = "<group>";
+		};
+		187C44AA140E72C60033DD6B /* rules */ = {
+			isa = PBXGroup;
+			children = (
+				187C44AB140E72C60033DD6B /* ActionNode.h */,
+				187C44AC140E72C60033DD6B /* ActionNode.m */,
+				187C44AD140E72C60033DD6B /* ConditionDataMiningNode.h */,
+				187C44AE140E72C60033DD6B /* ConditionDataMiningNode.m */,
+				187C44AF140E72C60033DD6B /* ConditionEmotionNode.h */,
+				187C44B0140E72C60033DD6B /* ConditionEmotionNode.m */,
+				187C44B1140E72C60033DD6B /* ConditionNode.h */,
+				187C44B2140E72C60033DD6B /* ConditionNode.m */,
+				187C44B3140E72C60033DD6B /* ConditionPerceptionNode.h */,
+				187C44B4140E72C60033DD6B /* ConditionPerceptionNode.m */,
+				187C44B5140E72C60033DD6B /* ConditionVariableNode.h */,
+				187C44B6140E72C60033DD6B /* ConditionVariableNode.m */,
+				187C44B7140E72C60033DD6B /* DataMiningNode.h */,
+				187C44B8140E72C60033DD6B /* DataMiningNode.m */,
+				187C44B9140E72C60033DD6B /* EmotionNode.h */,
+				187C44BA140E72C60033DD6B /* EmotionNode.m */,
+				187C44BB140E72C60033DD6B /* RootNode.h */,
+				187C44BC140E72C60033DD6B /* RootNode.m */,
+				187C44BD140E72C60033DD6B /* RuleNode.h */,
+				187C44BE140E72C60033DD6B /* RuleNode.m */,
+				187C44BF140E72C60033DD6B /* RulesXmlHandler.h */,
+				187C44C0140E72C60033DD6B /* RulesXmlHandler.m */,
+				187C44C1140E72C60033DD6B /* StorageNode.h */,
+				187C44C2140E72C60033DD6B /* StorageNode.m */,
+			);
+			path = rules;
 			sourceTree = "<group>";
 		};
 		1896133A13811CFD00FEA73A = {
@@ -222,8 +253,8 @@
 		189613821381370B00FEA73A /* CnotiMind */ = {
 			isa = PBXGroup;
 			children = (
+				187C44AA140E72C60033DD6B /* rules */,
 				1813F3CF13FC1C80005DEC76 /* 3rdParty */,
-				189613C213815B2200FEA73A /* Rules */,
 				189613831381370B00FEA73A /* Action.h */,
 				189613841381370B00FEA73A /* Action.m */,
 				189613871381370B00FEA73A /* Brain.h */,
@@ -243,40 +274,9 @@
 				189613A61381370B00FEA73A /* Perception.h */,
 				189613A71381370B00FEA73A /* Perception.m */,
 				1895305513E1BE9700B41045 /* Macros.h */,
-				1813F3CC13FC1C10005DEC76 /* RulesXmlHandler.h */,
-				1813F3CD13FC1C10005DEC76 /* RulesXmlHandler.m */,
 			);
 			name = CnotiMind;
 			path = ../../src_ios/CnotiMind;
-			sourceTree = "<group>";
-		};
-		189613C213815B2200FEA73A /* Rules */ = {
-			isa = PBXGroup;
-			children = (
-				1896139A1381370B00FEA73A /* EmotionNode.h */,
-				1896139B1381370B00FEA73A /* EmotionNode.m */,
-				189613851381370B00FEA73A /* ActionNode.h */,
-				189613861381370B00FEA73A /* ActionNode.m */,
-				189613A81381370B00FEA73A /* RootNode.h */,
-				189613A91381370B00FEA73A /* RootNode.m */,
-				189613AA1381370B00FEA73A /* RuleNode.h */,
-				189613AB1381370B00FEA73A /* RuleNode.m */,
-				189613AC1381370B00FEA73A /* StorageNode.h */,
-				189613AD1381370B00FEA73A /* StorageNode.m */,
-				189613961381370B00FEA73A /* DataMiningNode.h */,
-				189613971381370B00FEA73A /* DataMiningNode.m */,
-				189613941381370B00FEA73A /* ConditionVariableNode.h */,
-				189613951381370B00FEA73A /* ConditionVariableNode.m */,
-				189613901381370B00FEA73A /* ConditionNode.h */,
-				189613911381370B00FEA73A /* ConditionNode.m */,
-				189613921381370B00FEA73A /* ConditionPerceptionNode.h */,
-				189613931381370B00FEA73A /* ConditionPerceptionNode.m */,
-				1896138C1381370B00FEA73A /* ConditionDataMiningNode.h */,
-				1896138D1381370B00FEA73A /* ConditionDataMiningNode.m */,
-				1896138E1381370B00FEA73A /* ConditionEmotionNode.h */,
-				1896138F1381370B00FEA73A /* ConditionEmotionNode.m */,
-			);
-			name = Rules;
 			sourceTree = "<group>";
 		};
 		18E02CD71405262E00BD7343 /* xml */ = {
@@ -409,26 +409,26 @@
 				1896135713811CFD00FEA73A /* main.m in Sources */,
 				1896135A13811CFD00FEA73A /* SingleEmotionAppDelegate.m in Sources */,
 				189613AE1381370B00FEA73A /* Action.m in Sources */,
-				189613AF1381370B00FEA73A /* ActionNode.m in Sources */,
 				189613B01381370B00FEA73A /* Brain.m in Sources */,
 				189613B11381370B00FEA73A /* CnotiMind.m in Sources */,
-				189613B21381370B00FEA73A /* ConditionDataMiningNode.m in Sources */,
-				189613B31381370B00FEA73A /* ConditionEmotionNode.m in Sources */,
-				189613B41381370B00FEA73A /* ConditionNode.m in Sources */,
-				189613B51381370B00FEA73A /* ConditionPerceptionNode.m in Sources */,
-				189613B61381370B00FEA73A /* ConditionVariableNode.m in Sources */,
-				189613B71381370B00FEA73A /* DataMiningNode.m in Sources */,
 				189613B81381370B00FEA73A /* Emotion.m in Sources */,
-				189613B91381370B00FEA73A /* EmotionNode.m in Sources */,
 				189613BB1381370B00FEA73A /* MemoryEvent.m in Sources */,
 				189613BC1381370B00FEA73A /* Node.m in Sources */,
 				189613BD1381370B00FEA73A /* NSMutableArray+QueueAdditions.m in Sources */,
 				189613BE1381370B00FEA73A /* Perception.m in Sources */,
-				189613BF1381370B00FEA73A /* RootNode.m in Sources */,
-				189613C01381370B00FEA73A /* RuleNode.m in Sources */,
-				189613C11381370B00FEA73A /* StorageNode.m in Sources */,
-				1813F3CE13FC1C10005DEC76 /* RulesXmlHandler.m in Sources */,
 				1813F3D313FC1C80005DEC76 /* GDataXMLNode.m in Sources */,
+				187C44C3140E72C60033DD6B /* ActionNode.m in Sources */,
+				187C44C4140E72C60033DD6B /* ConditionDataMiningNode.m in Sources */,
+				187C44C5140E72C60033DD6B /* ConditionEmotionNode.m in Sources */,
+				187C44C6140E72C60033DD6B /* ConditionNode.m in Sources */,
+				187C44C7140E72C60033DD6B /* ConditionPerceptionNode.m in Sources */,
+				187C44C8140E72C60033DD6B /* ConditionVariableNode.m in Sources */,
+				187C44C9140E72C60033DD6B /* DataMiningNode.m in Sources */,
+				187C44CA140E72C60033DD6B /* EmotionNode.m in Sources */,
+				187C44CB140E72C60033DD6B /* RootNode.m in Sources */,
+				187C44CC140E72C60033DD6B /* RuleNode.m in Sources */,
+				187C44CD140E72C60033DD6B /* RulesXmlHandler.m in Sources */,
+				187C44CE140E72C60033DD6B /* StorageNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
