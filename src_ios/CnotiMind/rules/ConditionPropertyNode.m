@@ -90,7 +90,7 @@
     NSString* info = [NSString stringWithFormat:@""];
     NSString* space = [self space:aDepth];
     
-    info = [info stringByAppendingFormat:@"%@ Condition type=Property", space];
+    info = [info stringByAppendingFormat:@"%@ Condition type=Property %@", space, [super info:aDepth]];
     
     return info;
 }
