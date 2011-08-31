@@ -696,6 +696,52 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     [[NSNotificationCenter defaultCenter] postNotificationName:SEND_ACTION object:action];
 }
 
+//TODO - Not tested
+- (void) deleteEvent:(NSString*)aKey position:(enum DeletePosition)aPosition memory:(enum MemoryType)aMemory
+{
+
+    NSMutableArray* mem = aMemory == LongTermMemory ? _longTermMemory : _workingMemory;
+    
+    NSEnumerator* eMem = [mem objectEnumerator];
+    
+    switch ((int)aPosition) {
+        case DeleteLast:
+            for (NSString* aKey2 in eMem) {
+                NSString* k = [NSString stringWithFormat:@"%@", aKey2];
+                if (![aKey caseInsensitiveCompare: k]) {
+                    [mem removeLastObject];
+                }
+            }
+            break;
+        case DeleteFirst:
+            for (NSString* aKey2 in eMem) {
+                NSString* k = [NSString stringWithFormat:@"%@", aKey2];
+                if (![aKey caseInsensitiveCompare: k]) {
+                    [mem removeObjectAtIndex:0];
+                }
+            }
+            break;
+        case DeleteAll:
+            for (NSString* aKey2 in eMem) {
+                NSString* k = [NSString stringWithFormat:@"%@", aKey2];
+                if (![aKey caseInsensitiveCompare: k]) {
+                    [mem removeAllObjects];
+                }
+            }
+            break;    
+
+        default:
+            break;
+    }
+    
+}
+
+//TODO
+- (void) deleteEvent:(NSString*)aKey value:(NSString*)aValue position:(enum DeletePosition)aPosition memory:(enum MemoryType)aMemory
+{
+
+}
+
 
 - (id) dataMining: (enum DataMiningOperation)aOperation event:(NSString*)aEvent memoryType:(enum MemoryType)aMemoryType valid:(BOOL*)aValid
 {

@@ -25,6 +25,7 @@
 		187C44CE140E72C60033DD6B /* StorageNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 187C44C2140E72C60033DD6B /* StorageNode.m */; };
 		187C44D1140E74030033DD6B /* ClearMemoryNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 187C44D0140E74030033DD6B /* ClearMemoryNode.m */; };
 		187C44D4140E7D250033DD6B /* ConditionPropertyNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 187C44D3140E7D240033DD6B /* ConditionPropertyNode.m */; };
+		187C455C140E89320033DD6B /* DeleteNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 187C455B140E89310033DD6B /* DeleteNode.m */; };
 		1896134A13811CFD00FEA73A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1896134913811CFD00FEA73A /* UIKit.framework */; };
 		1896134C13811CFD00FEA73A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1896134B13811CFD00FEA73A /* Foundation.framework */; };
 		1896134E13811CFD00FEA73A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1896134D13811CFD00FEA73A /* CoreGraphics.framework */; };
@@ -94,6 +95,8 @@
 		187C44D0140E74030033DD6B /* ClearMemoryNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClearMemoryNode.m; sourceTree = "<group>"; };
 		187C44D2140E7D240033DD6B /* ConditionPropertyNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionPropertyNode.h; sourceTree = "<group>"; };
 		187C44D3140E7D240033DD6B /* ConditionPropertyNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionPropertyNode.m; sourceTree = "<group>"; };
+		187C455A140E89300033DD6B /* DeleteNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeleteNode.h; sourceTree = "<group>"; };
+		187C455B140E89310033DD6B /* DeleteNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeleteNode.m; sourceTree = "<group>"; };
 		1895305513E1BE9700B41045 /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		1896134513811CFD00FEA73A /* SingleEmotion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SingleEmotion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1896134913811CFD00FEA73A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -177,6 +180,8 @@
 			children = (
 				187C44AB140E72C60033DD6B /* ActionNode.h */,
 				187C44AC140E72C60033DD6B /* ActionNode.m */,
+				187C44CF140E74030033DD6B /* ClearMemoryNode.h */,
+				187C44D0140E74030033DD6B /* ClearMemoryNode.m */,
 				187C44AD140E72C60033DD6B /* ConditionDataMiningNode.h */,
 				187C44AE140E72C60033DD6B /* ConditionDataMiningNode.m */,
 				187C44AF140E72C60033DD6B /* ConditionEmotionNode.h */,
@@ -185,6 +190,8 @@
 				187C44B2140E72C60033DD6B /* ConditionNode.m */,
 				187C44B3140E72C60033DD6B /* ConditionPerceptionNode.h */,
 				187C44B4140E72C60033DD6B /* ConditionPerceptionNode.m */,
+				187C44D2140E7D240033DD6B /* ConditionPropertyNode.h */,
+				187C44D3140E7D240033DD6B /* ConditionPropertyNode.m */,
 				187C44B5140E72C60033DD6B /* ConditionVariableNode.h */,
 				187C44B6140E72C60033DD6B /* ConditionVariableNode.m */,
 				187C44B7140E72C60033DD6B /* DataMiningNode.h */,
@@ -199,10 +206,8 @@
 				187C44C0140E72C60033DD6B /* RulesXmlHandler.m */,
 				187C44C1140E72C60033DD6B /* StorageNode.h */,
 				187C44C2140E72C60033DD6B /* StorageNode.m */,
-				187C44CF140E74030033DD6B /* ClearMemoryNode.h */,
-				187C44D0140E74030033DD6B /* ClearMemoryNode.m */,
-				187C44D2140E7D240033DD6B /* ConditionPropertyNode.h */,
-				187C44D3140E7D240033DD6B /* ConditionPropertyNode.m */,
+				187C455A140E89300033DD6B /* DeleteNode.h */,
+				187C455B140E89310033DD6B /* DeleteNode.m */,
 			);
 			path = rules;
 			sourceTree = "<group>";
@@ -441,6 +446,7 @@
 				187C44CE140E72C60033DD6B /* StorageNode.m in Sources */,
 				187C44D1140E74030033DD6B /* ClearMemoryNode.m in Sources */,
 				187C44D4140E7D250033DD6B /* ConditionPropertyNode.m in Sources */,
+				187C455C140E89320033DD6B /* DeleteNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

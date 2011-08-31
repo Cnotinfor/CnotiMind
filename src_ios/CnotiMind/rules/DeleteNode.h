@@ -7,7 +7,29 @@
 //
 
 #import "RuleNode.h"
+#import "CnotiMind.h"
 
-@interface DeleteNode : RuleNode
+@interface DeleteNode : RuleNode{
+    NSString* _key;
+    NSString* _value;
+    enum DeletePosition _position;
+    enum MemoryType _memory;
+}
+
+
+- (id) initWithKeyAndValueAndPositionAndMemoryAndBrainAndParent:(NSString*)aKey
+                                                          value:(NSString*)aValue
+                                                       position:(enum DeletePosition)aPosition
+                                                         memory:(enum MemoryType)aMemory 
+                                                          brain:(Brain*)aBrain 
+                                                         parent:(id)aParent;
+
+- (void) exec;
+- (void) exec:(NSMutableDictionary*)aVariables;
+
+- (NSString*) info:(int)aDepth;
+
+- (void) dealloc;
+
 
 @end

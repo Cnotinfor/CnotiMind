@@ -114,6 +114,9 @@ enum { HAS_DATA, NO_DATA };
 - (void) executeAction:(NSString*)aKey value:(NSString*)aValue;
 //- (void) executeAction:(NSMutableArray*)aVariables;
 
+- (void) deleteEvent:(NSString*)aKey position:(enum DeletePosition)aPosition memory:(enum MemoryType)aMemory;
+- (void) deleteEvent:(NSString*)aKey value:(NSString*)aValue position:(enum DeletePosition)aPosition memory:(enum MemoryType)aMemory;
+
 // Methods to get information from the memory
 - (id) dataMining: (enum DataMiningOperation)aOperation event:(NSString*)aEvent memoryType:(enum MemoryType)aMemoryType valid:(BOOL*)aValid;
 - (id) dataMining: (enum DataMiningOperation)aOperation event:(NSString*)aEvent value:(id)aValue memoryType:(enum MemoryType)aMemoryType valid:(BOOL*)aValid;
