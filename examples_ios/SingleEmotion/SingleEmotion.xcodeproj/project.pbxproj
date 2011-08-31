@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		1813F3CE13FC1C10005DEC76 /* RulesXmlHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1813F3CD13FC1C10005DEC76 /* RulesXmlHandler.m */; };
 		1813F3D313FC1C80005DEC76 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1813F3D213FC1C80005DEC76 /* GDataXMLNode.m */; };
+		187C441E140E36AF0033DD6B /* KickMeRules_emotion_reaction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 187C441B140E36AF0033DD6B /* KickMeRules_emotion_reaction.xml */; };
+		187C4423140E36E20033DD6B /* KickMeRules_remember_how_many_times_it_was_kicked.xml in Resources */ = {isa = PBXBuildFile; fileRef = 187C4421140E36E20033DD6B /* KickMeRules_remember_how_many_times_it_was_kicked.xml */; };
+		187C4424140E36E20033DD6B /* KickMeRules_remember_who_last_kick_the_brain.xml in Resources */ = {isa = PBXBuildFile; fileRef = 187C4422140E36E20033DD6B /* KickMeRules_remember_who_last_kick_the_brain.xml */; };
 		1896134A13811CFD00FEA73A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1896134913811CFD00FEA73A /* UIKit.framework */; };
 		1896134C13811CFD00FEA73A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1896134B13811CFD00FEA73A /* Foundation.framework */; };
 		1896134E13811CFD00FEA73A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1896134D13811CFD00FEA73A /* CoreGraphics.framework */; };
@@ -38,9 +41,6 @@
 		189613BF1381370B00FEA73A /* RootNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613A91381370B00FEA73A /* RootNode.m */; };
 		189613C01381370B00FEA73A /* RuleNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613AB1381370B00FEA73A /* RuleNode.m */; };
 		189613C11381370B00FEA73A /* StorageNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 189613AD1381370B00FEA73A /* StorageNode.m */; };
-		18AA1B29140BDF78003301E7 /* single_emotion_rules_with_variables.xml in Resources */ = {isa = PBXBuildFile; fileRef = 18AA1B28140BDF78003301E7 /* single_emotion_rules_with_variables.xml */; };
-		18AA1B2C140BE0AA003301E7 /* KickMeRules_with_variables.xml in Resources */ = {isa = PBXBuildFile; fileRef = 18AA1B2B140BE0AA003301E7 /* KickMeRules_with_variables.xml */; };
-		18E02CDD1405262E00BD7343 /* KickMeRules.xml in Resources */ = {isa = PBXBuildFile; fileRef = 18E02CD81405262E00BD7343 /* KickMeRules.xml */; };
 		18E02CDE1405262E00BD7343 /* mozart_mind.xml in Resources */ = {isa = PBXBuildFile; fileRef = 18E02CD91405262E00BD7343 /* mozart_mind.xml */; };
 		18E02CDF1405262E00BD7343 /* mozart_rules.xml in Resources */ = {isa = PBXBuildFile; fileRef = 18E02CDA1405262E00BD7343 /* mozart_rules.xml */; };
 		18E02CE01405262E00BD7343 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 18E02CDB1405262E00BD7343 /* README */; };
@@ -63,6 +63,9 @@
 		1813F3D113FC1C80005DEC76 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
 		1813F3D213FC1C80005DEC76 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		184353CA13E2BDDD0092AFBD /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
+		187C441B140E36AF0033DD6B /* KickMeRules_emotion_reaction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = KickMeRules_emotion_reaction.xml; sourceTree = "<group>"; };
+		187C4421140E36E20033DD6B /* KickMeRules_remember_how_many_times_it_was_kicked.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = KickMeRules_remember_how_many_times_it_was_kicked.xml; sourceTree = "<group>"; };
+		187C4422140E36E20033DD6B /* KickMeRules_remember_who_last_kick_the_brain.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = KickMeRules_remember_who_last_kick_the_brain.xml; sourceTree = "<group>"; };
 		1895305513E1BE9700B41045 /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		1896134513811CFD00FEA73A /* SingleEmotion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SingleEmotion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1896134913811CFD00FEA73A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -116,9 +119,6 @@
 		189613AB1381370B00FEA73A /* RuleNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RuleNode.m; sourceTree = "<group>"; };
 		189613AC1381370B00FEA73A /* StorageNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorageNode.h; sourceTree = "<group>"; };
 		189613AD1381370B00FEA73A /* StorageNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorageNode.m; sourceTree = "<group>"; };
-		18AA1B28140BDF78003301E7 /* single_emotion_rules_with_variables.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = single_emotion_rules_with_variables.xml; sourceTree = "<group>"; };
-		18AA1B2B140BE0AA003301E7 /* KickMeRules_with_variables.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = KickMeRules_with_variables.xml; sourceTree = "<group>"; };
-		18E02CD81405262E00BD7343 /* KickMeRules.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = KickMeRules.xml; sourceTree = "<group>"; };
 		18E02CD91405262E00BD7343 /* mozart_mind.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mozart_mind.xml; sourceTree = "<group>"; };
 		18E02CDA1405262E00BD7343 /* mozart_rules.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mozart_rules.xml; sourceTree = "<group>"; };
 		18E02CDB1405262E00BD7343 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
@@ -282,9 +282,9 @@
 		18E02CD71405262E00BD7343 /* xml */ = {
 			isa = PBXGroup;
 			children = (
-				18AA1B2B140BE0AA003301E7 /* KickMeRules_with_variables.xml */,
-				18AA1B28140BDF78003301E7 /* single_emotion_rules_with_variables.xml */,
-				18E02CD81405262E00BD7343 /* KickMeRules.xml */,
+				187C4421140E36E20033DD6B /* KickMeRules_remember_how_many_times_it_was_kicked.xml */,
+				187C4422140E36E20033DD6B /* KickMeRules_remember_who_last_kick_the_brain.xml */,
+				187C441B140E36AF0033DD6B /* KickMeRules_emotion_reaction.xml */,
 				18E02CD91405262E00BD7343 /* mozart_mind.xml */,
 				18E02CDA1405262E00BD7343 /* mozart_rules.xml */,
 				18E02CDB1405262E00BD7343 /* README */,
@@ -366,13 +366,13 @@
 			files = (
 				1896135413811CFD00FEA73A /* InfoPlist.strings in Resources */,
 				1896135D13811CFD00FEA73A /* MainWindow.xib in Resources */,
-				18E02CDD1405262E00BD7343 /* KickMeRules.xml in Resources */,
 				18E02CDE1405262E00BD7343 /* mozart_mind.xml in Resources */,
 				18E02CDF1405262E00BD7343 /* mozart_rules.xml in Resources */,
 				18E02CE01405262E00BD7343 /* README in Resources */,
 				18E02CE11405262E00BD7343 /* single_emotion_rules.xml in Resources */,
-				18AA1B29140BDF78003301E7 /* single_emotion_rules_with_variables.xml in Resources */,
-				18AA1B2C140BE0AA003301E7 /* KickMeRules_with_variables.xml in Resources */,
+				187C441E140E36AF0033DD6B /* KickMeRules_emotion_reaction.xml in Resources */,
+				187C4423140E36E20033DD6B /* KickMeRules_remember_how_many_times_it_was_kicked.xml in Resources */,
+				187C4424140E36E20033DD6B /* KickMeRules_remember_who_last_kick_the_brain.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

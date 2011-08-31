@@ -202,9 +202,6 @@
 
 - (BOOL) createEmotionNode:(GDataXMLElement*)atts
 {
-    
-    
-    
     if( _rootNode == NULL || _currentNode == NULL )
     {
         return false;
@@ -340,7 +337,7 @@
     opConditionType = [CnotiMind translateConditionOperator: opCondition];
     
     _parentNode = _currentNode;
-    _currentNode = [[ConditionVariableNode alloc] initWithEmotionAndValueAndOperatorAndBrainAndParent:emotion value:value operator:opConditionType brain:_brain parent:_parentNode];
+    _currentNode = [[ConditionEmotionNode alloc] initWithEmotionAndValueAndOperatorAndBrainAndParent:emotion value:value operator:opConditionType brain:_brain parent:_parentNode];
     
     return true;  
 }

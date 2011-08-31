@@ -24,8 +24,15 @@
         _value = (aValue == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aValue];
         _min = INT_MIN;
         _max = INT_MAX;
-        _valueNumericOk = TRUE;
-        _valueNumeric = [aValue floatValue];
+        
+        if ([self isNumeric:_value]) {
+            _valueNumericOk = TRUE;
+            _valueNumeric = [aValue floatValue];            
+        }
+        else {
+            _valueNumericOk = FALSE;
+            _valueNumeric = -1;            
+        }
     }
     
     return self;
@@ -72,15 +79,12 @@
 
         NSString* value = [self variableToValue:_value variables:aVariables];
         
-        // Test if the value from the variable is a valid number
-        BOOL ok = ([[NSScanner scannerWithString:value] scanFloat:NULL]) ? TRUE : FALSE;
-        double newValueInt = [value floatValue];
-        
-        
-        if( !ok )
+        if( ![self isNumeric:value] )
         {
             return;// Not valid, it doesn't do nothing
         }
+        // Test if the value from the variable is a valid number
+        double newValueInt = [value floatValue];
         
         // Update the numeric value
         _valueNumeric = newValueInt;

@@ -71,8 +71,8 @@
     // search the emotion
     NSEnumerator* eEmotions = [_brain.emotions objectEnumerator];
     Emotion* objectEmotion;
-    while (objectEmotion == [eEmotions nextObject]) {
-        if ([[objectEmotion key] isEqual:_key]) {
+    while (objectEmotion = [eEmotions nextObject]) {
+        if (![[objectEmotion name] caseInsensitiveCompare: _key]) {
             return [self testEmotion:objectEmotion];
         }
     }

@@ -28,11 +28,11 @@
 //        [_brain loadXmlRulesWithoutXMLKickMeWithHandler];
 
         NSString* XMLFile = [NSString stringWithString:@""];
-        XMLFile = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"KickMeRules_with_variables.xml"];	
+        XMLFile = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"KickMeRules_emotion_reaction.xml"];	
 
         [_brain loadXmlRules:XMLFile];
-
         [_brain printRules];
+        
         
         DLog(@"--- start brain ---");
         [_brain startThreadRun];
@@ -59,6 +59,10 @@
 
 //    Perception* perception = [[Perception alloc] initWithNameAndAValue:@"User Talk" value:@"Bye"];
 //    [_brain receivePerception:perception];
+
+    Emotion* emotionJoy = [[Emotion alloc] initWithNameAndValue:@"joy" value:0];
+    [_brain addEmotion:emotionJoy];
+    
     
     Perception* perception2 = [[Perception alloc] initWithNameAndAValue:@"kicked" value:@"being kicked"];
     [_brain receivePerception:perception2];

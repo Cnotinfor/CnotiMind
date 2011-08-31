@@ -65,7 +65,7 @@
             [aParent insertChild:self];
         }
         
-        DLog(@"%@", parent_);
+        //  DLog(@"%@", parent_);
 	}
 	
 	return self;
@@ -378,7 +378,6 @@
 
 - (BOOL)isNumeric:(NSString*)s
 {
-    DLog(@"%@", s);
     NSScanner *sc = [NSScanner scannerWithString: s];
     // We can pass NULL because we don't actually need the value to test
     // for if the string is numeric. This is allowable.
