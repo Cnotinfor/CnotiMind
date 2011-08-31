@@ -1,0 +1,20 @@
+<Rules>
+    <Condition type="perception" perception="kicked" value="being kicked">
+        <DataMining operation="count" event="kicker" value="[perception.value]" variable="[kicks]" memory="WM">
+            <Condition type="variable" variable="[kicks]" value="0">
+                <Action name="talk" value="That is the first time you kicked me." />
+            </Condition>
+            <Condition type="variable" variable="[kicks]" operator="Bigger" value="0">
+                <Action name="talk" value="Again? Are you crazy?" />
+            </Condition>
+        </DataMining>
+
+        <Emotion name="joy" increase="-2" />
+        <Storage event="kicker" value="[perception.value]" memory="WM" />
+
+        <Condition type="emotion" emotion="joy" operator="Smaller" value="-5" >
+             <Action name="talk" value="I'm not very happy! Let's fight!" />
+             <Action name="kick" value="[perception.value]" />
+        </Condition>
+    </Condition>
+</Rules>
