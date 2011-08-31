@@ -7,7 +7,8 @@
 
 @implementation RootNode
 
-- (id) initWithBrainAndParent:(Brain*)aBrain parent:(id)aParent
+- (id) initWithBrainAndParent:(Brain*)aBrain 
+                       parent:(id)aParent
 {
     if (self == [super initWithBrainAndParent:aBrain parent:aParent]) {
         

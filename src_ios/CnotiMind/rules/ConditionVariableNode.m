@@ -27,8 +27,6 @@
                                                       brain:aBrain 
                                                      parent:aParent])
     {
-    
-    
     }
     return self;
 }
@@ -37,7 +35,6 @@
 - (void) exec
 {
     // Does nothing, since this Node, need variables to exec
-
 }
 
 

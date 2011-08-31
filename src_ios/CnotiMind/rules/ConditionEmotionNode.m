@@ -13,13 +13,14 @@
 @implementation ConditionEmotionNode
 
 
-- (id) initWithEmotionAndValueAndOperatorAndBrainAndParent: (NSString*)aEmotion value:(NSString*)aValue operator: (enum ConditionOperator)aOperator brain:(Brain*)aBrain parent:(id)aParent
+- (id) initWithEmotionAndValueAndOperatorAndBrainAndParent: (NSString*)aEmotion 
+                                                     value:(NSString*)aValue 
+                                                  operator:(enum ConditionOperator)aOperator 
+                                                     brain:(Brain*)aBrain 
+                                                    parent:(id)aParent
 {
-    
     if (self == [super initWithKeyAndValueAndBrainAndParent: aEmotion value:aValue operator:aOperator brain:aBrain parent:aParent])
     {
-    
-    
     }
     return self;
 }

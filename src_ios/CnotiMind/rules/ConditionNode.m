@@ -10,7 +10,11 @@
 
 
 
-- (id) initWithKeyAndValueAndBrainAndParent: (NSString*)aKey value:(NSString*)aValue operator: (enum ConditionOperator)aOperator brain:(Brain*)aBrain parent:(id)aParent
+- (id) initWithKeyAndValueAndBrainAndParent: (NSString*)aKey 
+                                      value:(NSString*)aValue 
+                                   operator: (enum ConditionOperator)aOperator 
+                                      brain:(Brain*)aBrain 
+                                     parent:(id)aParent
 {
     if (self == [super initWithBrainAndParent:aBrain parent:aParent]) {
         
@@ -39,9 +43,9 @@
                 _isValueNumeric = FALSE;
             }
         }
-//        DLog(@"_isValueNumeric: %d", _isValueNumeric);
-//        DLog(@"aValue: %@", aValue);
-//        DLog(@"_valueNumeric :%f", _valueNumeric);
+        //        DLog(@"_isValueNumeric: %d", _isValueNumeric);
+        //        DLog(@"aValue: %@", aValue);
+        //        DLog(@"_valueNumeric :%f", _valueNumeric);
         
     }
     
@@ -50,7 +54,6 @@
 
 - (void) exec
 {
-    
     // TODO Test if the condition is true. If it is, execute the node
     if( true )
     {
@@ -74,7 +77,7 @@
     NSString* info = [NSString stringWithFormat:@""];
     NSString* space = [self space:aDepth];
     
-//    info = [info stringByAppendingFormat:@"%@ Condition", space];
+    //    info = [info stringByAppendingFormat:@"%@ Condition", space];
     info = [info stringByAppendingFormat:@"%@", [super info:aDepth]];
     
     return info;

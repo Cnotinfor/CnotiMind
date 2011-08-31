@@ -16,7 +16,8 @@
 }
 
 
-- (id) initWithBrainAndParent:(Brain*)aBrain parent:(id)aParent;
+- (id) initWithBrainAndParent:(Brain*)aBrain 
+                       parent:(id)aParent;
 
 - (void) exec;
 - (void) exec:(NSMutableDictionary*)aVariables;

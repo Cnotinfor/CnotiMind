@@ -17,14 +17,16 @@
     
 }
 
-- (id) initWithPerceptionAndValueAndOperatorAndBrainAndParent: (NSString*)aKey value:(NSString*)aValue operator: (enum ConditionOperator)aOperator brain:(Brain*)aBrain parent:(id)aParent;
-
+- (id) initWithPerceptionAndValueAndOperatorAndBrainAndParent: (NSString*)aKey 
+                                                        value:(NSString*)aValue 
+                                                     operator: (enum ConditionOperator)aOperator 
+                                                        brain:(Brain*)aBrain 
+                                                       parent:(id)aParent;
 - (void) exec;
 - (void) exec:(NSMutableDictionary*)aVariables;
 
 - (NSString*) info:(int)aDepth;
 
 - (BOOL) isTrue;
-
 
 @end
