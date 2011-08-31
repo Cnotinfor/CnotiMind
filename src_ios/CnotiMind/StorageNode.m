@@ -83,15 +83,11 @@
 
 - (void) exec:(NSMutableDictionary*)aVariables
 {
-
     NSString* value = [NSString stringWithFormat:@"%@",_value];
     [self tagsToValue:&value variables:&aVariables];
-    
-    DLog(@"--->%@", value);
-    
+        
     MemoryEvent* m = [[MemoryEvent alloc] initWithEventAndValue:_event value:value];
     [_brain storeToMemory:m memoryType:_memory];
-
 }
 
 

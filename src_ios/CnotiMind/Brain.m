@@ -596,7 +596,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 {
     [_semaphoreBrain lockWhenCondition:NO_DATA];
     
-    DLog(@"name: %@. value: %@", [aPerception name], [aPerception value]);
+//    DLog(@"name: %@. value: %@", [aPerception name], [aPerception value]);
     
     [_receivedPerceptions enqueue:aPerception];
     
@@ -667,25 +667,13 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
             @synchronized(_longTermMemory) {
                 [_longTermMemory addObject:aMemoryEvent];
             }
-            
-            //			if( _gui != NULL )
-            //			{
-            //				_gui->updateLongTermMemory();
-            //			}
 			break;
 		case WorkingMemory:
             @synchronized(_workingMemory) {
                 [_workingMemory addObject:aMemoryEvent];
             }
-            //			if( _gui != NULL )
-            //			{
-            //				_gui->updateWorkingMemory();
-            //			}
 			break;
-            
     }
-    
-    DLog(@"stored to memory");   
 }
 
 - (void) executeActionWithVariables:(NSString*)aKey value:(NSString*)aValue
@@ -770,7 +758,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         [self setValid: aValid value:false];
         return result;
     }
-    DLog(@"aValue: %@", aValue);
+//    DLog(@"aValue: %@", aValue);
     // if value is empty, do datamining without the value
     if( [aValue length]==0 )
     {

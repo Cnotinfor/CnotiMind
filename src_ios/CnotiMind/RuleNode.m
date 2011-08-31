@@ -274,7 +274,7 @@
 {
     NSString* empty = [NSString stringWithFormat:@""];
     
-    DLog(@"%@", *aValue);
+//    DLog(@"%@", *aValue);
     
     // VARIABLES
     NSRegularExpression *regex_variables_tags = [NSRegularExpression regularExpressionWithPattern:@"(\\[[a-zA-Z0-9_\\- \\.]+\\])"
@@ -353,7 +353,7 @@
     NSString* space = [NSString stringWithFormat:@"\n"];
     for( int i=0; i <= aDepth; i++ )
     {
-        space = [space stringByAppendingFormat:@"---\t"];
+        space = [space stringByAppendingFormat:@"\t"];
     }
     
     return space;

@@ -62,13 +62,12 @@
 
     Emotion* emotionJoy = [[Emotion alloc] initWithNameAndValue:@"joy" value:0];
     [_brain addEmotion:emotionJoy];
-    
-    
+        
     Perception* perception2 = [[Perception alloc] initWithNameAndAValue:@"kicked" value:@"being kicked"];
     [_brain receivePerception:perception2];
     
-    [_brain printMemory:LongTermMemory];
-    [_brain printMemory:WorkingMemory];
+//    [_brain printMemory:LongTermMemory];
+//    [_brain printMemory:WorkingMemory];
 }
 
 
