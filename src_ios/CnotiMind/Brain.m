@@ -26,6 +26,8 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 @synthesize emotions = _emotions;
 @synthesize receivedPerceptions = _receivedPerceptions;
 
+@synthesize properties = _properties;
+
 - (id) init
 {
     if (self == [super init]) {

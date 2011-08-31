@@ -47,6 +47,9 @@ enum { HAS_DATA, NO_DATA };
     NSMutableArray* _emotionsChanged;
     NSMutableArray* _longTermMemory;
     NSMutableArray* _workingMemory;
+    
+    NSMutableDictionary* _properties;
+    
     int _timerDecayEmotions;
     
     bool _quit;
@@ -57,6 +60,8 @@ enum { HAS_DATA, NO_DATA };
 
 @property (readwrite, retain) NSMutableArray* emotions;
 @property (readwrite, retain) NSMutableArray* receivedPerceptions;
+
+@property (readwrite, retain) NSMutableDictionary* properties;
 
 - (id) init;
 - (id) initWithPath:(NSString*)aPath;
