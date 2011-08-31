@@ -27,13 +27,21 @@
 
 - (void) exec
 {
+//    TODO probability
     [_brain executeAction:_name value:_value]; 
 }
 
 
-- (void) exec:(NSString*)aVariables
+- (void) exec:(NSMutableDictionary*)aVariables
 {
-    [_brain executeAction:_name value:_value];
+    NSString* value = [NSString stringWithFormat:@"%@", _value];
+    
+    [self tagsToValue:&value variables:&aVariables];
+    
+    if ([value length]>0) {
+        [_brain executeAction:_name value:value];        
+    }
+
 }
 
 

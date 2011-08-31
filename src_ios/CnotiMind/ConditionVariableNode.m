@@ -73,44 +73,67 @@
 
 - (BOOL) isTrue:(NSMutableDictionary*)aVariables
 {
-    NSEnumerator* eVariables = [aVariables objectEnumerator];
+    NSEnumerator* eVariables = [aVariables keyEnumerator];
     
-    MemoryEvent* objectVariable;
-    while (objectVariable = [eVariables nextObject]) {
+    for (NSString* aKey in eVariables) {
         
-        
-        NSString* k = [NSString stringWithFormat:@"%@", [objectVariable event]];
-        NSString* v = [NSString stringWithFormat:@"%@", [objectVariable value]];
+        NSString* k = [NSString stringWithFormat:@"%@", aKey];
+        NSString* v = [NSString stringWithFormat:@"%@", [aVariables objectForKey:aKey]];
 
         // Test if found the variable
         if (![_key caseInsensitiveCompare:k]) {
             
             // Try to convert the value from the variable to number
             float value = [v floatValue];
-            BOOL ok = ([[NSScanner scannerWithString:v] scanFloat:NULL]) ? TRUE : FALSE;
+//            BOOL ok = ([[NSScanner scannerWithString:v] scanFloat:NULL]) ? TRUE : FALSE;
             
             // if both values are numbers
-            if (ok && _isValueNumeric) {
-                
-                switch( (int)_operator )
-                {
-                    case ConditionOperatorBigger: return _valueNumeric > value;
-                    case ConditionOperatorBiggerOrEqual: return _valueNumeric >= value;
-                    case ConditionOperatorSmaller: return _valueNumeric < value;
-                    case ConditionOperatorSmallerOrEqual: return _valueNumeric <= value;
-                    case ConditionOperatorEqual: return _valueNumeric == value;
-                    case ConditionOperatorDifferent: return _valueNumeric != value;
+            if ([self isNumeric:v]) {
+                if (_isValueNumeric) { // if the value to compare is a number
+                    
+                    switch( (int)_operator )
+                    {
+                        case ConditionOperatorBigger: return  value > _valueNumeric;
+                        case ConditionOperatorBiggerOrEqual: return value >= _valueNumeric;
+                        case ConditionOperatorSmaller: return value < _valueNumeric;
+                        case ConditionOperatorSmallerOrEqual: return value <= _valueNumeric;
+                        case ConditionOperatorEqual: return value == _valueNumeric;
+                        case ConditionOperatorDifferent: return value != _valueNumeric;
+                    }
+                    return false;    
                 }
-                return false;
                 
+                else { // if it is not a number, test if it is variable
+                
+                    NSString* strValue = [NSString stringWithFormat:@"%@", _value];
+                    [self tagsToValue:&strValue variables:&aVariables];
+                    
+                    if ([self isNumeric:strValue]) {
+                        float compareValue = [strValue floatValue];
+
+                        switch( (int)_operator )
+                        {
+                            case ConditionOperatorBigger: return value > compareValue;
+                            case ConditionOperatorBiggerOrEqual: return value >= compareValue;
+                            case ConditionOperatorSmaller: return value < compareValue;
+                            case ConditionOperatorSmallerOrEqual: return value <= compareValue;
+                            case ConditionOperatorEqual: return value == compareValue;
+                            case ConditionOperatorDifferent: return value != compareValue;
+                        }
+                        return false;
+                    }
+                }           
             }
         
             else // If one of the value is not a number
             {
+                NSString* strValue = [NSString stringWithFormat:@"%@", _value];
+                [self tagsToValue:&strValue variables:&aVariables];                
+                
                 switch( (int)_operator ) // it's a string, just to this 2 operators
                 {
-                    case ConditionOperatorEqual: return ![_value caseInsensitiveCompare:v];
-                    case ConditionOperatorDifferent: return [_value caseInsensitiveCompare:v];
+                    case ConditionOperatorEqual: return ![strValue caseInsensitiveCompare:v];
+                    case ConditionOperatorDifferent: return [strValue caseInsensitiveCompare:v];
                 }
                 return false;
             }

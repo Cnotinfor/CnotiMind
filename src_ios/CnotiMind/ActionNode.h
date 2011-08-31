@@ -20,7 +20,7 @@
 - (id) initWithNameAndValueAndBrainAndParent: (NSString*)aName value:(NSString*)aValue brain:(Brain*)aBrain parent:(id)aParent;
 
 - (void) exec;
-- (void) exec:(NSString*)aVariables;
+- (void) exec:(NSMutableDictionary*)aVariables;
 
 - (NSString*) info:(int)aDepth;
 

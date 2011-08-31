@@ -33,6 +33,7 @@
         else {
             if ([self isNumeric:aValue]) {
                 _isValueNumeric = TRUE;
+                _valueNumeric = [aValue floatValue];
             }
             else {
                 _isValueNumeric = FALSE;

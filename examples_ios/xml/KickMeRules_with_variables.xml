@@ -1,6 +1,7 @@
 <Rules>
     <Condition type="perception" perception="kicked" value="being kicked">
-        <DataMining operation="count" event="kicked" value="[perception.value]" variable="[kicks]" memory="WM">
+        <DataMining operation="count" event="kicked" variable="[kicks]" memory="WM">
+			<Action name="talk" value="... [kicks]" />
             <Condition type="variable" variable="[kicks]" value="0">
                 <Action name="talk" value="That is the first time you kicked me." />
             </Condition>

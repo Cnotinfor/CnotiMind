@@ -31,7 +31,7 @@
     if (aText==nil) {
         return ConditionOperatorUndefined;
     }
-    if( ![aText caseInsensitiveCompare:@">"])
+    if( (![aText caseInsensitiveCompare:@">"]) || (![aText caseInsensitiveCompare:@"bigger"]) )
     {
         return ConditionOperatorBigger;
     }
@@ -39,7 +39,7 @@
     {
         return ConditionOperatorBiggerOrEqual;
     }
-    if( ![aText caseInsensitiveCompare:@"<"])
+    if( (![aText caseInsensitiveCompare:@"<"]) || (![aText caseInsensitiveCompare:@"smaller"]) )
     {
         return ConditionOperatorSmaller;
     }
@@ -47,11 +47,11 @@
     {
         return ConditionOperatorSmallerOrEqual;
     }
-    if( ![aText caseInsensitiveCompare:@"=="])
+    if( (![aText caseInsensitiveCompare:@"=="]) || (![aText caseInsensitiveCompare:@"="]) || (![aText caseInsensitiveCompare:@"equal"]) )
     {
         return ConditionOperatorEqual;
     }
-    if( (![aText caseInsensitiveCompare:@"!="] ) || (![aText caseInsensitiveCompare:@"<>"]) )
+    if( (![aText caseInsensitiveCompare:@"!="] ) || (![aText caseInsensitiveCompare:@"different"]) )
     {
         return ConditionOperatorDifferent;
     }

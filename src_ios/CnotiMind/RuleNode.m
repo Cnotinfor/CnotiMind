@@ -282,16 +282,16 @@
                                                                              error:nil];
     // Search for variable value is between square brackets
     int pos = 0;
-    NSRange rangeOfFirstMatch = [regex_variables_tags rangeOfFirstMatchInString:*aValue options:0 range:NSMakeRange(0, [*aValue length])];
-    while( (pos = [regex_variables_tags firstMatchInString:*aValue options:0 range:NSMakeRange(0, [*aValue length])].range.length ) != 0 )
+    
+    while( (pos = [regex_variables_tags firstMatchInString:*aValue options:0 range:NSMakeRange(0, [*aValue length])].range.location ) != 0 )
     {
-        
+        NSRange rangeOfFirstMatch = [regex_variables_tags rangeOfFirstMatchInString:*aValue options:0 range:NSMakeRange(0, [*aValue length])];
         NSString* var = [*aValue substringWithRange:rangeOfFirstMatch];
         
         DLog(@"var: %@", var);
         DLog(@"aVariables: %@", *aVariables);
         
-        NSString* valueFromKey = [[NSString alloc] initWithString: [*aVariables valueForKey:var]];
+        NSString* valueFromKey = [[NSString alloc] initWithFormat:@"%@", [*aVariables valueForKey:var]];
         
         DLog(@"valueFromKey: %@", valueFromKey);
 
@@ -318,9 +318,9 @@
     // Search for variable value is between curl brackets
     pos = 0;    
     
-    rangeOfFirstMatch = [regex_properties_tags rangeOfFirstMatchInString:*aValue options:0 range:NSMakeRange(0, [*aValue length])];
     while( (pos = [regex_properties_tags firstMatchInString:*aValue options:0 range:NSMakeRange(0, [*aValue length])].range.length ) != 0 )
     {
+        NSRange rangeOfFirstMatch = [regex_properties_tags rangeOfFirstMatchInString:*aValue options:0 range:NSMakeRange(0, [*aValue length])];
         
         NSString* var = [*aValue substringWithRange:rangeOfFirstMatch];
         

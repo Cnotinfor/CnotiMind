@@ -84,7 +84,7 @@
 - (void) exec:(NSMutableDictionary*)aVariables
 {
 
-    NSString* value = _value;
+    NSString* value = [NSString stringWithFormat:@"%@",_value];
     [self tagsToValue:&value variables:&aVariables];
     
     DLog(@"--->%@", value);
