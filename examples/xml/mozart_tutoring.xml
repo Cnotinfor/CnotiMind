@@ -178,97 +178,178 @@
 					<Action name="talk" value="Start With DoAgudo" />
 				</Random>
 			</Condition>
-			<!-- Get the current last note -->
+			
+			<!-- Check if notes are present en WM -->
 			<Condition type="Datamining" operation="Exists" event="Note" compareValue="1" memory="WM">
+				<!-- Get the current last note -->
 				<DataMining variable="[Last Note]" operation="Last" event="Note"  memory="WM" />
-				<Condition type="Variable" variable="[Last Note]" compareValue="Do">
-					<Random>
-						<Action name="Talk" value="Use Again Do" />
-						<Action name="Talk" value="Use Note Re" />
-						<Action name="Talk" value="Use Note Mi" />
-						<Action name="Talk" value="Use Note Sol" />
-						<Action name="Talk" value="Use Note DoAgudo" />
-					</Random>
+				<!-- Get the current last note sequence option -->
+				<DataMining variable="[Last Note Option]" operation="Last" event="Note Option"  memory="WM" />
+				
+				<!-- Check if removed note was a bad note -->
+				<Condition type="Property" property="Deleted Notes Option" compareValue="Bad">
+					<!-- Check if current note is a good note -->
+					<Condition type="Property" property="Notes Option" compareValue="Good">
+						<!-- Give a suggestion for the next note -->
+						<!-- Current note Do -->
+						<Condition type="Variable" variable="[Last Note]" compareValue="Do">
+							<Random>
+								<Action name="Talk" value="Use Again Do" />
+								<Action name="Talk" value="Use Note Re" />
+								<Action name="Talk" value="Use Note Mi" />
+								<Action name="Talk" value="Use Note Sol" />
+								<Action name="Talk" value="Use Note DoAgudo" />
+							</Random>
+						</Condition>
+						<!-- Current note Re -->
+						<Condition type="Variable" variable="[Last Note]" compareValue="Re">
+							<Random>
+								<Action name="Talk" value="Use Note Do" />
+								<Action name="Talk" value="Use Again Re" />
+								<Action name="Talk" value="Use Note Mi" />
+								<Action name="Talk" value="Use Note Sol" />
+							</Random>
+						</Condition>
+						<!-- Current note Mi -->
+						<Condition type="Variable" variable="[Last Note]" compareValue="Mi">
+							<Random>
+								<Action name="Talk" value="Use Note Do" />
+								<Action name="Talk" value="Use Note Re" />
+								<Action name="Talk" value="Use Again Mi" />
+								<Action name="Talk" value="Use Note Fa" />
+								<Action name="Talk" value="Use Note Sol" />
+							</Random>
+						</Condition>
+						<!-- Current note Fa -->
+						<Condition type="Variable" variable="[Last Note]" compareValue="Fa">
+							<Random>
+								<Action name="Talk" value="Use Note Mi" />
+								<Action name="Talk" value="Use Again Fa" />
+								<Action name="Talk" value="Use Note Sol" />
+							</Random>
+						</Condition>
+						<!-- Current note Sol -->
+						<Condition type="Variable" variable="[Last Note]" compareValue="Sol">
+							<Random>
+								<Action name="Talk" value="Use Note Do" />
+								<Action name="Talk" value="Use Note Mi" />
+								<Action name="Talk" value="Use Note Fa" />
+								<Action name="Talk" value="Use Again Sol" />
+								<Action name="Talk" value="Use Note La" />
+							</Random>
+						</Condition>
+						<!-- Current note La -->
+						<Condition type="Variable" variable="[Last Note]" compareValue="La">
+							<Random>
+								<Action name="Talk" value="Use Note Sol" />
+								<Action name="Talk" value="Use Again La" />
+								<Action name="Talk" value="Use Note Si" />
+							</Random>
+						</Condition>
+						<!-- Current note Si -->
+						<Condition type="Variable" variable="[Last Note]" compareValue="Si">
+							<Random>
+								<Action name="Talk" value="Use Note La" />
+								<Action name="Talk" value="Use Again Si" />
+								<Action name="Talk" value="Use Note DoAgudo" />
+							</Random>
+						</Condition>
+						<!-- Current note Do Agudo -->
+						<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
+							<Random>
+								<Action name="Talk" value="Use Note Do" />
+								<Action name="Talk" value="Use Note Si" />
+								<Action name="Talk" value="Use Note Sol" />
+								<Action name="Talk" value="Use Again DoAgudo" />
+							</Random>
+						</Condition>
+					</Condition>
 				</Condition>
-				<Condition type="Variable" variable="[Last Note]" compareValue="Re">
-					<Random>
-						<Action name="Talk" value="Use Note Do" />
-						<Action name="Talk" value="Use Again Re" />
-						<Action name="Talk" value="Use Note Mi" />
-						<Action name="Talk" value="Use Note Sol" />
-					</Random>
+
+				<!-- Check if removed note had a bad duration sequence -->
+				<Condition type="Property" property="Deleted Notes Option" compareValue="Good">
+					<Condition type="Property" property="Deleted Duration Option" compareValue="Bad">
+						<MathOperation result="[Used Tempos]" variable="[Music Duration]" name="Remainder" value="4" />
+						
+						<!-- Duration is invalid -->
+						<Condition type="Variable" variable="[Used Tempos]" compareValue="1">
+							<Random>
+								<Action name="Talk" value="Use Duration 3" />
+								<Action name="Talk" value="Use Duration 2" />
+								<Action name="Talk" value="Use Duration 1" />
+							</Random>
+						</Condition>
+						<Condition type="Variable" variable="[Used Tempos]" compareValue="2">
+							<Random>
+								<Action name="Talk" value="Use Duration 2" />
+								<Action name="Talk" value="Use Duration 1" />
+							</Random>
+						</Condition>
+						<Condition type="Variable" variable="[Used Tempos]" compareValue="3">
+							<Action name="Talk" value="Use Duration 1" />
+						</Condition>
+					</Condition>
 				</Condition>
-				<Condition type="Variable" variable="[Last Note]" compareValue="Mi">
-					<Random>
-						<Action name="Talk" value="Use Note Do" />
-						<Action name="Talk" value="Use Note Re" />
-						<Action name="Talk" value="Use Again Mi" />
-						<Action name="Talk" value="Use Note Fa" />
-						<Action name="Talk" value="Use Note Sol" />
-					</Random>
-				</Condition>
-				<Condition type="Variable" variable="[Last Note]" compareValue="Fa">
-					<Random>
-						<Action name="Talk" value="Use Note Mi" />
-						<Action name="Talk" value="Use Again Fa" />
-						<Action name="Talk" value="Use Note Sol" />
-					</Random>
-				</Condition>
-				<Condition type="Variable" variable="[Last Note]" compareValue="Sol">
-					<Random>
-						<Action name="Talk" value="Use Note Do" />
-						<Action name="Talk" value="Use Note Mi" />
-						<Action name="Talk" value="Use Note Fa" />
-						<Action name="Talk" value="Use Again Sol" />
-						<Action name="Talk" value="Use Note La" />
-					</Random>
-				</Condition>
-				<Condition type="Variable" variable="[Last Note]" compareValue="La">
-					<Random>
-						<Action name="Talk" value="Use Note Sol" />
-						<Action name="Talk" value="Use Again La" />
-						<Action name="Talk" value="Use Note Si" />
-					</Random>
-				</Condition>
-				<Condition type="Variable" variable="[Last Note]" compareValue="Si">
-					<Random>
-						<Action name="Talk" value="Use Note La" />
-						<Action name="Talk" value="Use Again Si" />
-						<Action name="Talk" value="Use Note DoAgudo" />
-					</Random>
-				</Condition>
-				<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
-					<Random>
-						<Action name="Talk" value="Use Note Do" />
-						<Action name="Talk" value="Use Note Si" />
-						<Action name="Talk" value="Use Note Sol" />
-						<Action name="Talk" value="Use Again DoAgudo" />
-					</Random>
-				</Condition>
+
 			</Condition>
 
-			<!-- Check if removed note was of a bad duration sequence -->
-			<Condition type="Property" property="Deleted Notes Option" compareValue="Good">
-				<Condition type="Property" property="Deleted Duration Option" compareValue="Bad">
-					<MathOperation result="[Used Tempos]" variable="[Music Duration]" name="Remainder" value="4" />
-					<!-- Duration is invalid -->
-					<Condition type="Variable" variable="[Used Tempos]" compareValue="1">
-						<Random>
-							<Action name="Talk" value="Use Duration 3" />
-							<Action name="Talk" value="Use Duration 2" />
-							<Action name="Talk" value="Use Duration 1" />
-						</Random>
-					</Condition>
-					<Condition type="Variable" variable="[Used Tempos]" compareValue="2">
-						<Random>
-							<Action name="Talk" value="Use Duration 2" />
-							<Action name="Talk" value="Use Duration 1" />
-						</Random>
-					</Condition>
-					<Condition type="Variable" variable="[Used Tempos]" compareValue="3">
-						<Action name="Talk" value="Use Duration 1" />
-					</Condition>
+			<!-- Check if there are still more then 1 note -->
+			<Condition type="Variable" variable="[Count Notes]" compareValue="1" operator="Bigger">
+	
+				<!-- Check if current sequence is not good (note) -->
+				<Condition type="variable" variable="[Last Note Option]" compareValue="Bad">
 
+					<!-- Check if previous sequence is not good (note) -->
+					<DataMining variable="[Previous Note Status]" operation="Item" event="Note Option" position="-2" memory="WM" />
+					<Condition type="variable" variable="[Previous Note Status]" compareValue="Bad">
+
+						<!-- Check if deleted sequence is not good (note) -->
+						<Condition type="Property" property="Deleted Notes Option" compareValue="Bad">
+							<Action name="Talk" value="Delete Previous" />
+						</Condition>
+
+						<!-- Check if deleted sequence is not good (duration) -->
+						<Condition type="Property" property="Deleted Notes Option" compareValue="Good">
+
+							<!-- If deleted note duration was bad -->
+							<Condition type="Property" property="Deleted Duration Option" compareValue="Bad">
+								<Action name="Talk" value="Delete Previous" />
+							</Condition>
+						</Condition>
+					</Condition>
+				</Condition>
+
+				<!-- Check if current sequence is not good (duration) -->
+				<Condition type="variable" variable="[Last Note Option]" compareValue="Good">
+
+					<!-- Get the current last duration sequence option -->
+					<DataMining variable="[Last Duration Option]" operation="Last" event="Duration Option"  memory="WM" />
+					<Condition type="variable" variable="[Last Duration Option]" compareValue="Bad">
+				
+						<!-- Check if previous sequence is not good (note) -->
+						<DataMining variable="[Previous Note Status]" operation="Item" event="Note Option" position="-2" memory="WM" />
+						<Condition type="variable" variable="[Previous Note Status]" compareValue="Good">
+
+							<!-- Check if previous sequence is not good (duration) -->
+							<DataMining variable="[Previous Duration Status]" operation="Item" event="Duration Option" position="-2" memory="WM" />
+							<Condition type="variable" variable="[Previous Duration Status]" compareValue="Bad">
+
+								<!-- Check if deleted sequence is not good (note) -->
+								<Condition type="Property" property="Deleted Notes Option" compareValue="Bad">
+									<Action name="Talk" value="Delete Previous" />
+								</Condition>
+
+								<!-- Check if deleted sequence is not good (duration) -->
+								<Condition type="Property" property="Deleted Notes Option" compareValue="Good">
+									
+									<!-- If deleted note duration was bad -->
+									<Condition type="Property" property="Deleted Duration Option" compareValue="Bad">
+										<Action name="Talk" value="Delete Previous" />
+									</Condition>
+								</Condition>
+							</Condition>
+						</Condition>
+					</Condition>
 				</Condition>
 			</Condition>
 		</Condition>
