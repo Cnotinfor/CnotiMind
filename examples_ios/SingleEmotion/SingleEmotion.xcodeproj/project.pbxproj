@@ -26,6 +26,7 @@
 		187C44D1140E74030033DD6B /* ClearMemoryNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 187C44D0140E74030033DD6B /* ClearMemoryNode.m */; };
 		187C44D4140E7D250033DD6B /* ConditionPropertyNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 187C44D3140E7D240033DD6B /* ConditionPropertyNode.m */; };
 		187C455C140E89320033DD6B /* DeleteNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 187C455B140E89310033DD6B /* DeleteNode.m */; };
+		187C455F140E979B0033DD6B /* MathOperationNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 187C455E140E979A0033DD6B /* MathOperationNode.m */; };
 		1896134A13811CFD00FEA73A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1896134913811CFD00FEA73A /* UIKit.framework */; };
 		1896134C13811CFD00FEA73A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1896134B13811CFD00FEA73A /* Foundation.framework */; };
 		1896134E13811CFD00FEA73A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1896134D13811CFD00FEA73A /* CoreGraphics.framework */; };
@@ -97,6 +98,8 @@
 		187C44D3140E7D240033DD6B /* ConditionPropertyNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionPropertyNode.m; sourceTree = "<group>"; };
 		187C455A140E89300033DD6B /* DeleteNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeleteNode.h; sourceTree = "<group>"; };
 		187C455B140E89310033DD6B /* DeleteNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeleteNode.m; sourceTree = "<group>"; };
+		187C455D140E97990033DD6B /* MathOperationNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathOperationNode.h; sourceTree = "<group>"; };
+		187C455E140E979A0033DD6B /* MathOperationNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MathOperationNode.m; sourceTree = "<group>"; };
 		1895305513E1BE9700B41045 /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		1896134513811CFD00FEA73A /* SingleEmotion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SingleEmotion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1896134913811CFD00FEA73A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -196,6 +199,8 @@
 				187C44B6140E72C60033DD6B /* ConditionVariableNode.m */,
 				187C44B7140E72C60033DD6B /* DataMiningNode.h */,
 				187C44B8140E72C60033DD6B /* DataMiningNode.m */,
+				187C455A140E89300033DD6B /* DeleteNode.h */,
+				187C455B140E89310033DD6B /* DeleteNode.m */,
 				187C44B9140E72C60033DD6B /* EmotionNode.h */,
 				187C44BA140E72C60033DD6B /* EmotionNode.m */,
 				187C44BB140E72C60033DD6B /* RootNode.h */,
@@ -206,8 +211,8 @@
 				187C44C0140E72C60033DD6B /* RulesXmlHandler.m */,
 				187C44C1140E72C60033DD6B /* StorageNode.h */,
 				187C44C2140E72C60033DD6B /* StorageNode.m */,
-				187C455A140E89300033DD6B /* DeleteNode.h */,
-				187C455B140E89310033DD6B /* DeleteNode.m */,
+				187C455D140E97990033DD6B /* MathOperationNode.h */,
+				187C455E140E979A0033DD6B /* MathOperationNode.m */,
 			);
 			path = rules;
 			sourceTree = "<group>";
@@ -447,6 +452,7 @@
 				187C44D1140E74030033DD6B /* ClearMemoryNode.m in Sources */,
 				187C44D4140E7D250033DD6B /* ConditionPropertyNode.m in Sources */,
 				187C455C140E89320033DD6B /* DeleteNode.m in Sources */,
+				187C455F140E979B0033DD6B /* MathOperationNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
