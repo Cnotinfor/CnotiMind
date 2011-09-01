@@ -15,6 +15,12 @@
 -->
 
 <Rules>
+	<!-- Melody started -->
+	<Condition type="Perception" perception="Start Melody">
+		<!-- Save the deleted option for checking if two notes where deleted sequentially -->
+		<Property name="Previous Deleted Bad" value="False" />
+	</Condition>
+
 	<!-- Note added (note + duration) -->
 	<Condition type="Perception" perception="Duration">
 		<!-- Calculate the number of notes and pause -->
@@ -149,6 +155,21 @@
 	</Condition>
 	<!-- Note deleted (note + duration) -->
 	<Condition type="Perception" perception="Delete Duration">
+
+		<!-- Update Deleted Bad value -->
+		<!-- False - default value -->
+		<Property name="Deleted Bad" value="False" />
+		<!-- True - if note deleted was bad -->
+		<Condition type="Property" property="Deleted Notes Option" compareValue="Bad">
+			<Property name="Deleted Bad" value="True" />
+		</Condition>
+		<Condition type="Property" property="Deleted Notes Option" compareValue="Good">
+			<!-- True - if duration deleted was bad -->
+			<Condition type="Property" property="Deleted Duration Option" compareValue="Bad">
+				<Property name="Deleted Bad" value="True" />
+			</Condition>
+		</Condition>
+
 		<!-- Calculate the number of notes and pause -->
 		<DataMining variable="[Count Notes]" operation="Count" event="Note" memory="WM" />
 		<DataMining variable="[Count Pause]" operation="Count" event="Pause" memory="WM" />
@@ -303,19 +324,16 @@
 					<DataMining variable="[Previous Note Status]" operation="Item" event="Note Option" position="-2" memory="WM" />
 					<Condition type="variable" variable="[Previous Note Status]" compareValue="Bad">
 
-						<!-- Check if deleted sequence is not good (note) -->
-						<Condition type="Property" property="Deleted Notes Option" compareValue="Bad">
-							<Action name="Talk" value="Delete Previous" />
-						</Condition>
-
-						<!-- Check if deleted sequence is not good (duration) -->
-						<Condition type="Property" property="Deleted Notes Option" compareValue="Good">
-
-							<!-- If deleted note duration was bad -->
-							<Condition type="Property" property="Deleted Duration Option" compareValue="Bad">
+						<!-- Check if deleted sequence was bad -->
+						<Condition type="Property" property="Deleted Bad" compareValue="True">
+							<Condition type="Property" property="Previous Deleted Bad" compareValue="True">
+								<Action name="Talk" value="Continue Deleting" />
+							</Condition>
+							<Condition type="Property" property="Previous Deleted Bad" compareValue="False">
 								<Action name="Talk" value="Delete Previous" />
 							</Condition>
 						</Condition>
+
 					</Condition>
 				</Condition>
 
@@ -334,16 +352,12 @@
 							<DataMining variable="[Previous Duration Status]" operation="Item" event="Duration Option" position="-2" memory="WM" />
 							<Condition type="variable" variable="[Previous Duration Status]" compareValue="Bad">
 
-								<!-- Check if deleted sequence is not good (note) -->
-								<Condition type="Property" property="Deleted Notes Option" compareValue="Bad">
-									<Action name="Talk" value="Delete Previous" />
-								</Condition>
-
-								<!-- Check if deleted sequence is not good (duration) -->
-								<Condition type="Property" property="Deleted Notes Option" compareValue="Good">
-									
-									<!-- If deleted note duration was bad -->
-									<Condition type="Property" property="Deleted Duration Option" compareValue="Bad">
+								<!-- Check if deleted sequence was bad -->
+								<Condition type="Property" property="Deleted Bad" compareValue="True">
+									<Condition type="Property" property="Previous Deleted Bad" compareValue="True">
+										<Action name="Talk" value="Continue Deleting" />
+									</Condition>
+									<Condition type="Property" property="Previous Deleted Bad" compareValue="False">
 										<Action name="Talk" value="Delete Previous" />
 									</Condition>
 								</Condition>
@@ -351,6 +365,10 @@
 						</Condition>
 					</Condition>
 				</Condition>
+
+				<!-- Update Previous Deleted Bad value -->
+				<Property name="Previous Deleted Bad" value="{Deleted Bad}" />
+				
 			</Condition>
 		</Condition>
 	</Condition>
