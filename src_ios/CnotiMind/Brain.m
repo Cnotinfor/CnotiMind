@@ -660,6 +660,11 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     }
 }
 
+- (void) updatePropertyValue:(NSString*)aPropertyName value:(NSString*)aValue
+{
+    [_properties setObject:aValue forKey:aPropertyName];
+}
+
 
 - (void) storeToMemory:(MemoryEvent*)aMemoryEvent memoryType:(enum MemoryType)aMemoryType
 {

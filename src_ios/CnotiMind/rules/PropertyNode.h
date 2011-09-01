@@ -8,6 +8,20 @@
 
 #import "RuleNode.h"
 
-@interface PropertyNode : RuleNode
+@interface PropertyNode : RuleNode {
+    NSString* _key;
+    NSString* _value;
+}
+
+- (id) initWithKeyAndValuAndBrainAndParent:(NSString*)aKey
+                                     value:(NSString*)aValue
+                                     brain:(Brain*)aBrain 
+                                    parent:(id)aParent;
+
+- (void) exec;
+- (void) exec:(NSMutableDictionary*)aVariables;
+
+- (NSString*) info:(int)aDepth;
+- (void) dealloc;
 
 @end

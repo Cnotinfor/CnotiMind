@@ -15,12 +15,6 @@
 		180051151368816F00DB332E /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 180051131368816F00DB332E /* GDataXMLNode.m */; };
 		180A63C5137D7D3500389290 /* Emotion.h in Headers */ = {isa = PBXBuildFile; fileRef = 180A63C3137D7D3500389290 /* Emotion.h */; };
 		180A63C6137D7D3500389290 /* Emotion.m in Sources */ = {isa = PBXBuildFile; fileRef = 180A63C4137D7D3500389290 /* Emotion.m */; };
-		18189F8E1377E4D60020716D /* ConditionDataMiningNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 18189F8C1377E4D60020716D /* ConditionDataMiningNode.h */; };
-		18189F8F1377E4D60020716D /* ConditionDataMiningNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 18189F8D1377E4D60020716D /* ConditionDataMiningNode.m */; };
-		18189F931377F73C0020716D /* ConditionEmotionNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 18189F911377F73B0020716D /* ConditionEmotionNode.h */; };
-		18189F941377F73C0020716D /* ConditionEmotionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 18189F921377F73B0020716D /* ConditionEmotionNode.m */; };
-		1847CE45136AD75800D6D0FF /* ActionNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 1847CE43136AD75800D6D0FF /* ActionNode.h */; };
-		1847CE46136AD75800D6D0FF /* ActionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1847CE44136AD75800D6D0FF /* ActionNode.m */; };
 		18888C081366CEC400F96F2B /* Perception.h in Headers */ = {isa = PBXBuildFile; fileRef = 18888C061366CEC400F96F2B /* Perception.h */; };
 		18888C091366CEC400F96F2B /* Perception.m in Sources */ = {isa = PBXBuildFile; fileRef = 18888C071366CEC400F96F2B /* Perception.m */; };
 		18888C0D1366D80A00F96F2B /* MemoryEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 18888C0B1366D80900F96F2B /* MemoryEvent.h */; };
@@ -28,22 +22,43 @@
 		18888C171366FF6C00F96F2B /* CnotiMind.h in Headers */ = {isa = PBXBuildFile; fileRef = 18888C151366FF6C00F96F2B /* CnotiMind.h */; };
 		18888C181366FF6C00F96F2B /* CnotiMind.m in Sources */ = {isa = PBXBuildFile; fileRef = 18888C161366FF6C00F96F2B /* CnotiMind.m */; };
 		18888C1C136703A200F96F2B /* ObjectToXML.h in Headers */ = {isa = PBXBuildFile; fileRef = 18888C1A136703A200F96F2B /* ObjectToXML.h */; };
-		18888C21136707D900F96F2B /* RuleNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 18888C1F136707D900F96F2B /* RuleNode.h */; };
-		18888C22136707D900F96F2B /* RuleNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 18888C20136707D900F96F2B /* RuleNode.m */; };
-		18A7DCE1137823F000292D73 /* ConditionPerceptionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A7DCDF137823F000292D73 /* ConditionPerceptionNode.m */; };
-		18A7DCE2137823F000292D73 /* ConditionPerceptionNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 18A7DCE0137823F000292D73 /* ConditionPerceptionNode.h */; };
-		18A7DCE61378330E00292D73 /* ConditionVariableNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A7DCE41378330E00292D73 /* ConditionVariableNode.m */; };
-		18A7DCE71378330E00292D73 /* ConditionVariableNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 18A7DCE51378330E00292D73 /* ConditionVariableNode.h */; };
-		18A7DCEA13783C4F00292D73 /* DataMiningNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 18A7DCE813783C4F00292D73 /* DataMiningNode.h */; };
-		18A7DCEB13783C4F00292D73 /* DataMiningNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A7DCE913783C4F00292D73 /* DataMiningNode.m */; };
-		18A7DCEE1378475C00292D73 /* EmotionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A7DCEC1378475C00292D73 /* EmotionNode.m */; };
-		18A7DCEF1378475C00292D73 /* EmotionNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 18A7DCED1378475C00292D73 /* EmotionNode.h */; };
-		18DEE3F6136F181E00708EEE /* StorageNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 18DEE3F4136F181E00708EEE /* StorageNode.h */; };
-		18DEE3F7136F181E00708EEE /* StorageNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DEE3F5136F181E00708EEE /* StorageNode.m */; };
-		18EF043E136DF4FA00D0EFE5 /* ConditionNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 18EF043C136DF4FA00D0EFE5 /* ConditionNode.h */; };
-		18EF043F136DF4FA00D0EFE5 /* ConditionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EF043D136DF4FA00D0EFE5 /* ConditionNode.m */; };
-		18EF2B39137AC44000CC14ED /* RootNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 18EF2B37137AC44000CC14ED /* RootNode.h */; };
-		18EF2B3A137AC44000CC14ED /* RootNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EF2B38137AC44000CC14ED /* RootNode.m */; };
+		1890E6A0140F8EFB0039AAD9 /* ActionNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 1890E67E140F8EFB0039AAD9 /* ActionNode.h */; };
+		1890E6A1140F8EFB0039AAD9 /* ActionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E67F140F8EFB0039AAD9 /* ActionNode.m */; };
+		1890E6A2140F8EFB0039AAD9 /* ClearMemoryNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 1890E680140F8EFB0039AAD9 /* ClearMemoryNode.h */; };
+		1890E6A3140F8EFB0039AAD9 /* ClearMemoryNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E681140F8EFB0039AAD9 /* ClearMemoryNode.m */; };
+		1890E6A4140F8EFB0039AAD9 /* ConditionDataMiningNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 1890E682140F8EFB0039AAD9 /* ConditionDataMiningNode.h */; };
+		1890E6A5140F8EFB0039AAD9 /* ConditionDataMiningNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E683140F8EFB0039AAD9 /* ConditionDataMiningNode.m */; };
+		1890E6A6140F8EFB0039AAD9 /* ConditionEmotionNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 1890E684140F8EFB0039AAD9 /* ConditionEmotionNode.h */; };
+		1890E6A7140F8EFB0039AAD9 /* ConditionEmotionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E685140F8EFB0039AAD9 /* ConditionEmotionNode.m */; };
+		1890E6A8140F8EFB0039AAD9 /* ConditionNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 1890E686140F8EFB0039AAD9 /* ConditionNode.h */; };
+		1890E6A9140F8EFB0039AAD9 /* ConditionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E687140F8EFB0039AAD9 /* ConditionNode.m */; };
+		1890E6AA140F8EFB0039AAD9 /* ConditionPerceptionNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 1890E688140F8EFB0039AAD9 /* ConditionPerceptionNode.h */; };
+		1890E6AB140F8EFB0039AAD9 /* ConditionPerceptionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E689140F8EFB0039AAD9 /* ConditionPerceptionNode.m */; };
+		1890E6AC140F8EFB0039AAD9 /* ConditionPropertyNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 1890E68A140F8EFB0039AAD9 /* ConditionPropertyNode.h */; };
+		1890E6AD140F8EFB0039AAD9 /* ConditionPropertyNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E68B140F8EFB0039AAD9 /* ConditionPropertyNode.m */; };
+		1890E6AE140F8EFB0039AAD9 /* ConditionVariableNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 1890E68C140F8EFB0039AAD9 /* ConditionVariableNode.h */; };
+		1890E6AF140F8EFB0039AAD9 /* ConditionVariableNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E68D140F8EFB0039AAD9 /* ConditionVariableNode.m */; };
+		1890E6B0140F8EFB0039AAD9 /* DataMiningNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 1890E68E140F8EFB0039AAD9 /* DataMiningNode.h */; };
+		1890E6B1140F8EFB0039AAD9 /* DataMiningNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E68F140F8EFB0039AAD9 /* DataMiningNode.m */; };
+		1890E6B2140F8EFB0039AAD9 /* DeleteNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 1890E690140F8EFB0039AAD9 /* DeleteNode.h */; };
+		1890E6B3140F8EFB0039AAD9 /* DeleteNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E691140F8EFB0039AAD9 /* DeleteNode.m */; };
+		1890E6B4140F8EFB0039AAD9 /* EmotionNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 1890E692140F8EFB0039AAD9 /* EmotionNode.h */; };
+		1890E6B5140F8EFB0039AAD9 /* EmotionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E693140F8EFB0039AAD9 /* EmotionNode.m */; };
+		1890E6B6140F8EFB0039AAD9 /* MathOperationNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 1890E694140F8EFB0039AAD9 /* MathOperationNode.h */; };
+		1890E6B7140F8EFB0039AAD9 /* MathOperationNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E695140F8EFB0039AAD9 /* MathOperationNode.m */; };
+		1890E6B8140F8EFB0039AAD9 /* PropertyNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 1890E696140F8EFB0039AAD9 /* PropertyNode.h */; };
+		1890E6B9140F8EFB0039AAD9 /* PropertyNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E697140F8EFB0039AAD9 /* PropertyNode.m */; };
+		1890E6BA140F8EFB0039AAD9 /* RootNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 1890E698140F8EFB0039AAD9 /* RootNode.h */; };
+		1890E6BB140F8EFB0039AAD9 /* RootNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E699140F8EFB0039AAD9 /* RootNode.m */; };
+		1890E6BC140F8EFB0039AAD9 /* RuleNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 1890E69A140F8EFB0039AAD9 /* RuleNode.h */; };
+		1890E6BD140F8EFB0039AAD9 /* RuleNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E69B140F8EFB0039AAD9 /* RuleNode.m */; };
+		1890E6BE140F8EFB0039AAD9 /* RulesXmlHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 1890E69C140F8EFB0039AAD9 /* RulesXmlHandler.h */; };
+		1890E6BF140F8EFB0039AAD9 /* RulesXmlHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E69D140F8EFB0039AAD9 /* RulesXmlHandler.m */; };
+		1890E6C0140F8EFB0039AAD9 /* StorageNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 1890E69E140F8EFB0039AAD9 /* StorageNode.h */; };
+		1890E6C1140F8EFB0039AAD9 /* StorageNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E69F140F8EFB0039AAD9 /* StorageNode.m */; };
+		1890E6C3140F8F050039AAD9 /* Macros.h in Headers */ = {isa = PBXBuildFile; fileRef = 1890E6C2140F8F050039AAD9 /* Macros.h */; };
+		1890E6C8140F8F1F0039AAD9 /* GDataXMLNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 1890E6C6140F8F1F0039AAD9 /* GDataXMLNode.h */; };
+		1890E6C9140F8F1F0039AAD9 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E6C7140F8F1F0039AAD9 /* GDataXMLNode.m */; };
 		18F98A7113603671006AE7F4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F98A7013603671006AE7F4 /* Foundation.framework */; };
 		18F98A7C13603671006AE7F4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F98A7B13603671006AE7F4 /* UIKit.framework */; };
 		18F98A7D13603671006AE7F4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F98A7013603671006AE7F4 /* Foundation.framework */; };
@@ -77,12 +92,6 @@
 		180051131368816F00DB332E /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		180A63C3137D7D3500389290 /* Emotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Emotion.h; sourceTree = "<group>"; };
 		180A63C4137D7D3500389290 /* Emotion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Emotion.m; sourceTree = "<group>"; };
-		18189F8C1377E4D60020716D /* ConditionDataMiningNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionDataMiningNode.h; sourceTree = "<group>"; };
-		18189F8D1377E4D60020716D /* ConditionDataMiningNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionDataMiningNode.m; sourceTree = "<group>"; };
-		18189F911377F73B0020716D /* ConditionEmotionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionEmotionNode.h; sourceTree = "<group>"; };
-		18189F921377F73B0020716D /* ConditionEmotionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionEmotionNode.m; sourceTree = "<group>"; };
-		1847CE43136AD75800D6D0FF /* ActionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionNode.h; sourceTree = "<group>"; };
-		1847CE44136AD75800D6D0FF /* ActionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionNode.m; sourceTree = "<group>"; };
 		18888C061366CEC400F96F2B /* Perception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Perception.h; sourceTree = "<group>"; };
 		18888C071366CEC400F96F2B /* Perception.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Perception.m; sourceTree = "<group>"; };
 		18888C0B1366D80900F96F2B /* MemoryEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryEvent.h; sourceTree = "<group>"; };
@@ -90,22 +99,43 @@
 		18888C151366FF6C00F96F2B /* CnotiMind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CnotiMind.h; sourceTree = "<group>"; };
 		18888C161366FF6C00F96F2B /* CnotiMind.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CnotiMind.m; sourceTree = "<group>"; };
 		18888C1A136703A200F96F2B /* ObjectToXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectToXML.h; sourceTree = "<group>"; };
-		18888C1F136707D900F96F2B /* RuleNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuleNode.h; sourceTree = "<group>"; };
-		18888C20136707D900F96F2B /* RuleNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RuleNode.m; sourceTree = "<group>"; };
-		18A7DCDF137823F000292D73 /* ConditionPerceptionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionPerceptionNode.m; sourceTree = "<group>"; };
-		18A7DCE0137823F000292D73 /* ConditionPerceptionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionPerceptionNode.h; sourceTree = "<group>"; };
-		18A7DCE41378330E00292D73 /* ConditionVariableNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionVariableNode.m; sourceTree = "<group>"; };
-		18A7DCE51378330E00292D73 /* ConditionVariableNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionVariableNode.h; sourceTree = "<group>"; };
-		18A7DCE813783C4F00292D73 /* DataMiningNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataMiningNode.h; sourceTree = "<group>"; };
-		18A7DCE913783C4F00292D73 /* DataMiningNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataMiningNode.m; sourceTree = "<group>"; };
-		18A7DCEC1378475C00292D73 /* EmotionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmotionNode.m; sourceTree = "<group>"; };
-		18A7DCED1378475C00292D73 /* EmotionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmotionNode.h; sourceTree = "<group>"; };
-		18DEE3F4136F181E00708EEE /* StorageNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorageNode.h; sourceTree = "<group>"; };
-		18DEE3F5136F181E00708EEE /* StorageNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorageNode.m; sourceTree = "<group>"; };
-		18EF043C136DF4FA00D0EFE5 /* ConditionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionNode.h; sourceTree = "<group>"; };
-		18EF043D136DF4FA00D0EFE5 /* ConditionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionNode.m; sourceTree = "<group>"; };
-		18EF2B37137AC44000CC14ED /* RootNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootNode.h; sourceTree = "<group>"; };
-		18EF2B38137AC44000CC14ED /* RootNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootNode.m; sourceTree = "<group>"; };
+		1890E67E140F8EFB0039AAD9 /* ActionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionNode.h; sourceTree = "<group>"; };
+		1890E67F140F8EFB0039AAD9 /* ActionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionNode.m; sourceTree = "<group>"; };
+		1890E680140F8EFB0039AAD9 /* ClearMemoryNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClearMemoryNode.h; sourceTree = "<group>"; };
+		1890E681140F8EFB0039AAD9 /* ClearMemoryNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClearMemoryNode.m; sourceTree = "<group>"; };
+		1890E682140F8EFB0039AAD9 /* ConditionDataMiningNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionDataMiningNode.h; sourceTree = "<group>"; };
+		1890E683140F8EFB0039AAD9 /* ConditionDataMiningNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionDataMiningNode.m; sourceTree = "<group>"; };
+		1890E684140F8EFB0039AAD9 /* ConditionEmotionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionEmotionNode.h; sourceTree = "<group>"; };
+		1890E685140F8EFB0039AAD9 /* ConditionEmotionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionEmotionNode.m; sourceTree = "<group>"; };
+		1890E686140F8EFB0039AAD9 /* ConditionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionNode.h; sourceTree = "<group>"; };
+		1890E687140F8EFB0039AAD9 /* ConditionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionNode.m; sourceTree = "<group>"; };
+		1890E688140F8EFB0039AAD9 /* ConditionPerceptionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionPerceptionNode.h; sourceTree = "<group>"; };
+		1890E689140F8EFB0039AAD9 /* ConditionPerceptionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionPerceptionNode.m; sourceTree = "<group>"; };
+		1890E68A140F8EFB0039AAD9 /* ConditionPropertyNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionPropertyNode.h; sourceTree = "<group>"; };
+		1890E68B140F8EFB0039AAD9 /* ConditionPropertyNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionPropertyNode.m; sourceTree = "<group>"; };
+		1890E68C140F8EFB0039AAD9 /* ConditionVariableNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionVariableNode.h; sourceTree = "<group>"; };
+		1890E68D140F8EFB0039AAD9 /* ConditionVariableNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionVariableNode.m; sourceTree = "<group>"; };
+		1890E68E140F8EFB0039AAD9 /* DataMiningNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataMiningNode.h; sourceTree = "<group>"; };
+		1890E68F140F8EFB0039AAD9 /* DataMiningNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataMiningNode.m; sourceTree = "<group>"; };
+		1890E690140F8EFB0039AAD9 /* DeleteNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeleteNode.h; sourceTree = "<group>"; };
+		1890E691140F8EFB0039AAD9 /* DeleteNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeleteNode.m; sourceTree = "<group>"; };
+		1890E692140F8EFB0039AAD9 /* EmotionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmotionNode.h; sourceTree = "<group>"; };
+		1890E693140F8EFB0039AAD9 /* EmotionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmotionNode.m; sourceTree = "<group>"; };
+		1890E694140F8EFB0039AAD9 /* MathOperationNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathOperationNode.h; sourceTree = "<group>"; };
+		1890E695140F8EFB0039AAD9 /* MathOperationNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MathOperationNode.m; sourceTree = "<group>"; };
+		1890E696140F8EFB0039AAD9 /* PropertyNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyNode.h; sourceTree = "<group>"; };
+		1890E697140F8EFB0039AAD9 /* PropertyNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyNode.m; sourceTree = "<group>"; };
+		1890E698140F8EFB0039AAD9 /* RootNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootNode.h; sourceTree = "<group>"; };
+		1890E699140F8EFB0039AAD9 /* RootNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootNode.m; sourceTree = "<group>"; };
+		1890E69A140F8EFB0039AAD9 /* RuleNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuleNode.h; sourceTree = "<group>"; };
+		1890E69B140F8EFB0039AAD9 /* RuleNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RuleNode.m; sourceTree = "<group>"; };
+		1890E69C140F8EFB0039AAD9 /* RulesXmlHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RulesXmlHandler.h; sourceTree = "<group>"; };
+		1890E69D140F8EFB0039AAD9 /* RulesXmlHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RulesXmlHandler.m; sourceTree = "<group>"; };
+		1890E69E140F8EFB0039AAD9 /* StorageNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorageNode.h; sourceTree = "<group>"; };
+		1890E69F140F8EFB0039AAD9 /* StorageNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorageNode.m; sourceTree = "<group>"; };
+		1890E6C2140F8F050039AAD9 /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
+		1890E6C6140F8F1F0039AAD9 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
+		1890E6C7140F8F1F0039AAD9 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		18F98A6D13603671006AE7F4 /* libCnotiMind.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCnotiMind.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		18F98A7013603671006AE7F4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		18F98A7413603671006AE7F4 /* CnotiMind-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CnotiMind-Prefix.pch"; sourceTree = "<group>"; };
@@ -165,33 +195,62 @@
 			path = GDataXML;
 			sourceTree = "<group>";
 		};
-		18888C1E136707B900F96F2B /* rules */ = {
+		1890E67D140F8EFB0039AAD9 /* rules */ = {
 			isa = PBXGroup;
 			children = (
-				18A7DCEC1378475C00292D73 /* EmotionNode.m */,
-				18A7DCED1378475C00292D73 /* EmotionNode.h */,
-				18888C1F136707D900F96F2B /* RuleNode.h */,
-				18888C20136707D900F96F2B /* RuleNode.m */,
-				1847CE43136AD75800D6D0FF /* ActionNode.h */,
-				1847CE44136AD75800D6D0FF /* ActionNode.m */,
-				18DEE3F4136F181E00708EEE /* StorageNode.h */,
-				18DEE3F5136F181E00708EEE /* StorageNode.m */,
-				18EF043C136DF4FA00D0EFE5 /* ConditionNode.h */,
-				18EF043D136DF4FA00D0EFE5 /* ConditionNode.m */,
-				18189F8C1377E4D60020716D /* ConditionDataMiningNode.h */,
-				18189F8D1377E4D60020716D /* ConditionDataMiningNode.m */,
-				18189F911377F73B0020716D /* ConditionEmotionNode.h */,
-				18189F921377F73B0020716D /* ConditionEmotionNode.m */,
-				18A7DCDF137823F000292D73 /* ConditionPerceptionNode.m */,
-				18A7DCE0137823F000292D73 /* ConditionPerceptionNode.h */,
-				18A7DCE41378330E00292D73 /* ConditionVariableNode.m */,
-				18A7DCE51378330E00292D73 /* ConditionVariableNode.h */,
-				18A7DCE813783C4F00292D73 /* DataMiningNode.h */,
-				18A7DCE913783C4F00292D73 /* DataMiningNode.m */,
-				18EF2B37137AC44000CC14ED /* RootNode.h */,
-				18EF2B38137AC44000CC14ED /* RootNode.m */,
+				1890E67E140F8EFB0039AAD9 /* ActionNode.h */,
+				1890E67F140F8EFB0039AAD9 /* ActionNode.m */,
+				1890E680140F8EFB0039AAD9 /* ClearMemoryNode.h */,
+				1890E681140F8EFB0039AAD9 /* ClearMemoryNode.m */,
+				1890E682140F8EFB0039AAD9 /* ConditionDataMiningNode.h */,
+				1890E683140F8EFB0039AAD9 /* ConditionDataMiningNode.m */,
+				1890E684140F8EFB0039AAD9 /* ConditionEmotionNode.h */,
+				1890E685140F8EFB0039AAD9 /* ConditionEmotionNode.m */,
+				1890E686140F8EFB0039AAD9 /* ConditionNode.h */,
+				1890E687140F8EFB0039AAD9 /* ConditionNode.m */,
+				1890E688140F8EFB0039AAD9 /* ConditionPerceptionNode.h */,
+				1890E689140F8EFB0039AAD9 /* ConditionPerceptionNode.m */,
+				1890E68A140F8EFB0039AAD9 /* ConditionPropertyNode.h */,
+				1890E68B140F8EFB0039AAD9 /* ConditionPropertyNode.m */,
+				1890E68C140F8EFB0039AAD9 /* ConditionVariableNode.h */,
+				1890E68D140F8EFB0039AAD9 /* ConditionVariableNode.m */,
+				1890E68E140F8EFB0039AAD9 /* DataMiningNode.h */,
+				1890E68F140F8EFB0039AAD9 /* DataMiningNode.m */,
+				1890E690140F8EFB0039AAD9 /* DeleteNode.h */,
+				1890E691140F8EFB0039AAD9 /* DeleteNode.m */,
+				1890E692140F8EFB0039AAD9 /* EmotionNode.h */,
+				1890E693140F8EFB0039AAD9 /* EmotionNode.m */,
+				1890E694140F8EFB0039AAD9 /* MathOperationNode.h */,
+				1890E695140F8EFB0039AAD9 /* MathOperationNode.m */,
+				1890E696140F8EFB0039AAD9 /* PropertyNode.h */,
+				1890E697140F8EFB0039AAD9 /* PropertyNode.m */,
+				1890E698140F8EFB0039AAD9 /* RootNode.h */,
+				1890E699140F8EFB0039AAD9 /* RootNode.m */,
+				1890E69A140F8EFB0039AAD9 /* RuleNode.h */,
+				1890E69B140F8EFB0039AAD9 /* RuleNode.m */,
+				1890E69C140F8EFB0039AAD9 /* RulesXmlHandler.h */,
+				1890E69D140F8EFB0039AAD9 /* RulesXmlHandler.m */,
+				1890E69E140F8EFB0039AAD9 /* StorageNode.h */,
+				1890E69F140F8EFB0039AAD9 /* StorageNode.m */,
 			);
-			name = rules;
+			path = rules;
+			sourceTree = "<group>";
+		};
+		1890E6C4140F8F1F0039AAD9 /* 3rdParty */ = {
+			isa = PBXGroup;
+			children = (
+				1890E6C5140F8F1F0039AAD9 /* GDataXML */,
+			);
+			path = 3rdParty;
+			sourceTree = "<group>";
+		};
+		1890E6C5140F8F1F0039AAD9 /* GDataXML */ = {
+			isa = PBXGroup;
+			children = (
+				1890E6C6140F8F1F0039AAD9 /* GDataXMLNode.h */,
+				1890E6C7140F8F1F0039AAD9 /* GDataXMLNode.m */,
+			);
+			path = GDataXML;
 			sourceTree = "<group>";
 		};
 		18F98A6213603671006AE7F4 = {
@@ -226,8 +285,10 @@
 		18F98A7213603671006AE7F4 /* CnotiMind */ = {
 			isa = PBXGroup;
 			children = (
+				1890E6C2140F8F050039AAD9 /* Macros.h */,
+				1890E6C4140F8F1F0039AAD9 /* 3rdParty */,
+				1890E67D140F8EFB0039AAD9 /* rules */,
 				1800506F1368252A00DB332E /* Auxiliary */,
-				18888C1E136707B900F96F2B /* rules */,
 				18F98A7313603671006AE7F4 /* Supporting Files */,
 				18F98A961360411B006AE7F4 /* Node.h */,
 				18F98A971360411B006AE7F4 /* Node.m */,
@@ -289,21 +350,29 @@
 				18888C0D1366D80A00F96F2B /* MemoryEvent.h in Headers */,
 				18888C171366FF6C00F96F2B /* CnotiMind.h in Headers */,
 				18888C1C136703A200F96F2B /* ObjectToXML.h in Headers */,
-				18888C21136707D900F96F2B /* RuleNode.h in Headers */,
 				1800506C136818D000DB332E /* Brain.h in Headers */,
 				180050721368254700DB332E /* NSMutableArray+QueueAdditions.h in Headers */,
 				180051141368816F00DB332E /* GDataXMLNode.h in Headers */,
-				1847CE45136AD75800D6D0FF /* ActionNode.h in Headers */,
-				18EF043E136DF4FA00D0EFE5 /* ConditionNode.h in Headers */,
-				18DEE3F6136F181E00708EEE /* StorageNode.h in Headers */,
-				18189F8E1377E4D60020716D /* ConditionDataMiningNode.h in Headers */,
-				18189F931377F73C0020716D /* ConditionEmotionNode.h in Headers */,
-				18A7DCE2137823F000292D73 /* ConditionPerceptionNode.h in Headers */,
-				18A7DCE71378330E00292D73 /* ConditionVariableNode.h in Headers */,
-				18A7DCEA13783C4F00292D73 /* DataMiningNode.h in Headers */,
-				18A7DCEF1378475C00292D73 /* EmotionNode.h in Headers */,
-				18EF2B39137AC44000CC14ED /* RootNode.h in Headers */,
 				180A63C5137D7D3500389290 /* Emotion.h in Headers */,
+				1890E6A0140F8EFB0039AAD9 /* ActionNode.h in Headers */,
+				1890E6A2140F8EFB0039AAD9 /* ClearMemoryNode.h in Headers */,
+				1890E6A4140F8EFB0039AAD9 /* ConditionDataMiningNode.h in Headers */,
+				1890E6A6140F8EFB0039AAD9 /* ConditionEmotionNode.h in Headers */,
+				1890E6A8140F8EFB0039AAD9 /* ConditionNode.h in Headers */,
+				1890E6AA140F8EFB0039AAD9 /* ConditionPerceptionNode.h in Headers */,
+				1890E6AC140F8EFB0039AAD9 /* ConditionPropertyNode.h in Headers */,
+				1890E6AE140F8EFB0039AAD9 /* ConditionVariableNode.h in Headers */,
+				1890E6B0140F8EFB0039AAD9 /* DataMiningNode.h in Headers */,
+				1890E6B2140F8EFB0039AAD9 /* DeleteNode.h in Headers */,
+				1890E6B4140F8EFB0039AAD9 /* EmotionNode.h in Headers */,
+				1890E6B6140F8EFB0039AAD9 /* MathOperationNode.h in Headers */,
+				1890E6B8140F8EFB0039AAD9 /* PropertyNode.h in Headers */,
+				1890E6BA140F8EFB0039AAD9 /* RootNode.h in Headers */,
+				1890E6BC140F8EFB0039AAD9 /* RuleNode.h in Headers */,
+				1890E6BE140F8EFB0039AAD9 /* RulesXmlHandler.h in Headers */,
+				1890E6C0140F8EFB0039AAD9 /* StorageNode.h in Headers */,
+				1890E6C3140F8F050039AAD9 /* Macros.h in Headers */,
+				1890E6C8140F8F1F0039AAD9 /* GDataXMLNode.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,21 +479,28 @@
 				18888C091366CEC400F96F2B /* Perception.m in Sources */,
 				18888C0E1366D80A00F96F2B /* MemoryEvent.m in Sources */,
 				18888C181366FF6C00F96F2B /* CnotiMind.m in Sources */,
-				18888C22136707D900F96F2B /* RuleNode.m in Sources */,
 				1800506D136818D000DB332E /* Brain.m in Sources */,
 				180050731368254700DB332E /* NSMutableArray+QueueAdditions.m in Sources */,
 				180051151368816F00DB332E /* GDataXMLNode.m in Sources */,
-				1847CE46136AD75800D6D0FF /* ActionNode.m in Sources */,
-				18EF043F136DF4FA00D0EFE5 /* ConditionNode.m in Sources */,
-				18DEE3F7136F181E00708EEE /* StorageNode.m in Sources */,
-				18189F8F1377E4D60020716D /* ConditionDataMiningNode.m in Sources */,
-				18189F941377F73C0020716D /* ConditionEmotionNode.m in Sources */,
-				18A7DCE1137823F000292D73 /* ConditionPerceptionNode.m in Sources */,
-				18A7DCE61378330E00292D73 /* ConditionVariableNode.m in Sources */,
-				18A7DCEB13783C4F00292D73 /* DataMiningNode.m in Sources */,
-				18A7DCEE1378475C00292D73 /* EmotionNode.m in Sources */,
-				18EF2B3A137AC44000CC14ED /* RootNode.m in Sources */,
 				180A63C6137D7D3500389290 /* Emotion.m in Sources */,
+				1890E6A1140F8EFB0039AAD9 /* ActionNode.m in Sources */,
+				1890E6A3140F8EFB0039AAD9 /* ClearMemoryNode.m in Sources */,
+				1890E6A5140F8EFB0039AAD9 /* ConditionDataMiningNode.m in Sources */,
+				1890E6A7140F8EFB0039AAD9 /* ConditionEmotionNode.m in Sources */,
+				1890E6A9140F8EFB0039AAD9 /* ConditionNode.m in Sources */,
+				1890E6AB140F8EFB0039AAD9 /* ConditionPerceptionNode.m in Sources */,
+				1890E6AD140F8EFB0039AAD9 /* ConditionPropertyNode.m in Sources */,
+				1890E6AF140F8EFB0039AAD9 /* ConditionVariableNode.m in Sources */,
+				1890E6B1140F8EFB0039AAD9 /* DataMiningNode.m in Sources */,
+				1890E6B3140F8EFB0039AAD9 /* DeleteNode.m in Sources */,
+				1890E6B5140F8EFB0039AAD9 /* EmotionNode.m in Sources */,
+				1890E6B7140F8EFB0039AAD9 /* MathOperationNode.m in Sources */,
+				1890E6B9140F8EFB0039AAD9 /* PropertyNode.m in Sources */,
+				1890E6BB140F8EFB0039AAD9 /* RootNode.m in Sources */,
+				1890E6BD140F8EFB0039AAD9 /* RuleNode.m in Sources */,
+				1890E6BF140F8EFB0039AAD9 /* RulesXmlHandler.m in Sources */,
+				1890E6C1140F8EFB0039AAD9 /* StorageNode.m in Sources */,
+				1890E6C9140F8F1F0039AAD9 /* GDataXMLNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

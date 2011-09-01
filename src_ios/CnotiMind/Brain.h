@@ -107,6 +107,7 @@ enum { HAS_DATA, NO_DATA };
 - (void) updateEmotionValue:(NSString*)aEmotionName variation:(double)aVariation max:(double)aMax min:(double)aMin;
 - (void) updateEmotionValue:(NSString*)aEmotionName variation:(double)aVariation;
 
+- (void) updatePropertyValue:(NSString*)aPropertyName value:(NSString*)aValue;
 
 - (void) storeToMemory:(MemoryEvent*)aMemoryEvent memoryType:(enum MemoryType)aMemoryType;
 
