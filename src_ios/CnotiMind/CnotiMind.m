@@ -151,6 +151,28 @@
 }
 
 
++ (enum DeletePosition) translateDeletePosition:(NSString*)aText
+{
+    
+    if( ![aText caseInsensitiveCompare:@"last"] )
+    {
+        return DeleteLast;
+    }
+    if( ![aText caseInsensitiveCompare:@"first"] )
+    {
+        return DeleteFirst;
+    }
+    if( ![aText caseInsensitiveCompare:@"item"] )
+    {
+        return DeleteItem;
+    }
+    if( ![aText caseInsensitiveCompare:@"all"] )
+    {
+        return DeleteAll;
+    }
+}
+
+
 + (BOOL)isNumeric:(NSString*)s
 {
     NSScanner *sc = [NSScanner scannerWithString: s];

@@ -18,6 +18,12 @@
 #import "ConditionVariableNode.h"
 #import "DataMiningNode.h"
 
+#import "MathOperationNode.h"
+#import "PropertyNode.h"
+#import "DeleteNode.h"
+#import "ClearMemoryNode.h"
+#import "RandomNode.h"
+
 #import "CnotiMind.h"
 #import "Brain.h"
 
@@ -163,7 +169,10 @@
     }
     
     _parentNode = _currentNode;
-    _currentNode = [[ActionNode alloc] initWithNameAndValueAndBrainAndParent: name value:value brain:_brain parent:_parentNode];
+    _currentNode = [[ActionNode alloc] initWithNameAndValueAndBrainAndParent: name 
+                                                                       value:value 
+                                                                       brain:_brain 
+                                                                      parent:_parentNode];
     
     return true;
 }
@@ -190,10 +199,17 @@
     
     
     if ( (![clear caseInsensitiveCompare:@"yes"]) && (clear!=nil) ) {
-        _currentNode = [[StorageNode alloc] initWithClearAndMemoryAndBrainAndParent:true memory:memoryType brain:_brain parent:_parentNode];
+        _currentNode = [[StorageNode alloc] initWithClearAndMemoryAndBrainAndParent:true 
+                                                                             memory:memoryType 
+                                                                              brain:_brain 
+                                                                             parent:_parentNode];
     }
     else {
-        _currentNode = [[StorageNode alloc] initWithEventAndValueAndMemoryAndBrainAndParent:event value:value memory:memoryType brain:_brain parent:_parentNode];
+        _currentNode = [[StorageNode alloc] initWithEventAndValueAndMemoryAndBrainAndParent:event 
+                                                                                      value:value 
+                                                                                     memory:memoryType 
+                                                                                      brain:_brain 
+                                                                                     parent:_parentNode];
     }
     
     return true;
@@ -221,7 +237,12 @@
         max = INT_MAX;
     }
     _parentNode = _currentNode;
-    _currentNode = [[EmotionNode alloc] initWithEmotionAndValueAndMaxAndMinAndBrainAndParent:emotion value:value max:max min:min brain:_brain parent:_parentNode];
+    _currentNode = [[EmotionNode alloc] initWithEmotionAndValueAndMaxAndMinAndBrainAndParent:emotion 
+                                                                                       value:value 
+                                                                                         max:max 
+                                                                                         min:min 
+                                                                                       brain:_brain 
+                                                                                      parent:_parentNode];
     
     return true;
 }
@@ -253,7 +274,14 @@
 
     
     _parentNode = _currentNode;
-    _currentNode = [[DataMiningNode alloc] initWithEventAndValueAndOperatorAndMemoryAndVariableAndPositionAndBrainAndParent:event value:value operator:opDataMiningType memory:memoryType variable:variable position:position brain:_brain parent:_parentNode];
+    _currentNode = [[DataMiningNode alloc] initWithEventAndValueAndOperatorAndMemoryAndVariableAndPositionAndBrainAndParent:event 
+                                                                                                                      value:value 
+                                                                                                                   operator:opDataMiningType 
+                                                                                                                     memory:memoryType 
+                                                                                                                   variable:variable 
+                                                                                                                   position:position 
+                                                                                                                      brain:_brain 
+                                                                                                                     parent:_parentNode];
     
     return true;
 }
@@ -300,7 +328,11 @@
     opConditionType = [CnotiMind translateConditionOperator: opCondition];
     
     _parentNode = _currentNode;
-    _currentNode = [[ConditionPerceptionNode alloc] initWithPerceptionAndValueAndOperatorAndBrainAndParent:perception value:value operator:opConditionType brain:_brain parent:_parentNode];
+    _currentNode = [[ConditionPerceptionNode alloc] initWithPerceptionAndValueAndOperatorAndBrainAndParent:perception 
+                                                                                                     value:value 
+                                                                                                  operator:opConditionType 
+                                                                                                     brain:_brain 
+                                                                                                    parent:_parentNode];
     
     return true;
 }
@@ -316,7 +348,11 @@
     opConditionType = [CnotiMind translateConditionOperator: opCondition];
     
     _parentNode = _currentNode;
-    _currentNode = [[ConditionVariableNode alloc] initWithVariableAndValueAndOperatorAndBrainAndParent:variable value:value operator:opConditionType brain:_brain parent:_parentNode];
+    _currentNode = [[ConditionVariableNode alloc] initWithVariableAndValueAndOperatorAndBrainAndParent:variable 
+                                                                                                 value:value 
+                                                                                              operator:opConditionType 
+                                                                                                 brain:_brain 
+                                                                                                parent:_parentNode];
     
     return true;    
 }
@@ -337,7 +373,11 @@
     opConditionType = [CnotiMind translateConditionOperator: opCondition];
     
     _parentNode = _currentNode;
-    _currentNode = [[ConditionEmotionNode alloc] initWithEmotionAndValueAndOperatorAndBrainAndParent:emotion value:value operator:opConditionType brain:_brain parent:_parentNode];
+    _currentNode = [[ConditionEmotionNode alloc] initWithEmotionAndValueAndOperatorAndBrainAndParent:emotion 
+                                                                                               value:value 
+                                                                                            operator:opConditionType 
+                                                                                               brain:_brain 
+                                                                                              parent:_parentNode];
     
     return true;  
 }
@@ -382,43 +422,70 @@
         return false;
     }
     
-//    NSString* operation = [[atts attributeForName:@"name"] stringValue];
-//    NSString* value = [[atts attributeForName:@"value"] stringValue];
-//    NSString* variable = [[atts attributeForName:@"variable"] stringValue];
-//    NSString* result = [[atts attributeForName:@"result"] stringValue];
-//    
-//    enum MathOperation mathOperationType;
-//    mathOperationType = [CnotiMind translateMathOperation:operation];
-//    TODO
-//    _currentNode = [MathOperationNode]
+    NSString* operation = [[atts attributeForName:@"name"] stringValue];
+    NSString* value = [[atts attributeForName:@"value"] stringValue];
+    NSString* variable = [[atts attributeForName:@"variable"] stringValue];
+    NSString* result = [[atts attributeForName:@"result"] stringValue];
     
-    return false;
+    enum MathOperation mathOperationType;
+    mathOperationType = [CnotiMind translateMathOperation:operation];
+
+    _parentNode = _currentNode;
+    _currentNode = [[MathOperationNode alloc] initWithMathOperationAndVariableAndValueAndResutVariableAndBrainAndParent:mathOperationType variable:variable value:value resultVariable:result brain:_brain parent:_parentNode];
+    
+    return true;
 }
 
 - (BOOL) createPropertyNode:(GDataXMLElement*)atts
 {
-//    TODO    
-    return false;   
+
+    NSString* name = [[atts attributeForName:@"name"] stringValue];
+    NSString* value = [[atts attributeForName:@"value"] stringValue];
+
+    _parentNode = _currentNode;
+    _currentNode = [[PropertyNode alloc] initWithKeyAndValuAndBrainAndParent:name value:value brain:_brain parent:_parentNode];
+    
+    return true;   
 }
 
 - (BOOL) createDeleteNode:(GDataXMLElement*)atts
 {
-//    TODO    
-    return false;       
+    NSString* name = [[atts attributeForName:@"name"] stringValue];
+    NSString* value = [[atts attributeForName:@"value"] stringValue];
+    NSString* position = [[atts attributeForName:@"position"] stringValue];
+    NSString* memory = [[atts attributeForName:@"memory"] stringValue];
+    
+    enum DeletePosition positionType;
+    positionType = [CnotiMind translateDeletePosition:position];
+
+    enum MemoryType memoryType;
+    memoryType = [CnotiMind translateMemoryType:memory];
+    
+    _parentNode = _currentNode;
+    _currentNode = [[DeleteNode alloc] initWithKeyAndValueAndPositionAndMemoryAndBrainAndParent:name value:value position:positionType memory:memoryType brain:_brain parent:_parentNode];
+    
+    return true;   
 }
 
 - (BOOL) createClearMemoryNode:(GDataXMLElement*)atts
 {
-//    TODO    
-    return false;   
+    NSString* memory = [[atts attributeForName:@"memory"] stringValue];
+    
+    enum MemoryType memoryType;
+    memoryType = [CnotiMind translateMemoryType:memory];
+    
+    _parentNode = _currentNode;
+    _currentNode = [[ClearMemoryNode alloc] initWithMemoryAndBrainAndParent:memoryType brain:_brain parent:_parentNode];
+    
+    return true;    
 }
 
 - (BOOL) createRandomNode:(GDataXMLElement*)atts
 {
-//    TODO    
-    return false;    
+    _parentNode = _currentNode;
+    _currentNode = [[RandomNode alloc] initWithBrainAndParent:_brain parent:_parentNode];
+    return true;    
 }
-
 
 
 @end

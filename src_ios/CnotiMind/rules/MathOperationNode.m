@@ -11,14 +11,20 @@
 @implementation MathOperationNode
 
 
-- (id) initWithMathOperationAndVariableAndValueAndresutVariableAndBrainAndParent: (enum MemoryType)aMemory 
+- (id) initWithMathOperationAndVariableAndValueAndResutVariableAndBrainAndParent: (enum MathOperation)aMathOperation
+                                                                        variable:(NSString*)aVariable
+                                                                           value:(NSString*)aValue
+                                                                           resultVariable:(NSString*)aResultVariable
                                                                            brain:(Brain*)aBrain 
                                                                           parent:(id)aParent
 {
 
     if (self = [super initWithBrainAndParent:aBrain parent:aParent]) {
     
-        
+        _operation = aMathOperation;
+        _variable = (aVariable == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aVariable];
+        _value = (aValue == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aValue];
+        _resultVariable = (aResultVariable == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aResultVariable];
     }
     
     

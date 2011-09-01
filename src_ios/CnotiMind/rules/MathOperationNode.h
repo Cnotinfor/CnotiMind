@@ -19,7 +19,10 @@
     NSString* _resultVariable;
 }
 
-- (id) initWithMathOperationAndVariableAndValueAndresutVariableAndBrainAndParent: (enum MemoryType)aMemory 
+- (id) initWithMathOperationAndVariableAndValueAndResutVariableAndBrainAndParent: (enum MathOperation)aMathOperation
+                                                                        variable:(NSString*)aVariable
+                                                                           value:(NSString*)aValue
+                                                                  resultVariable:(NSString*)aResultVariable
                                                                            brain:(Brain*)aBrain 
                                                                           parent:(id)aParent;
 - (void) exec;
