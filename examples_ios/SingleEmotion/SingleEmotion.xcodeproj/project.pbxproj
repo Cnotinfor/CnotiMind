@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1813F3D313FC1C80005DEC76 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1813F3D213FC1C80005DEC76 /* GDataXMLNode.m */; };
+		183FBCAF140FBB4700F06833 /* RandomNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 183FBCAE140FBB4700F06833 /* RandomNode.m */; };
+		183FBCB3140FD19D00F06833 /* SettingsXmlHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 183FBCB2140FD19D00F06833 /* SettingsXmlHandler.m */; };
 		187C441E140E36AF0033DD6B /* KickMeRules_emotion_reaction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 187C441B140E36AF0033DD6B /* KickMeRules_emotion_reaction.xml */; };
 		187C4423140E36E20033DD6B /* KickMeRules_remember_how_many_times_it_was_kicked.xml in Resources */ = {isa = PBXBuildFile; fileRef = 187C4421140E36E20033DD6B /* KickMeRules_remember_how_many_times_it_was_kicked.xml */; };
 		187C4424140E36E20033DD6B /* KickMeRules_remember_who_last_kick_the_brain.xml in Resources */ = {isa = PBXBuildFile; fileRef = 187C4422140E36E20033DD6B /* KickMeRules_remember_who_last_kick_the_brain.xml */; };
@@ -65,6 +67,10 @@
 /* Begin PBXFileReference section */
 		1813F3D113FC1C80005DEC76 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
 		1813F3D213FC1C80005DEC76 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
+		183FBCAD140FBB4700F06833 /* RandomNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomNode.h; sourceTree = "<group>"; };
+		183FBCAE140FBB4700F06833 /* RandomNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RandomNode.m; sourceTree = "<group>"; };
+		183FBCB1140FD19D00F06833 /* SettingsXmlHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsXmlHandler.h; sourceTree = "<group>"; };
+		183FBCB2140FD19D00F06833 /* SettingsXmlHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsXmlHandler.m; sourceTree = "<group>"; };
 		184353CA13E2BDDD0092AFBD /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		187C441B140E36AF0033DD6B /* KickMeRules_emotion_reaction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = KickMeRules_emotion_reaction.xml; sourceTree = "<group>"; };
 		187C4421140E36E20033DD6B /* KickMeRules_remember_how_many_times_it_was_kicked.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = KickMeRules_remember_how_many_times_it_was_kicked.xml; sourceTree = "<group>"; };
@@ -208,6 +214,10 @@
 				187C44BA140E72C60033DD6B /* EmotionNode.m */,
 				187C455D140E97990033DD6B /* MathOperationNode.h */,
 				187C455E140E979A0033DD6B /* MathOperationNode.m */,
+				187C4560140EA95F0033DD6B /* PropertyNode.h */,
+				187C4561140EA95F0033DD6B /* PropertyNode.m */,
+				183FBCAD140FBB4700F06833 /* RandomNode.h */,
+				183FBCAE140FBB4700F06833 /* RandomNode.m */,
 				187C44BB140E72C60033DD6B /* RootNode.h */,
 				187C44BC140E72C60033DD6B /* RootNode.m */,
 				187C44BD140E72C60033DD6B /* RuleNode.h */,
@@ -216,8 +226,6 @@
 				187C44C0140E72C60033DD6B /* RulesXmlHandler.m */,
 				187C44C1140E72C60033DD6B /* StorageNode.h */,
 				187C44C2140E72C60033DD6B /* StorageNode.m */,
-				187C4560140EA95F0033DD6B /* PropertyNode.h */,
-				187C4561140EA95F0033DD6B /* PropertyNode.m */,
 			);
 			path = rules;
 			sourceTree = "<group>";
@@ -278,6 +286,8 @@
 		189613821381370B00FEA73A /* CnotiMind */ = {
 			isa = PBXGroup;
 			children = (
+				183FBCB1140FD19D00F06833 /* SettingsXmlHandler.h */,
+				183FBCB2140FD19D00F06833 /* SettingsXmlHandler.m */,
 				187C44AA140E72C60033DD6B /* rules */,
 				1813F3CF13FC1C80005DEC76 /* 3rdParty */,
 				189613831381370B00FEA73A /* Action.h */,
@@ -459,6 +469,8 @@
 				187C455C140E89320033DD6B /* DeleteNode.m in Sources */,
 				187C455F140E979B0033DD6B /* MathOperationNode.m in Sources */,
 				187C4562140EA9600033DD6B /* PropertyNode.m in Sources */,
+				183FBCAF140FBB4700F06833 /* RandomNode.m in Sources */,
+				183FBCB3140FD19D00F06833 /* SettingsXmlHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

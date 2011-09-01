@@ -8,6 +8,17 @@
 
 #import "RuleNode.h"
 
-@interface RandomNode : RuleNode
+@interface RandomNode : RuleNode {
+
+}
+
+- (id) initWithBrainAndParent:(Brain*)aBrain
+                       parent:(id)aParent;
+
+- (void) exec;
+- (void) exec:(NSMutableDictionary*)aVariables;
+
+- (NSString*) info:(int)aDepth;
+- (void) dealloc;
 
 @end
