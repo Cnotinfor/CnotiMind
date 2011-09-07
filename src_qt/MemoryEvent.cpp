@@ -13,8 +13,14 @@ namespace CnotiMind
 
 	}
 
-	MemoryEvent::MemoryEvent( const QString& key ):
-		_event( key ),
+	/**!
+
+		Creates a memory event with a \a eventName. The event time
+		is the local time. This event doesn't have any value associated.
+
+	*/
+	MemoryEvent::MemoryEvent( const QString& eventName ):
+		_eventName( eventName ),
 		_value( QVariant() ),
 		_time( QDateTime::currentDateTime().toMSecsSinceEpoch() )
 	{
@@ -27,16 +33,16 @@ namespace CnotiMind
 		is the local time.
 
 	*/
-	MemoryEvent::MemoryEvent(const QString& key, const QVariant& value):
-		_event( key ),
+	MemoryEvent::MemoryEvent(const QString& eventName, const QVariant& value):
+		_eventName( eventName ),
 		_value( value ),
 		_time( QDateTime::currentDateTime().toMSecsSinceEpoch() )
 	{
 
 	}
 
-	MemoryEvent::MemoryEvent(const QString& key, const QVariant& value, qint64 time):
-		_event( key ),
+	MemoryEvent::MemoryEvent(const QString& eventName, const QVariant& value, qint64 time):
+		_eventName( eventName ),
 		_value( value ),
 		_time( time )
 	{
@@ -47,7 +53,7 @@ namespace CnotiMind
 		Creates a Memory Event based on a Perception.
 	*/
 	MemoryEvent::MemoryEvent( const Perception& perception ):
-		_event( perception.name() ),
+		_eventName( perception.name() ),
 		_value( perception.value() ),
 		_time( QDateTime::currentDateTime().toMSecsSinceEpoch() )
 	{
@@ -61,7 +67,7 @@ namespace CnotiMind
 
 	const QString& MemoryEvent::event() const
 	{
-		return _event;
+		return _eventName;
 	}
 
 	qint64 MemoryEvent::time() const
@@ -75,7 +81,7 @@ namespace CnotiMind
 
 		xml = "<MemoryEvent ";
 
-		xml += "event=\"" + _event + "\"";
+		xml += "event=\"" + _eventName + "\"";
 		xml += "value=\"" + _value.toString() + "\"";
 		xml += "time=\"" + QString::number( _time ) + "\"";
 
@@ -89,7 +95,7 @@ namespace CnotiMind
 	*/
 	bool MemoryEvent::operator ==( const QString& name )
 	{
-		return QString::compare( _event, name, Qt::CaseInsensitive ) == 0;
+		return QString::compare( _eventName, name, Qt::CaseInsensitive ) == 0;
 	}
 
 	/*
@@ -101,11 +107,11 @@ namespace CnotiMind
 	{
 		if( me._value.isValid() && _value.isValid() )
 		{
-			return (QString::compare( _event, me._event, Qt::CaseInsensitive ) == 0) &&
+			return (QString::compare( _eventName, me._eventName, Qt::CaseInsensitive ) == 0) &&
 				   (QString::compare( _value.toString(), me._value.toString(), Qt::CaseInsensitive ) == 0);
 		}
 
-		return QString::compare( _event, me._event, Qt::CaseInsensitive ) == 0;
+		return QString::compare( _eventName, me._eventName, Qt::CaseInsensitive ) == 0;
 	}
 
 }
