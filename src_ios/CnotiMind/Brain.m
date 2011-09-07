@@ -12,11 +12,9 @@
 
 #import "NSMutableArray+QueueAdditions.h"
 
-
 #import "RootNode.h"
 #import "ConditionPerceptionNode.h"
 #import "ActionNode.h"
-
 
 #import "CnotiMind.h"
 
@@ -42,8 +40,11 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         _workingMemory = [[NSMutableArray alloc] init];
         
         _semaphoreBrain = [[NSConditionLock alloc] initWithCondition:NO_DATA];       
-
+        
     }
+    
+    _rulesXMLHandler = [[RulesXmlHandler alloc] initWithBrain:self];
+    
     return self;
 }
 
@@ -140,7 +141,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
                 NSString* decay = [NSString stringWithFormat:@"%@", [emotion attributeForName:@"decay"]];
                 
                 //  TODO set brain
-                Emotion* e = [[Emotion alloc] initWithKeyAndValueAndMaxAndMin:name value:[value floatValue] max:[max floatValue] min:[min floatValue]];
+                Emotion* e = [[Emotion alloc] initWithNameAndValueAndMaxAndMin:name value:[value floatValue] max:[max floatValue] min:[min floatValue]];
                 
                 [self addEmotion:e];
                 
@@ -157,14 +158,12 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 
 - (void) addValidPerception:(NSString*)aPerception
 {
-    DLog(@"addValidPerception: %@ <-",aPerception);
     [_validPerceptions enqueue:aPerception];
 }
 
 
 - (void) addValidAction:(NSString*)aAction
 {
-    DLog(@"addValidAction: %@ <-",aAction);
     [_validActions enqueue:aAction];
 }
 
@@ -175,62 +174,258 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 }
 
 //  TODO
-- (BOOL) loadXmlRules:(NSString*)aFilename
+
+- (BOOL) loadXmlRulesWithoutXML
 {
+    //    RootNode* rootNode = [[RootNode alloc] initWithBrainAndParent:self parent:nil];
+    //    _currentNode = rootNode;
+    //    
+    //    ConditionPerceptionNode* conditionPerceptionNode = [[ConditionPerceptionNode alloc] initWithPerceptionAndValueAndOperatorAndBrainAndParent:@"User Talk" value:@"Hello" operator:ConditionOperatorEqual brain:self parent:rootNode];
+    //
+    //    _currentNode = conditionPerceptionNode;
+    //    [rootNode insertChild:conditionPerceptionNode];
+    //    
+    //    //    -----------
+    //    ConditionDataMiningNode* conditionDataMiningNode = [[ConditionDataMiningNode alloc] initWithKeyAndValueAndOperatorAndOperationAndMemoryAndVariableAndCompareValueBrainAndParent:@"User Talk" value:@"Hello" operator:ConditionOperatorEqual operation:DMO_Last memory:LongTermMemory variable:@"" compareValue:@"Hello" brain:self parent:conditionPerceptionNode];
+    //
+    //    _currentNode = conditionDataMiningNode;
+    //    [conditionPerceptionNode insertChild:conditionDataMiningNode];
+    //    
+    //    ActionNode* actionNode = [[ActionNode alloc] initWithNameAndValueAndBrainAndParent:@"Talk" value:@"Again??" brain:self parent:conditionDataMiningNode];
+    //
+    //    _currentNode = actionNode;
+    //    [conditionDataMiningNode insertChild:actionNode];
+    //    //    -----------
+    //    
+    //    //    -----------
+    //    ConditionDataMiningNode* conditionDataMiningNode2 = [[ConditionDataMiningNode alloc] initWithKeyAndValueAndOperatorAndOperationAndMemoryAndVariableAndCompareValueBrainAndParent:@"User Talk" value:@"Bye" operator:ConditionOperatorEqual operation:DMO_Last memory:LongTermMemory variable:@"" compareValue:@"Bye" brain:self parent:conditionPerceptionNode];
+    //
+    //    _currentNode = conditionDataMiningNode2;
+    //    [conditionPerceptionNode insertChild:conditionDataMiningNode2];
+    //    
+    //    ActionNode* actionNode2 = [[ActionNode alloc] initWithNameAndValueAndBrainAndParent:@"Talk" value:@"I already said Bye!" brain:self parent:conditionDataMiningNode2];
+    //
+    //    _currentNode = actionNode2;
+    //    [conditionDataMiningNode2 insertChild:actionNode2];
+    //    
+    //    EmotionNode* emotionNode = [[EmotionNode alloc] initWithEmotionAndValueAndMaxAndMinAndBrainAndParent:@"Happiness" value:@"1" max:5 min:INT8_MIN brain:self parent:conditionDataMiningNode2];
+    //
+    //    _currentNode = emotionNode;
+    //    [conditionDataMiningNode2 insertChild:emotionNode];
+    //    
+    //    StorageNode* storageNode = [[StorageNode alloc] initWithEventAndValueAndMemoryAndBrainAndParent:@"User Talk" value:@"I already said Bye!" memory: LongTermMemory brain:self parent:conditionDataMiningNode2];
+    //
+    //    _currentNode = storageNode;
+    //    [conditionDataMiningNode2 insertChild:storageNode];
+    //    //    -----------    
+    //    
+    //    
+    //    //    -----------
+    //    ConditionDataMiningNode* conditionDataMiningNode3 = [[ConditionDataMiningNode alloc] initWithKeyAndValueAndOperatorAndOperationAndMemoryAndVariableAndCompareValueBrainAndParent:@"User Talk" value:@"" operator:ConditionOperatorEqual operation:DMO_Count memory:LongTermMemory variable:@"" compareValue:@"0" brain:self parent:conditionPerceptionNode];
+    //    
+    //
+    //    _currentNode = conditionDataMiningNode3;
+    //    [conditionPerceptionNode insertChild:conditionDataMiningNode3];
+    //    
+    //    ActionNode* actionNode3 = [[ActionNode alloc] initWithNameAndValueAndBrainAndParent:@"Talk" value:@"Hello" brain:self parent:conditionDataMiningNode3];
+    //
+    //    _currentNode = actionNode3;
+    //    [conditionDataMiningNode3 insertChild:actionNode3];
+    //    
+    //    StorageNode* storageNode2 = [[StorageNode alloc] initWithEventAndValueAndMemoryAndBrainAndParent:@"User Talk" value:@"Hello" memory: LongTermMemory brain:self parent:conditionDataMiningNode3];
+    //
+    //    _currentNode = storageNode2;
+    //    [conditionDataMiningNode3 insertChild:storageNode2];
+    //    //    -----------    
+    //
+    //    //    -----------    
+    //    ConditionPerceptionNode* conditionPerceptionNode2 = [[ConditionPerceptionNode alloc] initWithPerceptionAndValueAndOperatorAndBrainAndParent:@"User Talk" value:@"Bye" operator:ConditionOperatorEqual brain:self parent:rootNode];
+    //
+    //    _currentNode = conditionPerceptionNode2;
+    //    [rootNode insertChild:conditionPerceptionNode2];
+    //    
+    //    ActionNode* actionNode4 = [[ActionNode alloc] initWithNameAndValueAndBrainAndParent:@"Talk" value:@"Bye" brain:self parent:conditionPerceptionNode2];
+    //    _parentNode = _currentNode;
+    //    _currentNode = actionNode4;
+    //    [conditionPerceptionNode2 insertChild:actionNode4];
+    //    
+    //    EmotionNode* emotionNode2 = [[EmotionNode alloc] initWithEmotionAndValueAndMaxAndMinAndBrainAndParent:@"Happiness" value:@"-1" max:5 min:0 brain:self parent:conditionPerceptionNode2];
+    //    _parentNode = _currentNode;
+    //    _currentNode = emotionNode2;
+    //    [conditionPerceptionNode2 insertChild:emotionNode2];
+    //    
+    //    StorageNode* storageNode3 = [[StorageNode alloc] initWithEventAndValueAndMemoryAndBrainAndParent:@"User Talk" value:@"Bye" memory: LongTermMemory brain:self parent:conditionPerceptionNode2];
+    //    _parentNode = _currentNode;
+    //    _currentNode = storageNode3;
+    //    [conditionPerceptionNode2 insertChild:storageNode3];
+    //
+    //    DLog(@"INFO");
+    //    [rootNode info:1];
+    //    _rules = rootNode;
+    //    
+    //    
+    //    [self addValidPerception:@"User Talk"];
+    //    [self addValidAction:@"Talk"];
+    //    
+    //    Emotion* emotion = [[Emotion alloc] initWithNameAndValue:@"Happiness" value:1];
+    //    [self addEmotion:emotion];
     
-    RootNode* rootNode = [[RootNode alloc] initWithBrainAndParent:self parent:nil];
-    _currentNode = rootNode;
+    return TRUE;
     
-    ConditionPerceptionNode* conditionPerceptionNode = [[ConditionPerceptionNode alloc] initWithKeyAndValueAndOperatorAndBrainAndParent:@"User Talk" value:@"Hello" operator:ConditionOperatorUndefined brain:self parent:rootNode];
-    _parentNode = _currentNode;
-    _currentNode = conditionPerceptionNode;
+}
+
+- (BOOL) loadXmlRulesWithoutXMLKickMeWithHandler
+{
+    DLog(@"loadXmlRulesWithoutXMLKickMeWithHandler");
+    [_rulesXMLHandler createRootNode:nil];
     
-    [rootNode insertChild:conditionPerceptionNode];
-    
-    ConditionDataMiningNode* conditionDataMiningNode = [[ConditionDataMiningNode alloc] initWithKeyAndValueAndOperatorAndOperationAndMemoryAndVariableAndCompareValueBrainAndParent:@"last" value:@"Hello" operator:ConditionOperatorUndefined operation:DMO_Undefined memory:UndefinedMemory variable:@"" compareValue:@"" brain:self parent:conditionPerceptionNode];
-    _parentNode = _currentNode;
-    _currentNode = conditionDataMiningNode;
-    
-    [conditionPerceptionNode insertChild:conditionDataMiningNode];
-    
-    ActionNode* actionNode = [[ActionNode alloc] initWithKeyAndValueAndBrainAndParent:@"Talk" value:@"Hi there!" brain:self parent:conditionDataMiningNode];
-    _parentNode = _currentNode;
-    _currentNode = actionNode;
-    
-    [conditionDataMiningNode insertChild:actionNode];
-    
-    _rules = rootNode;
-    
-    DLog(@"Brain loadXmlRules finished");
-    
-    DLog(@"Brain add valid perceptions");
     [self addValidPerception:@"User Talk"];
-    [self addValidAction:@"User Talk"];
+    [self addValidAction:@"Talk"];
     
-    //    [actionNode exec];
+    Emotion* emotion = [[Emotion alloc] initWithNameAndValue:@"joy" value:1];
+    [self addEmotion:emotion];
     
+    GDataXMLElement* conditionElement = [GDataXMLNode elementWithName:@"Condition"];
+    GDataXMLNode* type = [GDataXMLNode attributeWithName:@"type" stringValue:@"perception"];
+    GDataXMLNode* perception = [GDataXMLNode attributeWithName:@"perception" stringValue:@"kicked"];
+    GDataXMLNode* value = [GDataXMLNode attributeWithName:@"value" stringValue:@"being kicked"];
+    [conditionElement addAttribute:type];
+    [conditionElement addAttribute:perception];
+    [conditionElement addAttribute:value];
+    [_rulesXMLHandler createConditionPerceptionNode:conditionElement];
     
-    //    NSData *xmlData = [[NSMutableData alloc] initWithContentsOfFile:aFilename];
-    //    NSError *error;
-    //    GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:xmlData 
-    //														   options:0 error:&error];    
+    GDataXMLElement* emotionElement = [GDataXMLNode elementWithName:@"Emotion"];
+    GDataXMLNode* name = [GDataXMLNode attributeWithName:@"name" stringValue:@"joy"];
+    GDataXMLNode* increase = [GDataXMLNode attributeWithName:@"increase" stringValue:@"-2"];
+    [emotionElement addAttribute:name];
+    [emotionElement addAttribute:increase];
+    [_rulesXMLHandler createEmotionNode:emotionElement];
+    
+    //    GDataXMLElement* storageElement = [GDataXMLNode elementWithName:@"Storage"];
+    //    GDataXMLNode* event = [GDataXMLNode attributeWithName:@"event" stringValue:@"kicker"];
+    //    GDataXMLNode* value2 = [GDataXMLNode attributeWithName:@"value" stringValue:@"being kicked"];
+    //    GDataXMLNode* memory = [GDataXMLNode attributeWithName:@"memory" stringValue:@"WM"];
+    //    [storageElement addAttribute:event];
+    //    [storageElement addAttribute:value2];
+    //    [storageElement addAttribute:memory];
+    //    [_rulesXMLHandler createStorageNode:storageElement];
+    
+    _rules = [_rulesXMLHandler rootNode];
+    
+    return true;
+}
+
+
+- (BOOL) loadXmlRulesWithoutXMLKickMe
+{
+    //      RootNode* rootNode = [[RootNode alloc] initWithBrainAndParent:self parent:nil];
+    //    _currentNode = rootNode;
     //    
-    //    if (error) {
-    //        return false;
-    //    }
+    //    ConditionPerceptionNode* conditionPerceptionNode = [[ConditionPerceptionNode alloc] initWithPerceptionAndValueAndOperatorAndBrainAndParent:@"kicked" value:@"being kicked" operator:ConditionOperatorEqual brain:self parent:rootNode];
     //    
-    //    else {
-    //        //  Make the parsing - must be recursive!!!
-    //        NSArray *rulesMembers = [doc.rootElement elementsForName:@"Rules"];
-    //        
-    //        for (GDataXMLElement* rulesMember in rulesMembers) {
-    //            
-    //        }
-    //    }
+    //    _currentNode = conditionPerceptionNode;
+    //    [rootNode insertChild:conditionPerceptionNode];
     //    
-    //    [doc release];
-    //    [xmlData release];
     //    
+    //    
+    //    
+    //    
+    //    ConditionDataMiningNode* conditionDataMiningNode = [[ConditionDataMiningNode alloc] initWithKeyAndValueAndOperatorAndOperationAndMemoryAndVariableAndCompareValueBrainAndParent:@"kicker" value:@"being kicked" operator:ConditionOperatorEqual operation:DMO_Last memory:WorkingMemory variable:@"" compareValue:@"being kicked" brain:self parent:conditionPerceptionNode];
+    //    
+    //    _currentNode = conditionDataMiningNode;
+    //    [conditionPerceptionNode insertChild:conditionDataMiningNode];
+    //    
+    //    ActionNode* actionNode = [[ActionNode alloc] initWithNameAndValueAndBrainAndParent:@"talk" value:@"again? are you crazy?" brain:self parent:conditionDataMiningNode];
+    //    
+    //    _currentNode = actionNode;
+    //    [conditionDataMiningNode insertChild:actionNode];
+    //    
+    //    
+    //    
+    //    EmotionNode* emotionNode = [[EmotionNode alloc] initWithEmotionAndValueAndMaxAndMinAndBrainAndParent:@"joy" value:@"-2" max:5 min:INT8_MIN brain:self parent:conditionPerceptionNode];
+    //    
+    //    _currentNode = emotionNode;
+    //    [conditionPerceptionNode insertChild:emotionNode];
+    //    
+    //    StorageNode* storageNode = [[StorageNode alloc] initWithEventAndValueAndMemoryAndBrainAndParent:@"kicker" value:@"being kicked" memory: WorkingMemory brain:self parent:conditionPerceptionNode];
+    //    _parentNode = _currentNode;
+    //    _currentNode = storageNode;
+    //    [conditionPerceptionNode insertChild:storageNode];
+    //    
+    //    
+    //    
+    //    DLog(@"INFO");
+    //    [rootNode info:1];
+    //    _rules = rootNode;
+    //    
+    //    
+    //    [self addValidPerception:@"kicked"];
+    ////    [self addValidAction:@"Talk"];
+    //    
+    //    Emotion* emotion = [[Emotion alloc] initWithNameAndValue:@"joy" value:1];
+    //    [self addEmotion:emotion];
+    
+    return TRUE;
+    
+}
+
+
+
+- (BOOL) loadXmlRules:(NSString*)aFilePath
+{
+    DLog(@"%@", aFilePath);
+    
+    NSData *xmlData = [[NSMutableData alloc] initWithContentsOfFile:aFilePath];  
+    NSError *error;
+    GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:xmlData 
+														   options:0 error:&error];
+    
+//    NSString *content = [[NSString alloc]  initWithBytes:[xmlData bytes]
+//                                                  length:[xmlData length] encoding: NSUTF8StringEncoding];
+    
+    if (error) {
+        DLog(@"[Brain::loadXmlRules] File not found");
+        return false;
+    }
+    
+    else {
+        //  Make the parsing - must be recursive!!!
+        NSArray *rulesMembers = [doc.rootElement children];
+        
+        NSLog(@"rulesMembers: %@", rulesMembers);
+        
+        [_rulesXMLHandler startElement:nil localName:nil qName:@"Rules" atts:nil];
+        [self loadXMLRecursive: rulesMembers];
+        [_rulesXMLHandler endElement:nil localName:nil qName:@"Rules"];
+
+    }
+    
+    [doc release];
+    [xmlData release];
+    
+    _rules = [_rulesXMLHandler rootNode];
+    DLog(@"[Brain::loadXmlRules] done");
+
+    return true;
+}
+
+
+- (BOOL) loadXMLRecursive:(NSArray*)rulesMembers
+{
+    if ([rulesMembers count]==0) {
+        return false;
+    }
+    
+    for (GDataXMLElement* rulesMember in rulesMembers) {
+        NSString* elementName = [[NSString alloc] initWithFormat:@"%@",[rulesMember name]];
+
+        [_rulesXMLHandler startElement:nil localName:nil qName:elementName atts:rulesMember];
+    
+        NSArray* childArray = [rulesMember children];        
+        [self loadXMLRecursive:childArray];
+    
+        [_rulesXMLHandler endElement:nil localName:nil qName:elementName];
+    }
     return true;
 }
 
@@ -254,7 +449,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     
     NSEnumerator* eLongTermMemory = [_longTermMemory objectEnumerator];
     MemoryEvent* objectLongTermMemory;
-    while (objectLongTermMemory == [eLongTermMemory nextObject]) {
+    while (objectLongTermMemory = [eLongTermMemory nextObject]) {
         xmlMemory = [xmlMemory stringByAppendingFormat:@"%@", [objectLongTermMemory toXML]];
     }
     
@@ -263,7 +458,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     
     NSEnumerator* eWorkingMemory = [_workingMemory objectEnumerator];
     MemoryEvent* objectWorkingMemory;
-    while (objectWorkingMemory == [eWorkingMemory nextObject]) {
+    while (objectWorkingMemory = [eWorkingMemory nextObject]) {
         xmlMemory = [xmlMemory stringByAppendingFormat:@"%@", [objectWorkingMemory toXML]];
     }
     
@@ -317,68 +512,98 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 
 - (void) printSettings;
 {
-    NSString* settings = [NSString stringWithFormat:@""];
-    settings = [settings stringByAppendingString:@"--- Valid Perceptions ---\n"];    
+    NSString* settings = [NSString stringWithFormat:@"\n--- Print Brain Settings ---"];
+    settings = [settings stringByAppendingString:@"\n--- Valid Perceptions ---"];    
     
     if ([_validPerceptions count] == 0) {
-        settings = [settings stringByAppendingString:@"No Perceptions defined\n"];            
+        settings = [settings stringByAppendingString:@"No Perceptions defined"];            
     }
     else {
         NSEnumerator* ePerceptions = [_validPerceptions objectEnumerator];
         Perception* objectPerception;
         while (objectPerception = [ePerceptions nextObject]) {
-            settings = [settings stringByAppendingFormat:@"%@", [objectPerception description]];
+            settings = [settings stringByAppendingFormat:@"\n%@", [objectPerception description]];
         }
     }
     
     
-    settings = [settings stringByAppendingString:@"--- Valid Actions ---\n"];    
+    settings = [settings stringByAppendingString:@"\n--- Valid Actions ---"];    
     
     if ([_validActions count] == 0) {
-        settings = [settings stringByAppendingString:@"No Actions defined\n"];            
+        settings = [settings stringByAppendingString:@"\nNo Actions defined"];            
     }
     else {
         NSEnumerator* eActions = [_validActions objectEnumerator];
         Perception* objectAction;
         while (objectAction = [eActions nextObject]) {
-            settings = [settings stringByAppendingFormat:@"%@", [objectAction description]];
+            settings = [settings stringByAppendingFormat:@"\n%@", [objectAction description]];
         }
     }
     
     
-    settings = [settings stringByAppendingString:@"--- Emotions ---\n"];    
+    settings = [settings stringByAppendingString:@"\n--- Emotions ---"];    
     
     if ([_emotions count] == 0) {
-        settings = [settings stringByAppendingString:@"No Emotions defined\n"];            
+        settings = [settings stringByAppendingString:@"\nNo Emotions defined"];            
     }
     else {
         NSEnumerator* eEmotions = [_emotions objectEnumerator];
         Perception* objectEmotion;
         while (objectEmotion = [eEmotions nextObject]) {
-            settings = [settings stringByAppendingFormat:@"%@", [objectEmotion description]];
+            settings = [settings stringByAppendingFormat:@"\n%@", [objectEmotion description]];
         }
     }
     
-    DLog(@"printSettings: %@", settings);
+    DLog(@"%@",settings);
 }
 
 
 - (void) printRules
 {
-    [_rules description];
+    DLog(@"printRules");
+    DLog(@"%@", [_rules info:1]);
+}
+
+- (void) printMemory:(enum MemoryType) aType
+{
+    NSEnumerator* eMemory;
+    
+    if (aType == WorkingMemory) {
+        DLog(@"--- Print Memory WorkingMemory---");
+        @synchronized(_workingMemory) {
+            eMemory = [_workingMemory objectEnumerator];
+            MemoryEvent* objectMemoryEvent;
+            while (objectMemoryEvent = [eMemory nextObject]) {
+                DLog(@"\nEvent: %@ Value: %@", [objectMemoryEvent event], [objectMemoryEvent value]);
+            }
+        }
+    }
+    else if (aType == LongTermMemory) {
+        DLog(@"--- Print Memory LongTermMemory---");
+        @synchronized(_longTermMemory) {
+            eMemory = [_longTermMemory objectEnumerator];
+            MemoryEvent* objectMemoryEvent;
+            while (objectMemoryEvent = [eMemory nextObject]) {
+                DLog(@"\nEvent: %@ Value: %@", [objectMemoryEvent event], [objectMemoryEvent value]);
+            }
+        }
+    }
+    
 }
 
 
 - (void) receivePerception:(Perception*)aPerception
 {
+    [_semaphoreBrain lockWhenCondition:NO_DATA];
+    
+    DLog(@"name: %@. value: %@", [aPerception name], [aPerception value]);
+    
     [_receivedPerceptions enqueue:aPerception];
     
-//    [_semaphoreBrain lockWhenCondition:OPERATION_FINISHED];
-    [_semaphoreBrain lockWhenCondition:NO_DATA];
     [_semaphoreBrain unlockWithCondition:HAS_DATA];
     
     //  Trigger the brain
-//    [self run];
+    //    [self run];
 }
 
 
@@ -401,47 +626,84 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 {
     NSMutableDictionary* action = [[NSMutableDictionary alloc] init];
     [action setObject:aValue forKey:aKey];
-    [[NSNotificationCenter defaultCenter] postNotificationName:SEND_EMOTIONAL_STATE object:action];  
+    [[NSNotificationCenter defaultCenter] postNotificationName:SEND_EMOTIONAL_STATE object:action];
 }
 
 
-- (void) updateEmotionValue:(NSString*)aEmotionName variation:(NSNumber*)aVariation
+- (void) updateEmotionValue:(NSString*)aEmotionName variation:(double)aVariation
 {
-    [self updateEmotionValue:aEmotionName variation:aVariation max:[NSNumber numberWithInt: INT8_MAX] min:[NSNumber numberWithInt: INT8_MIN] ];
+    [self updateEmotionValue:aEmotionName variation:aVariation max:INT8_MAX min:INT8_MIN];
 }
 
-- (void) updateEmotionValue:(NSString*)aEmotionName variation:(NSNumber*)aVariation max:(NSNumber*)aMax min:(NSNumber*)aMin
+- (void) updateEmotionValue:(NSString*)aEmotionName variation:(double)aVariation max:(double)aMax min:(double)aMin
 {
-    
     NSEnumerator* eEmotions = [_emotions objectEnumerator];
-    Perception* objectEmotion;
-    while (objectEmotion == [eEmotions nextObject]) {
+    Emotion* objectEmotion;
+    while (objectEmotion = [eEmotions nextObject]) {
         
-        if ([[objectEmotion value] isEqual:aEmotionName] == TRUE) {
+        if ([[objectEmotion name] isEqualToString:aEmotionName] == TRUE) {
             
-            //  TODO: send signal
-            //  emit sendEmotionalState( emotionName, e.value() );
+            [objectEmotion addValue:aVariation max:aMax min:aMin];
+            
+            [self sendEmotionalState:[objectEmotion name] value:[NSString stringWithFormat:@"%f", [objectEmotion value]]];
             
             [_emotionsChanged enqueue:aEmotionName];
-            [self run];
             
-            //  TODO: release signal
-            //  if(_semaphoreBrain.available() == 0)
-            //  {
-            //      _semaphoreBrain.release();
-            //  }
-            //  break;
+            if ([_semaphoreBrain tryLock]) {
+                [_semaphoreBrain unlockWithCondition:HAS_DATA];
+            }
+            
+            break;
         }
     }
 }
 
 
-- (void) executeAction:(NSString*)aKey value:(NSString*)aValue
+- (void) storeToMemory:(MemoryEvent*)aMemoryEvent memoryType:(enum MemoryType)aMemoryType
+{
+    switch((int)aMemoryType)
+    {
+		case LongTermMemory:
+            @synchronized(_longTermMemory) {
+                [_longTermMemory addObject:aMemoryEvent];
+            }
+            
+            //			if( _gui != NULL )
+            //			{
+            //				_gui->updateLongTermMemory();
+            //			}
+			break;
+		case WorkingMemory:
+            @synchronized(_workingMemory) {
+                [_workingMemory addObject:aMemoryEvent];
+            }
+            //			if( _gui != NULL )
+            //			{
+            //				_gui->updateWorkingMemory();
+            //			}
+			break;
+            
+    }
+    
+    DLog(@"stored to memory");   
+}
+
+- (void) executeActionWithVariables:(NSString*)aKey value:(NSString*)aValue
 {
     //  TODO: send signal
     NSMutableDictionary* action = [[NSMutableDictionary alloc] init];
     [action setObject:aValue forKey:aKey];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"SEND_ACTION" object:action];
+    
+}
+
+
+- (void)executeAction:(NSString *)aKey value:(NSString *)aValue
+{
+    NSMutableDictionary* action = [[NSMutableDictionary alloc] init];
+    [action setObject:aValue forKey:aKey];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:SEND_ACTION object:action];
 }
 
 
@@ -450,15 +712,16 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     // test if parameters are valid for datamining
     if( [aEvent length]==0 )
     {
+//        DLog(@"aEvent: %@", aEvent);
         [self setValid: aValid value:false];
         return [NSString stringWithFormat:@""];
     }
-    
     
     NSMutableArray* memory = (aMemoryType == WorkingMemory ? _workingMemory : _longTermMemory);
     
     [self setValid:aValid value:true];
     
+//    DLog(@"aValid: %d", *aValid);
     
     switch (aOperation) {
         case DMO_Max:
@@ -476,7 +739,6 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         case DMO_Mean:
             return [[NSNumber alloc] initWithFloat:[self dataMiningMean: aEvent memory: memory valid:aValid]];
             break;
-            
         case DMO_Exists:
             return [[NSNumber alloc] initWithFloat:[self dataMiningExists: aEvent memory: memory valid:aValid]];
             break;
@@ -497,22 +759,22 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 }
 
 
-
 - (id) dataMining: (enum DataMiningOperation)aOperation event:(NSString*)aEvent value:(NSString*)aValue memoryType:(enum MemoryType)aMemoryType valid:(BOOL*)aValid
 {
+    
+    NSString* result = [[NSString alloc] initWithString:@""];
     
     // test if parameters are valid for datamining
     if( [aEvent length]==0 )
     {
         [self setValid: aValid value:false];
-        return [NSString stringWithFormat:@""];
+        return result;
     }
-    
-    
+    DLog(@"aValue: %@", aValue);
     // if value is empty, do datamining without the value
     if( [aValue length]==0 )
     {
-        return [self dataMining:aOperation event:aEvent value:aValue memoryType:aMemoryType valid:aValid];
+        return [self dataMining:aOperation event:aEvent memoryType:aMemoryType valid:aValid];
     }
     
     // get the memory to performe data mining
@@ -521,10 +783,10 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     
     switch (aOperation) {
         case DMO_Count:
-            return [[NSNumber alloc] initWithFloat:[self dataMiningCount:aEvent value:aValue memory:memory valid:aValid]];
+            return [[NSString alloc] initWithFormat:@"%f",[self dataMiningCount:aEvent value:aValue memory:memory valid:aValid]];
             break;
         case DMO_Exists:
-            return [[NSNumber alloc] initWithBool:[self dataMiningExists:aEvent value:aValue memory:memory valid:aValid]];
+            return [[NSString alloc] initWithFormat:@"%d",[self dataMiningExists:aEvent value:aValue memory:memory valid:aValid]];
             break;
             
         default:
@@ -532,7 +794,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     }
     
     [self setValid: aValid value:false];
-    return [NSString stringWithFormat:@""];
+    return result;
 }
 
 /*
@@ -561,7 +823,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     NSEnumerator* eMemoryEvent = [aMemory objectEnumerator];
     
     MemoryEvent* objectMemoryEvent;
-    while( objectMemoryEvent == [eMemoryEvent nextObject] ) // Iterate all memory
+    while( objectMemoryEvent = [eMemoryEvent nextObject] ) // Iterate all memory
     {
         //  MemoryEvent* me = [eMemoryEvent nextObject];
         
@@ -608,7 +870,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     NSEnumerator* eMemoryEvent = [aMemory objectEnumerator];
     
     MemoryEvent* objectMemoryEvent;
-    while( objectMemoryEvent == [eMemoryEvent nextObject] ) // Iterate all memory
+    while( objectMemoryEvent = [eMemoryEvent nextObject] ) // Iterate all memory
     {
         //  MemoryEvent* me = [eMemoryEvent nextObject];
         
@@ -655,7 +917,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     NSEnumerator* eMemoryEvent = [aMemory objectEnumerator];
     
     MemoryEvent* objectMemoryEvent;
-    while( objectMemoryEvent == [eMemoryEvent nextObject] ) // Iterate all memory
+    while( objectMemoryEvent = [eMemoryEvent nextObject] ) // Iterate all memory
     {
         if( [[objectMemoryEvent event] isEqualToString:aEvent] ) // Event found
         {
@@ -693,7 +955,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     NSEnumerator* eMemoryEvent = [aMemory objectEnumerator];
     
     MemoryEvent* objectMemoryEvent;
-    while( objectMemoryEvent == [eMemoryEvent nextObject] ) // Iterate all memory
+    while( objectMemoryEvent = [eMemoryEvent nextObject] ) // Iterate all memory
     {
         if( [[objectMemoryEvent event] isEqualToString:aEvent] ) // Event found
         {
@@ -735,9 +997,8 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     int n = 0;
     
     NSEnumerator* eMemoryEvent = [aMemory objectEnumerator];
-    
     MemoryEvent* objectMemoryEvent;
-    while( objectMemoryEvent == [eMemoryEvent nextObject] ) // Iterate all memory
+    while( objectMemoryEvent = [eMemoryEvent nextObject] ) // Iterate all memory
     {
         if( [[objectMemoryEvent event] isEqualToString:aEvent] ) // Event found
         {
@@ -766,13 +1027,17 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     NSEnumerator* eMemoryEvent = [aMemory objectEnumerator];
     
     MemoryEvent* objectMemoryEvent;
-    while( objectMemoryEvent == [eMemoryEvent nextObject] ) // Iterate all memory
+    while( objectMemoryEvent = [eMemoryEvent nextObject] ) // Iterate all memory
     {
-        if( [[objectMemoryEvent event] isEqualToString:aEvent] && [[objectMemoryEvent value] isEqual:aValue]) // Event found
+        DLog(@"%@ - %@", [objectMemoryEvent event], [objectMemoryEvent value]);
+        DLog(@"%@ - %@", aEvent, aValue);
+        
+        if( [[objectMemoryEvent event] isEqualToString:aEvent] && [[objectMemoryEvent value] isEqualToString:aValue]) // Event found
         {
             n++;
         }   
     }
+    DLog(@"dataMiningCount: %d",n);
     return n;
 }
 
@@ -800,7 +1065,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     NSEnumerator* eMemoryEvent = [aMemory objectEnumerator];
     
     MemoryEvent* objectMemoryEvent;
-    while( objectMemoryEvent == [eMemoryEvent nextObject] ) // Iterate all memory
+    while( objectMemoryEvent = [eMemoryEvent nextObject] ) // Iterate all memory
     {
         if( [[objectMemoryEvent event] isEqualToString:aEvent] ) // Event found
         {
@@ -840,7 +1105,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     NSEnumerator* eMemoryEvent = [aMemory objectEnumerator];
     
     MemoryEvent* objectMemoryEvent;
-    while( objectMemoryEvent == [eMemoryEvent nextObject] ) // Iterate all memory
+    while( objectMemoryEvent = [eMemoryEvent nextObject] ) // Iterate all memory
     {
         if( [[objectMemoryEvent event] isEqualToString:aEvent] ) // Event found
         {
@@ -866,9 +1131,9 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     NSEnumerator* eMemoryEvent = [aMemory objectEnumerator];
     
     MemoryEvent* objectMemoryEvent;
-    while( objectMemoryEvent == [eMemoryEvent nextObject] ) // Iterate all memory
+    while( objectMemoryEvent = [eMemoryEvent nextObject] ) // Iterate all memory
     {
-        if( [[objectMemoryEvent event] isEqualToString:aEvent] && [[objectMemoryEvent value] isEqual:aValue]) // Event found
+        if( [[objectMemoryEvent event] isEqualToString:aEvent] && [[objectMemoryEvent value] isEqualToString:aValue]) // Event found
         {
             return true;
         }
@@ -883,6 +1148,9 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
  */
 - (NSString*) dataMiningLast: (NSString*)aEvent memory:(NSMutableArray*)aMemory valid:(BOOL*)aValid
 {
+    
+//    DLog(@"dataMiningLast: %@",aEvent);
+    
     // by defaulf the data mining is not valid
     [self setValid:aValid value:false];
     
@@ -897,7 +1165,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     // start search from back
     MemoryEvent* objectMemoryEvent;
     
-    for (int i = [aMemoryEvents count]-1; i>0; i--) {
+    for (int i = [aMemoryEvents count]-1; i>=0; i--) {
         objectMemoryEvent = [aMemoryEvents objectAtIndex:i];
         
         if( [[objectMemoryEvent event] isEqualToString:aEvent] ) // Event found
@@ -961,7 +1229,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 - (void) setValid:(BOOL*)aValid value:(BOOL)aValue
 {
     if (aValid != NULL) {
-        aValid = &aValue;
+        *aValid = aValue;
     }
 }
 
@@ -972,15 +1240,12 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     while (true) {
         
         [_semaphoreBrain lockWhenCondition:HAS_DATA];
-
-        DLog(@"...brain running...");
         
         int nEmotions;
         nEmotions = [_emotionsChanged count];
         
         // Execute the rules
         if (_rules!=nil) {
-            //  [_rules info:1];
             [_rules exec];       
         }
         
@@ -990,11 +1255,10 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         for(int i = 0; i < nEmotions; i++)
         {
             NSString* emotionName = [_emotionsChanged dequeue];
-            
             Emotion* e = [[Emotion alloc] init];
             
             for (Emotion* objectE in _emotions) {
-                if ([[objectE key] isEqual:emotionName]) {
+                if ([[objectE name] isEqualToString:emotionName]) {
                     e = objectE;
                 }
             }
@@ -1004,9 +1268,9 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         if( [_receivedPerceptions count] != 0 )
         {
             Perception* p = [_receivedPerceptions dequeue];
-            DLog(@"dequeue from _receivedPerceptions: %@", [p name]);
+//          DLog(@"dequeue from _receivedPerceptions: %@ %@", [p name], [p value]);
         }
-
+        
         [_semaphoreBrain unlockWithCondition:NO_DATA];
         
     }

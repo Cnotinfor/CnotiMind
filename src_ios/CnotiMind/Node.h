@@ -19,7 +19,7 @@
 @property (readwrite, assign) NSString* _value;
 
 - (id) init;
-- (id) initWithKeyAndValue:(NSString*)aKey value:(NSString*)aValue;
+//- (id) initWithKeyAndValue:(NSString*)aKey value:(NSString*)aValue;
 
 
 - (NSString*) info:(int)depth;

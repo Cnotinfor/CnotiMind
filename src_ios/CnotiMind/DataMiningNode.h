@@ -15,7 +15,10 @@
 
 
 @interface DataMiningNode : RuleNode {
+
     
+    NSString* _event;
+    NSString* _value;
     enum DataMiningOperation _operation;
     enum MemoryType _memory;
     NSString* _variable;
@@ -25,8 +28,8 @@
     id _result;
 }
 
-- (id) initWithKeyAndValueAndOperatorAndBrainAndParent: (NSString*)aKey 
-                                                value:(NSString*)aValue 
+- (id) initWithEventAndValueAndOperatorAndBrainAndParent: (NSString*)aKey 
+                                                   value:(NSString*)aValue 
                                                 operator:(enum DataMiningOperation)aDataMiningOperation 
                                                 memory:(enum MemoryType)aMemory
                                                 variable:(NSString*)aVariable
@@ -39,7 +42,8 @@
 - (NSString*) info:(int)aDepth;
 
 - (BOOL) isTrue;
-//- (BOOL) isTrue:(NSMutableDictionary*)aVariables;
+- (BOOL) isTrue:(NSMutableDictionary*)aVariables;
 
+- (void) dealloc;
 
 @end

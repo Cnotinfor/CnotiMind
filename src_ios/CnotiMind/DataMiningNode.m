@@ -14,21 +14,28 @@
 @implementation DataMiningNode
 
 
-- (id) initWithKeyAndValueAndOperatorAndBrainAndParent: (NSString*)aKey 
-                                                 value:(NSString*)aValue 
-                                              operator:(enum DataMiningOperation)aDataMiningOperation 
-                                                memory:(enum MemoryType)aMemory
-                                              variable:(NSString*)aVariable
-                                                 brain:(Brain*)aBrain 
-                                                parent:(id)aParent
+- (id) initWithEventAndValueAndOperatorAndBrainAndParent: (NSString*)aEvent 
+                                                   value:(NSString*)aValue 
+                                                operator:(enum DataMiningOperation)aDataMiningOperation 
+                                                  memory:(enum MemoryType)aMemory
+                                                variable:(NSString*)aVariable
+                                                   brain:(Brain*)aBrain 
+                                                  parent:(id)aParent
 {
     
-    if ( self == [super initWithKeyAndValueAndBrainAndParent:aKey value:aValue brain:aBrain parent:aParent] )
+    if ( self == [super initWithBrainAndParent:aBrain parent:aParent] )
     {
+        _event = (aEvent == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aEvent];
+        _value = (aValue == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aValue];
+        
         _operation = aDataMiningOperation;
         _memory = aMemory;
-        _variable = aVariable;
+        _variable = [[NSString alloc] initWithString:aVariable];
         _valueNumeric = [NSNumber numberWithFloat:[aValue floatValue]];
+        
+        
+        //      _position( position ),
+        //		_positionNumeric( position.toInt( &_isPositionNumeric ) )
     }
     return self;
 }
@@ -65,7 +72,7 @@
         
         [self execChildren];
     }
-
+    
 }
 
 
@@ -88,15 +95,59 @@
     // If the values are numbers it should use the
     if( _isValueNumeric )
     {
-        _result = [_brain dataMining: _operation event:_key value:_valueNumeric memoryType:_memory valid:&valid];
+        _result = [_brain dataMining: _operation event:_event value:_valueNumeric memoryType:_memory valid:&valid];
         return valid;
     }
     else // If the value is QString
     {
-        _result = [_brain dataMining: _operation event:_key value:_value memoryType:_memory valid:&valid];
+        _result = [_brain dataMining: _operation event:_event value:_value memoryType:_memory valid:&valid];
         
         return valid;
     }
 }
+
+/*
+ Check if in the value string there are variable or property tags
+ 
+ If it is a variable tag try to get the value from the variables lists.
+ 
+ Variables tags are betweeen square brackets [].
+ Property tags are between curl brackets {}.
+ 
+ If the variable/property tag is not found, it is replaced by an empty string.
+ */
+
+- (BOOL) isTrue:(NSMutableDictionary*)aVariables
+{
+    
+    BOOL valid;
+    int position = 0;
+    
+    // TODO stuff
+    //    [self tagsToValue:<#(NSString **)#> variables:<#(NSMutableDictionary **)#>]
+    
+    // If the values are numbers it should use the
+    if( _isValueNumeric )
+    {
+        _result = [_brain dataMining: _operation event:_event value:_valueNumeric memoryType:_memory valid:&valid];
+        return valid;
+    }
+    else // If the value is QString
+    {
+        _result = [_brain dataMining: _operation event:_event value:_value memoryType:_memory valid:&valid];
+        
+        return valid;
+    }
+}
+
+- (void) dealloc
+{
+    [_event release];
+    [_value release];
+    [_variable release];
+    
+    [super dealloc];
+}
+
 
 @end

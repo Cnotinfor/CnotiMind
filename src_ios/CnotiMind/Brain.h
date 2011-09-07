@@ -15,9 +15,15 @@
 
 #import "ConditionDataMiningNode.h"
 #import "ActionNode.h"
+#import "EmotionNode.h"
+#import "StorageNode.h"
 
 #import "CnotiMind.h"
 //#import "MemoryType.h"
+
+#import "RulesXmlHandler.h"
+
+
 
 extern NSString* const SEND_ACTION;
 extern NSString* const SEND_EMOTIONAL_STATE;
@@ -43,7 +49,9 @@ enum { HAS_DATA, NO_DATA };
     NSMutableArray* _workingMemory;
     int _timerDecayEmotions;
     
-    bool _quit;    
+    bool _quit;
+    
+    RulesXmlHandler* _rulesXMLHandler;
 }
 
 
@@ -59,7 +67,11 @@ enum { HAS_DATA, NO_DATA };
 - (void) addValidPerception:(NSString*)aPerception;
 - (void) addValidAction:(NSString*)aAction;
 - (void) addEmotion:(Emotion*)aEmotion;
+- (BOOL) loadXmlRulesWithoutXML;
+- (BOOL) loadXmlRulesWithoutXMLKickMeWithHandler;
+- (BOOL) loadXmlRulesWithoutXMLKickMe;
 - (BOOL) loadXmlRules:(NSString*)aFilename;
+- (BOOL) loadXMLRecursive:(NSArray*)rulesMembers;
 
 - (BOOL) validateXml:(NSString*)aFilename;
 - (BOOL) saveMemory:(NSString*)aFilename;
@@ -74,7 +86,7 @@ enum { HAS_DATA, NO_DATA };
 // Methods for printing brain data in console
 - (void) printSettings;
 - (void) printRules;
-//- (void) printMemory:(MemoryType*) aType;
+- (void) printMemory:(enum MemoryType) aType;
 
 
 - (void) receivePerception:(Perception*)aPerception;
@@ -87,11 +99,12 @@ enum { HAS_DATA, NO_DATA };
 
 // private
 
-- (void) updateEmotionValue:(NSString*)aEmotionName variation:(NSNumber*)aVariation max:(NSNumber*)aMax min:(NSNumber*)aMin;
-- (void) updateEmotionValue:(NSString*)aEmotionName variation:(NSNumber*)aVariation;
+- (void) updateEmotionValue:(NSString*)aEmotionName variation:(double)aVariation max:(double)aMax min:(double)aMin;
+- (void) updateEmotionValue:(NSString*)aEmotionName variation:(double)aVariation;
 
 
-//- (void) storeToMemory:(MemoryEvent*)aMemoryEvent memoryType:(MemoryType*)aMemoryType;
+- (void) storeToMemory:(MemoryEvent*)aMemoryEvent memoryType:(enum MemoryType)aMemoryType;
+
 
 - (void) executeAction:(NSString*)aKey value:(NSString*)aValue;
 //- (void) executeAction:(NSMutableArray*)aVariables;

@@ -41,6 +41,6 @@
 
 - (BOOL) isTrue;
 
-
+- (void) dealloc;
 
 @end

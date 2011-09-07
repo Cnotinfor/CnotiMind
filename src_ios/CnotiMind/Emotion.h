@@ -14,22 +14,23 @@
     double _value;
     double _max;
     double _min;
-    NSString* _key;
+    NSString* _name;
     
 }
 
 @property (readwrite, assign) double value;
-@property (readwrite, assign) NSString* key;
+@property (readwrite, assign) NSString* name;
 
 @property (readwrite, assign) double min;
 @property (readwrite, assign) double max;
 
 - (id) init;
-- (id) initWithKeyAndValue:(NSString*)aKey value:(double)aValue;
-- (id) initWithKeyAndValueAndMaxAndMin:(NSString*)aKey value:(double)aValue max:(double)aMax min:(double)aMin;
+- (id) initWithNameAndValue:(NSString*)aKey value:(double)aValue;
+- (id) initWithNameAndValueAndMaxAndMin:(NSString*)aKey value:(double)aValue max:(double)aMax min:(double)aMin;
 
-- (void) setValue:(double)aValue max:(double)aMax min:(double)aMin;
-- (void) setValue:(double)aValue;
+- (void) setEmotionValue:(double)aValue max:(double)aMax min:(double)aMin;
+- (void) setEmotionValue:(double)aValue;
+
 - (void) addValue:(double)aIncrement max:(double)aMax min:(double)aMin;
 - (void) addValue:(double)aIncrement;
 
@@ -39,7 +40,7 @@
 
 + (BOOL) insertEmotionIntoArray:(Emotion*)aEmotion array:(NSMutableArray*)aArray;
 
-- (NSString *)description;
+//- (NSString *)description;
 
 
 

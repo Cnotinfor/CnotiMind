@@ -13,7 +13,6 @@
  is the local time.
  */
 
-
 @implementation MemoryEvent
 
 @synthesize value = _value;
@@ -22,7 +21,7 @@
 @synthesize time = _time;
 
 
-- (id) initWithKeyAndValue:(NSString*)aEvent value:(id)aValue
+- (id) initWithEventAndValue:(NSString*)aEvent value:(id)aValue
 {
     if (self == [super init]) {
         _event = aEvent;
@@ -34,7 +33,7 @@
 }
 
 
-- (id) initWithKeyAndValueAndTime:(NSString*)aEvent value:(id)aValue time:(NSTimeInterval)aTime
+- (id) initWithEventAndValueAndTime:(NSString*)aEvent value:(id)aValue time:(NSTimeInterval)aTime
 {
     if (self == [super init]) {
         _event = aEvent;
@@ -56,7 +55,6 @@
     }
     return self;
 }
-
 
 - (NSString*) toXML
 {

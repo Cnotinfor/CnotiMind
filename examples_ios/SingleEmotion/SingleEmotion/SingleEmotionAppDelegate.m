@@ -10,21 +10,30 @@
 
 @implementation SingleEmotionAppDelegate
 
-
 @synthesize window=_window;
-
-@synthesize navigationController=_navigationController;
 
 
 - (id)init
 {
-    
     if (self == [super init]) {
+        
+        
         _brain = [[Brain alloc] init];
         
         //  load XML rulles;
         DLog(@"--- load XML rulles ---");
-        [_brain loadXmlRules:@""];
+//        [_brain loadXmlRulesWithoutXML];
+//        [_brain loadXmlRulesWithoutXMLKickMe];
+        
+//        [_brain loadXmlRulesWithoutXMLKickMeWithHandler];
+
+        NSString* XMLFile = [NSString stringWithString:@""];
+        XMLFile = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"single_emotion_rules.xml"];	
+
+        [_brain loadXmlRules:XMLFile];
+
+        [_brain printRules];
+        
         DLog(@"--- start brain ---");
         [_brain startThreadRun];
         
@@ -33,6 +42,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(actionReceived:) 
                                                  name:SEND_ACTION
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(emotionReceived:) 
+                                                 name:SEND_EMOTIONAL_STATE
                                                object:nil];
 
     return self;
@@ -43,35 +57,33 @@
 {
     DLog(@"I clicked on the Button!");
 
-    Perception* perception = [[Perception alloc] initWithNameAndAValue:@"User talk" value:@"Hello"];
+    Perception* perception = [[Perception alloc] initWithNameAndAValue:@"User Talk" value:@"Bye"];
     [_brain receivePerception:perception];
     
-//    //  print settings
-//    DLog(@"--- brain printSettings ---");
-//    [_brain printSettings];
-//    
-//    DLog(@"--- brain executeAction ---");
-//    [_brain executeAction:@"User Talk" value:@"BYE BYE!"];
-//    //  return nil;
+//    Perception* perception2 = [[Perception alloc] initWithNameAndAValue:@"User Talk" value:@"Hello"];
+//    [_brain receivePerception:perception2];
+    
+    [_brain printMemory:LongTermMemory];
+    [_brain printMemory:WorkingMemory];
 }
 
 
 - (void) actionReceived:(NSNotification*)aNotif
 {
     
-    
-    DLog(@"actionReceived");
-    
+    NSArray* values = [[aNotif object] allValues]; 
+    for (id value in values) {
+//        DLog(@"setText: %@", value);
+    }
+
+    DLog(@"actionReceived: %@", aNotif);
 }
 
-//- (void) actionReceived:(NSString*)aKey value:(NSString*)aValue
-//{
-//    DLog(@"actionReceived");
-//    
-//}
 
-- (void) emotionReceived:(NSString*)aEmotion number:(NSNumber*)aValue
-{}
+- (void) emotionReceived:(NSNotification*)aNotif
+{
+    DLog(@"emotionReceived: %@", aNotif);
+}
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -125,7 +137,6 @@
 - (void)dealloc
 {
     [_window release];
-    [_navigationController release];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [super dealloc];
 }

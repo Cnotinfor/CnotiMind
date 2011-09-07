@@ -17,7 +17,7 @@
 {
     if (self == [super init]) {
         _name = [[NSString alloc] initWithString:@""];
-        _value = [[NSNumber alloc] initWithInt:0];
+        _value = [[NSString alloc] initWithString:@""];
     }
     return self;
 }
@@ -26,7 +26,7 @@
 {
     if (self == [super init]) {
         _name = [[NSString alloc] initWithString:aName];
-        _value = [[NSNumber alloc] initWithInteger:[aValue intValue]];
+        _value = [[NSString alloc] initWithString:aValue];
     }
     return self;
 }
@@ -35,6 +35,8 @@
 {
     [_name release];
     [_value release];
+    
+    [super dealloc];
 }
 
 

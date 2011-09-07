@@ -18,25 +18,27 @@
 
 @interface EmotionNode : RuleNode {
     
+    NSString* _emotion;
+    NSString* _value;
     
-    NSNumber* _min;
-    NSNumber* _max;
+    double _min;
+    double _max;
     
-    NSNumber* _valueNumeric;
+    double _valueNumeric;
     BOOL _valueNumericOk;
 }
 
-- (id) initWithKeyAndValueAndAndBrainAndParent: (NSString*)aKey 
-                                                value:(NSString*)aValue 
-                                                brain:(Brain*)aBrain 
-                                                parent:(id)aParent;
+- (id) initWithEmotionAndValueAndAndBrainAndParent:(NSString*)aEmotion
+                                             value:(NSString*)aValue 
+                                             brain:(Brain*)aBrain 
+                                            parent:(id)aParent;
 
-- (id) initWithKeyAndValueAndAndBrainAndParent: (NSString*)aKey 
-                                         value:(NSString*)aValue 
-                                           max:(NSNumber*)aMax
-                                           min:(NSNumber*)aMin
-                                         brain:(Brain*)aBrain 
-                                        parent:(id)aParent;
+- (id) initWithEmotionAndValueAndMaxAndMinAndBrainAndParent:(NSString*)aEmotion 
+                                                      value:(NSString*)aValue 
+                                                        max:(double)aMax
+                                                        min:(double)aMin
+                                                      brain:(Brain*)aBrain 
+                                                     parent:(id)aParent;
 
 - (void) exec;
 - (void) exec:(NSMutableDictionary*)aVariables;

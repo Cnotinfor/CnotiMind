@@ -10,7 +10,7 @@
 
 #import "Node.h"
 
-@interface Action : Node {
+@interface Action : NSObject {
     
 }
 

@@ -68,8 +68,10 @@ enum DeletePosition
     
 }
 
-- (enum MemoryType) translateMemoryType:(NSString*)aText;
-- (enum ConditionOperator) translateConditionOperator:(NSString*)aText;
-- (enum DataMiningOperation) translateDataMiningOperator:(NSString*)aText;
++ (enum MemoryType) translateMemoryType:(NSString*)aText;
++ (enum ConditionOperator) translateConditionOperator:(NSString*)aText;
++ (enum DataMiningOperation) translateDataMiningOperator:(NSString*)aText;
++ (enum MathOperation) translateMathOperation:(NSString*)text;
++ (BOOL)isNumeric:(NSString*)s;
 
 @end

@@ -13,37 +13,40 @@
 
 @implementation EmotionNode
 
-
-
-- (id) initWithKeyAndValueAndAndBrainAndParent: (NSString*)aKey 
-                                         value:(NSString*)aValue 
-                                         brain:(Brain*)aBrain 
-                                        parent:(id)aParent
+- (id) initWithEmotionAndValueAndAndBrainAndParent:(NSString*)aEmotion 
+                                             value:(NSString*)aValue 
+                                             brain:(Brain*)aBrain 
+                                            parent:(id)aParent
 {
-    if ( self == [super initWithKeyAndValueAndBrainAndParent:aKey value:aValue brain:aBrain parent:aParent] ) {
+    if ( self == [super initWithBrainAndParent:aBrain parent:aParent] ) {
     
-        _min = [NSNumber numberWithInt:INT_MIN];
-        _max = [NSNumber numberWithInt:INT_MAX];
-        
-        _valueNumeric = [NSNumber numberWithFloat:[aValue floatValue]];
+        _emotion = (aEmotion == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aEmotion];
+        _value = (aValue == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aValue];
+        _min = INT_MIN;
+        _max = INT_MAX;
+        _valueNumericOk = TRUE;
+        _valueNumeric = [aValue floatValue];
     }
     
     return self;
 }
 
-- (id) initWithKeyAndValueAndAndBrainAndParent: (NSString*)aKey 
-                                         value:(NSString*)aValue 
-                                           max:(NSNumber*)aMax
-                                           min:(NSNumber*)aMin
-                                         brain:(Brain*)aBrain 
-                                        parent:(id)aParent
+- (id) initWithEmotionAndValueAndMaxAndMinAndBrainAndParent:(NSString*)aEmotion 
+                                                      value:(NSString*)aValue 
+                                                        max:(double)aMax
+                                                        min:(double)aMin
+                                                      brain:(Brain*)aBrain 
+                                                     parent:(id)aParent
 {
-    if ( self == [super initWithKeyAndValueAndBrainAndParent:aKey value:aValue brain:aBrain parent:aParent] ) {
-        
+    if ( self == [super initWithBrainAndParent:aBrain parent:aParent] ) {        
+
+        _emotion = (aEmotion == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aEmotion];
+        _value = (aValue == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aValue];
+                
         _min = aMin;
         _max = aMax;
-        
-        _valueNumeric = [NSNumber numberWithFloat:[aValue floatValue]];
+        _valueNumericOk = TRUE;        
+        _valueNumeric = [aValue floatValue];
     }
     
     return self;
@@ -58,8 +61,8 @@
         return; // it doesn't do nothing
     }
     
-
-    [_brain updateEmotionValue:_key variation:_valueNumeric max:_max min:_min];
+    // TODO
+    [_brain updateEmotionValue:_emotion variation:_valueNumeric max:_max min:_min];
 }
 
 
@@ -71,7 +74,7 @@
         
         // Test if the value from the variable is a valid number
         BOOL ok = ([[NSScanner scannerWithString:value] scanFloat:NULL]) ? TRUE : FALSE;
-        NSNumber* newValueInt = [NSNumber numberWithFloat:[value floatValue]];
+        double newValueInt = [value floatValue];
         
         
         if( !ok )
@@ -83,15 +86,22 @@
         _valueNumeric = newValueInt;
     }
     
-    [_brain updateEmotionValue:_key variation:_valueNumeric max:_max min:_min];
+    [_brain updateEmotionValue:_emotion variation:_valueNumeric max:_max min:_min];
 }
 
 - (NSString*) info:(int)aDepth
 {
     NSString* info = [NSString stringWithFormat:@""];
     NSString* space = [self space:aDepth];
+    info = [info stringByAppendingFormat:@"%@ Emotion (%@) increment=%@", space, _emotion, _value];
     
-    info = [info stringByAppendingFormat:@"%@ DataMining", space];
+    if (_min != INT_MIN) {
+        [info stringByAppendingFormat:@" min= %@", _min ];
+    }
+    if (_max != INT_MAX) {
+        [info stringByAppendingFormat:@" max= %@", _max ];
+    }
+    
     info = [info stringByAppendingFormat:@"%@", [super info:aDepth]];
     
     return info;
