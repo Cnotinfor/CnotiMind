@@ -22,7 +22,7 @@ namespace CnotiMind
 	{
 
 	public:
-		explicit RulesXmlHandler(Brain* brain, RuleNode* _rules = NULL);
+		explicit RulesXmlHandler(Brain* brain, RuleNode* rootNode = NULL);
 		~RulesXmlHandler();
 
 		bool startElement ( const QString & namespaceURI, const QString & localName, const QString & qName, const QXmlAttributes & atts );
@@ -33,22 +33,7 @@ namespace CnotiMind
 		int line() const;
 
 	protected:
-		bool createRootNode( const QXmlAttributes & atts );
-		bool createActionNode( const QXmlAttributes & atts );
-		bool createStorageNode( const QXmlAttributes & atts );
-		bool createEmotionNode( const QXmlAttributes & atts );
-		bool createDataMiningNode( const QXmlAttributes & atts );
-		bool createConditionNode( const QXmlAttributes & atts );
-		bool createConditionPerceptionNode( const QXmlAttributes & atts );
-		bool createConditionVariableNode( const QXmlAttributes & atts );
-		bool createConditionPropertyNode( const QXmlAttributes & atts );
-		bool createConditionEmotionNode( const QXmlAttributes & atts );
-		bool createConditionDataMiningNode( const QXmlAttributes & atts );
-		bool createMathOperationNode( const QXmlAttributes & atts );
-		bool createPropertyNode( const QXmlAttributes & atts );
-		bool createDeleteNode( const QXmlAttributes & atts );
-		bool createClearMemoryNode( const QXmlAttributes & atts );
-		bool createRandomNode( const QXmlAttributes & atts );
+
 
 	protected:
 		RuleNode* _rootNode;

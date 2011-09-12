@@ -122,4 +122,23 @@ namespace CnotiMind
 		return false;
 	}
 
+	ConditionPerceptionNode* ConditionPerceptionNode::fromXML(const QString &qName, const QXmlAttributes &atts, Brain *brain, QObject *parent)
+	{
+		if(qName.compare( "Condition", Qt::CaseInsensitive) == 0)
+		{
+			QString type = atts.value( "type" );
+			if( type.compare("Perception") == 0 )
+			{
+
+				QString perception = atts.value( "perception" );
+				QString value = atts.value( "value" );
+				ConditionOperator op = translateConditionOperator( atts.value( "operator" ) );
+
+				return new ConditionPerceptionNode( perception, value, op, brain, parent );
+			}
+		}
+
+		return NULL;
+	}
+
 }

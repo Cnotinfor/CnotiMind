@@ -67,4 +67,22 @@ namespace CnotiMind
 		return info;
 	}
 
+	ActionNode *ActionNode::fromXML(const QString &qName, const QXmlAttributes &atts, Brain *brain, QObject *parent)
+	{
+		if( qName.compare("Action", Qt::CaseInsensitive) == 0 )
+		{
+			QString key = atts.value( "name" );
+			QString value = atts.value( "value" );
+			QString probability = atts.value( "probability" );
+
+			if( probability.isEmpty() )
+			{
+				probability = "1";
+			}
+
+			return new ActionNode( key, value, probability, brain, parent );
+		}
+		return NULL;
+	}
+
 }

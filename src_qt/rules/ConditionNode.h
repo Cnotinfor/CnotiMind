@@ -24,6 +24,8 @@ namespace CnotiMind
 
 		QString info( int depth = 0 ) const;
 
+
+
 	protected:
 		QString _key;
 		QString _value;

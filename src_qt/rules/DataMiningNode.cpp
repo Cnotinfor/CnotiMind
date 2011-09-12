@@ -96,4 +96,16 @@ namespace CnotiMind
 		}
 	}
 
+	DataMiningNode *DataMiningNode::fromXML(const QString &qName, const QXmlAttributes &atts, Brain *brain, QObject *parent)
+	{
+		QString event = atts.value( "event" );
+		QString value = atts.value( "value" );
+		DataMiningOperation opDataMining = translateDataMiningOperator( atts.value( "operation" ) );
+		QString variable = atts.value( "variable" );
+		QString position = atts.value( "position" );
+		MemoryType memory = translateMemoryType( atts.value( "memory" ) );
+
+		return new DataMiningNode( event, value, opDataMining, memory,
+								   variable, position, brain, parent );
+	}
 }

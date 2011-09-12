@@ -26,6 +26,7 @@ namespace CnotiMind
 
 		QString info( int depth = 0 ) const;
 
+		static ConditionDataMiningNode *fromXML( const QString &qName, const QXmlAttributes &atts, Brain* brain, QObject* parent );
 
 	protected:
 		const DataMiningOperation _dataMiningOperation;

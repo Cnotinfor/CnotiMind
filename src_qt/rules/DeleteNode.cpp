@@ -48,4 +48,18 @@ namespace CnotiMind
 		return space(depth) + "Delete Node " + _key + ": " + _value + " (" + (_memory == LongTermMemory ? "LTM" : "WM" ) + ")";
 	}
 
+
+	DeleteNode *DeleteNode::fromXML( const QString &qName, const QXmlAttributes &atts, Brain* brain, QObject* parent )
+	{
+		if( qName.compare( "", Qt::CaseInsensitive ) == 0 )
+		{
+			QString name = atts.value( "name" );
+			QString value = atts.value( "value" );
+			DeletePosition position = translateDeletePosition( atts.value( "position" ) ) ;
+			MemoryType memory = translateMemoryType( atts.value( "memory" ) );
+
+			return new DeleteNode( name, value, position, memory, brain, parent );
+
+		}
+	}
 }

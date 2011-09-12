@@ -659,9 +659,39 @@
 	<!-- Test if the it is a good spot to finish the melody -->
 	<Condition type="Perception" perception="Finish Melody">
 		<Action name="Think" value="Melody finished" />
+		<Condition type="DataMining" operation="Exists" event="Note Option" value="Bad">
+			<Storage event="Melody Quality" value="Bad" />
+		</Condition>
+		<Condition type="DataMining" operation="Exists" event="Duration Option" value="Bad">
+			<Storage event="Melody Quality" value="Bad" />
+		</Condition>
+		<Condition type="DataMining" operation="Count" event="Note Option" value="Bad" compareValue="0">
+			<Condition type="DataMining" operation="Count" event="Duration Option" value="Bad" compareValue="0">
+				<Storage event="Melody Quality" value="Good" />
+			</Condition> 
+		</Condition>
 		
-		<!-- <StorageCopy from="WM" to="LTM" /> -->
+		<!-- Saves all events on the Working memory to the Long Term Memory -->
+		<StorageCopy from="WM" to="LTM" />
+		<!-- Clear all from Working Memory, since it is already saved on the Long Term Memory -->
 		<ClearMemory memory="WM" />
 	</Condition>
+	
+	<!-- When a music is saved -->
+	<Condition type="Perception" perception="Saving Melody">
+		
+	</Condition>
+	
+	
+	<!-- When a music is loaded -->
+	<Condition type="Perception" perception="Loading Melody">
+		<Property name="Loading" value="True" />
+	</Condition>
+	
+	<!-- When a music finish loaded -->
+	<Condition type="Perception" perception="Melody Loaded">
+		<Property name="Loading" value="False" />
+	</Condition>
+	
 	
 </Rules>

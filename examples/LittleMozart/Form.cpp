@@ -72,7 +72,7 @@ Form::Form(QWidget *parent) :
 
 	_brain->start();
 
-	_brain->showGUI();
+	//_brain->showGUI();
 }
 
 Form::~Form()

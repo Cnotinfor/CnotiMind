@@ -56,7 +56,6 @@ namespace CnotiMind
 
 
 
-		bool validateXML(int xml);
 		bool saveMemory(const QString& filename);
 		bool loadMemory(const QString& filename);
 		bool saveEmotionalState(const QString& filename);

@@ -19,6 +19,8 @@ namespace CnotiMind
 
 		QString info( int depth = 0 ) const;
 
+		static DeleteNode *fromXML( const QString &qName, const QXmlAttributes &atts, Brain* brain, QObject* parent );
+
 	private:
 		QString _key;
 		QString _value;

@@ -86,4 +86,20 @@ namespace CnotiMind
 		return false;
 	}
 
+	ConditionEmotionNode* ConditionEmotionNode::fromXML(const QString &qName, const QXmlAttributes &atts, Brain *brain, QObject *parent)
+	{
+		if(qName.compare( "Condition", Qt::CaseInsensitive) == 0)
+		{
+			QString type = atts.value( "type" );
+			if( type.compare("Emotion") == 0 )
+			{
+				QString emotion = atts.value( "emotion" );
+				QString value = atts.value( "value" );
+				ConditionOperator op = translateConditionOperator( atts.value( "operator" ) );
+
+				return new ConditionEmotionNode( emotion, value, op, brain, parent );
+			}
+		}
+		return NULL;
+	}
 }

@@ -42,4 +42,15 @@ namespace CnotiMind
 	{
 		return "Root" + RuleNode::info( depth );
 	}
+
+	RootNode *RootNode::fromXML( const QString &qName, const QXmlAttributes &atts, Brain* brain, QObject *parent)
+	{
+		Q_UNUSED(atts);
+
+		if( qName.compare( "Rules", Qt::CaseInsensitive ) == 0 )
+		{
+			return new RootNode(brain, parent);
+		}
+		return NULL;
+	}
 }

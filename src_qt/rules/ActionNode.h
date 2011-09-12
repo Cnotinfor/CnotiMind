@@ -20,6 +20,8 @@ namespace CnotiMind
 
 		QString info( int depth ) const;
 
+		static ActionNode *fromXML( const QString &qName, const QXmlAttributes &atts, Brain* brain, QObject* parent );
+
 	protected:
 		QString _name;
 		QString _value;

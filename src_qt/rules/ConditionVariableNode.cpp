@@ -116,4 +116,21 @@ namespace CnotiMind
 		return false;
 	}
 
+	ConditionVariableNode* ConditionVariableNode::fromXML(const QString &qName, const QXmlAttributes &atts, Brain *brain, QObject *parent)
+	{
+		if(qName.compare( "Condition", Qt::CaseInsensitive) == 0)
+		{
+			QString type = atts.value( "type" );
+			if( type.compare("Variable") == 0 )
+			{
+				QString key = atts.value( "variable" );
+				QString value = atts.value( "compareValue" );
+				ConditionOperator op = translateConditionOperator( atts.value( "operator" ) );
+
+				return new ConditionVariableNode( key, value, op, brain, parent );
+
+			}
+		}
+	}
+
 }

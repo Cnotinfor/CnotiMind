@@ -70,5 +70,22 @@ namespace CnotiMind
 		return info + RuleNode::info(depth);
 	}
 
+	ConditionPropertyNode* ConditionPropertyNode::fromXML(const QString &qName, const QXmlAttributes &atts, Brain *brain, QObject *parent)
+	{
+		if(qName.compare( "Condition", Qt::CaseInsensitive) == 0)
+		{
+			QString type = atts.value( "type" );
+			if( type.compare("Property") == 0 )
+			{
+				QString property = atts.value( "property" );
+				QString value = atts.value( "compareValue" );
+				ConditionOperator op = translateConditionOperator( atts.value( "operator" ) );
+
+				return new ConditionPropertyNode( property, value, op, brain, parent );
+
+			}
+		}
+	}
+
 
 }

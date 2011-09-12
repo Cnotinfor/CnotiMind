@@ -135,13 +135,6 @@ namespace CnotiMind
 		return false;
 	}
 
-	/**
-
-	*/
-	bool Brain::validateXML(int xml)
-	{
-		return true;
-	}
 
 	bool Brain::saveMemory(const QString& filename)
 	{
@@ -537,14 +530,11 @@ namespace CnotiMind
 
 
 	/*
-		Return a QString with the datamining result operation. In case there are no events, or
-		the data doesn't allow the operation it return an empty QString.
+		Return a QVariant with the datamining result operation. In case there are no events, or
+		the data doesn't allow the operation it return an non valid QVariant.
 
-		All numeric operations are converted to QString
+		All numeric operations are converted to QString.
 	*/
-
-	;
-
 	QVariant Brain::dataMining( DataMiningOperation operation, const QString& event, int position, MemoryType memoryType, bool* valid )
 	{
 		// test if parameters are valid for datamining
@@ -586,6 +576,12 @@ namespace CnotiMind
 		return "";
 	}
 
+	/*
+		Return a QVariant with the datamining result operation. In case there are no events, or
+		the data doesn't allow the operation it return an non valid QVariant.
+
+		All numeric operations are converted to QString.
+	*/
 	QVariant Brain::dataMining( DataMiningOperation operation, const QString& event, const QString& value, int position, MemoryType memoryType, bool* valid )
 	{
 		// test if parameters are valid for datamining
@@ -618,6 +614,12 @@ namespace CnotiMind
 		return "";
 	}
 
+	/*
+		Return a QVariant with the datamining result operation. In case there are no events, or
+		the data doesn't allow the operation it return an non valid QVariant.
+
+		All numeric operations are converted to QString.
+	*/
 	QVariant Brain::dataMining( DataMiningOperation operation, const QString& event, qreal value, int position, MemoryType memoryType, bool* valid )
 	{
 		// test if parameters are valid for datamining
@@ -643,7 +645,7 @@ namespace CnotiMind
 
 
 	/*
-		Datamining Max only works if the values are numbers.
+		Datamining Max only works if the values of the events are numbers.
 
 		If any value of the event is not a number, it will set valid to false.
 		If the memory is empty it will set valid to false.
@@ -689,6 +691,15 @@ namespace CnotiMind
 		return max;
 	}
 
+	/*
+		Datamining Min only works if the values of the events are numbers.
+
+		If any value of the event is not a number, it will set valid to false.
+		If the memory is empty it will set valid to false.
+		If no event is found it also set valid to false.
+
+		Valid becomes true, if it founds one element.
+	*/
 	qreal Brain::dataMiningMin( const QString& event, const QList<MemoryEvent>& memory, bool* valid )
 	{
 		// by defaulf the data mining is not valid

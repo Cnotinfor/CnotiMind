@@ -16,36 +16,13 @@ namespace CnotiMind
 
 	}
 
-	StorageNode::StorageNode( bool clear, MemoryType memory, Brain* brain, QObject* parent ):
-		RuleNode( brain, parent ),
-		_memory( memory ),
-		_clearStorage( clear ),
-		_event( "" ),
-		_value( "" )
-	{
-
-	}
 
 	/*
 		Creates a memory Event and store it in the brain memory
 	*/
 	void StorageNode::exec()
 	{
-		// Test if the node is for clearing the memory
-		if( _clearStorage )
-		{
-			if( _memory == CnotiMind::WorkingMemory )
-			{
-				_brain->clearWorkingMemory();
-			}
-			else
-			{
-				_brain->clearMemory();
-			}
-			return;
-		}
-
-		// If it is not for clearing, check if the value and event are valid
+		// Check if the value and event are valid
 		if( _event.isEmpty() || _value.isEmpty() )
 		{
 			return;
@@ -80,5 +57,22 @@ namespace CnotiMind
 		info += space(depth) + "Storage event=" + _event + " value=" + _value;
 
 		return info;
+	}
+
+	/*!
+		Converts XML attributes to a StorageNode
+	*/
+	StorageNode *StorageNode::fromXML( const QString &qName, const QXmlAttributes &atts, Brain* brain, QObject* parent )
+	{
+		if( qName.compare( "Storage", Qt::CaseInsensitive ) == 0 )
+		{
+			QString event = atts.value( "event" );
+			QString value = atts.value( "value" );
+			MemoryType memory = translateMemoryType( atts.value( "memory" ) );
+
+			return new StorageNode( event, value, memory, brain, parent );
+
+		}
+		return NULL;
 	}
 }

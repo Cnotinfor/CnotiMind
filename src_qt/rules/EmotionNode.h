@@ -22,6 +22,8 @@ namespace CnotiMind
 
 		QString info( int depth = 0 ) const;
 
+		static EmotionNode *fromXML( const QString &qName, const QXmlAttributes &atts, Brain* brain, QObject* parent );
+
 	protected:
 		QString _emotion;
 		QString _value;

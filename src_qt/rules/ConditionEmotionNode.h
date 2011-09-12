@@ -22,6 +22,8 @@ namespace CnotiMind
 
 		QString info( int depth = 0 ) const;
 
+		static ConditionEmotionNode *fromXML( const QString &qName, const QXmlAttributes &atts, Brain* brain, QObject* parent );
+
 	protected:
 		bool isTrue();
 		bool testEmotion( const Emotion& e ) const;

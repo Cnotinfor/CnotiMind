@@ -105,12 +105,34 @@ namespace CnotiMind
 
 			switch( _operator )
 			{
-				case ConditionOperatorEqual: return QString::compare( _result, _compareValue, Qt::CaseInsensitive ) == 0;
-				case ConditionOperatorDifferent: return QString::compare( _result, _compareValue, Qt::CaseInsensitive ) != 0;
+				case ConditionOperatorEqual: return _result.compare( _compareValue, Qt::CaseInsensitive ) == 0;
+				case ConditionOperatorDifferent: return _result.compare( _compareValue, Qt::CaseInsensitive ) != 0;
 			}
 
 			return false;
 		}
 	}
 
+	ConditionDataMiningNode *ConditionDataMiningNode::fromXML(const QString &qName,
+															  const QXmlAttributes &atts,
+															  Brain *brain, QObject *parent)
+	{
+		if(qName.compare( "Condition", Qt::CaseInsensitive) == 0)
+		{
+			QString type = atts.value( "type" );
+			if( type.compare("DataMininig") == 0 )
+			{
+				QString key = atts.value( "event" );
+				QString value = atts.value( "value" );
+				ConditionOperator op = translateConditionOperator( atts.value( "operator" ) );
+				DataMiningOperation opDataMining = translateDataMiningOperator( atts.value( "operation" ) );
+				QString variable = atts.value( "variable" );
+				QString compareValue = atts.value( "compareValue" );
+				MemoryType memory = translateMemoryType( atts.value( "memory" ) );
+
+				return new ConditionDataMiningNode( key, value, op, opDataMining, memory, variable,
+													compareValue, brain, parent );
+			}
+		}
+	}
 }
