@@ -1,6 +1,8 @@
 #include <QDebug>
 #include <QSignalMapper>
 #include <QScrollBar>
+#include <QFileDialog>
+#include <QMessageBox>
 
 #include "Form.h"
 #include "ui_Form.h"
@@ -124,6 +126,30 @@ void Form::on_pushButtonPrint_clicked()
 	_brain->printMemory(CnotiMind::WorkingMemory);
 	_brain->printProperties();
 }
+
+void Form::on_pushButtonSave_clicked()
+{
+	QString filename = QFileDialog::getSaveFileName( this, tr("Memory XML File"), "", tr("Memory XML files") + " (*.xml)");
+
+	if(!_brain->saveMemory(filename))
+	{
+		QMessageBox::critical( this, tr("Error"), tr("It was not possible to save the Memory XML file."));
+	}
+}
+
+/*!
+	Loads the memory from a file
+*/
+void Form::on_pushButtonLoad_clicked()
+{
+	QString filename = QFileDialog::getOpenFileName( this, tr("Memory XML File"), "", tr("Memory XML files") + " (*.xml)");
+
+	if(!_brain->loadMemory(filename))
+	{
+		QMessageBox::critical( this, tr("Error"), tr("It was not possible to load the Memory XML file."));
+	}
+}
+
 
 void Form::on_pushButtonCancelDuration_clicked()
 {
