@@ -4,7 +4,7 @@
 namespace CnotiMind
 {
 
-	DeleteNode::DeleteNode(const QString& key, const QString& value, DeletePosition position,
+	DeleteNode::DeleteNode(const QString& key, const QString& value, EventPosition position,
 						   MemoryType memory, Brain* brain, QObject* parent ) :
 		RuleNode(brain, parent),
 		_key( key ),
@@ -55,7 +55,7 @@ namespace CnotiMind
 		{
 			QString name = atts.value( "name" );
 			QString value = atts.value( "value" );
-			DeletePosition position = translateDeletePosition( atts.value( "position" ) ) ;
+			EventPosition position = translateEventPosition( atts.value( "position" ) ) ;
 			MemoryType memory = translateMemoryType( atts.value( "memory" ) );
 
 			return new DeleteNode( name, value, position, memory, brain, parent );

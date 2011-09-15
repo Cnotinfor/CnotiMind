@@ -1,6 +1,7 @@
 #include <QtCore/QString>
 #include <QtCore/QObject>
 #include <QtCore/QListIterator>
+#include <QDebug>
 
 #include "ConditionPerceptionNode.h"
 #include "../Brain.h"
@@ -124,15 +125,20 @@ namespace CnotiMind
 
 	ConditionPerceptionNode* ConditionPerceptionNode::fromXML(const QString &qName, const QXmlAttributes &atts, Brain *brain, QObject *parent)
 	{
+		qDebug() << "[ConditionPerceptionNode::fromXML]" << qName;
+
 		if(qName.compare( "Condition", Qt::CaseInsensitive) == 0)
 		{
+			qDebug() << "[ConditionPerceptionNode::fromXML]" << "building";
 			QString type = atts.value( "type" );
-			if( type.compare("Perception") == 0 )
+			if( type.compare("Perception", Qt::CaseInsensitive) == 0 )
 			{
+				qDebug() << "[ConditionPerceptionNode::fromXML]" << "building";
 
 				QString perception = atts.value( "perception" );
 				QString value = atts.value( "value" );
 				ConditionOperator op = translateConditionOperator( atts.value( "operator" ) );
+
 
 				return new ConditionPerceptionNode( perception, value, op, brain, parent );
 			}

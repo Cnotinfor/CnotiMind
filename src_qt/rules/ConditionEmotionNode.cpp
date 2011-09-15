@@ -1,5 +1,6 @@
 #include <QtCore/QString>
 #include <QtCore/QListIterator>
+#include <QDebug>
 
 #include "ConditionEmotionNode.h"
 #include "../Brain.h"
@@ -88,10 +89,12 @@ namespace CnotiMind
 
 	ConditionEmotionNode* ConditionEmotionNode::fromXML(const QString &qName, const QXmlAttributes &atts, Brain *brain, QObject *parent)
 	{
+		qDebug() << "[ConditionEmotionNode::fromXML]" << qName;
+
 		if(qName.compare( "Condition", Qt::CaseInsensitive) == 0)
 		{
 			QString type = atts.value( "type" );
-			if( type.compare("Emotion") == 0 )
+			if( type.compare("Emotion", Qt::CaseInsensitive) == 0 )
 			{
 				QString emotion = atts.value( "emotion" );
 				QString value = atts.value( "value" );

@@ -1,4 +1,5 @@
 #include <QtCore/QString>
+#include <QDebug>
 
 #include "ConditionDataMiningNode.h"
 #include "../Brain.h"
@@ -117,10 +118,12 @@ namespace CnotiMind
 															  const QXmlAttributes &atts,
 															  Brain *brain, QObject *parent)
 	{
+		qDebug() << "[ConditionDataMiningNode::fromXML]" << qName;
+
 		if(qName.compare( "Condition", Qt::CaseInsensitive) == 0)
 		{
 			QString type = atts.value( "type" );
-			if( type.compare("DataMininig") == 0 )
+			if( type.compare("DataMininig", Qt::CaseInsensitive) == 0 )
 			{
 				QString key = atts.value( "event" );
 				QString value = atts.value( "value" );
@@ -134,5 +137,6 @@ namespace CnotiMind
 													compareValue, brain, parent );
 			}
 		}
+		return NULL;
 	}
 }

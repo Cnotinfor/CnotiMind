@@ -152,24 +152,24 @@ namespace CnotiMind
 	/*
 		Convert text string to a DeleteItem
 	*/
-	DeletePosition translateDeletePosition( const QString &text )
+	EventPosition translateEventPosition( const QString &text )
 	{
 		if( QString::compare( text, "last", Qt::CaseInsensitive  ) == 0 )
 		{
-			return DeleteLast;
+			return PositionLast;
 		}
 		if( QString::compare( text, "first", Qt::CaseInsensitive  ) == 0 )
 		{
-			return DeleteFirst;
+			return PositionFirst;
 		}
 		if( QString::compare( text, "item", Qt::CaseInsensitive  ) == 0 )
 		{
-			return DeleteItem;
+			return PositionItem;
 		}
 		if( QString::compare( text, "all", Qt::CaseInsensitive  ) == 0 )
 		{
-			return DeleteAll;
+			return PositionAll;
 		}
-
+		return PositionNone;
 	}
 }

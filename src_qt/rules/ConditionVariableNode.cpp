@@ -121,7 +121,7 @@ namespace CnotiMind
 		if(qName.compare( "Condition", Qt::CaseInsensitive) == 0)
 		{
 			QString type = atts.value( "type" );
-			if( type.compare("Variable") == 0 )
+			if( type.compare("Variable", Qt::CaseInsensitive ) == 0 )
 			{
 				QString key = atts.value( "variable" );
 				QString value = atts.value( "compareValue" );

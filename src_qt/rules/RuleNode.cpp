@@ -1,6 +1,7 @@
 #include <QtCore/QString>
 #include <QtCore/QListIterator>
 #include <QRegExp>
+#include <QDebug>
 
 #include "RuleNode.h"
 #include "../Brain.h"
@@ -12,6 +13,7 @@ namespace CnotiMind
 		QObject( parent ),
 		_brain( brain )
 	{
+		qDebug() << "RuleNode";
 	}
 
 

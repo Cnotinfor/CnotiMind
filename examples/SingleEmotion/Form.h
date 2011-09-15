@@ -3,7 +3,6 @@
 
 #include <QWidget>
 
-#include <Action>
 #include <Emotion>
 
 namespace CnotiMind

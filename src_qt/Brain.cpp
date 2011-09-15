@@ -3,6 +3,7 @@
 #include <QtCore/QMutableListIterator>
 #include <QtCore/QListIterator>
 #include <QDateTime>
+#include <QList>
 
 #include "Brain.h"
 #include "CnotiMind.h"
@@ -10,6 +11,7 @@
 #include "rules/RuleNode.h"
 #include "rules/RulesXmlHandler.h"
 #include "gui/BrainGUI.h"
+#include "MemoryXmlHandler.h"
 
 namespace CnotiMind
 {
@@ -112,7 +114,7 @@ namespace CnotiMind
 	{
 		QFile f( filename );
 
-		RulesXmlHandler *handler = new RulesXmlHandler( this, _rules );
+		RulesXmlHandler handler( this, _rules );
 		QXmlInputSource source( &f );
 		if( source.data() == "" )
 		{
@@ -121,16 +123,16 @@ namespace CnotiMind
 		}
 
 		QXmlSimpleReader reader;
-		reader.setContentHandler( handler );
+		reader.setContentHandler( &handler );
 
 		// Retrives data from file
 		if( reader.parse( source ) )
 		{
-			_rules = handler->rootNode();
+			_rules = handler.rootNode();
 			return true;
 		}
 
-		qDebug() << "[Brain::loadXmlRules] Error in XML, line" << handler->line();
+		qDebug() << "[Brain::loadXmlRules] Error in XML, line" << handler.line();
 
 		return false;
 	}
@@ -171,10 +173,21 @@ namespace CnotiMind
 	{
 		QFile f(filename);
 
-		if( f.open( QIODevice::ReadOnly | QIODevice::Text ) )
-		{
+		QXmlInputSource source( &f );
+		MemoryXmlHandler handler(this);
 
-			f.close();
+		if( source.data() == "" )
+		{
+			qWarning() << "[Brain::loadMemory] File not found" << filename;
+			return false;
+		}
+
+		QXmlSimpleReader reader;
+		reader.setContentHandler( &handler );
+
+		// Retrives data from file
+		if( reader.parse( source ) )
+		{
 			return true;
 		}
 
@@ -470,7 +483,7 @@ namespace CnotiMind
 	/*
 		Delete an event from the memory
 	*/
-	void Brain::deleteEvent( const QString& key, DeletePosition position, MemoryType memory )
+	void Brain::deleteEvent( const QString& key, EventPosition position, MemoryType memory )
 	{
 		QList<MemoryEvent>* mem = ( memory == LongTermMemory ? &_longTermMemory : &_workingMemory );
 
@@ -478,7 +491,7 @@ namespace CnotiMind
 
 		switch(position)
 		{
-			case DeleteLast:
+			case PositionLast:
 				it.toBack();
 				while(it.hasPrevious())
 				{
@@ -489,7 +502,7 @@ namespace CnotiMind
 					}
 				}
 				break;
-			case DeleteFirst:
+			case PositionFirst:
 				while(it.hasNext())
 				{
 					if( it.next() == key )
@@ -499,7 +512,7 @@ namespace CnotiMind
 					}
 				}
 				break;
-			case DeleteAll:
+			case PositionAll:
 				while(it.hasNext())
 				{
 					if( it.next() == key )
@@ -523,11 +536,122 @@ namespace CnotiMind
 		}
 	}
 
-	void Brain::deleteEvent( const QString& key, const QString& value, DeletePosition position, MemoryType memory )
+	void Brain::deleteEvent( const QString& key, const QString& value, EventPosition position, MemoryType memory )
 	{
 
 	}
 
+	/*!
+		Copies the Events from a memory to another. The
+	*/
+	void Brain::copyEvents( MemoryType fromMemory, MemoryType toMemory, const QString afterEvent,
+							EventPosition afterPosition, const QString &beforeEvent,
+							EventPosition beforePosition)
+	{
+		QList<MemoryEvent> tmp;
+		QList<MemoryEvent> &listFrom = (fromMemory == LongTermMemory ? _longTermMemory : _workingMemory);
+		QList<MemoryEvent> &listTo = (toMemory == LongTermMemory ? _longTermMemory : _workingMemory);
+
+		int iAfter = findMemoryEvent( afterPosition, afterEvent, listFrom );
+		int iBefore = findMemoryEvent( beforePosition, beforeEvent, listFrom );
+
+		if(iBefore == -1 || iAfter == -1)
+		{
+			// It doesn't make the copy of between memories
+			return;
+		}
+		if(iAfter > iBefore )
+		{
+			// If the events don'r provide a valid rage of elements to be copied
+			return;
+		}
+
+		// Copy the elements to the other memory storage
+		QDateTime date = QDateTime::currentDateTime();
+		for(int i = iAfter; i <= iBefore; i++)
+		{
+			listTo.append( listFrom.at(i) );
+		}
+	}
+
+
+	/*!
+		Search for a memory Event named eventName in the memory
+	*/
+	int Brain::findMemoryEvent( EventPosition position, const QString& eventName, const QList<MemoryEvent>& memory )
+	{
+		if( position == PositionLast )
+		{
+			for(int pos = memory.size() - 1; pos >= 0; pos--)
+			{
+				if(memory.at(pos) == eventName)
+				{
+					// Found MemoryEvent
+					return pos;
+				}
+			}
+		}
+		else if( position == PositionFirst )
+		{
+			for(int pos = 0; pos < memory.size(); pos++)
+			{
+				if(memory.at(pos) == eventName)
+				{
+					// Found MemoryEvent
+					return pos;
+				}
+			}
+		}
+		// not found
+		return -1;
+	}
+
+	int Brain::findMemoryEvent( EventPosition position, int itemPosition, const QString& eventName, const QList<MemoryEvent>& memory )
+	{
+		if( position == PositionLast || position == PositionFirst )
+		{
+			return findMemoryEvent(position, eventName, memory);
+		}
+		else if( position == PositionItem )
+		{
+			int n = 0; // Count the number of events found
+
+			if( itemPosition > 0 )
+			{
+				for(int pos = 0; pos < memory.size(); pos++)
+				{
+					if(memory.at(pos) == eventName)
+					{
+						// Found MemoryEvent
+						n++;
+						// Test if it is itemPosition evenName found
+						if(n == itemPosition)
+						{
+							return pos;
+						}
+					}
+				}
+			}
+			else if( itemPosition < 0 )
+			{
+				for(int pos = memory.size() - 1; pos <= 0 ; pos--)
+				{
+					if(memory.at(pos) == eventName)
+					{
+						// Found MemoryEvent
+						n--;
+						// Test if it is itemPosition evenName found
+						if(n == itemPosition)
+						{
+							return pos;
+						}
+					}
+				}
+			}
+		}
+		// not found
+		return -1;
+	}
 
 	/*
 		Return a QVariant with the datamining result operation. In case there are no events, or

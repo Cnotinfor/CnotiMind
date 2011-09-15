@@ -11,7 +11,7 @@ namespace CnotiMind
 	{
 		Q_OBJECT
 	public:
-		explicit DeleteNode( const QString& key, const QString& value, DeletePosition position,
+		explicit DeleteNode( const QString& key, const QString& value, EventPosition position,
 							 MemoryType memory, Brain* brain, QObject* parent );
 
 		void exec();
@@ -24,7 +24,7 @@ namespace CnotiMind
 	private:
 		QString _key;
 		QString _value;
-		DeletePosition _position;
+		EventPosition _position;
 		MemoryType _memory;
 
 	};

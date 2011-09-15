@@ -20,7 +20,7 @@
 #include "RandomNode.h"
 #include "../Brain.h"
 
-#define DO_NOTHING
+#define DO_NOTHING qDebug() << "Nothing"
 
 namespace CnotiMind
 {
@@ -50,6 +50,8 @@ namespace CnotiMind
 		_line++;
 		RuleNode *node;
 
+		qDebug()<< "[RulesXmlHandler::startElement]" << qName;
+
 		// RootNode is child from parentNode, to ensure that if the getRootNode is not called
 		// All the nodes created by XML are released.
 		node = RootNode::fromXML(qName, atts, _brain, _parentObject);
@@ -60,21 +62,22 @@ namespace CnotiMind
 		}
 		else if( _parentNode != NULL && _currentNode != NULL)
 		{
-			if( node = ActionNode::fromXML(qName, atts, _brain, _parentNode) ) DO_NOTHING;
-			else if( node = ClearMemoryNode::fromXML(qName, atts, _brain, _parentNode) ) DO_NOTHING;
-			else if( node = ConditionDataMiningNode::fromXML(qName, atts, _brain, _parentNode) ) DO_NOTHING;
-			else if( node = ConditionEmotionNode::fromXML(qName, atts, _brain, _parentNode) ) DO_NOTHING;
-			else if( node = ConditionPerceptionNode::fromXML(qName, atts, _brain, _parentNode) ) DO_NOTHING;
-			else if( node = ConditionPropertyNode::fromXML(qName, atts, _brain, _parentNode) ) DO_NOTHING;
-			else if( node = ConditionVariableNode::fromXML(qName, atts, _brain, _parentNode) ) DO_NOTHING;
-			else if( node = DataMiningNode::fromXML(qName, atts, _brain, _parentNode) ) DO_NOTHING;
-			else if( node = DeleteNode::fromXML(qName, atts, _brain, _parentNode) ) DO_NOTHING;
-			else if( node = EmotionNode::fromXML(qName, atts, _brain, _parentNode) ) DO_NOTHING;
-			else if( node = MathOperationNode::fromXML(qName, atts, _brain, _parentNode) ) DO_NOTHING;
-			else if( node = PropertyNode::fromXML(qName, atts, _brain, _parentNode) ) DO_NOTHING;
-			else if( node = RandomNode::fromXML(qName, atts, _brain, _parentNode) ) DO_NOTHING;
-			else if( node = StorageNode::fromXML(qName, atts, _brain, _parentNode) ) DO_NOTHING;
+			if( node = ActionNode::fromXML(qName, atts, _brain, _currentNode) ) DO_NOTHING;
+			else if( node = ClearMemoryNode::fromXML(qName, atts, _brain, _currentNode) ) DO_NOTHING;
+			else if( node = ConditionDataMiningNode::fromXML(qName, atts, _brain, _currentNode) ) DO_NOTHING;
+			else if( node = ConditionEmotionNode::fromXML(qName, atts, _brain, _currentNode) ) DO_NOTHING;
+			else if( node = ConditionPerceptionNode::fromXML(qName, atts, _brain, _currentNode) ) DO_NOTHING;
+			else if( node = ConditionPropertyNode::fromXML(qName, atts, _brain, _currentNode) ) DO_NOTHING;
+			else if( node = ConditionVariableNode::fromXML(qName, atts, _brain, _currentNode) ) DO_NOTHING;
+			else if( node = DataMiningNode::fromXML(qName, atts, _brain, _currentNode) ) DO_NOTHING;
+			else if( node = DeleteNode::fromXML(qName, atts, _brain, _currentNode) ) DO_NOTHING;
+			else if( node = EmotionNode::fromXML(qName, atts, _brain, _currentNode) ) DO_NOTHING;
+			else if( node = MathOperationNode::fromXML(qName, atts, _brain, _currentNode) ) DO_NOTHING;
+			else if( node = PropertyNode::fromXML(qName, atts, _brain, _currentNode) ) DO_NOTHING;
+			else if( node = RandomNode::fromXML(qName, atts, _brain, _currentNode) ) DO_NOTHING;
+			else if( node = StorageNode::fromXML(qName, atts, _brain, _currentNode) ) DO_NOTHING;
 
+			qDebug()<< "[RulesXmlHandler::startElement]" << "done";
 			// If a node was created then update some variables
 			if( node != NULL )
 			{
@@ -96,6 +99,8 @@ namespace CnotiMind
 		Q_UNUSED( namespaceURI );
 		Q_UNUSED( localName );
 		Q_UNUSED( qName );
+
+		qDebug()<< "[RulesXmlHandler::endElement]" << qName;
 
 		if( _rootNode == _currentNode )
 		{
