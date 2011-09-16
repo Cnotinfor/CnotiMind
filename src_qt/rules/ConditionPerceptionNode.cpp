@@ -125,15 +125,11 @@ namespace CnotiMind
 
 	ConditionPerceptionNode* ConditionPerceptionNode::fromXML(const QString &qName, const QXmlAttributes &atts, Brain *brain, QObject *parent)
 	{
-		qDebug() << "[ConditionPerceptionNode::fromXML]" << qName;
-
 		if(qName.compare( "Condition", Qt::CaseInsensitive) == 0)
 		{
-			qDebug() << "[ConditionPerceptionNode::fromXML]" << "building";
 			QString type = atts.value( "type" );
 			if( type.compare("Perception", Qt::CaseInsensitive) == 0 )
 			{
-				qDebug() << "[ConditionPerceptionNode::fromXML]" << "building";
 
 				QString perception = atts.value( "perception" );
 				QString value = atts.value( "value" );

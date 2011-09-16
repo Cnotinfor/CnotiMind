@@ -2,7 +2,9 @@
 #define _ACTIONNODE_H
 
 #include <QtCore/QString>
+
 #include "RuleNode.h"
+#include "../CnotiMind.h"
 
 namespace CnotiMind
 {

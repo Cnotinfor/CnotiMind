@@ -42,8 +42,6 @@ namespace CnotiMind
 	ClearMemoryNode *ClearMemoryNode::fromXML(const QString &qName, const QXmlAttributes &atts,
 											  Brain *brain, QObject *parent)
 	{
-		qDebug() << "[ClearMemoryNode::fromXML]" << qName;
-
 		if( qName.compare( "ClearMemory", Qt::CaseInsensitive ) == 0 )
 		{
 			MemoryType memory = translateMemoryType( atts.value( "memory" ) );

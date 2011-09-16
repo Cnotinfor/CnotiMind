@@ -1,20 +1,23 @@
+#include <QDebug>
+
 #include "DataMiningNode.h"
 #include "../Brain.h"
+
 
 namespace CnotiMind
 {
 
-	DataMiningNode::DataMiningNode( const QString& event, const QString& value, DataMiningOperation dataMiningOperation,
+	DataMiningNode::DataMiningNode( const QString& event, const QString& value,
 								   MemoryType memory, const QString& variable, const QString& position, Brain* brain, QObject* parent ) :
-		RuleNode( brain, parent ),
-		_event( event ),
-		_value( value ),
-		_operation( dataMiningOperation ),
-		_memory( memory ),
-		_variable( variable ),
-		_valueNumeric( value.toDouble( &_isValueNumeric ) ),
-		_position( position ),
-		_positionNumeric( position.toInt( &_isPositionNumeric ) )
+		RuleNode( brain, parent )//,
+//		_event( event ),
+//		_value( value ),
+//		_operation( dataMiningOperation ),
+//		_memory( memory ),
+//		_variable( variable ),
+//		_valueNumeric( value.toDouble( &_isValueNumeric ) ),
+//		_position( position ),
+//		_positionNumeric( position.toInt( &_isPositionNumeric ) )
 	{
 
 	}
@@ -98,17 +101,26 @@ namespace CnotiMind
 
 	DataMiningNode *DataMiningNode::fromXML(const QString &qName, const QXmlAttributes &atts, Brain *brain, QObject *parent)
 	{
+		qDebug() << "Inside";
 		if( qName.compare( "Datamining", Qt::CaseInsensitive ) == 0 )
 		{
+			qDebug() << "Inside";
+
 			QString event = atts.value( "event" );
 			QString value = atts.value( "value" );
+			qDebug() << "Inside";
 			DataMiningOperation opDataMining = translateDataMiningOperator( atts.value( "operation" ) );
+			qDebug() << "Inside";
 			QString variable = atts.value( "variable" );
 			QString position = atts.value( "position" );
 			MemoryType memory = translateMemoryType( atts.value( "memory" ) );
 
-			return new DataMiningNode( event, value, opDataMining, memory,
-								   variable, position, brain, parent );
+
+
+			DataMiningNode* n = new DataMiningNode( event, value, memory,
+													variable, position, brain, parent );
+			qDebug() << "Data: " << n;
+			return n;
 		}
 		return NULL;
 	}

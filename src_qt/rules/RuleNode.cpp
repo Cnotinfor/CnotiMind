@@ -13,7 +13,7 @@ namespace CnotiMind
 		QObject( parent ),
 		_brain( brain )
 	{
-		qDebug() << "RuleNode";
+		qDebug() << "Rule Node";
 	}
 
 

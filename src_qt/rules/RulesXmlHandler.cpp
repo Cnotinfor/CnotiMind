@@ -20,7 +20,7 @@
 #include "RandomNode.h"
 #include "../Brain.h"
 
-#define DO_NOTHING qDebug() << "Nothing"
+#define DO_NOTHING qDebug() << "Node built" << qName
 
 namespace CnotiMind
 {
@@ -48,7 +48,7 @@ namespace CnotiMind
 		Q_UNUSED( localName );
 
 		_line++;
-		RuleNode *node;
+		RuleNode *node = NULL;
 
 		qDebug()<< "[RulesXmlHandler::startElement]" << qName;
 
@@ -62,6 +62,11 @@ namespace CnotiMind
 		}
 		else if( _parentNode != NULL && _currentNode != NULL)
 		{
+			qDebug() << "estoira";
+
+			qDebug() << "Parent:" << _parentNode;
+			qDebug() << "Current:" << (int) _currentNode;
+
 			if( node = ActionNode::fromXML(qName, atts, _brain, _currentNode) ) DO_NOTHING;
 			else if( node = ClearMemoryNode::fromXML(qName, atts, _brain, _currentNode) ) DO_NOTHING;
 			else if( node = ConditionDataMiningNode::fromXML(qName, atts, _brain, _currentNode) ) DO_NOTHING;
@@ -77,12 +82,13 @@ namespace CnotiMind
 			else if( node = RandomNode::fromXML(qName, atts, _brain, _currentNode) ) DO_NOTHING;
 			else if( node = StorageNode::fromXML(qName, atts, _brain, _currentNode) ) DO_NOTHING;
 
-			qDebug()<< "[RulesXmlHandler::startElement]" << "done";
 			// If a node was created then update some variables
 			if( node != NULL )
 			{
+				qDebug() << (int) node;
 				_parentNode = _currentNode;
 				_currentNode = node;
+
 				return true;
 			}
 		}
@@ -108,8 +114,13 @@ namespace CnotiMind
 			return true;
 		}
 
+
 		_currentNode = _parentNode;
-		_parentNode = qobject_cast<RuleNode*>( _currentNode->parent() );
+		if(_parentNode != _rootNode)
+		{
+
+			_parentNode = qobject_cast<RuleNode*>( _currentNode->parent() );
+		}
 
 		return true;
 	}

@@ -118,22 +118,20 @@ namespace CnotiMind
 															  const QXmlAttributes &atts,
 															  Brain *brain, QObject *parent)
 	{
-		qDebug() << "[ConditionDataMiningNode::fromXML]" << qName;
-
 		if(qName.compare( "Condition", Qt::CaseInsensitive) == 0)
 		{
 			QString type = atts.value( "type" );
 			if( type.compare("DataMininig", Qt::CaseInsensitive) == 0 )
 			{
-				QString key = atts.value( "event" );
+				DataMiningOperation opDataMining = translateDataMiningOperator( atts.value( "operation" ) );
+				QString event = atts.value( "event" );
 				QString value = atts.value( "value" );
 				ConditionOperator op = translateConditionOperator( atts.value( "operator" ) );
-				DataMiningOperation opDataMining = translateDataMiningOperator( atts.value( "operation" ) );
 				QString variable = atts.value( "variable" );
 				QString compareValue = atts.value( "compareValue" );
 				MemoryType memory = translateMemoryType( atts.value( "memory" ) );
 
-				return new ConditionDataMiningNode( key, value, op, opDataMining, memory, variable,
+				return new ConditionDataMiningNode( event, value, op, opDataMining, memory, variable,
 													compareValue, brain, parent );
 			}
 		}

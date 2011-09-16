@@ -15,7 +15,7 @@ namespace CnotiMind
 		Q_OBJECT
 
 	public:
-		DataMiningNode(const QString& key, const QString& value, DataMiningOperation dataMiningOperation,
+		DataMiningNode(const QString& key, const QString& value,
 					   MemoryType memory, const QString& variable, const QString& position, Brain* brain, QObject* parent);
 
 		void exec();
@@ -30,9 +30,9 @@ namespace CnotiMind
 
 		QString _event;
 		QString _value;
-		const DataMiningOperation _operation;
-		const MemoryType _memory;
-		const QString _variable;
+		 DataMiningOperation _operation;
+		 MemoryType _memory;
+		 QString _variable;
 		qreal _valueNumeric;
 		bool _isValueNumeric;
 		QVariant _result;

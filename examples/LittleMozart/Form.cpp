@@ -60,15 +60,16 @@ Form::Form(QWidget *parent) :
 	connect( _brain, SIGNAL(sendAction(const QString&,const QString&)), this, SLOT(actionReceived(const QString&,const QString&)));
 	connect( _brain, SIGNAL(sendEmotionalState(const QString&,qreal)), this, SLOT(emotionReceived( const QString&, qreal )));
 
-	if(!_brain->loadXmlRules( "../../xml/mozart_rules.xml" ) )
-	{
-		qWarning() << "[Form::Form] Error loading Xml rules.";
-	}
+	_brain->loadXmlRules( "../../xml/simple_rules.xml" );
+//	if(!_brain->loadXmlRules( "../../xml/mozart_rules.xml" ) )
+//	{
+//		qWarning() << "[Form::Form] Error loading Xml rules.";
+//	}
 
-	if(!_brain->loadXmlRules( "../../xml/mozart_tutoring.xml" ) )
-	{
-		qWarning() << "[Form::Form] Error loading tutoring Xml.";
-	}
+//	if(!_brain->loadXmlRules( "../../xml/mozart_tutoring.xml" ) )
+//	{
+//		qWarning() << "[Form::Form] Error loading tutoring Xml.";
+//	}
 
 	_brain->printRules();
 

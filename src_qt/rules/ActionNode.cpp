@@ -15,7 +15,6 @@ namespace CnotiMind
 		_probability( probability ),
 		_probabilityValue( probability.toDouble( &_isProbabilityNumeric ) )
 	{
-		qDebug()<< "[ActionNode::ActionNode]" << "constructor";
 
 	}
 
@@ -71,11 +70,8 @@ namespace CnotiMind
 
 	ActionNode *ActionNode::fromXML(const QString &qName, const QXmlAttributes &atts, Brain *brain, QObject *parent)
 	{
-		qDebug()<< "[ActionNode::fromXML]" << qName;
-
 		if( qName.compare("Action", Qt::CaseInsensitive) == 0 )
 		{
-			qDebug()<< "[ActionNode::fromXML]" << "inside";
 			QString key = atts.value( "name" );
 			QString value = atts.value( "value" );
 			QString probability = atts.value( "probability" );
@@ -84,8 +80,6 @@ namespace CnotiMind
 			{
 				probability = "1";
 			}
-
-			qDebug()<< "[ActionNode::fromXML]" << "building";
 
 			return new ActionNode( key, value, probability, brain, parent );
 		}
