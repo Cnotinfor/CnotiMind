@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Rules>
+	<DataMining operation="Exists"	event="Note" compareValue="0" memory="LTM" variable="[ddd]" />
+	
+	<Action name="Think" value="1" />
+	<Action name="Think" value="2" />
+	<!-- When a note is added -->
+	<!--<Condition type="Emotion" emotion="Love"	value="5" >-->
+	<!--<Condition type="Property" property="Note" compareValue="5">-->
+	
+	<Condition type="DataMining" operation="Exists"	event="Note" compareValue="0" memory="LTM" variable="[ddd]">
+		<Action name="Think" value="Note [Perception.value]" />
+	</Condition>
+	
+	<Condition type="Perception" perception="Note">
+		<Action name="Think" value="Note [Perception.value]" />
+		<Condition type="Perception" perception="Note">
+			<Action name="Think" value="Note [Perception.value]" />
+		</Condition>
+	</Condition>
+
+	<Condition type="Perception" perception="Note">
+		<Action name="Think" value="Note [Perception.value]" />
+	</Condition>
+
+	
+</Rules>
