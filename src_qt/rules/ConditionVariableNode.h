@@ -18,7 +18,15 @@ namespace CnotiMind
 
 		QString info( int depth = 0 ) const;
 
+		static ConditionVariableNode *fromXML( const QString &qName, const QXmlAttributes &atts, Brain* brain, QObject* parent );
+
 	protected:
+
+		QString _variable;
+		QString _value;
+		qreal _valueNumeric;
+		bool _isValueNumeric;
+
 		bool isTrue();
 		bool isTrue( QHash<QString,QString>& variables );
 

@@ -22,6 +22,8 @@ namespace CnotiMind
 
 		QString info( int depth = 0 ) const;
 
+		static ClearMemoryNode *fromXML( const QString &qName, const QXmlAttributes &atts, Brain* brain, QObject* parent );
+
 	private:
 		MemoryType _memory;
 	};

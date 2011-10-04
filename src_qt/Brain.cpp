@@ -3,6 +3,8 @@
 #include <QtCore/QMutableListIterator>
 #include <QtCore/QListIterator>
 #include <QDateTime>
+#include <QList>
+#include <QTextCodec>
 
 #include "Brain.h"
 #include "CnotiMind.h"
@@ -10,6 +12,7 @@
 #include "rules/RuleNode.h"
 #include "rules/RulesXmlHandler.h"
 #include "gui/BrainGUI.h"
+#include "MemoryXmlHandler.h"
 
 namespace CnotiMind
 {
@@ -112,7 +115,7 @@ namespace CnotiMind
 	{
 		QFile f( filename );
 
-		RulesXmlHandler *handler = new RulesXmlHandler( this, _rules );
+		RulesXmlHandler handler( this, _rules );
 		QXmlInputSource source( &f );
 		if( source.data() == "" )
 		{
@@ -121,50 +124,48 @@ namespace CnotiMind
 		}
 
 		QXmlSimpleReader reader;
-		reader.setContentHandler( handler );
+		reader.setContentHandler( &handler );
 
 		// Retrives data from file
 		if( reader.parse( source ) )
 		{
-			_rules = handler->rootNode();
+			_rules = handler.rootNode();
 			return true;
 		}
 
-		qDebug() << "[Brain::loadXmlRules] Error in XML, line" << handler->line();
+		qDebug() << "[Brain::loadXmlRules] Error in XML, line" << handler.line();
 
 		return false;
 	}
 
-	/**
-
-	*/
-	bool Brain::validateXML(int xml)
-	{
-		return true;
-	}
 
 	bool Brain::saveMemory(const QString& filename)
 	{
 		QFile f(filename);
+		QTextStream out(&f);
+		out.setCodec(QTextCodec::codecForName("UTF-8"));
 
 		if( f.open( QIODevice::WriteOnly | QIODevice::Text ) )
 		{
+
+			f.write( "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" );
 			f.write( "<Memory>\n" );
-			f.write( "<LongTermMemory>\n" );
+			f.write( "\t<LongTermMemory>\n" );
 			QListIterator<MemoryEvent> it(_longTermMemory);
 			while(it.hasNext())
 			{
-
+				f.write( "\t\t");
 				f.write( it.next().toXml().toUtf8() + "\n" );
 			}
-			f.write( "</LongTermMemory>\n" );
-			f.write( "<WorkingMemory>\n" );
+			f.write( "\t</LongTermMemory>\n" );
+			f.write( "\t<WorkingMemory>\n" );
 			QListIterator<MemoryEvent> it2(_workingMemory);
 			while(it2.hasNext())
 			{
+				f.write( "\t\t");
 				f.write( it2.next().toXml().toUtf8() + "\n" );
 			}
-			f.write( "</WorkingMemory>\n" );
+			f.write( "\t</WorkingMemory>\n" );
 			f.write( "</Memory>\n" );
 
 			f.close();
@@ -178,10 +179,21 @@ namespace CnotiMind
 	{
 		QFile f(filename);
 
-		if( f.open( QIODevice::ReadOnly | QIODevice::Text ) )
-		{
+		QXmlInputSource source( &f );
+		MemoryXmlHandler handler(this);
 
-			f.close();
+		if( source.data() == "" )
+		{
+			qWarning() << "[Brain::loadMemory] File not found" << filename;
+			return false;
+		}
+
+		QXmlSimpleReader reader;
+		reader.setContentHandler( &handler );
+
+		// Retrives data from file
+		if( reader.parse( source ) )
+		{
 			return true;
 		}
 
@@ -394,6 +406,18 @@ namespace CnotiMind
 		}
 	}
 
+	/*!
+		Updated the graphical representation of the memory events
+	*/
+	void Brain::updateGUI()
+	{
+		if( _gui != NULL )
+		{
+			_gui->updateLongTermMemory();
+			_gui->updateWorkingMemory();
+		}
+	}
+
 	void Brain::updateEmotionalValue(const QString& emotionName, qreal variation, qreal max, qreal min)
 	{
 		QMutableListIterator<Emotion> it(_emotions);
@@ -477,7 +501,7 @@ namespace CnotiMind
 	/*
 		Delete an event from the memory
 	*/
-	void Brain::deleteEvent( const QString& key, DeletePosition position, MemoryType memory )
+	void Brain::deleteEvent( const QString& name, EventPosition position, MemoryType memory )
 	{
 		QList<MemoryEvent>* mem = ( memory == LongTermMemory ? &_longTermMemory : &_workingMemory );
 
@@ -485,31 +509,31 @@ namespace CnotiMind
 
 		switch(position)
 		{
-			case DeleteLast:
+			case PositionLast:
 				it.toBack();
 				while(it.hasPrevious())
 				{
-					if( it.previous() == key )
+					if( it.previous() == name )
 					{
 						it.remove();
 						break;
 					}
 				}
 				break;
-			case DeleteFirst:
+			case PositionFirst:
 				while(it.hasNext())
 				{
-					if( it.next() == key )
+					if( it.next() == name )
 					{
 						it.remove();
 						break;
 					}
 				}
 				break;
-			case DeleteAll:
+			case PositionAll:
 				while(it.hasNext())
 				{
-					if( it.next() == key )
+					if( it.next() == name )
 					{
 						it.remove();
 					}
@@ -517,34 +541,183 @@ namespace CnotiMind
 				break;
 		}
 
-		if( _gui != NULL )
-		{
-			if( memory == LongTermMemory)
-			{
-				_gui->updateLongTermMemory();
-			}
-			else
-			{
-				_gui->updateWorkingMemory();
-			}
-		}
+		updateGUI();
 	}
 
-	void Brain::deleteEvent( const QString& key, const QString& value, DeletePosition position, MemoryType memory )
+	void Brain::deleteEvent( const QString& name, const QString& value, EventPosition position, MemoryType memory )
 	{
+		QList<MemoryEvent>* mem = ( memory == LongTermMemory ? &_longTermMemory : &_workingMemory );
+		MemoryEvent tmpEvent(name, value);
 
+		QMutableListIterator<MemoryEvent> it(*mem);
+
+		switch(position)
+		{
+			case PositionLast:
+				it.toBack();
+				while(it.hasPrevious())
+				{
+					if( it.previous() == tmpEvent )
+					{
+						it.remove();
+						break;
+					}
+				}
+				break;
+			case PositionFirst:
+				while(it.hasNext())
+				{
+					if( it.next() == tmpEvent )
+					{
+						it.remove();
+						break;
+					}
+				}
+				break;
+			case PositionAll:
+				while(it.hasNext())
+				{
+					if( it.next() == tmpEvent )
+					{
+						it.remove();
+					}
+				}
+				break;
+		}
+
+		updateGUI();
 	}
 
+
+	/*!
+		Copies all events from one memory to another memory.
+	*/
+	void Brain::copyEvents(MemoryType fromMemory, MemoryType toMemory)
+	{
+		QList<MemoryEvent> &listFrom = (fromMemory == LongTermMemory ? _longTermMemory : _workingMemory);
+		QList<MemoryEvent> &listTo = (toMemory == LongTermMemory ? _longTermMemory : _workingMemory);
+
+		// size must be read here, in case it is the same memory, if not is an endless loop
+		int size = listFrom.size();
+		for(int i = 0; i < size; i++)
+		{
+			listTo.append(listFrom.at(i));
+		}
+	}
+
+	/*!
+		Copies the Events from a memory to another. The
+	*/
+	void Brain::copyEvents( MemoryType fromMemory, MemoryType toMemory, const QString afterEvent,
+							EventPosition afterPosition, const QString &beforeEvent,
+							EventPosition beforePosition)
+	{
+		QList<MemoryEvent> tmp;
+		QList<MemoryEvent> &listFrom = (fromMemory == LongTermMemory ? _longTermMemory : _workingMemory);
+		QList<MemoryEvent> &listTo = (toMemory == LongTermMemory ? _longTermMemory : _workingMemory);
+
+		int iAfter = findMemoryEvent( afterPosition, afterEvent, listFrom );
+		int iBefore = findMemoryEvent( beforePosition, beforeEvent, listFrom );
+
+		if(iBefore == -1 || iAfter == -1)
+		{
+			// It doesn't make the copy of between memories
+			return;
+		}
+		if(iAfter > iBefore )
+		{
+			// If the events don't provide a valid rage of elements to be copied
+			return;
+		}
+
+		// Copy the elements to the other memory storage
+
+		for(int i = iAfter; i <= iBefore; i++)
+		{
+			listTo.append( listFrom.at(i) );
+		}
+	}
+
+
+	/*!
+		Search for a memory Event named eventName in the memory
+	*/
+	int Brain::findMemoryEvent( EventPosition position, const QString& eventName, const QList<MemoryEvent>& memory )
+	{
+		if( position == PositionLast )
+		{
+			for(int pos = memory.size() - 1; pos >= 0; pos--)
+			{
+				if(memory.at(pos) == eventName)
+				{
+					// Found MemoryEvent
+					return pos;
+				}
+			}
+		}
+		else if( position == PositionFirst )
+		{
+			for(int pos = 0; pos < memory.size(); pos++)
+			{
+				if(memory.at(pos) == eventName)
+				{
+					// Found MemoryEvent
+					return pos;
+				}
+			}
+		}
+		// not found
+		return -1;
+	}
+
+	int Brain::findMemoryEvent( int itemPosition, const QString& eventName, const QList<MemoryEvent>& memory )
+	{
+		int n = 0; // Count the number of events found
+
+		if( itemPosition > 0 )
+		{
+			// start from the oldest event in the memory
+			for(int pos = 0; pos < memory.size(); pos++)
+			{
+				if(memory.at(pos) == eventName)
+				{
+					// Found MemoryEvent
+					n++;
+					// Test if it is itemPosition evenName found
+					if(n == itemPosition)
+					{
+						return pos;
+					}
+				}
+			}
+		}
+		else if( itemPosition < 0 )
+		{
+			// If the itemPosition is negative, start from the most recent event
+			for(int pos = memory.size() - 1; pos <= 0 ; pos--)
+			{
+				if(memory.at(pos) == eventName)
+				{
+					// Found MemoryEvent
+					n--;
+					// Test if it is itemPosition evenName found
+					if(n == itemPosition)
+					{
+						return pos;
+					}
+				}
+			}
+		}
+		// not found
+		return -1;
+	}
 
 	/*
-		Return a QString with the datamining result operation. In case there are no events, or
-		the data doesn't allow the operation it return an empty QString.
+		Return a QVariant with the datamining result operation. In case there are no events, or
+		the data doesn't allow the operation it return an non valid QVariant.
 
-		All numeric operations are converted to QString
+		All numeric operations are converted to QString.
 	*/
-
-	;
-
 	QVariant Brain::dataMining( DataMiningOperation operation, const QString& event, int position, MemoryType memoryType, bool* valid )
 	{
 		// test if parameters are valid for datamining
@@ -586,6 +759,12 @@ namespace CnotiMind
 		return "";
 	}
 
+	/*
+		Return a QVariant with the datamining result operation. In case there are no events, or
+		the data doesn't allow the operation it return an non valid QVariant.
+
+		All numeric operations are converted to QString.
+	*/
 	QVariant Brain::dataMining( DataMiningOperation operation, const QString& event, const QString& value, int position, MemoryType memoryType, bool* valid )
 	{
 		// test if parameters are valid for datamining
@@ -618,6 +797,12 @@ namespace CnotiMind
 		return "";
 	}
 
+	/*
+		Return a QVariant with the datamining result operation. In case there are no events, or
+		the data doesn't allow the operation it return an non valid QVariant.
+
+		All numeric operations are converted to QString.
+	*/
 	QVariant Brain::dataMining( DataMiningOperation operation, const QString& event, qreal value, int position, MemoryType memoryType, bool* valid )
 	{
 		// test if parameters are valid for datamining
@@ -643,7 +828,7 @@ namespace CnotiMind
 
 
 	/*
-		Datamining Max only works if the values are numbers.
+		Datamining Max only works if the values of the events are numbers.
 
 		If any value of the event is not a number, it will set valid to false.
 		If the memory is empty it will set valid to false.
@@ -689,6 +874,15 @@ namespace CnotiMind
 		return max;
 	}
 
+	/*
+		Datamining Min only works if the values of the events are numbers.
+
+		If any value of the event is not a number, it will set valid to false.
+		If the memory is empty it will set valid to false.
+		If no event is found it also set valid to false.
+
+		Valid becomes true, if it founds one element.
+	*/
 	qreal Brain::dataMiningMin( const QString& event, const QList<MemoryEvent>& memory, bool* valid )
 	{
 		// by defaulf the data mining is not valid

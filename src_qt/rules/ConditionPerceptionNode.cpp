@@ -1,6 +1,7 @@
 #include <QtCore/QString>
 #include <QtCore/QObject>
 #include <QtCore/QListIterator>
+#include <QDebug>
 
 #include "ConditionPerceptionNode.h"
 #include "../Brain.h"
@@ -9,7 +10,10 @@ namespace CnotiMind
 {
 
 	ConditionPerceptionNode::ConditionPerceptionNode( const QString& perception, const QString& value, ConditionOperator op, Brain* brain, QObject* parent):
-		ConditionNode( perception, value, op, brain, parent )
+		ConditionNode( op, brain, parent ),
+		_perception( perception ),
+		_value( value ),
+		_valueNumeric( value.toInt( &_isValueNumeric ) )
 	{
 
 	}
@@ -68,7 +72,7 @@ namespace CnotiMind
 			// Just test the first perception
 			Perception p = _brain->_receivedPerceptions.head();
 			// Check if it is the percetion for this Node
-			if( QString::compare( p.name(), _key, Qt::CaseInsensitive ) == 0 )
+			if( _perception.compare( p.name(), Qt::CaseInsensitive ) == 0 )
 			{
 				if( _value.isEmpty() )
 				{
@@ -120,6 +124,26 @@ namespace CnotiMind
 		}
 
 		return false;
+	}
+
+	ConditionPerceptionNode* ConditionPerceptionNode::fromXML(const QString &qName, const QXmlAttributes &atts, Brain *brain, QObject *parent)
+	{
+		if(qName.compare( "Condition", Qt::CaseInsensitive) == 0)
+		{
+			QString type = atts.value( "type" );
+			if( type.compare("Perception", Qt::CaseInsensitive) == 0 )
+			{
+
+				QString perception = atts.value( "perception" );
+				QString value = atts.value( "value" );
+				ConditionOperator op = translateConditionOperator( atts.value( "operator" ) );
+
+
+				return new ConditionPerceptionNode( perception, value, op, brain, parent );
+			}
+		}
+
+		return NULL;
 	}
 
 }

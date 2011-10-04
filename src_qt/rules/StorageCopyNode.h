@@ -21,9 +21,9 @@ namespace CnotiMind
 	class StorageCopyNode : public RuleNode
 	{
 	public:
-		StorageCopyNode(MemoryType memory, Brain* brain, QObject* parent);
-		StorageCopyNode(MemoryType memory, const QString &afterDate, const QString &beforeDate, Brain* brain, QObject* parent);
-		StorageCopyNode(MemoryType memory, const QString &afterEvent, EventPosition afterEventPosition,
+		StorageCopyNode(MemoryType fromMemory, MemoryType toMemory, Brain* brain, QObject* parent);
+		StorageCopyNode(MemoryType fromMemory, MemoryType toMemory, const QString &afterDate, const QString &beforeDate, Brain* brain, QObject* parent);
+		StorageCopyNode(MemoryType fromMemory, MemoryType toMemory, const QString &afterEvent, EventPosition afterEventPosition,
 						const QString &beforeEvent, EventPosition beforeEventPosition, Brain* brain, QObject* parent);
 
 

@@ -78,4 +78,30 @@ namespace CnotiMind
 
 		_brain->updateEmotionalValue( _emotion, _valueNumeric, _max, _min );
 	}
+
+	EmotionNode *EmotionNode::fromXML(const QString &qName, const QXmlAttributes &atts, Brain *brain, QObject *parent)
+	{
+		if( qName.compare( "Emotion" ) == 0 )
+		{
+			QString emotionName = atts.value( "name" );
+			QString value = atts.value( "increment" );
+
+			bool okMin;
+			qreal min = atts.value( "min" ).toDouble(&okMin);
+			bool okMax;
+			qreal max = atts.value( "max" ).toDouble(&okMax);
+
+			if(!okMax)
+			{
+				max = INT_MAX;
+			}
+			if(!okMin)
+			{
+				min = INT_MIN;
+			}
+
+			return new EmotionNode( emotionName, value, max, min, brain, parent );
+		}
+		return NULL;
+	}
 }

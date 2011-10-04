@@ -7,7 +7,10 @@ namespace CnotiMind
 {
 
 	ConditionPropertyNode::ConditionPropertyNode( const QString& property, const QString& value, ConditionOperator op, Brain* brain, QObject* parent ) :
-		ConditionNode( property, value, op, brain, parent )
+		ConditionNode( op, brain, parent ),
+		_property( property ),
+		_value( value ),
+		_valueNumeric( value.toInt( &_isValueNumeric ) )
 	{
 	}
 
@@ -25,7 +28,7 @@ namespace CnotiMind
 			const QString& v = it.value();
 
 			// Test if found the property
-			if( _key.compare( k, Qt::CaseInsensitive ) == 0 )
+			if( _property.compare( k, Qt::CaseInsensitive ) == 0 )
 			{
 				// Try to convert the value from the variable to number
 				bool ok;
@@ -68,6 +71,24 @@ namespace CnotiMind
 		info += space(depth) + "Condition type=Property";
 
 		return info + RuleNode::info(depth);
+	}
+
+	ConditionPropertyNode* ConditionPropertyNode::fromXML(const QString &qName, const QXmlAttributes &atts, Brain *brain, QObject *parent)
+	{
+		if(qName.compare( "Condition", Qt::CaseInsensitive) == 0)
+		{
+			QString type = atts.value( "type" );
+			if( type.compare("Property", Qt::CaseInsensitive) == 0 )
+			{
+				QString property = atts.value( "property" );
+				QString value = atts.value( "compareValue" );
+				ConditionOperator op = translateConditionOperator( atts.value( "operator" ) );
+
+				return new ConditionPropertyNode( property, value, op, brain, parent );
+
+			}
+		}
+		return NULL;
 	}
 
 

@@ -28,6 +28,9 @@ private slots:
 	void durationClicked( const QString& duration );
 
 	void on_pushButtonPrint_clicked();
+	void on_pushButtonSave_clicked();
+	void on_pushButtonLoad_clicked();
+
 	void on_pushButtonCancelDuration_clicked();
 	void on_pushButtonDeleteNote_clicked();
 	void on_pushButtonStartMelody_clicked();

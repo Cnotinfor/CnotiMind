@@ -50,4 +50,13 @@ namespace CnotiMind
 	{
 		return space( depth ) + "Random";
 	}
+
+	RandomNode *RandomNode::fromXML( const QString &qName, const QXmlAttributes &atts, Brain* brain, QObject* parent )
+	{
+		if( qName.compare( "Random", Qt::CaseInsensitive ) == 0 )
+		{
+			return new RandomNode(brain, parent);
+		}
+		return NULL;
+	}
 }

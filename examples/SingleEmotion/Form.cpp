@@ -7,7 +7,6 @@
 // Cnoti Mind
 #include <Brain>
 #include <Perception>
-#include <Action>
 #include <Emotion>
 
 #define XML_RULES "../../xml/single_emotion_rules.xml"

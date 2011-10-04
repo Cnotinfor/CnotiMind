@@ -16,7 +16,7 @@ namespace CnotiMind
 
 	public:
 
-		ConditionDataMiningNode(const QString& key, const QString& value, ConditionOperator op,
+		ConditionDataMiningNode(const QString& event, const QString& value, ConditionOperator op,
 								DataMiningOperation dataMiningOperation, MemoryType memory,
 								const QString& variable, const QString& compareValue,
 								Brain* brain, QObject* parent);
@@ -26,6 +26,7 @@ namespace CnotiMind
 
 		QString info( int depth = 0 ) const;
 
+		static ConditionDataMiningNode *fromXML( const QString &qName, const QXmlAttributes &atts, Brain* brain, QObject* parent );
 
 	protected:
 		const DataMiningOperation _dataMiningOperation;
@@ -35,7 +36,10 @@ namespace CnotiMind
 		const MemoryType _memory;
 		bool _isCompareValueNumeric;
 		QString _result;
-
+		QString _event;
+		QString _value;
+		qreal _valueNumeric;
+		bool _isValueNumeric;
 
 		bool isTrue();
 	};

@@ -6,22 +6,15 @@
 namespace CnotiMind
 {
 
-	ConditionNode::ConditionNode(const QString& key, const QString& value, ConditionOperator op, Brain* brain, QObject* parent):
+	ConditionNode::ConditionNode(ConditionOperator op, Brain* brain, QObject* parent):
 		RuleNode( brain, parent ),
-		_key( key ),
-		_value( value ),
-		_operator( op ),
-		_isValueNumeric( false )
+		_operator( op )
 	{
 		// If not condition operator is set, it uses the Equal Operator
 		if(op == ConditionOperatorUndefined)
 		{
 			_operator = ConditionOperatorEqual;
 		}
-
-		// Convert to double
-		// If it has sucessefull, the variable _isNumeric is true.
-		_valueNumeric = value.toDouble( &_isValueNumeric );
 	}
 
 	void ConditionNode::exec()

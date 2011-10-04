@@ -5,6 +5,7 @@
 #include "RootNode.h"
 #include "ActionNode.h"
 #include "StorageNode.h"
+#include "StorageCopyNode.h"
 #include "EmotionNode.h"
 #include "ConditionNode.h"
 #include "ConditionPerceptionNode.h"
@@ -62,6 +63,10 @@ namespace CnotiMind
 		if( QString::compare( qName, "Storage", Qt::CaseInsensitive ) == 0 )
 		{
 			return createStorageNode( atts );
+		}
+		if( QString::compare( qName, "StorageCopy", Qt::CaseInsensitive ) == 0 )
+		{
+			return createStorageCopyNode( atts );
 		}
 		if( QString::compare( qName, "Emotion", Qt::CaseInsensitive ) == 0 )
 		{
@@ -191,18 +196,44 @@ namespace CnotiMind
 		_parentNode = _currentNode;
 
 		// If the clear attribute is set, it doesn't store the event
-		if( QString::compare( clear, "yes", Qt::CaseInsensitive ) == 0)
+		_currentNode =  new StorageNode( key, value, memory, _brain, _parentNode );
+
+		return true;
+	}
+
+	bool RulesXmlHandler::createStorageCopyNode(  const QXmlAttributes & atts )
+	{
+		if( _rootNode == NULL || _currentNode == NULL )
 		{
-			_currentNode =  new StorageNode( true, memory, _brain, _parentNode );
+			return false;
+		}
+
+		MemoryType from = translateMemoryType( atts.value( "from" ) );
+		MemoryType to = translateMemoryType( atts.value( "to" ) );
+		QString eventBefore = atts.value( "before" );
+		QString eventAfter =  atts.value( "after" );
+		EventPosition eventBeforePosition = translateEventPosition( atts.value( "beforePositon" ) );
+		EventPosition eventAfterPosition = translateEventPosition( atts.value( "afterPositon" ) );
+
+		_parentNode = _currentNode;
+
+		if( eventBefore.isEmpty() && eventBeforePosition == PositionNone &&  eventAfter.isEmpty() && eventAfterPosition == PositionNone )
+		{
+			// No before and after events are defined, copy the all memory
+			_currentNode =  new StorageCopyNode( from, to, _brain, _parentNode );
+			return true;
+		}
+		else if( eventBefore.isEmpty() || eventBeforePosition == PositionNone ||  eventAfter.isEmpty() || eventAfterPosition == PositionNone )
+		{
+			// If some of the before and after events parameters are not well defined, it returns false
+			return false;
 		}
 		else
 		{
-			_currentNode =  new StorageNode( key, value, memory, _brain, _parentNode );
+			// After and Before event are well defined
+			_currentNode = new StorageCopyNode(from, to, eventAfter, eventAfterPosition, eventBefore, eventBeforePosition, _brain, _parentNode);
+			return true;
 		}
-
-
-
-		return true;
 	}
 
 	bool RulesXmlHandler::createEmotionNode(  const QXmlAttributes & atts )
@@ -399,7 +430,7 @@ namespace CnotiMind
 	{
 		QString name = atts.value( "name" );
 		QString value = atts.value( "value" );
-		DeletePosition position = translateDeletePosition( atts.value( "position" ) ) ;
+		EventPosition position = translateEventPosition( atts.value( "position" ) ) ;
 		MemoryType memory = translateMemoryType( atts.value( "memory" ) );
 
 		_parentNode = _currentNode;
@@ -420,6 +451,8 @@ namespace CnotiMind
 
 	bool RulesXmlHandler::createRandomNode( const QXmlAttributes & atts )
 	{
+		Q_UNUSED(atts);
+
 		_parentNode = _currentNode;
 		_currentNode =  new RandomNode( _brain, _parentNode );
 

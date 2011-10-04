@@ -1,4 +1,7 @@
+#include <QDebug>
+
 #include "ClearMemoryNode.h"
+
 #include "../Brain.h"
 
 namespace CnotiMind
@@ -36,4 +39,15 @@ namespace CnotiMind
 		return space( depth ) + "ClearMemory (" + (_memory == LongTermMemory ? "LTM" : "WM" ) + ")";
 	}
 
+	ClearMemoryNode *ClearMemoryNode::fromXML(const QString &qName, const QXmlAttributes &atts,
+											  Brain *brain, QObject *parent)
+	{
+		if( qName.compare( "ClearMemory", Qt::CaseInsensitive ) == 0 )
+		{
+			MemoryType memory = translateMemoryType( atts.value( "memory" ) );
+
+			return new ClearMemoryNode( memory , brain, parent );
+		}
+		return NULL;
+	}
 }

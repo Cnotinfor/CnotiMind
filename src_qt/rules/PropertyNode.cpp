@@ -31,4 +31,16 @@ namespace CnotiMind
 		return space(depth) + "Property " + _key + ": " + _value;
 	}
 
+	PropertyNode *PropertyNode::fromXML(const QString &qName, const QXmlAttributes &atts, Brain *brain, QObject *parent)
+	{
+		if( qName.compare( "Property", Qt::CaseInsensitive ) == 0 )
+		{
+			QString value = atts.value( "value" );
+			QString name = atts.value( "name" );
+
+			return new PropertyNode( name, value, brain, parent );
+		}
+		return NULL;
+	}
+
 }

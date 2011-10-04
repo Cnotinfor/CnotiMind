@@ -15,7 +15,7 @@ namespace CnotiMind
 		Q_OBJECT
 
 	public:
-		DataMiningNode(const QString& key, const QString& value, DataMiningOperation dataMiningOperation,
+		DataMiningNode(const QString& key, const QString& value, DataMiningOperation operation,
 					   MemoryType memory, const QString& variable, const QString& position, Brain* brain, QObject* parent);
 
 		void exec();
@@ -23,6 +23,7 @@ namespace CnotiMind
 
 		QString info( int depth = 0 ) const;
 
+		static DataMiningNode *fromXML( const QString &qName, const QXmlAttributes &atts, Brain* brain, QObject* parent );
 
 	protected:
 		bool isTrue( const QHash<QString, QString>& variables );

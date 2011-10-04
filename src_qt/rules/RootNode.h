@@ -23,6 +23,8 @@ namespace CnotiMind
 		bool isRoot() const;
 
 		QString info( int depth = 0 ) const;
+
+		static RootNode *fromXML( const QString &qName, const QXmlAttributes &atts, Brain* brain, QObject* parent );
 	};
 
 }

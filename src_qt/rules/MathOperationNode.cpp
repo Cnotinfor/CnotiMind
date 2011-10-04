@@ -125,4 +125,18 @@ namespace CnotiMind
 		return variableValue;
 	}
 
+	MathOperationNode *MathOperationNode::fromXML(const QString &qName, const QXmlAttributes &atts, Brain *brain, QObject *parent)
+	{
+		if(qName.compare("MathOperation") == 0)
+		{
+			MathOperation operation = translateMathOperation( atts.value( "name" ) );
+			QString value = atts.value( "value" );
+			QString variable = atts.value( "variable" );
+			QString resultVariable = atts.value( "result" );
+
+			return new MathOperationNode( operation, variable, value, resultVariable, brain, parent );
+		}
+		return NULL;
+	}
+
 }

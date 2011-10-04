@@ -75,11 +75,11 @@ namespace CnotiMind
 
 		xml = "<MemoryEvent ";
 
-		xml += "event=\"" + _event + "\"";
-		xml += "value=\"" + _value.toString() + "\"";
-		xml += "time=\"" + QString::number( _time ) + "\"";
+		xml += "event=\"" + _event + "\" ";
+		xml += "value=\"" + _value.toString() + "\" ";
+		xml += "time=\"" + QString::number( _time ) + "\" ";
 
-		xml += "</MemoryEvent>";
+		xml += "/>";
 
 		return xml;
 	}
@@ -89,7 +89,7 @@ namespace CnotiMind
 	*/
 	bool MemoryEvent::operator ==( const QString& name )
 	{
-		return QString::compare( _event, name, Qt::CaseInsensitive ) == 0;
+		return  _event.compare( name, Qt::CaseInsensitive ) == 0;
 	}
 
 	/*
@@ -106,6 +106,16 @@ namespace CnotiMind
 		}
 
 		return QString::compare( _event, me._event, Qt::CaseInsensitive ) == 0;
+	}
+
+	bool operator ==(const MemoryEvent& event, const QString& name)
+	{
+		return event._event.compare( name, Qt::CaseInsensitive ) == 0;
+	}
+
+	bool operator ==(const QString& name, const MemoryEvent& event)
+	{
+		return operator ==(event, name);
 	}
 
 }

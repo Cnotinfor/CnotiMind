@@ -1,5 +1,6 @@
 #include <QtCore/QString>
 #include <QtCore/QListIterator>
+#include <QDebug>
 
 #include "ConditionEmotionNode.h"
 #include "../Brain.h"
@@ -9,7 +10,10 @@ namespace CnotiMind
 {
 
 	ConditionEmotionNode::ConditionEmotionNode(const QString& emotion, const QString& value, ConditionOperator op, Brain* brain, QObject* parent):
-		ConditionNode( emotion, value, op, brain, parent )
+		ConditionNode( op, brain, parent ),
+		_emotion( emotion ),
+		_value( value ),
+		_valueNumeric( value.toInt( &_isValueNumeric ) )
 	{
 
 	}
@@ -56,7 +60,7 @@ namespace CnotiMind
 		{
 			Emotion e = it.next();
 
-			if( e.key() == _key) // Emotion found
+			if( e.key() == _emotion) // Emotion found
 			{
 				return testEmotion(e);
 			}
@@ -86,4 +90,20 @@ namespace CnotiMind
 		return false;
 	}
 
+	ConditionEmotionNode* ConditionEmotionNode::fromXML(const QString &qName, const QXmlAttributes &atts, Brain *brain, QObject *parent)
+	{
+		if(qName.compare( "Condition", Qt::CaseInsensitive) == 0)
+		{
+			QString type = atts.value( "type" );
+			if( type.compare("Emotion", Qt::CaseInsensitive) == 0 )
+			{
+				QString emotion = atts.value( "emotion" );
+				QString value = atts.value( "value" );
+				ConditionOperator op = translateConditionOperator( atts.value( "operator" ) );
+
+				return new ConditionEmotionNode( emotion, value, op, brain, parent );
+			}
+		}
+		return NULL;
+	}
 }

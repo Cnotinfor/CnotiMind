@@ -2,7 +2,9 @@
 #define _ACTIONNODE_H
 
 #include <QtCore/QString>
+
 #include "RuleNode.h"
+#include "../CnotiMind.h"
 
 namespace CnotiMind
 {
@@ -19,6 +21,8 @@ namespace CnotiMind
 		void exec( QHash<QString, QString>& variables );
 
 		QString info( int depth ) const;
+
+		static ActionNode *fromXML( const QString &qName, const QXmlAttributes &atts, Brain* brain, QObject* parent );
 
 	protected:
 		QString _name;

@@ -56,7 +56,6 @@ namespace CnotiMind
 
 
 
-		bool validateXML(int xml);
 		bool saveMemory(const QString& filename);
 		bool loadMemory(const QString& filename);
 		bool saveEmotionalState(const QString& filename);
@@ -74,29 +73,30 @@ namespace CnotiMind
 		void printProperties();
 
 		// Friend classes Nodes
-		friend class RuleNode;
-		friend class RootNode;
 		friend class ActionNode;
-		friend class EmotionNode;
-		friend class DataMiningNode;
-		friend class StorageNode;
+		friend class ClearMemoryNode;
 		friend class ConditionNode;
 		friend class ConditionEmotionNode;
 		friend class ConditionDataMiningNode;
 		friend class ConditionPerceptionNode;
 		friend class ConditionVariableNode;
 		friend class ConditionPropertyNode;
-		friend class PropertyNode;
+		friend class DataMiningNode;
+		friend class DeleteNode;
+		friend class EmotionNode;
 		friend class MathOperationNode;
 		friend class MemoryXmlHandler;
-		friend class ClearMemoryNode;
-		friend class DeleteNode;
+		friend class PropertyNode;
+		friend class RuleNode;
+		friend class RootNode;
+		friend class StorageNode;
+		friend class StorageCopyNode;
 
 		// Friend class Models
-		friend class PropertiesModel;
 		friend class EmotionsModel;
-		friend class PerceptionsModel;
 		friend class MemoryModel;
+		friend class PerceptionsModel;
+		friend class PropertiesModel;
 
 
 
@@ -113,6 +113,8 @@ namespace CnotiMind
 
 	private:
 
+		void updateGUI();
+
 		// Methods to update the emotional state
 		void updateEmotionalValue(const QString& emotionName, qreal variation, qreal max, qreal min);
 		void updateEmotionalValue(const QString& emotionName, qreal variation);
@@ -125,9 +127,16 @@ namespace CnotiMind
 
 		void executeAction( const QString& key, const QString& value );
 
-		void deleteEvent( const QString& key, DeletePosition position, MemoryType memory );
-		void deleteEvent( const QString& key, const QString& value, DeletePosition position, MemoryType memory );
+		void deleteEvent( const QString& key, EventPosition position, MemoryType memory );
+		void deleteEvent( const QString& key, const QString& value, EventPosition position, MemoryType memory );
 
+		void copyEvents( MemoryType fromMemory, MemoryType toMemory );
+		void copyEvents( MemoryType fromMemory, MemoryType toMemory, const QString afterEvent,
+						 EventPosition afterPosition, const QString &beforeEvent,
+						 EventPosition beforePosition);
+
+		int findMemoryEvent( EventPosition position, const QString& eventName, const QList<MemoryEvent>& memory );
+		int findMemoryEvent( int itemPosition, const QString& eventName, const QList<MemoryEvent>& memory );
 
 		// Methods to get information from the memory
 		QVariant dataMining( DataMiningOperation operation, const QString& event, int position, MemoryType memoryType, bool *valid = NULL );

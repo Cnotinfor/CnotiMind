@@ -18,32 +18,34 @@ namespace CnotiMind
 		Q_UNUSED( namespaceURI );
 		Q_UNUSED( localName );
 
-		if( QString::compare( qName, "Memory", Qt::CaseInsensitive ) == 0 )
+		if( qName.compare( "Memory", Qt::CaseInsensitive ) == 0 )
 		{
 			_type = UndefinedMemory;
 			return true;
 		}
-		if( QString::compare( qName, "LongTermMemory", Qt::CaseInsensitive ) == 0 )
+		if( qName.compare( "LongTermMemory", Qt::CaseInsensitive ) == 0 )
 		{
 			_type = LongTermMemory;
 			return true;
 		}
-		if( QString::compare( qName, "WorkingMemory", Qt::CaseInsensitive ) == 0 )
+		if( qName.compare( "WorkingMemory", Qt::CaseInsensitive ) == 0 )
 		{
-			_type = LongTermMemory;
+			_type = WorkingMemory;
 			return true;
 		}
-		else if( QString::compare( qName, "MemoryEvent", Qt::CaseInsensitive ) == 0 )
+		else if( qName.compare( "MemoryEvent", Qt::CaseInsensitive ) == 0 )
 		{
 			if( _type == UndefinedMemory ) // Memory event not inside Working or Long Term Memory
 			{
 				return false;
 			}
 
-			QString name = atts.value( "name" );
+			QString name = atts.value( "event" );
 			QString value = atts.value( "value" );
+			qint64 time = atts.value( "time" ).toInt();
 
-			MemoryEvent me( name, value );
+
+			MemoryEvent me( name, value, time );
 
 			_brain->storeToMemory(me, _type);
 			return true;
@@ -57,6 +59,22 @@ namespace CnotiMind
 		Q_UNUSED( localName );
 		Q_UNUSED( qName );
 
+		if( qName.compare( "LongTermMemory", Qt::CaseInsensitive ) == 0 && _type == LongTermMemory )
+		{
+			_type = UndefinedMemory;
+			return true;
+		}
+		if( qName.compare( "WorkingMemory", Qt::CaseInsensitive ) == 0 && _type == WorkingMemory )
+		{
+			_type = UndefinedMemory;
+			return true;
+		}
+		if( qName.compare("MemoryEvent", Qt::CaseInsensitive) == 0 || qName.compare("Memory", Qt::CaseInsensitive) == 0 )
+		{
+			return true;
+		}
+
+		// If it reach here there are invalid tags in XML
 		return true;
 	}
 

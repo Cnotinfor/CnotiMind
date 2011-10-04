@@ -17,21 +17,19 @@ namespace CnotiMind
 
 	public:
 
-		ConditionNode(const QString& key, const QString& value, ConditionOperator op, Brain* brain, QObject* parent);
+		ConditionNode( ConditionOperator op, Brain* brain, QObject* parent);
 
 		void exec();
 		void exec( QHash<QString,QString>& variables );
 
 		QString info( int depth = 0 ) const;
 
+
+
 	protected:
-		QString _key;
-		QString _value;
 		ConditionOperator _operator;
 		virtual bool isTrue() = 0;
 
-		qreal _valueNumeric;
-		bool _isValueNumeric;
 
 	};
 

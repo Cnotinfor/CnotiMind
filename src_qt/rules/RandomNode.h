@@ -19,6 +19,7 @@ namespace CnotiMind
 
 		virtual QString info( int depth = 0 ) const;
 
+		static RandomNode *fromXML( const QString &qName, const QXmlAttributes &atts, Brain* brain, QObject* parent );
 	};
 
 }

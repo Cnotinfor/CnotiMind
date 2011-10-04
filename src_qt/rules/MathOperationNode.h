@@ -30,6 +30,8 @@ namespace CnotiMind
 
 		QString info( int depth = 0 ) const;
 
+		static MathOperationNode *fromXML( const QString &qName, const QXmlAttributes &atts, Brain* brain, QObject* parent );
+
 	protected:
 		qreal applyOperation( qreal variableValue );
 

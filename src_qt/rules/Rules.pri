@@ -39,5 +39,3 @@ SOURCES += \
     rules/DeleteNode.cpp \
     rules/RandomNode.cpp \
     rules/StorageCopyNode.cpp
-
-

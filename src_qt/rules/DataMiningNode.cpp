@@ -1,5 +1,8 @@
+#include <QDebug>
+
 #include "DataMiningNode.h"
 #include "../Brain.h"
+
 
 namespace CnotiMind
 {
@@ -96,4 +99,29 @@ namespace CnotiMind
 		}
 	}
 
+	DataMiningNode *DataMiningNode::fromXML(const QString &qName, const QXmlAttributes &atts, Brain *brain, QObject *parent)
+	{
+		qDebug() << "Inside";
+		if( qName.compare( "Datamining", Qt::CaseInsensitive ) == 0 )
+		{
+			qDebug() << "Inside";
+
+			QString event = atts.value( "event" );
+			QString value = atts.value( "value" );
+			qDebug() << "Inside";
+			DataMiningOperation opDataMining = translateDataMiningOperator( atts.value( "operation" ) );
+			qDebug() << "Inside";
+			QString variable = atts.value( "variable" );
+			QString position = atts.value( "position" );
+			MemoryType memory = translateMemoryType( atts.value( "memory" ) );
+
+
+
+			DataMiningNode* n = new DataMiningNode( event, value, opDataMining, memory,
+													variable, position, brain, parent );
+			qDebug() << "Data: " << n;
+			return n;
+		}
+		return NULL;
+	}
 }

@@ -21,8 +21,16 @@ namespace CnotiMind
 
 		QString info( int depth = 0 ) const;
 
+		static ConditionPerceptionNode *fromXML( const QString &qName, const QXmlAttributes &atts, Brain* brain, QObject* parent );
+
 	protected:
 		bool isTrue();
+
+		QString _perception;
+		QString _value;
+		qreal _valueNumeric;
+		bool _isValueNumeric;
+
 	};
 
 }

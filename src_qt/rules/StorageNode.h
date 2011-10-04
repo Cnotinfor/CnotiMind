@@ -1,5 +1,5 @@
-#if !defined(_STORAGENODE_H)
-#define _STORAGENODE_H
+#if !defined(_STORAGECOPYNODE_H)
+#define _STORAGECOPYNODE_H
 
 #include <QtCore/QString>
 
@@ -14,12 +14,13 @@ namespace CnotiMind
 
 	public:
 		StorageNode( const QString& event, const QString& value, MemoryType memory, Brain* brain, QObject* parent );
-		StorageNode( bool clear, MemoryType memory, Brain* brain, QObject* parent );
 
 		void exec();
 		void exec( QHash<QString, QString>& variables );
 
 		QString info( int depth = 0 ) const;
+
+		static StorageNode *fromXML( const QString &qName, const QXmlAttributes &atts, Brain* brain, QObject* parent );
 
 	protected:
 		MemoryType _memory;
@@ -29,4 +30,4 @@ namespace CnotiMind
 	};
 
 }
-#endif  //_STORAGENODE_H
+#endif  //_STORAGECOPYNODE_H

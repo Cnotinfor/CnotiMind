@@ -4,10 +4,10 @@
 namespace CnotiMind
 {
 
-	StorageCopyNode::StorageCopyNode(MemoryType memory, Brain* brain, QObject* parent):
+	StorageCopyNode::StorageCopyNode(MemoryType fromMemory, MemoryType toMemory, Brain* brain, QObject* parent):
 		RuleNode( brain, parent ),
-		_memoryFrom( memory ),
-		_memoryTo( ( memory == LongTermMemory ) ? WorkingMemory : LongTermMemory ),
+		_memoryFrom( fromMemory ),
+		_memoryTo( toMemory ),
 		_beforePosition( PositionNone ),
 		_afterPosition( PositionNone )
 	{
@@ -15,10 +15,10 @@ namespace CnotiMind
 	}
 
 
-	StorageCopyNode::StorageCopyNode(MemoryType memory, const QString &afterDate, const QString &beforeDate, Brain* brain, QObject* parent):
+	StorageCopyNode::StorageCopyNode(MemoryType fromMemory, MemoryType toMemory, const QString &afterDate, const QString &beforeDate, Brain* brain, QObject* parent):
 		RuleNode( brain, parent ),
-		_memoryFrom( memory ),
-		_memoryTo( ( memory == LongTermMemory ) ? WorkingMemory : LongTermMemory ),
+		_memoryFrom( fromMemory ),
+		_memoryTo( toMemory ),
 		_beforePosition( PositionNone ),
 		_afterPosition( PositionNone ),
 		_beforeDateString( beforeDate ),
@@ -28,16 +28,17 @@ namespace CnotiMind
 	}
 
 
-	StorageCopyNode::StorageCopyNode(MemoryType memory, const QString &afterEvent, EventPosition afterEventPosition,
+	StorageCopyNode::StorageCopyNode(MemoryType fromMemory, MemoryType toMemory, const QString &afterEvent, EventPosition afterEventPosition,
 					const QString &beforeEvent, EventPosition beforeEventPosition, Brain* brain, QObject* parent):
 		RuleNode( brain, parent ),
-		_memoryFrom( memory ),
-		_memoryTo( ( memory == LongTermMemory ) ? WorkingMemory : LongTermMemory ),
+		_memoryFrom( fromMemory ),
+		_memoryTo( toMemory ),
 		_beforePosition( beforeEventPosition ),
 		_afterPosition( afterEventPosition ),
 		_beforeEventName( beforeEvent ),
 		_afterEventName( afterEvent )
 	{
+
 
 	}
 
@@ -45,7 +46,7 @@ namespace CnotiMind
 
 	void StorageCopyNode::exec()
 	{
-
+		_brain->copyEvents(_memoryFrom, _memoryTo, _afterEventName, _afterPosition, _beforeEventName, _beforePosition);
 	}
 
 
@@ -55,21 +56,23 @@ namespace CnotiMind
 		QString afterEventName = _afterEventName;
 		QString beforeDateString = _beforeDateString;
 		QString afterDateString = _afterDateString;
-		bool valid;
 
 		tagsToValue(beforeEventName, variables);
 		tagsToValue(afterEventName, variables);
 		tagsToValue(beforeDateString, variables);
 		tagsToValue(afterDateString, variables);
 
-		// Test if the before Event exists
-		QVariant result = _brain->dataMining(DMO_Exists, beforeEventName, 0, _memoryFrom, &valid);
-		if( valid && result.toInt() == 1 )
+		// Copy the events as necessary
+		if( afterEventName.isEmpty() || beforeEventName.isEmpty() || _afterPosition == PositionNone || _beforePosition == PositionNone )
 		{
-
+			_brain->copyEvents(_memoryFrom, _memoryTo);
+		}
+		else
+		{
+			_brain->copyEvents(_memoryFrom, _memoryTo, afterEventName, _afterPosition, beforeEventName, _beforePosition);
 		}
 
-		//
+
 	}
 
 	/*!
@@ -100,9 +103,10 @@ namespace CnotiMind
 	{
 		if( qName.compare( "StorageCopy", Qt::CaseInsensitive ) == 0 )
 		{
-			MemoryType memory = translateMemoryType( atts.value( "Memory" ) );
+			MemoryType fromMemory = translateMemoryType( atts.value( "from" ) );
+			MemoryType toMemory = translateMemoryType( atts.value( "fro" ) );
 
-			return new StorageCopyNode( memory, brain, parent );
+			return new StorageCopyNode( fromMemory, toMemory, brain, parent );
 		}
 		return NULL;
 	}
