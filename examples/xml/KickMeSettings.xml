@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- List of perceptions -->
+<!-- Things the agent perceives and can react to -->
+<Settings>
+	<Perception name="being kicked" />
+	<Perception name="can not kick" />
+
+	<!-- List of emotions the agent has -->
+	<Emotion name="Joy" value="0" min="-10" max="10" decay="60" />
+</Settings>
