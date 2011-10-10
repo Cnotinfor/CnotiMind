@@ -1,0 +1,291 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1868F7A01443320B00B61726 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1868F79F1443320B00B61726 /* UIKit.framework */; };
+		1868F7A21443320B00B61726 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1868F7A11443320B00B61726 /* Foundation.framework */; };
+		1868F7A41443320B00B61726 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1868F7A31443320B00B61726 /* CoreGraphics.framework */; };
+		1868F7AA1443320B00B61726 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1868F7A81443320B00B61726 /* InfoPlist.strings */; };
+		1868F7AC1443320B00B61726 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1868F7AB1443320B00B61726 /* main.m */; };
+		1868F7B01443320B00B61726 /* LittleMozartAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1868F7AF1443320B00B61726 /* LittleMozartAppDelegate.m */; };
+		1868F7B31443320B00B61726 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1868F7B11443320B00B61726 /* MainWindow.xib */; };
+		1868F7B61443320B00B61726 /* LittleMozartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1868F7B51443320B00B61726 /* LittleMozartViewController.m */; };
+		1868F7B91443320B00B61726 /* LittleMozartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1868F7B71443320B00B61726 /* LittleMozartViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1868F79B1443320B00B61726 /* LittleMozart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LittleMozart.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1868F79F1443320B00B61726 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		1868F7A11443320B00B61726 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1868F7A31443320B00B61726 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		1868F7A71443320B00B61726 /* LittleMozart-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LittleMozart-Info.plist"; sourceTree = "<group>"; };
+		1868F7A91443320B00B61726 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1868F7AB1443320B00B61726 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1868F7AD1443320B00B61726 /* LittleMozart-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LittleMozart-Prefix.pch"; sourceTree = "<group>"; };
+		1868F7AE1443320B00B61726 /* LittleMozartAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LittleMozartAppDelegate.h; sourceTree = "<group>"; };
+		1868F7AF1443320B00B61726 /* LittleMozartAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LittleMozartAppDelegate.m; sourceTree = "<group>"; };
+		1868F7B21443320B00B61726 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		1868F7B41443320B00B61726 /* LittleMozartViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LittleMozartViewController.h; sourceTree = "<group>"; };
+		1868F7B51443320B00B61726 /* LittleMozartViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LittleMozartViewController.m; sourceTree = "<group>"; };
+		1868F7B81443320B00B61726 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LittleMozartViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1868F7981443320B00B61726 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1868F7A01443320B00B61726 /* UIKit.framework in Frameworks */,
+				1868F7A21443320B00B61726 /* Foundation.framework in Frameworks */,
+				1868F7A41443320B00B61726 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1868F7901443320B00B61726 = {
+			isa = PBXGroup;
+			children = (
+				1868F7A51443320B00B61726 /* LittleMozart */,
+				1868F79E1443320B00B61726 /* Frameworks */,
+				1868F79C1443320B00B61726 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1868F79C1443320B00B61726 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1868F79B1443320B00B61726 /* LittleMozart.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1868F79E1443320B00B61726 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1868F79F1443320B00B61726 /* UIKit.framework */,
+				1868F7A11443320B00B61726 /* Foundation.framework */,
+				1868F7A31443320B00B61726 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1868F7A51443320B00B61726 /* LittleMozart */ = {
+			isa = PBXGroup;
+			children = (
+				1868F7AE1443320B00B61726 /* LittleMozartAppDelegate.h */,
+				1868F7AF1443320B00B61726 /* LittleMozartAppDelegate.m */,
+				1868F7B11443320B00B61726 /* MainWindow.xib */,
+				1868F7B41443320B00B61726 /* LittleMozartViewController.h */,
+				1868F7B51443320B00B61726 /* LittleMozartViewController.m */,
+				1868F7B71443320B00B61726 /* LittleMozartViewController.xib */,
+				1868F7A61443320B00B61726 /* Supporting Files */,
+			);
+			path = LittleMozart;
+			sourceTree = "<group>";
+		};
+		1868F7A61443320B00B61726 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1868F7A71443320B00B61726 /* LittleMozart-Info.plist */,
+				1868F7A81443320B00B61726 /* InfoPlist.strings */,
+				1868F7AB1443320B00B61726 /* main.m */,
+				1868F7AD1443320B00B61726 /* LittleMozart-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1868F79A1443320B00B61726 /* LittleMozart */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1868F7BC1443320B00B61726 /* Build configuration list for PBXNativeTarget "LittleMozart" */;
+			buildPhases = (
+				1868F7971443320B00B61726 /* Sources */,
+				1868F7981443320B00B61726 /* Frameworks */,
+				1868F7991443320B00B61726 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LittleMozart;
+			productName = LittleMozart;
+			productReference = 1868F79B1443320B00B61726 /* LittleMozart.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1868F7921443320B00B61726 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "Universidade de Coimbra";
+			};
+			buildConfigurationList = 1868F7951443320B00B61726 /* Build configuration list for PBXProject "LittleMozart" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 1868F7901443320B00B61726;
+			productRefGroup = 1868F79C1443320B00B61726 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1868F79A1443320B00B61726 /* LittleMozart */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1868F7991443320B00B61726 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1868F7AA1443320B00B61726 /* InfoPlist.strings in Resources */,
+				1868F7B31443320B00B61726 /* MainWindow.xib in Resources */,
+				1868F7B91443320B00B61726 /* LittleMozartViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1868F7971443320B00B61726 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1868F7AC1443320B00B61726 /* main.m in Sources */,
+				1868F7B01443320B00B61726 /* LittleMozartAppDelegate.m in Sources */,
+				1868F7B61443320B00B61726 /* LittleMozartViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		1868F7A81443320B00B61726 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1868F7A91443320B00B61726 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		1868F7B11443320B00B61726 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1868F7B21443320B00B61726 /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		1868F7B71443320B00B61726 /* LittleMozartViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1868F7B81443320B00B61726 /* en */,
+			);
+			name = LittleMozartViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1868F7BA1443320B00B61726 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		1868F7BB1443320B00B61726 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1868F7BD1443320B00B61726 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LittleMozart/LittleMozart-Prefix.pch";
+				INFOPLIST_FILE = "LittleMozart/LittleMozart-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		1868F7BE1443320B00B61726 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LittleMozart/LittleMozart-Prefix.pch";
+				INFOPLIST_FILE = "LittleMozart/LittleMozart-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1868F7951443320B00B61726 /* Build configuration list for PBXProject "LittleMozart" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1868F7BA1443320B00B61726 /* Debug */,
+				1868F7BB1443320B00B61726 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1868F7BC1443320B00B61726 /* Build configuration list for PBXNativeTarget "LittleMozart" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1868F7BD1443320B00B61726 /* Debug */,
+				1868F7BE1443320B00B61726 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1868F7921443320B00B61726 /* Project object */;
+}
