@@ -27,11 +27,9 @@
 -->
 
 <Rules>
+	<!-- When a note is added -->
 	<Condition type="Perception" perception="Note">
-	
-		
 		<Action name="Think" value="Note chosen [Perception.value]" />
-		<Property name="Make Suggestion" value="false" />
 		
 		<!-- First Note added -->
 		<Condition type="DataMining" operation="Exists"	event="Note" compareValue="0" memory="WM">
@@ -436,12 +434,15 @@
 			<Storage event="Pause" value="[Perception.value]" memory="WM" />
 			<Property name="Pause" value="true" />
 		</Condition>
+		<!-- Save good/bad sequence to the memory -->
+		<Storage event="Note Option" value="{Notes Option}" memory="WM" />
 
 		<!-- -->
 	</Condition>
 
 	<!-- When a duration is added -->
 	<Condition type="Perception" perception="Duration">
+
 		<!-- Calculate the music lenght -->
 		<DataMining operation="Sum" event="Duration" variable="[Music Duration]" memory="WM">
 			<Action name="Think" value ="Music length [Music Duration]" />
@@ -535,53 +536,37 @@
 
 			</MathOperation>
 
-
-
+			<!-- Save duration value to the memory -->
 			<Storage event="Duration" value="[Perception.value]" memory="WM" />
 
-			<!-- Test what sentence it should speak -->
-			<Condition type="Property" property="Duration Option" compareValue="Bad">
-				<!-- It send the music length and the duration choosen -->
-				<Action name="Talk" value="Wrong Duration [Music Duration] [Perception.value]" />
-			</Condition>
-			<Condition type="Property" property="Duration Option" compareValue="Good">
-				<Condition type="Property" property="Notes Option" compareValue="Bad">
-					<Condition type="Property" property="Pause" compareValue="false">
-						<Action name="Talk" value="Wrong Note {Note Sequence}" probability="0.9" />
-					</Condition>
-					<Condition type="Property" property="Pause" compareValue="true">
-						<Action name="Talk" value="Wrong Note Pause" probability="0.9" />
-					</Condition>
-				</Condition>
-				<Condition type="Property" property="Notes Option" compareValue="Good">
-					<Condition type="Property" property="Pause" compareValue="false">
-						<Action name="Talk" value="Good Note {Note Sequence}" probability="0.3" />
-					</Condition>
-					<Condition type="Property" property="Pause" compareValue="true">
-						<Action name="Talk" value="Good Note Pause" probability="0.3" />
-					</Condition>
-				</Condition>
-			</Condition>
+			<!-- Save good/bad sequence to the memory -->
+			<Storage event="Duration Option" value="{Duration Option}" memory="WM" />
 
 		</DataMining>
 	</Condition>
 
+	<!-- When a note is deleted -->
 	<Condition type="Perception" perception="Delete Note">
+		<!-- Holds the Notes Option value prior to a note being deleted -->
+		<Property name="Deleted Notes Option" value="" />
+		
 		<Condition type="DataMining" operation="Exists"	event="Note" compareValue="0" memory="WM">
 			<Condition type="DataMining" operation="Exists"	event="Pause" compareValue="0" memory="WM">
 				<Action name="Think" value="There are no notes to delete" />
 			</Condition>
 			<Condition type="DataMining" operation="Exists"	event="Pause" compareValue="1" memory="WM">
+				<Property name="Deleted Notes Option" value="{Notes Option}" />
 				<Delete memory="WM" name="Pause" position="Last" />
+				<Delete memory="WM" name="Note Option" position="Last" />
 				<Action name="Think" value="Pause deleted" />
-
 			</Condition>
-			
 		</Condition>
 		
 		<Condition type="DataMining" operation="Exists"	event="Note" compareValue="1" memory="WM">
 			<Condition type="DataMining" operation="Exists"	event="Pause" compareValue="0" memory="WM">
+				<Property name="Deleted Notes Option" value="{Notes Option}" />
 				<Delete memory="WM" name="Note" position="Last" />
+				<Delete memory="WM" name="Note Option" position="Last" />
 				<Action name="Think" value="Note deleted" />
 			</Condition>
 			<Condition type="DataMining" operation="Exists"	event="Pause" compareValue="1" memory="WM">
@@ -591,252 +576,33 @@
 					<DataMining operation="Time" event="Pause" variable="[Pause Time]" memory="WM">
 						<Condition type="Variable" variable="[Note Time]" operator="bigger" compareValue="[Pause Time]"  >
 							<Action name="Think" value="Note is more recent then pause" />
+							<Property name="Deleted Notes Option" value="{Notes Option}" />
 							<Delete memory="WM" name="Note" position="Last" />
+							<Delete memory="WM" name="Note Option" position="Last" />
 							<Action name="Think" value="Note deleted" />
 						</Condition>
 						<Condition type="Variable" variable="[Note Time]" operator="smaller" compareValue="[Pause Time]"  >
 							<Action name="Think" value="Pause is more recent then note" />
+							<Property name="Deleted Notes Option" value="{Notes Option}" />
 							<Delete memory="WM" name="Pause" position="Last" />
+							<Delete memory="WM" name="Note Option" position="Last" />
 							<Action name="Think" value="Pause deleted" />
 						</Condition>
 					</DataMining>
 				</DataMining>
 			</Condition>
-			
 
-			
-			
+			<!-- Update Notes Option -->
+			<DataMining  variable="[Last Note Option]" operation="Last" event="Note Option" memory="WM" />
+			<Property name="Notes Option" value="[Last Note Option]" />
+
 			<!-- Test if there are more then 2 notes, to update the Note Sequence -->
-			<Condition type="DataMining" operation="Count" event="Note" compareValue="1" operator="bigger" memory="WM">
+			<DataMining variable="[Notes Count]" operation="Count" event="Note" memory="WM" />
+			<Condition type="variable" variable="[Notes Count]" operator="Bigger" compareValue="1">
 				<DataMining operation="Last" event="Note" variable="[Last Note]" memory="WM">
 					<DataMining operation="Item" event="Note" variable="[Second Last Note]" position="-2" memory="WM">
 						<!-- Update the Notes Sequence -->
 						<Property name="Note Sequence" value="[Second Last Note] [Last Note]" />
-						
-						<!-- Do -->
-						<Condition type="Variable" variable="[Second Last Note]" value="Do">
-							<Condition type="Variable" variable="[Last Note]" compareValue="Do">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Re">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Mi">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Fa">
-								<Property name="Notes Option" value="Bad" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Sol">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="La">
-								<Property name="Notes Option" value="Bad" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Si">
-								<Property name="Notes Option" value="Bad" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-						</Condition>
-
-						<!-- Re -->
-						<Condition type="Variable" variable="[Second Last Note]" value="Re">
-							<Condition type="Variable" variable="[Last Note]" compareValue="Do">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Re">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Mi">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Fa">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Sol">
-								<Property name="Notes Option" value="Bad" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="La">
-								<Property name="Notes Option" value="Bad" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Si">
-								<Property name="Notes Option" value="Bad" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
-								<Property name="Notes Option" value="Bad" />
-							</Condition>
-						</Condition>
-
-						<!-- Mi -->
-						<Condition type="Variable" variable="[Second Last Note]" value="Mi">
-							<Condition type="Variable" variable="[Last Note]" compareValue="Do">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Re">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Mi">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Fa">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Sol">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="La">
-								<Property name="Notes Option" value="Bad" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Si">
-								<Property name="Notes Option" value="Bad" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
-								<Property name="Notes Option" value="Bad" />
-							</Condition>
-						</Condition>
-
-						<!-- Fa -->
-						<Condition type="Variable" variable="[Second Last Note]" value="Fa">
-							<Condition type="Variable" variable="[Last Note]" compareValue="Do">
-								<Property name="Notes Option" value="Bad" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Re">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Mi">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Fa">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Sol">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="La">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Si">
-								<Property name="Notes Option" value="Bad" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
-								<Property name="Notes Option" value="Bad" />
-							</Condition>
-						</Condition>
-
-						<!-- Sol -->
-						<Condition type="Variable" variable="[Second Last Note]" value="Sol">
-							<Condition type="Variable" variable="[Last Note]" compareValue="Do">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Re">
-								<Property name="Notes Option" value="Bad" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Mi">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Fa">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Sol">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="La">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Si">
-								<Property name="Notes Option" value="Bad" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-						</Condition>
-
-						<!-- La -->
-						<Condition type="Variable" variable="[Second Last Note]" value="La">
-							<Condition type="Variable" variable="[Last Note]" compareValue="Do">
-								<Property name="Notes Option" value="Bad" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Re">
-								<Property name="Notes Option" value="Bad" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Mi">
-								<Property name="Notes Option" value="Bad" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Fa">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Sol">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="La">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Si">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
-								<Property name="Notes Option" value="Bad" />
-							</Condition>
-						</Condition>
-
-						<!-- Si -->
-						<Condition type="Variable" variable="[Second Last Note]" value="Si">
-							<Condition type="Variable" variable="[Last Note]" compareValue="Do">
-								<Property name="Notes Option" value="Bad" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Re">
-								<Property name="Notes Option" value="Bad" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Mi">
-								<Property name="Notes Option" value="Bad" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Fa">
-								<Property name="Notes Option" value="Bad" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Sol">
-								<Property name="Notes Option" value="Bad" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="La">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Si">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-						</Condition>
-
-						<!-- DoAgudo -->
-						<Condition type="Variable" variable="[Second Last Note]" value="DoAgudo">
-							<Condition type="Variable" variable="[Last Note]" compareValue="Do">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Re">
-								<Property name="Notes Option" value="Bad" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Mi">
-								<Property name="Notes Option" value="Bad" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Fa">
-								<Property name="Notes Option" value="Bad" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Sol">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="La">
-								<Property name="Notes Option" value="Bad" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="Si">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-							<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
-								<Property name="Notes Option" value="Good" />
-							</Condition>
-						</Condition>
-
 					</DataMining>
 				</DataMining>
 			</Condition>
@@ -844,45 +610,12 @@
 			<!-- Test if there is only one 1 note left -->
 			<Condition type="DataMining" operation="Count" event="Note" compareValue="1" memory="WM">
 				<DataMining operation="Last" event="Note" variable="[Last Note]" memory="WM">
-					<Action name="Think" value="Inside delete note [Last Note]" />
-					<Condition type="variable" variable="[Last Note]" value="Do">
-						<Property name="Notes Option" value="Good" />
-						<Property name="Note Sequence" value="First Note Do" />
-					</Condition>
-					<Condition type="variable" variable="[Last Note]" value="Re">
-						<Property name="Notes Option" value="Bad" />
-						<Property name="Note Sequence" value="First Note Re" />
-					</Condition>
-					<Condition type="variable" variable="[Last Note]" value="Mi">
-						<Property name="Notes Option" value="Good" />
-						<Property name="Note Sequence" value="First Note Mi" />
-					</Condition>
-					<Condition type="variable" variable="[Last Note]" value="Fa">
-						<Property name="Notes Option" value="Bad" />
-						<Property name="Note Sequence" value="First Note Fa" />
-					</Condition>
-					<Condition type="variable" variable="[Last Note]" value="Sol">
-						<Property name="Notes Option" value="Good" />
-						<Property name="Note Sequence" value="First Note Sol" />
-					</Condition>
-					<Condition type="variable" variable="[Last Note]" value="La">
-						<Property name="Notes Option" value="Bad" />
-						<Property name="Note Sequence" value="First Note La" />
-					</Condition>
-					<Condition type="variable" variable="[Last Note]" value="Si">
-						<Property name="Notes Option" value="Bad" />
-						<Property name="Note Sequence" value="First Note Si" />
-					</Condition>
-					<Condition type="variable" variable="[Last Note]" value="DoAgudo">
-						<Property name="Notes Option" value="Good" />
-						<Property name="Note Sequence" value="First Note DoAgudo" />
-					</Condition>
+					<Action name="Think" value="Inside delete note, with one onte left [Last Note]" />
+					<!-- Update the Notes Sequence -->
+					<Property name="Note Sequence" value="First Note [Last Note]" />
 				</DataMining>
 			</Condition>
 		</Condition>
-						
-				
-		
 		
 		<!-- Check if there are still notes in the memory. If not remove the StartNote Event -->
 		<DataMining operation="Count" event="Note" memory="WM" variable="[Count Notes]">
@@ -898,162 +631,23 @@
 		</DataMining>
 	</Condition>
 
-
+	<!-- When a duration is deleted -->
 	<Condition type="Perception" perception="Delete Duration">
+		<!-- Holds the Duration Option value prior to a duration being deleted -->
+		<Property name="Deleted Duration Option" value="" />
+		
 		<Condition type="DataMining" operation="Exists"	event="Duration" compareValue="0" memory="WM">
 			<Action name="Think" value="Not possible to delete a duration" />
 		</Condition>
 		<Condition type="DataMining" operation="Exists"	event="Duration" compareValue="1" memory="WM">
+			<Property name="Deleted Duration Option" value="{Duration Option}" />
 			<Delete memory="WM" name="Duration" position="Last" />
+			<Delete memory="WM" name="Duration Option" position="Last" />
 			<Action name="Think" value="Duration deleted" />
-			
-			<!-- After deleting the note and the duration -->
-			
-			<!-- Test if it should help the user -->
-			<!-- test if made a previous suggestion or not and test if it should make a suggestion -->
-			<Condition type="Property" property="Make Suggestion" compareValue="false">
-				<Action name="Think" value="Going to make a suggestion" />
-				<!-- Check how much tempos from the compass have been used -->
-				<DataMining operation="Sum" event="Duration" variable="[Music Duration]" memory="WM">
-					<Action name="Think" value="Duration calculated" />
-					<Condition type="Property" property="Notes Option" compareValue="Bad">
-						<Condition type="Property" property="Duration Option" compareValue="Bad">
-							<!-- Both note and duration were invalid  -->
-							<MathOperation name="Remainder" variable="[Music Duration]" value="4" result="[Used Tempos]">
-							
-							</MathOperation>
-							
-						</Condition>
-						
-						<Condition type="Property" property="Duration Option" compareValue="Good">
-							<!-- Note was invalid -->
-							<Action name="Think" value="Invalid Note" />
-							<!-- Test if the melody is empty -->
-							<Condition type="Variable" variable="[Music Duration]" compareValue="0">
-								<Random>
-									<Action name="Talk" value="Start Do" />
-									<Action name="Talk" value="Start Mi" />
-									<Action name="Talk" value="Start Sol" />
-									<Action name="Talk" value="Start DoAgudo" />
-								</Random>
-							</Condition>
-							
-							<!-- Test if the melody is not empty -->
-							<Condition type="Variable" variable="[Music Duration]" compareValue="0" operator="bigger">
-							
-								<!-- Check if there are only pauses (Duration > 0, Note quantity == 0) -->
-								<Condition type="Datamining" operation="Exists" event="Note" compareValue="0" memory="WM">
-								
-									<Action name="Talk" value="Not Start Pause"/>
-									<Action name="Talk" value="Start Do" />
-									<!--<Action name="Talk" value="Start Mi" />
-									<Action name="Talk" value="Start Sol" />
-									<Action name="Talk" value="Start DoAgudo" /> -->
-								</Condition>
-								
-								<Condition type="Datamining" operation="Exists" event="Note" compareValue="1" memory="WM">
-									<DataMining operation="Last" event="Note" variable="[Last Note]"  memory="WM">
-										<Condition type="Variable" variable="[Last Note]" compareValue="Do">
-											<Random>
-												<Action name="Talk" value="Use Do" />
-												<Action name="Talk" value="Use Re" />
-												<Action name="Talk" value="Use Mi" />
-												<Action name="Talk" value="Use Sol" />
-												<Action name="Talk" value="Use DoAgudo" />
-											</Random>
-										</Condition>
-										<Condition type="Variable" variable="[Last Note]" compareValue="Re">
-											<Random>
-												<Action name="Talk" value="Use Do" />
-												<Action name="Talk" value="Use Re" />
-												<Action name="Talk" value="Use Mi" />
-												<Action name="Talk" value="Use Sol" />
-											</Random>
-										</Condition>
-										<Condition type="Variable" variable="[Last Note]" compareValue="Mi">
-											<Random>
-												<Action name="Talk" value="Use Do" />
-												<Action name="Talk" value="Use Re" />
-												<Action name="Talk" value="Use Mi" />
-												<Action name="Talk" value="Use Fa" />
-												<Action name="Talk" value="Use Sol" />
-											</Random>
-										</Condition>
-										<Condition type="Variable" variable="[Last Note]" compareValue="Fa">
-											<Random>
-												<Action name="Talk" value="Use Mi" />
-												<Action name="Talk" value="Fa" />
-												<Action name="Talk" value="Use Sol" />
-											</Random>
-										</Condition>
-										<Condition type="Variable" variable="[Last Note]" compareValue="Sol">
-											<Random>
-												<Action name="Talk" value="Use Do" />
-												<Action name="Talk" value="Use Mi" />
-												<Action name="Talk" value="Use Fa" />
-												<Action name="Talk" value="Use Sol" />
-												<Action name="Talk" value="Use La" />
-											</Random>
-										</Condition>
-										<Condition type="Variable" variable="[Last Note]" compareValue="La">
-											<Random>
-												<Action name="Talk" value="Use Sol" />
-												<Action name="Talk" value="Use La" />
-												<Action name="Talk" value="Use Si" />
-											</Random>
-										</Condition>
-										<Condition type="Variable" variable="[Last Note]" compareValue="Si">
-											<Random>
-												<Action name="Talk" value="Use La" />
-												<Action name="Talk" value="Use Si" />
-												<Action name="Talk" value="Use DoAgudo" />
-											</Random>
-										</Condition>
-										<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
-											<Random>
-												<Action name="Talk" value="Use Do" />
-												<Action name="Talk" value="Use Si" />
-												<Action name="Talk" value="Use Sol" />
-												<Action name="Talk" value="Use DoAgudo" />
-											</Random>
-										</Condition>
-									</DataMining>
-								</Condition>
-							</Condition>
-						</Condition>	
-					</Condition>
-					
-					<Condition type="Property" property="Notes Option" compareValue="Good">
-						<Condition type="Property" property="Duration Option" compareValue="Bad">
-							<!-- Duration is invalid -->
-							<Condition type="Variable" variable="[Used Tempos]" compareValue="1">
-								<Random>
-									<Action name="Talk" value="Use Duration 2" />
-									<Action name="Talk" value="Use Duration 3" />
-									<Action name="Talk" value="Use Duration 1" />
-								</Random>
-							</Condition>
-							<Condition type="Variable" variable="[Used Tempos]" compareValue="2">
-								<Random>
-									<Action name="Talk" value="Use Duration 2" />
-									<Action name="Talk" value="Use Duration 1" />	
-								</Random>
-							</Condition>
-							<Condition type="Variable" variable="[Used Tempos]" compareValue="3">
-								<Action name="Talk" value="Use Duration 1" />
-							</Condition>
-							
-						</Condition>
-					</Condition>
 
-				</DataMining>
-			</Condition>
-			
-			
-	
-			
-			
-			
+			<!-- Update Duration Option -->
+			<DataMining  variable="[Last Duration Option]" operation="Last" event="Duration Option" memory="WM" />
+			<Property name="Duration Option" value="[Last Duration Option]" />
 		</Condition>
 	</Condition>
 
@@ -1065,9 +659,39 @@
 	<!-- Test if the it is a good spot to finish the melody -->
 	<Condition type="Perception" perception="Finish Melody">
 		<Action name="Think" value="Melody finished" />
+		<Condition type="DataMining" operation="Exists" event="Note Option" value="Bad">
+			<Storage event="Melody Quality" value="Bad" />
+		</Condition>
+		<Condition type="DataMining" operation="Exists" event="Duration Option" value="Bad">
+			<Storage event="Melody Quality" value="Bad" />
+		</Condition>
+		<Condition type="DataMining" operation="Count" event="Note Option" value="Bad" compareValue="0">
+			<Condition type="DataMining" operation="Count" event="Duration Option" value="Bad" compareValue="0">
+				<Storage event="Melody Quality" value="Good" />
+			</Condition> 
+		</Condition>
 		
-		<!-- <StorageCopy from="WM" to="LTM" /> -->
+		<!-- Saves all events on the Working memory to the Long Term Memory -->
+		<StorageCopy from="WM" to="LTM" />
+		<!-- Clear all from Working Memory, since it is already saved on the Long Term Memory -->
 		<ClearMemory memory="WM" />
 	</Condition>
+	
+	<!-- When a music is saved -->
+	<Condition type="Perception" perception="Saving Melody">
+		
+	</Condition>
+	
+	
+	<!-- When a music is loaded -->
+	<Condition type="Perception" perception="Loading Melody">
+		<Property name="Loading" value="True" />
+	</Condition>
+	
+	<!-- When a music finish loaded -->
+	<Condition type="Perception" perception="Melody Loaded">
+		<Property name="Loading" value="False" />
+	</Condition>
+	
 	
 </Rules>
