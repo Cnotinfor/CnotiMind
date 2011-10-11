@@ -50,4 +50,9 @@
 - (IBAction)btnNoteDo2Touch:(id)sender;
 - (IBAction)btnNotePauseTouch:(id)sender;
 
+- (IBAction)btnDuration01:(id)sender;
+- (IBAction)btnDuration02:(id)sender;
+- (IBAction)btnDuration03:(id)sender;
+- (IBAction)btnDuration04:(id)sender;
+
 @end

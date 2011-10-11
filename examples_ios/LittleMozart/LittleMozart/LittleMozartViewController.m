@@ -84,6 +84,40 @@
     [super dealloc];
 }
 
+- (NSString*)selectedNoteButton {
+    
+    if ([btnNoteDo isSelected]) {
+        return [NSString stringWithString:@"Do"];
+    }
+    else if ([btnNoteRe isSelected]) {
+        return [NSString stringWithString:@"Re"];
+    }
+    else if ([btnNoteMi isSelected]) {
+        return [NSString stringWithString:@"Mi"];
+    }
+    else if ([btnNoteFa isSelected]) {
+        return [NSString stringWithString:@"Fa"];
+    }
+    else if ([btnNoteSol isSelected]) {
+        return [NSString stringWithString:@"Sol"];
+    }
+    else if ([btnNoteLa isSelected]) {
+        return [NSString stringWithString:@"La"];
+    }
+    else if ([btnNoteSi isSelected]) {
+        return [NSString stringWithString:@"Si"];
+    }
+    else if ([btnNoteDo2 isSelected]) {
+        return [NSString stringWithString:@"DoAgudo"];
+    }
+    else if ([btnNotePause isSelected]) {
+        return [NSString stringWithString:@"Pause"];
+    }
+    else {
+        return nil;
+    }
+}
+
 - (void)unselectAllNoteButtons {
     
     [btnNoteDo setSelected:FALSE];
@@ -162,6 +196,22 @@
     [self unselectAllNoteButtons];
     [btnNotePause setSelected:TRUE];
     [btnNotePause setBackgroundColor:[UIColor blueColor]];
+}
+
+- (IBAction)btnDuration01:(id)sender {
+    NSLog(@"%@", [self selectedNoteButton]);
+}
+
+- (IBAction)btnDuration02:(id)sender {
+    NSLog(@"%@", [self selectedNoteButton]);
+}
+
+- (IBAction)btnDuration03:(id)sender {
+    NSLog(@"%@", [self selectedNoteButton]);
+}
+
+- (IBAction)btnDuration04:(id)sender {
+    NSLog(@"%@", [self selectedNoteButton]);
 }
 
 @end
