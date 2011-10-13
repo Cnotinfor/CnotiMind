@@ -22,10 +22,6 @@
         
         //  load XML rulles;
         DLog(@"--- load XML rulles ---");
-//        [_brain loadXmlRulesWithoutXML];
-//        [_brain loadXmlRulesWithoutXMLKickMe];
-        
-//        [_brain loadXmlRulesWithoutXMLKickMeWithHandler];
 
         NSString* XMLFile = [NSString stringWithString:@""];
         XMLFile = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"KickMeRules_emotion_reaction.xml"];	

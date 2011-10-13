@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1853868C1446EF46000DE2A9 /* mozart_rules_without_comments.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1853868B1446EF46000DE2A9 /* mozart_rules_without_comments.xml */; };
 		1868F7A01443320B00B61726 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1868F79F1443320B00B61726 /* UIKit.framework */; };
 		1868F7A21443320B00B61726 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1868F7A11443320B00B61726 /* Foundation.framework */; };
 		1868F7A41443320B00B61726 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1868F7A31443320B00B61726 /* CoreGraphics.framework */; };
@@ -44,9 +45,19 @@
 		1868F82314449C1A00B61726 /* RulesXmlHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1868F80514449C1A00B61726 /* RulesXmlHandler.m */; };
 		1868F82414449C1A00B61726 /* StorageNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1868F80714449C1A00B61726 /* StorageNode.m */; };
 		1868F82514449C1A00B61726 /* SettingsXmlHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1868F80914449C1A00B61726 /* SettingsXmlHandler.m */; };
+		18B41B031444AAF6008D9CE6 /* KickMeRules_emotion_reaction.xml in Resources */ = {isa = PBXBuildFile; fileRef = 18B41AFA1444AAF6008D9CE6 /* KickMeRules_emotion_reaction.xml */; };
+		18B41B041444AAF6008D9CE6 /* KickMeRules_remember_how_many_times_it_was_kicked.xml in Resources */ = {isa = PBXBuildFile; fileRef = 18B41AFB1444AAF6008D9CE6 /* KickMeRules_remember_how_many_times_it_was_kicked.xml */; };
+		18B41B051444AAF6008D9CE6 /* KickMeRules_remember_who_last_kick_the_brain.xml in Resources */ = {isa = PBXBuildFile; fileRef = 18B41AFC1444AAF6008D9CE6 /* KickMeRules_remember_who_last_kick_the_brain.xml */; };
+		18B41B061444AAF6008D9CE6 /* mozart_mind.xml in Resources */ = {isa = PBXBuildFile; fileRef = 18B41AFD1444AAF6008D9CE6 /* mozart_mind.xml */; };
+		18B41B071444AAF6008D9CE6 /* mozart_rules.xml in Resources */ = {isa = PBXBuildFile; fileRef = 18B41AFE1444AAF6008D9CE6 /* mozart_rules.xml */; };
+		18B41B081444AAF6008D9CE6 /* mozart_tutoring.xml in Resources */ = {isa = PBXBuildFile; fileRef = 18B41AFF1444AAF6008D9CE6 /* mozart_tutoring.xml */; };
+		18B41B091444AAF6008D9CE6 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 18B41B001444AAF6008D9CE6 /* README */; };
+		18B41B0A1444AAF6008D9CE6 /* simple_rules.xml in Resources */ = {isa = PBXBuildFile; fileRef = 18B41B011444AAF6008D9CE6 /* simple_rules.xml */; };
+		18B41B0B1444AAF6008D9CE6 /* single_emotion_rules.xml in Resources */ = {isa = PBXBuildFile; fileRef = 18B41B021444AAF6008D9CE6 /* single_emotion_rules.xml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1853868B1446EF46000DE2A9 /* mozart_rules_without_comments.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mozart_rules_without_comments.xml; sourceTree = "<group>"; };
 		1868F79B1443320B00B61726 /* LittleMozart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LittleMozart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1868F79F1443320B00B61726 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1868F7A11443320B00B61726 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -121,6 +132,15 @@
 		1868F80814449C1A00B61726 /* SettingsXmlHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsXmlHandler.h; sourceTree = "<group>"; };
 		1868F80914449C1A00B61726 /* SettingsXmlHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsXmlHandler.m; sourceTree = "<group>"; };
 		18B41AF01444A44F008D9CE6 /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
+		18B41AFA1444AAF6008D9CE6 /* KickMeRules_emotion_reaction.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = KickMeRules_emotion_reaction.xml; sourceTree = "<group>"; };
+		18B41AFB1444AAF6008D9CE6 /* KickMeRules_remember_how_many_times_it_was_kicked.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = KickMeRules_remember_how_many_times_it_was_kicked.xml; sourceTree = "<group>"; };
+		18B41AFC1444AAF6008D9CE6 /* KickMeRules_remember_who_last_kick_the_brain.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = KickMeRules_remember_who_last_kick_the_brain.xml; sourceTree = "<group>"; };
+		18B41AFD1444AAF6008D9CE6 /* mozart_mind.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mozart_mind.xml; sourceTree = "<group>"; };
+		18B41AFE1444AAF6008D9CE6 /* mozart_rules.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mozart_rules.xml; sourceTree = "<group>"; };
+		18B41AFF1444AAF6008D9CE6 /* mozart_tutoring.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mozart_tutoring.xml; sourceTree = "<group>"; };
+		18B41B001444AAF6008D9CE6 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		18B41B011444AAF6008D9CE6 /* simple_rules.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = simple_rules.xml; sourceTree = "<group>"; };
+		18B41B021444AAF6008D9CE6 /* single_emotion_rules.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = single_emotion_rules.xml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +188,7 @@
 		1868F7A51443320B00B61726 /* LittleMozart */ = {
 			isa = PBXGroup;
 			children = (
+				18B41AF91444AAF6008D9CE6 /* xml */,
 				18B41AF01444A44F008D9CE6 /* Macros.h */,
 				1868F7AE1443320B00B61726 /* LittleMozartAppDelegate.h */,
 				1868F7AF1443320B00B61726 /* LittleMozartAppDelegate.m */,
@@ -282,6 +303,24 @@
 			path = rules;
 			sourceTree = "<group>";
 		};
+		18B41AF91444AAF6008D9CE6 /* xml */ = {
+			isa = PBXGroup;
+			children = (
+				18B41AFA1444AAF6008D9CE6 /* KickMeRules_emotion_reaction.xml */,
+				18B41AFB1444AAF6008D9CE6 /* KickMeRules_remember_how_many_times_it_was_kicked.xml */,
+				18B41AFC1444AAF6008D9CE6 /* KickMeRules_remember_who_last_kick_the_brain.xml */,
+				18B41AFD1444AAF6008D9CE6 /* mozart_mind.xml */,
+				18B41AFE1444AAF6008D9CE6 /* mozart_rules.xml */,
+				18B41AFF1444AAF6008D9CE6 /* mozart_tutoring.xml */,
+				18B41B001444AAF6008D9CE6 /* README */,
+				18B41B011444AAF6008D9CE6 /* simple_rules.xml */,
+				18B41B021444AAF6008D9CE6 /* single_emotion_rules.xml */,
+				1853868B1446EF46000DE2A9 /* mozart_rules_without_comments.xml */,
+			);
+			name = xml;
+			path = ../../xml;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -335,6 +374,16 @@
 				1868F7AA1443320B00B61726 /* InfoPlist.strings in Resources */,
 				1868F7B31443320B00B61726 /* MainWindow.xib in Resources */,
 				1868F7B91443320B00B61726 /* LittleMozartViewController.xib in Resources */,
+				18B41B031444AAF6008D9CE6 /* KickMeRules_emotion_reaction.xml in Resources */,
+				18B41B041444AAF6008D9CE6 /* KickMeRules_remember_how_many_times_it_was_kicked.xml in Resources */,
+				18B41B051444AAF6008D9CE6 /* KickMeRules_remember_who_last_kick_the_brain.xml in Resources */,
+				18B41B061444AAF6008D9CE6 /* mozart_mind.xml in Resources */,
+				18B41B071444AAF6008D9CE6 /* mozart_rules.xml in Resources */,
+				18B41B081444AAF6008D9CE6 /* mozart_tutoring.xml in Resources */,
+				18B41B091444AAF6008D9CE6 /* README in Resources */,
+				18B41B0A1444AAF6008D9CE6 /* simple_rules.xml in Resources */,
+				18B41B0B1444AAF6008D9CE6 /* single_emotion_rules.xml in Resources */,
+				1853868C1446EF46000DE2A9 /* mozart_rules_without_comments.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

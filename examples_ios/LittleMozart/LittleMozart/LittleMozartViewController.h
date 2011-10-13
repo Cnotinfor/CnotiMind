@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+#import "Brain.h"
+#import "Perception.h"
+#import "Action.h"
+#import "Emotion.h"
+
+#import "ConditionPerceptionNode.h"
+#import "RuleNode.h"
+
+
 @interface LittleMozartViewController : UIViewController {
     UIButton *btnNoteDo;
     UIButton *btnNoteRe;
@@ -22,6 +31,9 @@
     UIButton *btnDuration02;
     UIButton *btnDuration03;
     UIButton *btnDuration04;
+    
+    
+    Brain* _brain;
 }
 
 @property (nonatomic, retain) IBOutlet UIButton *btnNoteDo;
@@ -54,5 +66,8 @@
 - (IBAction)btnDuration02:(id)sender;
 - (IBAction)btnDuration03:(id)sender;
 - (IBAction)btnDuration04:(id)sender;
+
+- (void)actionReceived:(NSNotification*)aNotif;
+- (void)emotionReceived:(NSNotification*)aNotif;
 
 @end

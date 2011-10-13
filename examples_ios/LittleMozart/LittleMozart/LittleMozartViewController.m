@@ -33,13 +33,38 @@
 
 #pragma mark - View lifecycle
 
-/*
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
+    _brain = [[Brain alloc] init];
+        
+    //  load XML rulles;
+    DLog(@"--- load XML rulles ---");
+
+    NSString* XMLFile = [NSString stringWithString:@""];
+    XMLFile = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"mozart_rules.xml"];	
+    
+    [_brain loadXmlRules:XMLFile];
+    [_brain printRules];
+    
+    
+    DLog(@"--- start brain ---");
+    [_brain startThreadRun];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(actionReceived:) 
+                                                 name:SEND_ACTION
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(emotionReceived:) 
+                                                 name:SEND_EMOTIONAL_STATE
+                                               object:nil];
+    
     [super viewDidLoad];
 }
-*/
+
 
 - (void)viewDidUnload
 {
@@ -212,6 +237,23 @@
 
 - (IBAction)btnDuration04:(id)sender {
     NSLog(@"%@", [self selectedNoteButton]);
+}
+
+- (void)actionReceived:(NSNotification*)aNotif
+{
+    
+    NSArray* values = [[aNotif object] allValues]; 
+    for (id value in values) {
+        //  DLog(@"setText: %@", value);
+    }
+    
+    DLog(@"actionReceived: %@", aNotif);
+}
+
+
+- (void)emotionReceived:(NSNotification*)aNotif
+{
+    DLog(@"emotionReceived: %@", aNotif);
 }
 
 @end

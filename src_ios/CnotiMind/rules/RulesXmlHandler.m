@@ -113,7 +113,18 @@
     {
         return [self createRandomNode:atts];
     }
-    
+    if (![aQName caseInsensitiveCompare:@"comment"])
+    {
+        return true;
+    }
+    if (![aQName caseInsensitiveCompare:@"StorageCopy"])
+    {
+        return true;
+    }
+    if (![aQName caseInsensitiveCompare:@"text"])
+    {
+        return true;
+    }
     DLog(@"[RulesXmlHandler::startElement] Invalid element: %@",aQName);
     
     return false;
@@ -124,6 +135,20 @@
 */
 - (BOOL) endElement:(NSString*)aNamespaceURI localName:(NSString*)aLocalName qName:(NSString*)aQName
 {
+    if (![aQName caseInsensitiveCompare:@"comment"])
+    {
+        return true;
+    }
+    if (![aQName caseInsensitiveCompare:@"StorageCopy"])
+    {
+        return true;
+    }
+    if (![aQName caseInsensitiveCompare:@"text"])
+    {
+        return true;
+    }
+
+    
     if( _rootNode == _currentNode )
     {
         _currentNode = NULL;
