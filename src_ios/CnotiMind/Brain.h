@@ -22,6 +22,7 @@
 //#import "MemoryType.h"
 
 #import "RulesXmlHandler.h"
+#import "SettingsXmlHandler.h"
 
 
 
@@ -55,6 +56,7 @@ enum { HAS_DATA, NO_DATA };
     bool _quit;
     
     RulesXmlHandler* _rulesXMLHandler;
+    SettingsXmlHandler* _settingsXMLHandler;
 }
 
 
@@ -72,11 +74,12 @@ enum { HAS_DATA, NO_DATA };
 - (void) addValidPerception:(NSString*)aPerception;
 - (void) addValidAction:(NSString*)aAction;
 - (void) addEmotion:(Emotion*)aEmotion;
-- (BOOL) loadXmlRulesWithoutXML;
-- (BOOL) loadXmlRulesWithoutXMLKickMeWithHandler;
-- (BOOL) loadXmlRulesWithoutXMLKickMe;
+
+- (BOOL) loadXmlSettings:(NSString*)aFilename;
 - (BOOL) loadXmlRules:(NSString*)aFilename;
 - (BOOL) loadXMLRecursive:(NSArray*)rulesMembers;
+- (BOOL) loadXMLRecursiveSettings:(NSArray*)settingsMembers;
+
 
 - (BOOL) validateXml:(NSString*)aFilename;
 - (BOOL) saveMemory:(NSString*)aFilename;

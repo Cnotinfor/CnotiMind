@@ -47,7 +47,7 @@
 
         _rootNode = NULL;
         _currentNode = NULL;
-//        _parentNode = NULL;
+//      _parentNode = NULL;
         _brain = aBrain;
         _line = 0;
         
@@ -72,7 +72,6 @@
 - (BOOL) startElement:(NSString*)aNamespaceURI localName:(NSString*)aLocalName qName:(NSString*)aQName atts:(GDataXMLElement*)atts
 {
     _line++;
-    
     if( ![aQName caseInsensitiveCompare:@"Settings"] )
     {
         return true;
@@ -103,6 +102,10 @@
             return false;
         }
         _insideValue = true;
+        return true;
+    }
+    if (![aQName caseInsensitiveCompare:@"comment"])
+    {
         return true;
     }
     
@@ -138,6 +141,10 @@
         _insideValue = false;
         return true;
     }
+    if (![aQName caseInsensitiveCompare:@"comment"])
+    {
+        return true;
+    }
     
     DLog(@"[RulesXmlHandler::endElement] Invalid element: %@",aQName);
     
@@ -169,7 +176,7 @@
         return false;
     }
     // Check it it need values for the perception
-    _needValues = ![[atts valueForKey:TYPE] caseInsensitiveCompare:TYPE_VALUES];
+//    _needValues = ![[atts valueForKey:TYPE] caseInsensitiveCompare:TYPE_VALUES];
     [_possibleValues removeAllObjects];
     
     // Get the perception name
@@ -195,7 +202,7 @@
         return false;
     }
     // Check it it need values for the perception
-    _needValues = ![[atts valueForKey:TYPE] caseInsensitiveCompare:TYPE_VALUES];
+//    _needValues = ![[atts valueForKey:TYPE] caseInsensitiveCompare:TYPE_VALUES];
     [_possibleValues removeAllObjects];
     
     // Get the action name

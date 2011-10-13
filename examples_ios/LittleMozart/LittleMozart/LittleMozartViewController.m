@@ -48,6 +48,12 @@
     [_brain loadXmlRules:XMLFile];
     [_brain printRules];
     
+    NSString* XMLFileSettings = [NSString stringWithString:@""];
+    XMLFileSettings = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"mozart_mind.xml"];	
+    
+    [_brain loadXmlSettings:XMLFileSettings];
+    [_brain printSettings];
+    
     
     DLog(@"--- start brain ---");
     [_brain startThreadRun];
