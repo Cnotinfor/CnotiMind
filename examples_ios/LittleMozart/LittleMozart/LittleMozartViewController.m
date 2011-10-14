@@ -179,58 +179,87 @@
     [btnNoteDo setSelected:TRUE];
     [btnNoteDo setBackgroundColor:[UIColor blueColor]];
     
+    Perception* perceptionDo = [[Perception alloc] initWithNameAndAValue:@"Note" value:@"Do"];
+    [_brain receivePerception:perceptionDo];
+    
 }
 
-- (IBAction)btnNotereTouch:(id)sender {
+- (IBAction)btnNoteReTouch:(id)sender {
     [self unselectAllNoteButtons];
     [btnNoteRe setSelected:TRUE];
     [btnNoteRe setBackgroundColor:[UIColor blueColor]];
+    
+    Perception* perceptionRe = [[Perception alloc] initWithNameAndAValue:@"Note" value:@"Re"];
+    [_brain receivePerception:perceptionRe];
 }
 
 - (IBAction)btnNoteMiTouch:(id)sender {
     [self unselectAllNoteButtons];
     [btnNoteMi setSelected:TRUE];
     [btnNoteMi setBackgroundColor:[UIColor blueColor]];
+    
+    Perception* perceptionMi = [[Perception alloc] initWithNameAndAValue:@"Note" value:@"Mi"];
+    [_brain receivePerception:perceptionMi];
 }
 
 - (IBAction)btnNoteFaTouch:(id)sender {
     [self unselectAllNoteButtons];
     [btnNoteFa setSelected:TRUE];
     [btnNoteFa setBackgroundColor:[UIColor blueColor]];
+    
+    Perception* perceptionFa = [[Perception alloc] initWithNameAndAValue:@"Note" value:@"Fa"];
+    [_brain receivePerception:perceptionFa];
 }
 
 - (IBAction)btnNoteSolTouch:(id)sender {
     [self unselectAllNoteButtons];
     [btnNoteSol setSelected:TRUE];
     [btnNoteSol setBackgroundColor:[UIColor blueColor]];
+    
+    Perception* perceptionSol = [[Perception alloc] initWithNameAndAValue:@"Note" value:@"Sol"];
+    [_brain receivePerception:perceptionSol];
 }
 
 - (IBAction)btnNoteLaTouch:(id)sender {
     [self unselectAllNoteButtons];
     [btnNoteLa setSelected:TRUE];
     [btnNoteLa setBackgroundColor:[UIColor blueColor]];
+    
+    Perception* perceptionLa = [[Perception alloc] initWithNameAndAValue:@"Note" value:@"La"];
+    [_brain receivePerception:perceptionLa];
 }
 
 - (IBAction)btnNoteSiTouch:(id)sender {
     [self unselectAllNoteButtons];
     [btnNoteSi setSelected:TRUE];
     [btnNoteSi setBackgroundColor:[UIColor blueColor]];
+    
+    Perception* perceptionSi = [[Perception alloc] initWithNameAndAValue:@"Note" value:@"Si"];
+    [_brain receivePerception:perceptionSi];
 }
 
 - (IBAction)btnNoteDo2Touch:(id)sender {
     [self unselectAllNoteButtons];
     [btnNoteDo2 setSelected:TRUE];
     [btnNoteDo2 setBackgroundColor:[UIColor blueColor]];
+    
+    Perception* perceptionDo2 = [[Perception alloc] initWithNameAndAValue:@"Note" value:@"DoAgudo"];
+    [_brain receivePerception:perceptionDo2];
 }
 
 - (IBAction)btnNotePauseTouch:(id)sender {
     [self unselectAllNoteButtons];
     [btnNotePause setSelected:TRUE];
     [btnNotePause setBackgroundColor:[UIColor blueColor]];
+    
+    Perception* perceptionPause = [[Perception alloc] initWithNameAndAValue:@"Note" value:@"Pause"];
+    [_brain receivePerception:perceptionPause];
 }
 
 - (IBAction)btnDuration01:(id)sender {
     NSLog(@"%@", [self selectedNoteButton]);
+    
+    
 }
 
 - (IBAction)btnDuration02:(id)sender {
@@ -247,12 +276,6 @@
 
 - (void)actionReceived:(NSNotification*)aNotif
 {
-    
-    NSArray* values = [[aNotif object] allValues]; 
-    for (id value in values) {
-        //  DLog(@"setText: %@", value);
-    }
-    
     DLog(@"actionReceived: %@", aNotif);
 }
 
