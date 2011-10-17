@@ -922,6 +922,8 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     MemoryEvent* objectMemoryEvent;
     while( objectMemoryEvent = [eMemoryEvent nextObject] ) // Iterate all memory
     {
+        
+        DLog(@"objectMemoryEvent event: %@", [objectMemoryEvent event]);
         if( ![[objectMemoryEvent event] caseInsensitiveCompare:aEvent] ) // Event found
         {
             return true;

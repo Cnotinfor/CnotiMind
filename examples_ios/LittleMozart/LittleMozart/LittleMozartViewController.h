@@ -51,9 +51,8 @@
 @property (nonatomic, retain) IBOutlet UIButton *btnDuration03;
 @property (nonatomic, retain) IBOutlet UIButton *btnDuration04;
 
-
 - (IBAction)btnNoteDoTouch:(id)sender;
-- (IBAction)btnNotereTouch:(id)sender;
+- (IBAction)btnNoteReTouch:(id)sender;
 - (IBAction)btnNoteMiTouch:(id)sender;
 - (IBAction)btnNoteFaTouch:(id)sender;
 - (IBAction)btnNoteSolTouch:(id)sender;
