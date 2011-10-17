@@ -33,8 +33,11 @@
 		
 		<!-- First Note added -->
 		<Condition type="DataMining" operation="Exists"	event="Note" compareValue="0" memory="WM">
+            <Action name="Think" value="DEBUG 1" />
+
 			<Action name="Think" value="First Note" />
 			<Condition type="Perception" perception="Note" value="Do">
+                <Action name="Think" value="DEBUG 2" />
 				<Emotion name="Joy" increment="2" max="10" />
 				<Storage event="Start Note" value="Do" memory="WM" />
 				<Property name="Notes Option" value="Good" />

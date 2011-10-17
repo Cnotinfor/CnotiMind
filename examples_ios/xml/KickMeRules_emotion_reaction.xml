@@ -9,7 +9,7 @@
             </Condition>
         </DataMining>
 
-        <Emotion name="joy" increase="-2" />
+        <Emotion name="joy" increment="-2" />
         <Storage event="kicker" value="[perception.value]" memory="WM" />
 
         <Condition type="emotion" emotion="joy" operator="Smaller" value="-5" >

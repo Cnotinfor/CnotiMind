@@ -273,9 +273,7 @@
 - (void) tagsToValue:(NSString**)aValue variables:(NSMutableDictionary**)aVariables
 {
     NSString* empty = [NSString stringWithFormat:@""];
-    
-//    DLog(@"%@", *aValue);
-    
+        
     // VARIABLES
     NSRegularExpression *regex_variables_tags = [NSRegularExpression regularExpressionWithPattern:@"(\\[[a-zA-Z0-9_\\- \\.]+\\])"
                                                                            options:NSRegularExpressionCaseInsensitive
@@ -284,31 +282,31 @@
     int pos = 0;
     
     while( (pos = [regex_variables_tags firstMatchInString:*aValue options:0 range:NSMakeRange(0, [*aValue length])].range.location ) != 0 )
-    {
+    {        
         NSRange rangeOfFirstMatch = [regex_variables_tags rangeOfFirstMatchInString:*aValue options:0 range:NSMakeRange(0, [*aValue length])];
         NSString* var = [*aValue substringWithRange:rangeOfFirstMatch];
-        
-        DLog(@"var: %@", var);
-        DLog(@"aVariables: %@", *aVariables);
+        var = [var lowercaseString];
         
         NSString* valueFromKey = [[NSString alloc] initWithFormat:@"%@", [*aVariables valueForKey:var]];
         
-        DLog(@"valueFromKey: %@", valueFromKey);
+        NSRange range = NSMakeRange(0, [*aValue length]);
 
-        
         if ([valueFromKey length]>0) {
             // found it, replace by the variable tag, by the variable value
             
+                    
             *aValue = [*aValue stringByReplacingOccurrencesOfString:var
-                                                         withString:valueFromKey];
+                                                         withString:valueFromKey
+                                                            options:NSCaseInsensitiveSearch 
+                                                            range:range];
             pos += [valueFromKey length];
         }
         else {
             // not found replace by an empty string
             *aValue = [*aValue stringByReplacingOccurrencesOfString:var
-                                                         withString:empty];
+                                                         withString:empty                                                            options:NSCaseInsensitiveSearch 
+                                                              range:range];
         }
-        DLog(@"aValue: %@", *aValue);
     }
     
     // PROPERTIES - TODO
@@ -324,10 +322,7 @@
         
         NSString* var = [*aValue substringWithRange:rangeOfFirstMatch];
         
-        DLog(@"var: %@", var);
-        DLog(@"aVariables: %@", *aVariables);
         NSString* valueFromKey = [[NSString alloc] initWithString: [*aVariables valueForKey:var]];
-        DLog(@"valueFromKey: %@", valueFromKey);
         
         if ([valueFromKey length]>0) {
             
@@ -344,7 +339,6 @@
                                                          withString:empty];
             
         }
-        DLog(@"aValue: %@", *aValue);
     }
 }
 

@@ -249,7 +249,7 @@
     }
     
     NSString* emotion = [[atts attributeForName:@"name"] stringValue];
-    NSString* value = [[atts attributeForName:@"increase"] stringValue];
+    NSString* value = [[atts attributeForName:@"increment"] stringValue];
     BOOL okMin = [CnotiMind isNumeric: [[atts attributeForName:@"min"] stringValue]];
     double min = [[[atts attributeForName:@"min"] stringValue] floatValue];
     BOOL okMax = [CnotiMind isNumeric: [[atts attributeForName:@"max"] stringValue]];

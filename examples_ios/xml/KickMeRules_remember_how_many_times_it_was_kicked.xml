@@ -9,7 +9,7 @@
                 <Action name="talk" value="Again? Are you crazy?" />
             </Condition>
         </DataMining>
-        <Emotion name="joy" increase="-2" />
+        <Emotion name="joy" increment="-2" />
         <Storage event="kicked" value="[perception.value]" memory="WM" />
     </Condition>
 </Rules>

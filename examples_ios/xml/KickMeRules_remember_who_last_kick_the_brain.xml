@@ -3,7 +3,7 @@
 	    <Condition type="datamining" operation="last" event="kicker" compareValue="being kicked" memory="WM">
 	    	<Action name="talk" value="Again? Are you crazy?" />
 		</Condition>
-        <Emotion name="joy" increase="-2" />
+        <Emotion name="joy" increment="-2" />
 		<Storage event="kicker" value="being kicked" memory="WM" />
     </Condition>
 </Rules>
