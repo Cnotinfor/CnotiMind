@@ -16,6 +16,7 @@
 #import "ConditionEmotionNode.h"
 #import "ConditionDataMiningNode.h"
 #import "ConditionVariableNode.h"
+#import "ConditionPropertyNode.h"
 #import "DataMiningNode.h"
 
 #import "MathOperationNode.h"
@@ -68,6 +69,10 @@
 - (BOOL) startElement:(NSString*)aNamespaceURI localName:(NSString*)aLocalName qName:(NSString*)aQName atts:(GDataXMLElement*)atts
 {
     _line++;
+    
+    DLog(@"---------------------------------------------------------------------------------------------");
+    DLog(@"startElement---aQName: %@ _currentNode: %@ _parentNode: %@", aQName, _currentNode, _parentNode);
+
     
     if( ![aQName caseInsensitiveCompare:@"Rules"] )
     {
@@ -151,12 +156,16 @@
     
     if( _rootNode == _currentNode )
     {
+        DLog(@"oooendElement---aQName: %@ _currentNode: %@ _parentNode: %@ rootNode: %@", aQName, _currentNode, _parentNode, _rootNode);
+
         _currentNode = NULL;
         return true;
     }
     
     _currentNode = _parentNode;
     _parentNode = (RuleNode*)_currentNode.parent;
+    
+    DLog(@"endElement---aQName: %@ _currentNode: %@ _parentNode: %@", aQName, _currentNode, _parentNode);
     
     return true;
 }
@@ -179,26 +188,38 @@
 
 - (BOOL) createActionNode:(GDataXMLElement*)atts
 {
-    if( _rootNode == NULL || _currentNode == NULL )
-    {
-        return false;
-    }
+
 
     NSString* name = [[atts attributeForName:@"name"] stringValue];
     NSString* value = [[atts attributeForName:@"value"] stringValue];
     NSString* probability = [[atts attributeForName:@"probability"] stringValue];
+    
+    if( _rootNode == NULL || _currentNode == NULL )
+    {
+        DLog(@"_rootNode: %@", _rootNode);
+        DLog(@"_currentNode: %@", _currentNode);
+        
+        DLog(@"---createActionNodename: %@ createActionNodevalue: %@", name, value);
+        
+     
+
+        return false;
+    }
     
     if( [probability length]==0 )
     {
         probability = @"1";
     }
     
+    DLog(@"createActionNodename: %@ createActionNodevalue: %@", name, value);
+    
     _parentNode = _currentNode;
     _currentNode = [[ActionNode alloc] initWithNameAndValueAndBrainAndParent: name 
                                                                        value:value 
                                                                        brain:_brain 
                                                                       parent:_parentNode];
-    
+    DLog(@"_rootNode: %@", _rootNode);
+    DLog(@"_currentNode: %@", _currentNode);
     return true;
 }
 
@@ -384,8 +405,21 @@
 
 - (BOOL) createConditionPropertyNode:(GDataXMLElement*)atts
 {
-//    TODO
-    return false;
+
+    NSString* property = [[atts attributeForName:@"property"] stringValue];
+    NSString* value = [[atts attributeForName:@"compareValue"] stringValue];
+    NSString* opCondition = [[atts attributeForName:@"operator"] stringValue];
+    
+    enum ConditionOperator opConditionType;
+    opConditionType = [CnotiMind translateConditionOperator: opCondition];
+    
+    _parentNode = _currentNode;
+    _currentNode = [[ConditionPropertyNode alloc] initWithPropertyAndValuAndOperatorAndBrainAndParent:property 
+                                                                                                value:value 
+                                                                                             operator:opConditionType
+                                                                                                brain:_brain 
+                                                                                               parent:_parentNode];
+    return true;
 }
 
 - (BOOL) createConditionEmotionNode:(GDataXMLElement*)atts

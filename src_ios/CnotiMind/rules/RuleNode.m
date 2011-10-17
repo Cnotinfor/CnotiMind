@@ -316,13 +316,16 @@
     // Search for variable value is between curl brackets
     pos = 0;    
     
-    while( (pos = [regex_properties_tags firstMatchInString:*aValue options:0 range:NSMakeRange(0, [*aValue length])].range.length ) != 0 )
+    while( (pos = [regex_variables_tags firstMatchInString:*aValue options:0 range:NSMakeRange(0, [*aValue length])].range.location ) != 0 )
     {
+        
+        DLog(@"...");
         NSRange rangeOfFirstMatch = [regex_properties_tags rangeOfFirstMatchInString:*aValue options:0 range:NSMakeRange(0, [*aValue length])];
         
         NSString* var = [*aValue substringWithRange:rangeOfFirstMatch];
-        
-        NSString* valueFromKey = [[NSString alloc] initWithString: [*aVariables valueForKey:var]];
+        var = [var lowercaseString];
+
+        NSString* valueFromKey = [[NSString alloc] initWithFormat:@"%@", [*aVariables valueForKey:var]];
         
         if ([valueFromKey length]>0) {
             

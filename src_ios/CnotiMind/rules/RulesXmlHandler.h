@@ -19,6 +19,7 @@
 @class ConditionPerceptionNode;
 @class ConditionEmotionNode;
 @class ConditionDataMiningNode;
+@class ConditionPropertyNode;
 @class Brain;
 
 #import "GDataXMLNode.h"

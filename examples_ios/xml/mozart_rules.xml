@@ -29,17 +29,11 @@
 <Rules>
 	<!-- When a note is added -->
 	<Condition type="Perception" perception="Note">
-        <Action name="Think" value="DEBUG 1.0" />
-
 		<Action name="Think" value="Note chosen [Perception.value]" />
-		
 		<!-- First Note added -->
 		<Condition type="DataMining" operation="Exists"	event="Note" compareValue="0" memory="WM">
-            <Action name="Think" value="DEBUG 1.1" />
-
 			<Action name="Think" value="First Note" />
-			<Condition type="Perception" perception="Note" value="Do">
-                <Action name="Think" value="DEBUG 2" />
+			<Condition type="Perception" perception="Note" value="Do">                
 				<Emotion name="Joy" increment="2" max="10" />
 				<Storage event="Start Note" value="Do" memory="WM" />
 				<Property name="Notes Option" value="Good" />
@@ -104,12 +98,8 @@
 			</Condition>
 
 		</Condition>
-        <Action name="Think" value="DEBUG 1.2" />
-
 		<!-- Test if there is already one note -->
 		<Condition type="DataMining" operation="Exists"	event="Note" compareValue="1" memory="WM">
-	        <Action name="Think" value="DEBUG 1.3" />
-
 			<DataMining operation="Last" event="Note" variable="[Last Note]"  memory="WM">
 				<!-- Do -->
 				<Condition type="Perception" perception="Note" value="Do">
@@ -149,8 +139,6 @@
 
 				<!-- Re -->
 				<Condition type="Perception" perception="Note" value="Re">
-			        <Action name="Think" value="DEBUG 1.4" />
-
 					<Condition type="Variable" variable="[Last Note]" compareValue="Do">
 						<Emotion name="Joy" increment="1" max="7" />
 						<Property name="Notes Option" value="Good" />
@@ -431,14 +419,9 @@
 
 			</DataMining>
 		</Condition>
-
-        <Action name="Think" value="DEBUG 3.0" />		
-
 		<Action name="Think" value="Note {Notes Option}" />
-        <Action name="Think" value="DEBUG 3.1" />		
 		<!-- Save note added to the memory -->
 		<Condition type="Perception" perception="Note" value="Pause" operator="!=" >
-            <Action name="Think" value="DEBUG 4" />
 			<Storage event="Note" value="[Perception.value]" memory="WM" />
 			<Property name="Pause" value="false" />
 		</Condition>
