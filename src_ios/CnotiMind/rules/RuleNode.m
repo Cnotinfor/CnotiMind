@@ -316,25 +316,32 @@
     // Search for variable value is between curl brackets
     pos = 0;    
     
-    while( (pos = [regex_variables_tags firstMatchInString:*aValue options:0 range:NSMakeRange(0, [*aValue length])].range.location ) != 0 )
+    while( (pos = [regex_properties_tags firstMatchInString:*aValue options:0 range:NSMakeRange(0, [*aValue length])].range.location ) != 0 )
     {
         
         DLog(@"...");
         NSRange rangeOfFirstMatch = [regex_properties_tags rangeOfFirstMatchInString:*aValue options:0 range:NSMakeRange(0, [*aValue length])];
         
         NSString* var = [*aValue substringWithRange:rangeOfFirstMatch];
-        var = [var lowercaseString];
+        var = [var substringWithRange:NSMakeRange(1, [var length]-2)];
+        
+//      var = [var lowercaseString];
 
-        NSString* valueFromKey = [[NSString alloc] initWithFormat:@"%@", [*aVariables valueForKey:var]];
+        DLog(@"_brain.properties: %@", _brain.properties);
+
+        NSString* valueFromKey = [[NSString alloc] initWithFormat:@"%@", [_brain.properties valueForKey:var]];
         
         if ([valueFromKey length]>0) {
             
             NSString* var2 = [NSString stringWithFormat:@""];
             var2 = [NSString stringWithFormat:@"{%@}",var];
             
+            DLog(@"var2: %@", var2);
+            
             *aValue = [*aValue stringByReplacingOccurrencesOfString:var2
                                                          withString:valueFromKey];
             pos += [valueFromKey length];
+            
         }
         else {
             // not found replace by an empty string

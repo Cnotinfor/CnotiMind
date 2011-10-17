@@ -41,6 +41,8 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         _longTermMemory = [[NSMutableArray alloc] init];
         _workingMemory = [[NSMutableArray alloc] init];
         
+        _properties = [[NSMutableDictionary alloc] init];
+        
         _semaphoreBrain = [[NSConditionLock alloc] initWithCondition:NO_DATA];       
         
     }
