@@ -97,6 +97,7 @@
         {
             // Apply the operator
             float result = [self applyOperation:variableNumericValue];
+            DLog(@"result: %f", result);
             
             // Save the output
             if( [_resultVariable length]==0 ) // If it is empty, save on the same variable

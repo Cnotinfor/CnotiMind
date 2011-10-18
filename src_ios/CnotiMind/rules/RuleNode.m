@@ -281,13 +281,15 @@
     // Search for variable value is between square brackets
     int pos = 0;
     
-    while( (pos = [regex_variables_tags firstMatchInString:*aValue options:0 range:NSMakeRange(0, [*aValue length])].range.location ) != 0 )
+    NSTextCheckingResult* regResultCheck = [regex_variables_tags firstMatchInString:*aValue options:0 range:NSMakeRange(0, [*aValue length])];
+    
+    while( regResultCheck != nil )
     {        
+        pos = regResultCheck.range.location;
+        
         NSRange rangeOfFirstMatch = [regex_variables_tags rangeOfFirstMatchInString:*aValue options:0 range:NSMakeRange(0, [*aValue length])];
         NSString* var = [*aValue substringWithRange:rangeOfFirstMatch];
-//        var = [var lowercaseString];
-        
-//      NSString* valueFromKey = [[NSString alloc] initWithFormat:@"%@", [*aVariables valueForKey:var]];
+
         NSString* valueFromKey = [[NSString alloc] initWithFormat:@"%@", [self valueForKeyInsensitiveSearch:*aVariables key:var]];
         NSRange range = NSMakeRange(0, [*aValue length]);
 
@@ -304,9 +306,12 @@
         else {
             // not found replace by an empty string
             *aValue = [*aValue stringByReplacingOccurrencesOfString:var
-                                                         withString:empty                                                            options:NSCaseInsensitiveSearch 
+                                                         withString:empty
+                                                            options:NSCaseInsensitiveSearch 
                                                               range:range];
         }
+        
+        regResultCheck = [regex_variables_tags firstMatchInString:*aValue options:0 range:NSMakeRange(0, [*aValue length])];
     }
     
     // PROPERTIES - TODO
@@ -315,22 +320,18 @@
                                                                                             error:nil];
     // Search for variable value is between curl brackets
     pos = 0;    
-    
-    while( (pos = [regex_properties_tags firstMatchInString:*aValue options:0 range:NSMakeRange(0, [*aValue length])].range.location ) != 0 )
+    NSTextCheckingResult* regResultCheck2 = [regex_properties_tags firstMatchInString:*aValue options:0 range:NSMakeRange(0, [*aValue length])];
+
+    while( regResultCheck2 != nil )
     {
-        
-        DLog(@"...");
+        pos = regResultCheck2.range.location;
+
         NSRange rangeOfFirstMatch = [regex_properties_tags rangeOfFirstMatchInString:*aValue options:0 range:NSMakeRange(0, [*aValue length])];
         
         NSString* var = [*aValue substringWithRange:rangeOfFirstMatch];
-        DLog(@"var: %@", var);
+
         var = [var substringWithRange:NSMakeRange(1, [var length]-2)];
-        DLog(@"var: %@", var);
-//        var = [var lowercaseString];
 
-        DLog(@"_brain.properties: %@", _brain.properties);
-
-//        NSString* valueFromKey = [[NSString alloc] initWithFormat:@"%@", [_brain.properties valueForKey:var]];
         NSString* valueFromKey = [[NSString alloc] initWithFormat:@"%@", [self valueForKeyInsensitiveSearch:_brain.properties key:var]];   
 
         DLog(@"valueFromKey: %@", valueFromKey);
@@ -352,6 +353,8 @@
                                                          withString:empty];
             
         }
+        
+        regResultCheck2 = [regex_properties_tags firstMatchInString:*aValue options:0 range:NSMakeRange(0, [*aValue length])];
     }
 }
 

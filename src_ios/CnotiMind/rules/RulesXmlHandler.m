@@ -387,7 +387,7 @@
 - (BOOL) createConditionVariableNode:(GDataXMLElement*)atts
 {
     NSString* variable = [[atts attributeForName:@"variable"] stringValue];
-    NSString* value = [[atts attributeForName:@"value"] stringValue];
+    NSString* value = [[atts attributeForName:@"compareValue"] stringValue];
     NSString* opCondition = [[atts attributeForName:@"operator"] stringValue];
     
     enum ConditionOperator opConditionType;

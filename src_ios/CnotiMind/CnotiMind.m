@@ -112,37 +112,37 @@
  */
 + (enum MathOperation) translateMathOperation:(NSString*)text
 {
-    if( [text caseInsensitiveCompare: @"sum"]  ||
-       [text caseInsensitiveCompare: @"+"]  )
+    if( ![text caseInsensitiveCompare: @"sum"]  ||
+       ![text caseInsensitiveCompare: @"+"]  )
     {
         return MathOperationSum;
     }
-    if( [text caseInsensitiveCompare: @"sub"]  ||
-       [text caseInsensitiveCompare: @"subtraction"]  ||
-       [text caseInsensitiveCompare: @"-"]  )
+    if( ![text caseInsensitiveCompare: @"sub"]  ||
+       ![text caseInsensitiveCompare: @"subtraction"]  ||
+       ![text caseInsensitiveCompare: @"-"]  )
     {
         return MathOperationSubtraction;
     }
-    if( [text caseInsensitiveCompare: @"mul"]  ||
-       [text caseInsensitiveCompare: @"multiplication"]  ||
-       [text caseInsensitiveCompare: @"x"]  ||
-       [text caseInsensitiveCompare: @"*"]  )
+    if( ![text caseInsensitiveCompare: @"mul"]  ||
+       ![text caseInsensitiveCompare: @"multiplication"]  ||
+       ![text caseInsensitiveCompare: @"x"]  ||
+       ![text caseInsensitiveCompare: @"*"]  )
     {
         return MathOperationMultiplication;
     }
-    if( [text caseInsensitiveCompare: @"div"]  ||
-       [text caseInsensitiveCompare: @"division"]  ||
-       [text caseInsensitiveCompare: @"quotient"]  ||
-       [text caseInsensitiveCompare: @"/"]  )
+    if( ![text caseInsensitiveCompare: @"div"]  ||
+       ![text caseInsensitiveCompare: @"division"]  ||
+       ![text caseInsensitiveCompare: @"quotient"]  ||
+       ![text caseInsensitiveCompare: @"/"]  )
     {
         return MathOperationDivision;
     }
-    if( [text caseInsensitiveCompare: @"remainder"]  ||
-       [text caseInsensitiveCompare: @"%"]  )
+    if( ![text caseInsensitiveCompare: @"remainder"]  ||
+       ![text caseInsensitiveCompare: @"%"]  )
     {
         return MathOperationRemainder;
     }
-    if( [text caseInsensitiveCompare: @"sqrt"]  )
+    if( ![text caseInsensitiveCompare: @"sqrt"]  )
     {
         return MathOperationSquareRoot;
     }
