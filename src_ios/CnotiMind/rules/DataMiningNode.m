@@ -27,7 +27,15 @@
     if ( self == [super initWithBrainAndParent:aBrain parent:aParent] )
     {
         _event = (aEvent == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aEvent];
-        _value = (aValue == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aValue];
+        _value = (aValue == nil) ? [[NSString alloc] initWithString:@"0"] : [[NSString alloc] initWithString:aValue];
+        
+        if ([self isNumeric:_value]) {
+            _isValueNumeric = true;
+        }
+        else {
+            _isValueNumeric = false;
+        }
+        
         
         _operation = aDataMiningOperation;
         _memory = aMemory;
@@ -140,13 +148,15 @@
     // If the values are numbers it should use the
     if( _isValueNumeric )
     {
-        _result = [_brain dataMining: _operation event:_event value:_valueNumeric memoryType:_memory valid:&valid];
+        _result = [_brain dataMining: _operation event:_event memoryType:_memory valid:&valid];
+        
+        DLog(@"_result: %@", _result);
         return valid;
     }
     else // If the value is QString
     {
+        DLog(@"_value: %@", _value);
         _result = [_brain dataMining: _operation event:_event value:_value memoryType:_memory valid:&valid];
-        
         return valid;
     }
 }

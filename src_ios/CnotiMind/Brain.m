@@ -438,6 +438,9 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 
 - (void) updatePropertyValue:(NSString*)aPropertyName value:(NSString*)aValue
 {
+    DLog(@"aPropertyName: %@", aPropertyName);
+    DLog(@"aValue: %@", aValue);
+    
     [_properties setObject:aValue forKey:aPropertyName];
 }
 
@@ -529,16 +532,14 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     // test if parameters are valid for datamining
     if( [aEvent length]==0 )
     {
-//        DLog(@"aEvent: %@", aEvent);
+        DLog(@"aEvent: %@", aEvent);
         [self setValid: aValid value:false];
-        return [NSString stringWithFormat:@""];
+        return [[NSString alloc] initWithFormat:@""];
     }
     
     NSMutableArray* memory = (aMemoryType == WorkingMemory ? _workingMemory : _longTermMemory);
     
     [self setValid:aValid value:true];
-    
-//    DLog(@"aValid: %d", *aValid);
     
     switch (aOperation) {
         case DMO_Max:
@@ -548,6 +549,8 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
             return [[NSNumber alloc] initWithFloat:[self dataMiningMin: aEvent memory: memory valid:aValid]];
             break;
         case DMO_Sum:
+            DLog(@"%f", [self dataMiningSum: aEvent memory: memory valid:aValid]);
+            DLog(@"%@", [[NSNumber alloc] initWithFloat:[self dataMiningSum: aEvent memory: memory valid:aValid]]);
             return [[NSNumber alloc] initWithFloat:[self dataMiningSum: aEvent memory: memory valid:aValid]];
             break;
         case DMO_Count:
@@ -587,11 +590,13 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         [self setValid: aValid value:false];
         return result;
     }
-//    DLog(@"aValue: %@", aValue);
+    
+    DLog(@"aValue: %@", aValue);
     // if value is empty, do datamining without the value
     if( [aValue length]==0 )
     {
-        return [self dataMining:aOperation event:aEvent memoryType:aMemoryType valid:aValid];
+        DLog(@"tete");
+        return [[self dataMining:aOperation event:aEvent memoryType:aMemoryType valid:aValid] autorelease];
     }
     
     // get the memory to performe data mining
@@ -738,7 +743,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     {
         if( ![[objectMemoryEvent event] caseInsensitiveCompare:aEvent] ) // Event found
         {
-            if (strcmp([[objectMemoryEvent value] objCType], "f") || strcmp([[objectMemoryEvent value] objCType], "i") || strcmp([[objectMemoryEvent value] objCType], "d") || strcmp([[objectMemoryEvent value] objCType], "l")) {
+            if ([self isNumeric: [objectMemoryEvent value]]) {
                 ok = true;
             }
             
@@ -753,6 +758,22 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     }
     return sum;
 }
+
+- (BOOL)isNumeric:(NSString*)s
+{
+    NSScanner *sc = [NSScanner scannerWithString: s];
+    // We can pass NULL because we don't actually need the value to test
+    // for if the string is numeric. This is allowable.
+    if ( [sc scanFloat:NULL] )
+    {
+        // Ensure nothing left in scanner so that "42foo" is not accepted.
+        // ("42" would be consumed by scanFloat above leaving "foo".)
+        return [sc isAtEnd];
+    }
+    // Couldn't even scan a float :(
+    return NO;
+}
+
 
 
 - (float) dataMiningSum:(NSString*)aEvent value:(float)aValue memory:(NSMutableArray*)aMemory valid:(BOOL*)aValid

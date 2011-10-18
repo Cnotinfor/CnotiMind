@@ -285,10 +285,10 @@
     {        
         NSRange rangeOfFirstMatch = [regex_variables_tags rangeOfFirstMatchInString:*aValue options:0 range:NSMakeRange(0, [*aValue length])];
         NSString* var = [*aValue substringWithRange:rangeOfFirstMatch];
-        var = [var lowercaseString];
+//        var = [var lowercaseString];
         
-        NSString* valueFromKey = [[NSString alloc] initWithFormat:@"%@", [*aVariables valueForKey:var]];
-        
+//      NSString* valueFromKey = [[NSString alloc] initWithFormat:@"%@", [*aVariables valueForKey:var]];
+        NSString* valueFromKey = [[NSString alloc] initWithFormat:@"%@", [self valueForKeyInsensitiveSearch:*aVariables key:var]];
         NSRange range = NSMakeRange(0, [*aValue length]);
 
         if ([valueFromKey length]>0) {
@@ -323,14 +323,17 @@
         NSRange rangeOfFirstMatch = [regex_properties_tags rangeOfFirstMatchInString:*aValue options:0 range:NSMakeRange(0, [*aValue length])];
         
         NSString* var = [*aValue substringWithRange:rangeOfFirstMatch];
+        DLog(@"var: %@", var);
         var = [var substringWithRange:NSMakeRange(1, [var length]-2)];
-        
-//      var = [var lowercaseString];
+        DLog(@"var: %@", var);
+//        var = [var lowercaseString];
 
         DLog(@"_brain.properties: %@", _brain.properties);
 
-        NSString* valueFromKey = [[NSString alloc] initWithFormat:@"%@", [_brain.properties valueForKey:var]];
-        
+//        NSString* valueFromKey = [[NSString alloc] initWithFormat:@"%@", [_brain.properties valueForKey:var]];
+        NSString* valueFromKey = [[NSString alloc] initWithFormat:@"%@", [self valueForKeyInsensitiveSearch:_brain.properties key:var]];   
+
+        DLog(@"valueFromKey: %@", valueFromKey);
         if ([valueFromKey length]>0) {
             
             NSString* var2 = [NSString stringWithFormat:@""];
@@ -423,6 +426,19 @@
     if(rangeOfFirstMatch.location == NSNotFound) return nil;
     
     return [pattern substringWithRange:rangeOfFirstMatch];
+}
+
+- (NSString *)valueForKeyInsensitiveSearch:(NSMutableDictionary*)aDictionary key:(NSString*)aKey {
+
+    NSEnumerator *enumerator = [aDictionary keyEnumerator];
+    id key;
+    while ((key = [enumerator nextObject])) {
+        if (![key caseInsensitiveCompare:aKey]) {
+            return [aDictionary valueForKey:key];
+        }
+    }
+    
+    return nil;
 }
 
 @end

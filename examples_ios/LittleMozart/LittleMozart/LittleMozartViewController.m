@@ -257,21 +257,26 @@
 }
 
 - (IBAction)btnDuration01:(id)sender {
-    NSLog(@"%@", [self selectedNoteButton]);
-    
-    
+    Perception* perceptionDuration = [[Perception alloc] initWithNameAndAValue:@"Duration" value:@"1"];
+    [_brain receivePerception:perceptionDuration];
 }
 
 - (IBAction)btnDuration02:(id)sender {
-    NSLog(@"%@", [self selectedNoteButton]);
+    Perception* perceptionDuration = [[Perception alloc] initWithNameAndAValue:@"Duration" value:@"2"];
+    [_brain receivePerception:perceptionDuration];
+
 }
 
 - (IBAction)btnDuration03:(id)sender {
-    NSLog(@"%@", [self selectedNoteButton]);
+    Perception* perceptionDuration = [[Perception alloc] initWithNameAndAValue:@"Duration" value:@"3"];
+    [_brain receivePerception:perceptionDuration];
+
 }
 
 - (IBAction)btnDuration04:(id)sender {
-    NSLog(@"%@", [self selectedNoteButton]);
+    Perception* perceptionDuration = [[Perception alloc] initWithNameAndAValue:@"Duration" value:@"4"];
+    [_brain receivePerception:perceptionDuration];
+
 }
 
 - (void)actionReceived:(NSNotification*)aNotif

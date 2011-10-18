@@ -441,13 +441,15 @@
 		<!-- Calculate the music lenght -->
 		<DataMining operation="Sum" event="Duration" variable="[Music Duration]" memory="WM">
 			<Action name="Think" value ="Music length [Music Duration]" />
-
+			<Action name="Think" value ="Music Duration 00 [Music Duration]" />
 			<!-- Check how much tempos from the compass have been used -->
 			<MathOperation name="Remainder" variable="[Music Duration]" value="4" result="[Duration]">
-
+				<Action name="Think" value ="Music Duration 01 [Music Duration]" />
 				<!-- Compass with 0 durations -->
 
 				<Condition type="Variable" variable="[Duration]" compareValue="0">
+					<Action name="Think" value ="Music Duration 02 [Music Duration]" />
+
 					<Condition type="Perception" perception="Duration" value="1">
 						<Emotion name="Joy" increment="1" max="2" />
 						<Property name="Duration Option" value ="Good" />
@@ -527,7 +529,7 @@
 				</Condition>
 
 				<!-- Think the current compass duration and the duration choosen -->
-				<Action name="Think" value="Duration {Duration Option}" />
+				<Action name="Think" value="Duration Option {Duration Option}" />
 
 			</MathOperation>
 

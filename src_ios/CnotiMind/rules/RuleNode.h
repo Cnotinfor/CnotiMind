@@ -102,4 +102,7 @@
 
 - (NSString *)captureRegex:(NSString *)pattern;
 
+
+- (NSString *)valueForKeyInsensitiveSearch:(NSMutableDictionary*)aDictionary key:(NSString*)aKey;
+
 @end
