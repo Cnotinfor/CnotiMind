@@ -34,6 +34,8 @@
 {
     if (self == [super init]) {
         _name = [[NSString alloc] initWithString:aName];
+        DLog(@"initWithNameAndValue: %@", _name);
+        
         _value = aValue;
         _min = INT8_MIN;
         _max = INT8_MAX;
@@ -46,6 +48,8 @@
 {
     if (self == [super init]) {
         _name = [[NSString alloc] initWithString:aName];
+        DLog(@"initWithNameAndValue: %@", _name);
+
         _value = aValue;
         _min = INT8_MIN;
         _max = INT8_MAX;

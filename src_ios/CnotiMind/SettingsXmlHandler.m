@@ -228,7 +228,7 @@
     }
     
     // Get the emotion name
-    _elementName = [atts valueForKey:NAME];
+    _elementName = [[atts attributeForName:@"name"] stringValue];
 
     if([_elementName length]==0)
     {
