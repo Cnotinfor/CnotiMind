@@ -20,7 +20,6 @@
 {
 
     if (self = [super initWithBrainAndParent:aBrain parent:aParent]) {
-    
         _operation = aMathOperation;
         _variable = (aVariable == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aVariable];
         _value = (aValue == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aValue];
@@ -88,7 +87,7 @@
         float variableNumericValue;
         bool variableOk;
         if ([self isNumeric:variableValue]) {
-            valueOk = TRUE;
+            variableOk = TRUE;
             variableNumericValue = [variableValue floatValue];
         }
                 

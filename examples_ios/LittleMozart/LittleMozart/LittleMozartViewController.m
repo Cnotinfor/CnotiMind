@@ -23,6 +23,10 @@
 @synthesize btnDuration02;
 @synthesize btnDuration03;
 @synthesize btnDuration04;
+@synthesize btnDurationCancel;
+@synthesize btnMelodyStartNew;
+@synthesize btnMelodyDeleteLastNote;
+@synthesize btnMelodyFinish;
 @synthesize emotionsUITextView;
 
 - (void)didReceiveMemoryWarning
@@ -92,6 +96,11 @@
     [self setBtnDuration04:nil];
     [self setActionsUITextView:nil];
     [self setEmotionsUITextView:nil];
+    [self setBtnDurationCancel:nil];
+    [self setBtnMelodyStartNew:nil];
+    [self setBtnMelodyDeleteLastNote:nil];
+    [self setBtnMelodyFinish:nil];
+    [self setBtnMelodyDeleteLastNote:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -119,6 +128,11 @@
     [btnDuration04 release];
     [actionsUITextView release];
     [emotionsUITextView release];
+    [btnDurationCancel release];
+    [btnMelodyStartNew release];
+    [btnMelodyDeleteLastNote release];
+    [btnMelodyFinish release];
+    [btnMelodyDeleteLastNote release];
     [super dealloc];
 }
 
@@ -286,6 +300,24 @@
 
 }
 
+- (IBAction)btnDurationCancel:(id)sender {
+    Perception* perceptionDuration = [[Perception alloc] initWithNameAndAValue:@"Delete Duration" value:@""];
+    [_brain receivePerception:perceptionDuration];
+}
+
+- (IBAction)btnMelodyStartNew:(id)sender {
+    Perception* perceptionDuration = [[Perception alloc] initWithNameAndAValue:@"Start Melody" value:@""];
+    [_brain receivePerception:perceptionDuration];
+}
+
+- (IBAction)btnMelodyDeleteLastNote:(id)sender {
+    Perception* perceptionDuration = [[Perception alloc] initWithNameAndAValue:@"Delete Note" value:@""];
+    [_brain receivePerception:perceptionDuration];
+}
+
+- (IBAction)btnMelodyFinish:(id)sender {
+}
+
 - (void)actionReceived:(NSNotification*)aNotif
 {
     DLog(@"actionReceived: %@", aNotif);
@@ -298,11 +330,8 @@
         
         [received replaceOccurrencesOfString:@"{" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [received length])];
         [received replaceOccurrencesOfString:@"}" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [received length])];
-
-
         received = (NSMutableString*)[received stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 
-        
         NSString* newReceived = [NSString stringWithFormat:@"%@%@", receivedOld, received];
         
         [actionsUITextView setText:newReceived];
@@ -325,12 +354,9 @@
         received = (NSMutableString*)[[aNotif object] description];
         
         [received replaceOccurrencesOfString:@"{" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [received length])];
-        [received replaceOccurrencesOfString:@"}" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [received length])];
-                
+        [received replaceOccurrencesOfString:@"}" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [received length])];                
         received = (NSMutableString*)[received stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 
-
-        
         NSString* newReceived = [NSString stringWithFormat:@"%@%@", receivedOld, received];
         
         [emotionsUITextView setText:newReceived];

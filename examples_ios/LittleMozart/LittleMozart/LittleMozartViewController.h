@@ -50,6 +50,13 @@
 @property (nonatomic, retain) IBOutlet UIButton *btnDuration02;
 @property (nonatomic, retain) IBOutlet UIButton *btnDuration03;
 @property (nonatomic, retain) IBOutlet UIButton *btnDuration04;
+@property (retain, nonatomic) IBOutlet UIButton *btnDurationCancel;
+
+
+@property (retain, nonatomic) IBOutlet UIButton *btnMelodyStartNew;
+@property (retain, nonatomic) IBOutlet UIButton *btnMelodyDeleteLastNote;
+@property (retain, nonatomic) IBOutlet UIButton *btnMelodyFinish;
+
 
 @property (retain, nonatomic) IBOutlet UITextView *emotionsUITextView;
 @property (retain, nonatomic) IBOutlet UITextView *actionsUITextView;
@@ -68,6 +75,11 @@
 - (IBAction)btnDuration02:(id)sender;
 - (IBAction)btnDuration03:(id)sender;
 - (IBAction)btnDuration04:(id)sender;
+- (IBAction)btnDurationCancel:(id)sender;
+
+- (IBAction)btnMelodyStartNew:(id)sender;
+- (IBAction)btnMelodyDeleteLastNote:(id)sender;
+- (IBAction)btnMelodyFinish:(id)sender;
 
 - (void)actionReceived:(NSNotification*)aNotif;
 - (void)emotionReceived:(NSNotification*)aNotif;
