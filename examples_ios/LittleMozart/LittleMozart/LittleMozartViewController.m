@@ -23,6 +23,7 @@
 @synthesize btnDuration02;
 @synthesize btnDuration03;
 @synthesize btnDuration04;
+@synthesize emotionsUITextView;
 
 - (void)didReceiveMemoryWarning
 {
@@ -89,6 +90,7 @@
     [self setBtnDuration03:nil];
     [self setBtnDuration04:nil];
     [self setActionsUITextView:nil];
+    [self setEmotionsUITextView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -115,6 +117,7 @@
     [btnDuration03 release];
     [btnDuration04 release];
     [actionsUITextView release];
+    [emotionsUITextView release];
     [super dealloc];
 }
 
@@ -287,21 +290,21 @@
     DLog(@"actionReceived: %@", aNotif);
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        NSString* actionReceivedOld = actionsUITextView.text;
+        NSString* receivedOld = actionsUITextView.text;
         
-        NSMutableString* actionReceived = [[NSMutableString alloc] init];
-        actionReceived = (NSMutableString*)[[aNotif object] description];
+        NSMutableString* received = [[NSMutableString alloc] init];
+        received = [NSMutableString stringWithString:[[aNotif object] description]];
         
-        [actionReceived replaceOccurrencesOfString:@"{" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [actionReceived length])];
-        [actionReceived replaceOccurrencesOfString:@"}" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [actionReceived length])];
+        [received replaceOccurrencesOfString:@"{" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [received length])];
+        [received replaceOccurrencesOfString:@"}" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [received length])];
 
-        actionReceived = (NSMutableString*)[actionReceived stringByAppendingString:@"   "];
 
-        actionReceived = (NSMutableString*)[actionReceived stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        received = (NSMutableString*)[received stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+
         
-        NSString* newActionReceived = [NSString stringWithFormat:@"%@%@", actionReceivedOld, actionReceived];
+        NSString* newReceived = [NSString stringWithFormat:@"%@%@", receivedOld, received];
         
-        [actionsUITextView setText:newActionReceived];
+        [actionsUITextView setText:newReceived];
 
         NSRange range = NSMakeRange(actionsUITextView.text.length - 1, 1);
         [actionsUITextView scrollRangeToVisible:range];
@@ -312,6 +315,27 @@
 - (void)emotionReceived:(NSNotification*)aNotif
 {
     DLog(@"emotionReceived: %@", aNotif);
-}
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        NSString* receivedOld = emotionsUITextView.text;
+        
+        NSMutableString* received = [[NSMutableString alloc] init];
+        received = (NSMutableString*)[[aNotif object] description];
+        
+        [received replaceOccurrencesOfString:@"{" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [received length])];
+        [received replaceOccurrencesOfString:@"}" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [received length])];
+                
+        received = (NSMutableString*)[received stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+
+
+        
+        NSString* newReceived = [NSString stringWithFormat:@"%@%@", receivedOld, received];
+        
+        [emotionsUITextView setText:newReceived];
+        
+        NSRange range = NSMakeRange(emotionsUITextView.text.length - 1, 1);
+        [emotionsUITextView scrollRangeToVisible:range];
+    });}
 
 @end

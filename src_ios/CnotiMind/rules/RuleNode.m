@@ -269,7 +269,6 @@
  If the variable/property tag is not found, it is replaced by an empty string.
  */
 
-// TODO
 - (void) tagsToValue:(NSString**)aValue variables:(NSMutableDictionary**)aVariables
 {
     NSString* empty = [NSString stringWithFormat:@""];
@@ -334,7 +333,7 @@
 
         NSString* valueFromKey = [[NSString alloc] initWithFormat:@"%@", [self valueForKeyInsensitiveSearch:_brain.properties key:var]];   
 
-        DLog(@"valueFromKey: %@", valueFromKey);
+//        DLog(@"valueFromKey: %@", valueFromKey);
         if ([valueFromKey length]>0) {
             
             NSString* var2 = [NSString stringWithFormat:@""];

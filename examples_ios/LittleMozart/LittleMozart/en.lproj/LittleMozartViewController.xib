@@ -123,11 +123,11 @@
 							<int key="IBUIAutocapitalizationType">2</int>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
-						<object class="IBUIFontDescription" key="IBUIFontDescription" id="38854727">
+						<object class="IBUIFontDescription" key="IBUIFontDescription" id="54682150">
 							<int key="type">1</int>
 							<double key="pointSize">14</double>
 						</object>
-						<object class="NSFont" key="IBUIFont" id="1045623334">
+						<object class="NSFont" key="IBUIFont" id="71597847">
 							<string key="NSName">Helvetica</string>
 							<double key="NSSize">14</double>
 							<int key="NSfFlags">16</int>
@@ -151,8 +151,8 @@
 							<int key="IBUIAutocapitalizationType">2</int>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
-						<reference key="IBUIFontDescription" ref="38854727"/>
-						<reference key="IBUIFont" ref="1045623334"/>
+						<reference key="IBUIFontDescription" ref="54682150"/>
+						<reference key="IBUIFont" ref="71597847"/>
 					</object>
 					<object class="IBUIButton" id="507149721">
 						<reference key="NSNextResponder" ref="774585933"/>
@@ -609,6 +609,14 @@
 					<int key="connectionID">61</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">emotionsUITextView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="1049254375"/>
+					</object>
+					<int key="connectionID">62</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">btnNoteFaTouch:</string>
 						<reference key="source" ref="507149721"/>
@@ -925,7 +933,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">61</int>
+			<int key="maxID">62</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1060,6 +1068,7 @@
 							<string>btnNoteRe</string>
 							<string>btnNoteSi</string>
 							<string>btnNoteSol</string>
+							<string>emotionsUITextView</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1077,6 +1086,7 @@
 							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
+							<string>UITextView</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -1097,6 +1107,7 @@
 							<string>btnNoteRe</string>
 							<string>btnNoteSi</string>
 							<string>btnNoteSol</string>
+							<string>emotionsUITextView</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1155,6 +1166,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">btnNoteSol</string>
 								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">emotionsUITextView</string>
+								<string key="candidateClassName">UITextView</string>
 							</object>
 						</object>
 					</object>

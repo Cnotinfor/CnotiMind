@@ -69,11 +69,7 @@
 - (BOOL) startElement:(NSString*)aNamespaceURI localName:(NSString*)aLocalName qName:(NSString*)aQName atts:(GDataXMLElement*)atts
 {
     _line++;
-    
-    DLog(@"---------------------------------------------------------------------------------------------");
-    DLog(@"startElement---aQName: %@ _currentNode: %@ _parentNode: %@", aQName, _currentNode, _parentNode);
-
-    
+        
     if( ![aQName caseInsensitiveCompare:@"Rules"] )
     {
         return [self createRootNode:atts];
@@ -156,16 +152,12 @@
     
     if( _rootNode == _currentNode )
     {
-        DLog(@"oooendElement---aQName: %@ _currentNode: %@ _parentNode: %@ rootNode: %@", aQName, _currentNode, _parentNode, _rootNode);
-
         _currentNode = NULL;
         return true;
     }
     
     _currentNode = _parentNode;
     _parentNode = (RuleNode*)_currentNode.parent;
-    
-    DLog(@"endElement---aQName: %@ _currentNode: %@ _parentNode: %@", aQName, _currentNode, _parentNode);
     
     return true;
 }
@@ -196,13 +188,6 @@
     
     if( _rootNode == NULL || _currentNode == NULL )
     {
-        DLog(@"_rootNode: %@", _rootNode);
-        DLog(@"_currentNode: %@", _currentNode);
-        
-        DLog(@"---createActionNodename: %@ createActionNodevalue: %@", name, value);
-        
-     
-
         return false;
     }
     
@@ -211,15 +196,11 @@
         probability = @"1";
     }
     
-    DLog(@"createActionNodename: %@ createActionNodevalue: %@", name, value);
-    
     _parentNode = _currentNode;
     _currentNode = [[ActionNode alloc] initWithNameAndValueAndBrainAndParent: name 
                                                                        value:value 
                                                                        brain:_brain 
                                                                       parent:_parentNode];
-    DLog(@"_rootNode: %@", _rootNode);
-    DLog(@"_currentNode: %@", _currentNode);
     return true;
 }
 
