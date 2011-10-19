@@ -40,6 +40,7 @@
 - (void)viewDidLoad
 {
     _brain = [[Brain alloc] init];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"whitey.png"]];
         
     //  load XML rulles;
     DLog(@"--- load XML rulles ---");
