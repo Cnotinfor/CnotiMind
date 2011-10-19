@@ -16,3 +16,5 @@
 #ifdef __OBJC__
 #import "Macros.h"
 #endif
+
+#import <dispatch/dispatch.h>

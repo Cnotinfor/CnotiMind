@@ -51,6 +51,8 @@
 @property (nonatomic, retain) IBOutlet UIButton *btnDuration03;
 @property (nonatomic, retain) IBOutlet UIButton *btnDuration04;
 
+@property (retain, nonatomic) IBOutlet UITextView *actionsUITextView;
+
 - (IBAction)btnNoteDoTouch:(id)sender;
 - (IBAction)btnNoteReTouch:(id)sender;
 - (IBAction)btnNoteMiTouch:(id)sender;
@@ -68,5 +70,7 @@
 
 - (void)actionReceived:(NSNotification*)aNotif;
 - (void)emotionReceived:(NSNotification*)aNotif;
+
+- (void)setActionText:(NSString*)aText;
 
 @end

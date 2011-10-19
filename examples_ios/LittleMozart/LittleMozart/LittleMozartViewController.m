@@ -9,6 +9,7 @@
 #import "LittleMozartViewController.h"
 
 @implementation LittleMozartViewController
+@synthesize actionsUITextView;
 @synthesize btnNoteDo;
 @synthesize btnNoteRe;
 @synthesize btnNoteMi;
@@ -87,6 +88,7 @@
     [self setBtnDuration02:nil];
     [self setBtnDuration03:nil];
     [self setBtnDuration04:nil];
+    [self setActionsUITextView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -112,6 +114,7 @@
     [btnDuration02 release];
     [btnDuration03 release];
     [btnDuration04 release];
+    [actionsUITextView release];
     [super dealloc];
 }
 
@@ -282,6 +285,27 @@
 - (void)actionReceived:(NSNotification*)aNotif
 {
     DLog(@"actionReceived: %@", aNotif);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        NSString* actionReceivedOld = actionsUITextView.text;
+        
+        NSMutableString* actionReceived = [[NSMutableString alloc] init];
+        actionReceived = (NSMutableString*)[[aNotif object] description];
+        
+        [actionReceived replaceOccurrencesOfString:@"{" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [actionReceived length])];
+        [actionReceived replaceOccurrencesOfString:@"}" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [actionReceived length])];
+
+        actionReceived = (NSMutableString*)[actionReceived stringByAppendingString:@"   "];
+
+        actionReceived = (NSMutableString*)[actionReceived stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        
+        NSString* newActionReceived = [NSString stringWithFormat:@"%@%@", actionReceivedOld, actionReceived];
+        
+        [actionsUITextView setText:newActionReceived];
+
+        NSRange range = NSMakeRange(actionsUITextView.text.length - 1, 1);
+        [actionsUITextView scrollRangeToVisible:range];
+    });
 }
 
 
