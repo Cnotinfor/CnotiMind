@@ -170,6 +170,8 @@
     {
         return DeleteAll;
     }
+    
+    return false;
 }
 
 

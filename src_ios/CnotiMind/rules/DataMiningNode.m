@@ -78,7 +78,7 @@
         }
         else
         {
-            NSMutableDictionary* variables = [[NSDictionary alloc] init];
+            NSMutableDictionary* variables = [[NSMutableDictionary alloc] init];
             [variables setObject:_result forKey:_variable];
             
             //  TODO    

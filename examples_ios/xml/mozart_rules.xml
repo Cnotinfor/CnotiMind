@@ -445,11 +445,10 @@
 
 			<!-- Check how much tempos from the compass have been used -->
 			<MathOperation name="Remainder" variable="[Music Duration]" value="4" result="[Duration]">
-				<Action name="Think" value="Duration3" />
+				<Action name="Think" value="Duration Total (before adding duration) [Duration]" />
 				<!-- Compass with 0 durations -->
 				<Condition type="Variable" variable="[Duration]" compareValue="0">
 					<Action name="Think" value ="Music Duration1 [Music Duration]" />
-
 					<Condition type="Perception" perception="Duration" value="1">
 						<Emotion name="Joy" increment="1" max="2" />
 						<Property name="Duration Option" value ="Good" />
@@ -458,7 +457,6 @@
 						<Action name="Think" value="Duration2" />
 						<Emotion name="Joy" increment="1" max="2" />
 						<Property name="Duration Option" value ="Good" />
-						<Action name="Think" value="--->Duration [Duration]" />
 					</Condition>
 					<Condition type="Perception" perception="Duration" value="3">
 						<Emotion name="Joy" increment="1" max="2" />
@@ -578,7 +576,7 @@
 							<Property name="Deleted Notes Option" value="{Notes Option}" />
 							<Delete memory="WM" name="Note" position="Last" />
 							<Delete memory="WM" name="Note Option" position="Last" />
-							<Action name="Think" value="Note deleted" />
+							<Action name="Think" value="Note deleted 2" />
 						</Condition>
 						<Condition type="Variable" variable="[Note Time]" operator="smaller" compareValue="[Pause Time]"  >
 							<Action name="Think" value="Pause is more recent then note" />
@@ -639,6 +637,8 @@
 			<Action name="Think" value="Not possible to delete a duration" />
 		</Condition>
 		<Condition type="DataMining" operation="Exists"	event="Duration" compareValue="1" memory="WM">
+			<Action name="Think" value="Let's delete the last duration" />
+
 			<Property name="Deleted Duration Option" value="{Duration Option}" />
 			<Delete memory="WM" name="Duration" position="Last" />
 			<Delete memory="WM" name="Duration Option" position="Last" />

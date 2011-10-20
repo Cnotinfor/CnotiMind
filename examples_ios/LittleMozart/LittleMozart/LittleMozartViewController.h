@@ -10,7 +10,6 @@
 
 #import "Brain.h"
 #import "Perception.h"
-#import "Action.h"
 #import "Emotion.h"
 
 #import "ConditionPerceptionNode.h"

@@ -29,7 +29,7 @@
 - (void) exec
 {
     if ([self isTrue]) {
-        NSMutableDictionary* variables = [[NSDictionary alloc] init];
+        NSMutableDictionary* variables = [[NSMutableDictionary alloc] init];
         [variables setObject:_value forKey:@"[Emotion.value]"];
         
         //  TODO

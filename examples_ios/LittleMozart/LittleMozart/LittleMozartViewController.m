@@ -301,8 +301,10 @@
 }
 
 - (IBAction)btnDurationCancel:(id)sender {
-    Perception* perceptionDuration = [[Perception alloc] initWithNameAndAValue:@"Delete Duration" value:@""];
+    Perception* perceptionDuration = [[Perception alloc] initWithNameAndAValue:@"Delete Note" value:@""];
     [_brain receivePerception:perceptionDuration];
+    
+    [self unselectAllNoteButtons];
 }
 
 - (IBAction)btnMelodyStartNew:(id)sender {
@@ -313,9 +315,13 @@
 - (IBAction)btnMelodyDeleteLastNote:(id)sender {
     Perception* perceptionDuration = [[Perception alloc] initWithNameAndAValue:@"Delete Note" value:@""];
     [_brain receivePerception:perceptionDuration];
+    Perception* perceptionDuration2 = [[Perception alloc] initWithNameAndAValue:@"Delete Duration" value:@""];
+    [_brain receivePerception:perceptionDuration2];
 }
 
 - (IBAction)btnMelodyFinish:(id)sender {
+    Perception* perceptionDuration = [[Perception alloc] initWithNameAndAValue:@"Finish Melody" value:@""];
+    [_brain receivePerception:perceptionDuration];
 }
 
 - (void)actionReceived:(NSNotification*)aNotif
@@ -330,7 +336,10 @@
         
         [received replaceOccurrencesOfString:@"{" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [received length])];
         [received replaceOccurrencesOfString:@"}" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [received length])];
-        received = (NSMutableString*)[received stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        
+        NSString* received2 = [NSString stringWithString:received];
+        received2 = [received2 stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        received2 = [received2 stringByAppendingString:@"\n"];
 
         NSString* newReceived = [NSString stringWithFormat:@"%@%@", receivedOld, received];
         
@@ -355,8 +364,11 @@
         
         [received replaceOccurrencesOfString:@"{" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [received length])];
         [received replaceOccurrencesOfString:@"}" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [received length])];                
-        received = (NSMutableString*)[received stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 
+        NSString* received2 = [NSString stringWithString:received];
+        received2 = [received2 stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        received2 = [received2 stringByAppendingString:@"\n"];
+        
         NSString* newReceived = [NSString stringWithFormat:@"%@%@", receivedOld, received];
         
         [emotionsUITextView setText:newReceived];

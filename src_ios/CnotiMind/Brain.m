@@ -488,30 +488,50 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     
     NSEnumerator* eMem = [mem objectEnumerator];
     
+    BOOL removeLast = false;
+    BOOL removeFirst = false;
+    BOOL removeAll = false;
+    
     switch ((int)aPosition) {
         case DeleteLast:
-            for (NSString* aKey2 in eMem) {
-                NSString* k = [NSString stringWithFormat:@"%@", aKey2];
-                if (![aKey caseInsensitiveCompare: k]) {
-                    [mem removeLastObject];
+            @synchronized(mem) {
+                for (MemoryEvent* aKey2 in eMem) {
+                    NSString* k = [NSString stringWithFormat:@"%@", [aKey2 event]];
+                    if (![aKey caseInsensitiveCompare: k]) {
+                        removeLast = true;
+                    }
                 }
+            }
+            if (removeLast) {
+                [mem removeLastObject];    
             }
             break;
         case DeleteFirst:
-            for (NSString* aKey2 in eMem) {
-                NSString* k = [NSString stringWithFormat:@"%@", aKey2];
-                if (![aKey caseInsensitiveCompare: k]) {
-                    [mem removeObjectAtIndex:0];
+            @synchronized(mem) {
+                for (MemoryEvent* aKey2 in eMem) {
+                    NSString* k = [NSString stringWithFormat:@"%@", [aKey2 event]];
+                    if (![aKey caseInsensitiveCompare: k]) {
+                        removeFirst = true;
+                    }
                 }
+            }
+            if (removeFirst) {
+                [mem removeObjectAtIndex:0];
             }
             break;
         case DeleteAll:
-            for (NSString* aKey2 in eMem) {
-                NSString* k = [NSString stringWithFormat:@"%@", aKey2];
-                if (![aKey caseInsensitiveCompare: k]) {
-                    [mem removeAllObjects];
+            @synchronized(mem) {
+                for (MemoryEvent* aKey2 in eMem) {
+                    NSString* k = [NSString stringWithFormat:@"%@", [aKey2 event]];
+                    if (![aKey caseInsensitiveCompare: k]) {
+                        removeAll = true;
+                    }
                 }
             }
+            if (removeAll) {
+                [mem removeAllObjects];
+            }
+
             break;    
 
         default:

@@ -20,7 +20,6 @@
 		1868F7B61443320B00B61726 /* LittleMozartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1868F7B51443320B00B61726 /* LittleMozartViewController.m */; };
 		1868F7B91443320B00B61726 /* LittleMozartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1868F7B71443320B00B61726 /* LittleMozartViewController.xib */; };
 		1868F80A14449C1A00B61726 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1868F7CF14449C1A00B61726 /* GDataXMLNode.m */; };
-		1868F80B14449C1A00B61726 /* Action.m in Sources */ = {isa = PBXBuildFile; fileRef = 1868F7D114449C1A00B61726 /* Action.m */; };
 		1868F80C14449C1A00B61726 /* Brain.m in Sources */ = {isa = PBXBuildFile; fileRef = 1868F7D314449C1A00B61726 /* Brain.m */; };
 		1868F80D14449C1A00B61726 /* CnotiMind.m in Sources */ = {isa = PBXBuildFile; fileRef = 1868F7D614449C1A00B61726 /* CnotiMind.m */; };
 		1868F80E14449C1A00B61726 /* Emotion.m in Sources */ = {isa = PBXBuildFile; fileRef = 1868F7D814449C1A00B61726 /* Emotion.m */; };
@@ -78,8 +77,6 @@
 		1868F7B81443320B00B61726 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LittleMozartViewController.xib; sourceTree = "<group>"; };
 		1868F7CE14449C1A00B61726 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
 		1868F7CF14449C1A00B61726 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
-		1868F7D014449C1A00B61726 /* Action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Action.h; sourceTree = "<group>"; };
-		1868F7D114449C1A00B61726 /* Action.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Action.m; sourceTree = "<group>"; };
 		1868F7D214449C1A00B61726 /* Brain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Brain.h; sourceTree = "<group>"; };
 		1868F7D314449C1A00B61726 /* Brain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Brain.m; sourceTree = "<group>"; };
 		1868F7D414449C1A00B61726 /* CnotiMind-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CnotiMind-Prefix.pch"; sourceTree = "<group>"; };
@@ -246,8 +243,6 @@
 			isa = PBXGroup;
 			children = (
 				1868F7CC14449C1A00B61726 /* 3rdParty */,
-				1868F7D014449C1A00B61726 /* Action.h */,
-				1868F7D114449C1A00B61726 /* Action.m */,
 				1868F7D214449C1A00B61726 /* Brain.h */,
 				1868F7D314449C1A00B61726 /* Brain.m */,
 				1868F7D414449C1A00B61726 /* CnotiMind-Prefix.pch */,
@@ -377,6 +372,7 @@
 		1868F7921443320B00B61726 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = "Universidade de Coimbra";
 			};
 			buildConfigurationList = 1868F7951443320B00B61726 /* Build configuration list for PBXProject "LittleMozart" */;
@@ -430,7 +426,6 @@
 				1868F7B01443320B00B61726 /* LittleMozartAppDelegate.m in Sources */,
 				1868F7B61443320B00B61726 /* LittleMozartViewController.m in Sources */,
 				1868F80A14449C1A00B61726 /* GDataXMLNode.m in Sources */,
-				1868F80B14449C1A00B61726 /* Action.m in Sources */,
 				1868F80C14449C1A00B61726 /* Brain.m in Sources */,
 				1868F80D14449C1A00B61726 /* CnotiMind.m in Sources */,
 				1868F80E14449C1A00B61726 /* Emotion.m in Sources */,
@@ -551,7 +546,7 @@
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LittleMozart/LittleMozart-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "/usr/include/libxml2/**";
 				INFOPLIST_FILE = "LittleMozart/LittleMozart-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
@@ -573,7 +568,7 @@
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LittleMozart/LittleMozart-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "/usr/include/libxml2/**";
 				INFOPLIST_FILE = "LittleMozart/LittleMozart-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
