@@ -52,7 +52,7 @@
     
     int n = arc4random() % count;
     
-    RuleNode* node = [[self children] objectAtIndex:n-1];
+    RuleNode* node = [[self children] objectAtIndex:n];
     [node exec:aVariables]; 
 
 }

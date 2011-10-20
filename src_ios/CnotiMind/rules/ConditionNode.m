@@ -54,8 +54,7 @@
 
 - (void) exec
 {
-    // TODO Test if the condition is true. If it is, execute the node
-    if( true )
+    if( [self isTrue] )
     {
         [super execChildren];
     }
@@ -64,8 +63,7 @@
 
 - (void) exec:(NSMutableDictionary*)aVariables
 {
-    // TODO Test if the condition is true. If it is, execute the node
-    if( true )
+    if( [self isTrue] )
     {
         [super execChildren:aVariables];
     }

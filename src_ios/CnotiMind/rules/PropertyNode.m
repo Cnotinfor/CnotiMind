@@ -11,6 +11,9 @@
 
 @implementation PropertyNode
 
+@synthesize key = _key;
+@synthesize value = _value;
+
 - (id) initWithKeyAndValuAndBrainAndParent:(NSString*)aKey
                                      value:(NSString*)aValue
                                      brain:(Brain*)aBrain 

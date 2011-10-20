@@ -10,6 +10,8 @@
 
 #import "Brain.h"
 
+#import "PropertyNode.h"
+
 @implementation ConditionPropertyNode
 
 - (id)init
@@ -39,9 +41,11 @@
 
 - (BOOL) isTrue{
 
-    NSEnumerator* eProperties = [[_brain properties] objectEnumerator];
+    DLog(@"_brain properties%@", [_brain properties]);
+    NSEnumerator* eProperties = [[_brain properties] keyEnumerator];
     
-    for (NSString* aKey in eProperties) {
+    id aKey;
+    while (aKey = [eProperties nextObject]) {
         
         NSString* k = [NSString stringWithFormat:@"%@", aKey];
         NSString* v = [NSString stringWithFormat:@"%@", [[_brain properties] objectForKey:aKey]];

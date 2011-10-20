@@ -47,7 +47,6 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         
     }
     
-    _rulesXMLHandler = [[RulesXmlHandler alloc] initWithBrain:self];
     _settingsXMLHandler = [[SettingsXmlHandler alloc] initWithBrain:self];
     
     return self;
@@ -135,6 +134,9 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 
 - (BOOL) loadXmlRules:(NSString*)aFilePath
 {
+    
+    _rulesXMLHandler = [[RulesXmlHandler alloc] initWithBrain:self rules:_rules];
+
     DLog(@"%@", aFilePath);
     
     NSData *xmlData = [[NSMutableData alloc] initWithContentsOfFile:aFilePath];  
@@ -162,7 +164,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     [xmlData release];
     
     _rules = [_rulesXMLHandler rootNode];
-    DLog(@"[Brain::loadXmlRules] done");
+    DLog(@"[Brain::loadXmlRules] done rules: %@",_rules);
 
     return true;
 }
@@ -1100,7 +1102,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     while (true) {
         
         [_semaphoreBrain lockWhenCondition:HAS_DATA];
-        
+        DLog(@"Brain - run - HAS_DATA");
         int nEmotions;
         nEmotions = [_emotionsChanged count];
         

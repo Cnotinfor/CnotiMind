@@ -41,6 +41,7 @@
 
 - (id)init;
 - (id)initWithBrain:(Brain*)aBrain;
+- (id)initWithBrain:(Brain*)aBrain rules:(RuleNode*)aRules;
 
 - (BOOL) startElement:(NSString*)aNamespaceURI localName:(NSString*)aLocalName qName:(NSString*)aQName atts:(GDataXMLElement*)atts;
 - (BOOL) endElement:(NSString*)aNamespaceURI localName:(NSString*)aLocalName qName:(NSString*)aQName;

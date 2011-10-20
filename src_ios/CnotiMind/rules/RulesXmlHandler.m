@@ -51,10 +51,15 @@
 
 - (id)initWithBrain:(Brain*)aBrain
 {
+    return [self initWithBrain:aBrain rules:nil];
+}
+
+- (id)initWithBrain:(Brain*)aBrain rules:(RuleNode*)aRules
+{
     self = [super init];
     if (self) {
         // Initialization code here.
-        _rootNode = NULL;
+        _rootNode = aRules;
         _currentNode = NULL;
         _parentNode = NULL;
         _brain = aBrain;
@@ -167,12 +172,11 @@
 {
     
     // it can only exist 1 root node.
-    if( _rootNode != NULL )
+    if( _rootNode == NULL )
     {
-        return false;
+        _rootNode = [[RootNode alloc] initWithBrainAndParent: _brain parent:_parentObject];
     }
     
-    _rootNode = [[RootNode alloc] initWithBrainAndParent: _brain parent:_parentObject];
     _currentNode = _rootNode;
     
     return true;

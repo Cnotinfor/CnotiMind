@@ -18,6 +18,10 @@
                                      brain:(Brain*)aBrain 
                                     parent:(id)aParent;
 
+@property(retain,readonly) NSString* key;
+@property(retain,readonly) NSString* value;
+
+
 - (void) exec;
 - (void) exec:(NSMutableDictionary*)aVariables;
 

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-	Tutoring rules for Little Mozart.
-	
-	Try to make Little Mozart a tutor with emotions, that can help the user to build music
-
-	There are 2 actions made by Mozart
-	- Talk -> Mozart should talk
-	- Think -> For debugging purpose
-	
-	What should be really said by Mozart and how it is at the competences level, not in the brain.
-	
-	The only emotion that currently is being changed is Joy
--->
+ Tutoring rules for Little Mozart.
+ 
+ Try to make Little Mozart a tutor with emotions, that can help the user to build music
+ 
+ There are 2 actions made by Mozart
+ - Talk -> Mozart should talk
+ - Think -> For debugging purpose
+ 
+ What should be really said by Mozart and how it is at the competences level, not in the brain.
+ 
+ The only emotion that currently is being changed is Joy
+ -->
 
 <Rules>
 	<!-- Melody started -->
@@ -20,7 +20,7 @@
 		<!-- Save the deleted option for checking if two notes where deleted sequentially -->
 		<Property name="Previous Deleted Bad" value="False" />
 	</Condition>
-
+    
 	<!-- Note added (note + duration) -->
 	<Condition type="Perception" perception="Duration">
 		<!-- Calculate the number of notes and pause -->
@@ -99,11 +99,11 @@
 			</Condition>
 			
 			<!-- Good note and duration -->
-				<!-- TODO ????? -->
-
+            <!-- TODO ????? -->
+            
 			<!-- Music time -->
-<!-- TODO: is missing a OR between the conditions -->
-<!--       var that is changed when enters in a condition -->
+            <!-- TODO: is missing a OR between the conditions -->
+             <!--       var that is changed when enters in a condition -->
 			<DataMining variable="[Music Duration]" operation="Sum" event="Duration" memory="WM" />
 			<MathOperation result="[Rest]" name="remainder" variable="[Music Duration]" value="4" />
 			<!-- Bigger the 12 -->
@@ -151,11 +151,11 @@
 			<!-- Music time -->
 			
 		</Condition>
-			
+        
 	</Condition>
 	<!-- Note deleted (note + duration) -->
 	<Condition type="Perception" perception="Delete Duration">
-
+        
 		<!-- Update Deleted Bad value -->
 		<!-- False - default value -->
 		<Property name="Deleted Bad" value="False" />
@@ -169,7 +169,7 @@
 				<Property name="Deleted Bad" value="True" />
 			</Condition>
 		</Condition>
-
+        
 		<!-- Calculate the number of notes and pause -->
 		<DataMining variable="[Count Notes]" operation="Count" event="Note" memory="WM" />
 		<DataMining variable="[Count Pause]" operation="Count" event="Pause" memory="WM" />
@@ -286,7 +286,7 @@
 						</Condition>
 					</Condition>
 				</Condition>
-
+                
 				<!-- Check if removed note had a bad duration sequence -->
 				<Condition type="Property" property="Deleted Notes Option" compareValue="Good">
 					<Condition type="Property" property="Deleted Duration Option" compareValue="Bad">
@@ -311,19 +311,19 @@
 						</Condition>
 					</Condition>
 				</Condition>
-
+                
 			</Condition>
-
+            
 			<!-- Check if there are still more then 1 note -->
 			<Condition type="Variable" variable="[Count Notes]" compareValue="1" operator="Bigger">
-	
+                
 				<!-- Check if current sequence is not good (note) -->
 				<Condition type="variable" variable="[Last Note Option]" compareValue="Bad">
-
+                    
 					<!-- Check if previous sequence is not good (note) -->
 					<DataMining variable="[Previous Note Status]" operation="Item" event="Note Option" position="-2" memory="WM" />
 					<Condition type="variable" variable="[Previous Note Status]" compareValue="Bad">
-
+                        
 						<!-- Check if deleted sequence was bad -->
 						<Condition type="Property" property="Deleted Bad" compareValue="True">
 							<Condition type="Property" property="Previous Deleted Bad" compareValue="True">
@@ -333,25 +333,25 @@
 								<Action name="Talk" value="Delete Previous" />
 							</Condition>
 						</Condition>
-
+                        
 					</Condition>
 				</Condition>
-
+                
 				<!-- Check if current sequence is not good (duration) -->
 				<Condition type="variable" variable="[Last Note Option]" compareValue="Good">
-
+                    
 					<!-- Get the current last duration sequence option -->
 					<DataMining variable="[Last Duration Option]" operation="Last" event="Duration Option"  memory="WM" />
 					<Condition type="variable" variable="[Last Duration Option]" compareValue="Bad">
-				
+                        
 						<!-- Check if previous sequence is not good (note) -->
 						<DataMining variable="[Previous Note Status]" operation="Item" event="Note Option" position="-2" memory="WM" />
 						<Condition type="variable" variable="[Previous Note Status]" compareValue="Good">
-
+                            
 							<!-- Check if previous sequence is not good (duration) -->
 							<DataMining variable="[Previous Duration Status]" operation="Item" event="Duration Option" position="-2" memory="WM" />
 							<Condition type="variable" variable="[Previous Duration Status]" compareValue="Bad">
-
+                                
 								<!-- Check if deleted sequence was bad -->
 								<Condition type="Property" property="Deleted Bad" compareValue="True">
 									<Condition type="Property" property="Previous Deleted Bad" compareValue="True">
@@ -365,7 +365,7 @@
 						</Condition>
 					</Condition>
 				</Condition>
-
+                
 				<!-- Update Previous Deleted Bad value -->
 				<Property name="Previous Deleted Bad" value="{Deleted Bad}" />
 				

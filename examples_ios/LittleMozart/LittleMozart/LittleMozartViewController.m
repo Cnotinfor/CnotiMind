@@ -50,9 +50,15 @@
     DLog(@"--- load XML rulles ---");
 
     NSString* XMLFile = [NSString stringWithString:@""];
-    XMLFile = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"mozart_rules.xml"];	
-    
+    XMLFile = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"mozart_rules.xml"];
+	
     [_brain loadXmlRules:XMLFile];
+
+    
+    NSString* XMLFile2 = [NSString stringWithString:@""];
+    XMLFile2 = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"mozart_tutoring.xml"];
+    
+    [_brain loadXmlRules:XMLFile2];
     [_brain printRules];
     
     NSString* XMLFileSettings = [NSString stringWithString:@""];

@@ -35,6 +35,8 @@
 
 - (NSString*) info:(int)aDepth;
 
+- (BOOL)isTrue;
+
 - (void) dealloc;
 
 
