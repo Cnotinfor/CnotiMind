@@ -55,6 +55,16 @@ enum MathOperation
 };
 
 
+enum EventPosition
+{
+    PositionLast,
+    PositionFirst,
+    PositionItem, // Not implemente yeat
+    PositionAll,
+    PositionNone
+};
+
+
 enum DeletePosition
 {
     DeleteLast,

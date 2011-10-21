@@ -68,7 +68,6 @@
         return; // it doesn't do nothing
     }
     
-    // TODO
     [_brain updateEmotionValue:_emotion variation:_valueNumeric max:_max min:_min];
 }
 

@@ -32,7 +32,6 @@
         NSMutableDictionary* variables = [[NSMutableDictionary alloc] init];
         [variables setObject:_value forKey:@"[Emotion.value]"];
         
-        //  TODO
         [self execChildren:variables];
     }
 }

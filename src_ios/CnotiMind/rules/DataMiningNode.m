@@ -81,7 +81,6 @@
             NSMutableDictionary* variables = [[NSMutableDictionary alloc] init];
             [variables setObject:_result forKey:_variable];
             
-            //  TODO    
             [self execChildren: variables];
         }
     }
