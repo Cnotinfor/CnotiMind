@@ -486,6 +486,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 - (void) deleteEvent:(NSString*)aKey position:(enum DeletePosition)aPosition memory:(enum MemoryType)aMemory
 {
     NSMutableArray* mem = aMemory == LongTermMemory ? _longTermMemory : _workingMemory;
+    
     NSEnumerator* eMem = [mem objectEnumerator];
     
     BOOL removeLast = false;
@@ -540,44 +541,10 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     
 }
 
-//TODO - Not tested
+//TODO
 - (void) deleteEvent:(NSString*)aKey value:(NSString*)aValue position:(enum DeletePosition)aPosition memory:(enum MemoryType)aMemory
 {
-    NSMutableArray* mem = aMemory == LongTermMemory ? _longTermMemory : _workingMemory;
-    MemoryEvent* tmpEvent = [[MemoryEvent alloc] initWithEventAndValue:aKey value:aValue];
-    
-//    NSEnumerator* eMem = [mem keyEnumerator];
-//    MemoryEvent* aKey2;
-    
-    switch ((int)aPosition) {
-        case PositionLast:
-            for (int i = [mem count]; i >= 0; i--) {
-                if ([[mem objectAtIndex:i] isEqual:tmpEvent]) {
-                    [mem removeObjectAtIndex:i];
-                }
-            }
-            break;
-            
-        case PositionFirst:
-            for (int i = 0; i < [mem count]; i++) {
-                if ([[mem objectAtIndex:i] isEqual:tmpEvent]) {
-                    [mem removeObjectAtIndex:i];
-                }
-            }
-            break;
-            
-        case PositionAll:
-            for (int i = 0; i < [mem count]; i++) {
-                if ([[mem objectAtIndex:i] isEqual:tmpEvent]) {
-                    [mem removeObjectAtIndex:i];
-                }
-            }
-            break;
-            
-        default:
-            break;
-    }
-    
+
 }
 
 

@@ -25,6 +25,7 @@
 }
 
 
+// TODO
 -(id) init
 {
 	if ((self=[super init]) ) {
@@ -70,6 +71,18 @@
 	return self;
 }
 
+
+//- (id) initWithKeyAndValueAndBrainAndParent: (NSString*)aKey value:(NSString*)aValue brain:(Brain*)aBrain parent:(id)aParent
+//{
+//
+//    if ((self=[super initWithKeyAndValue:aKey value:aValue])) {
+//        [self initWithParent:aParent];
+//        //  TODO
+//        _brain = aBrain;
+//    }
+//    
+//    return self;
+//}
 
 - (id) initWithBrainAndParent:(Brain*)aBrain parent:(id)aParent
 {
@@ -300,7 +313,7 @@
         regResultCheck = [regex_variables_tags firstMatchInString:*aValue options:0 range:NSMakeRange(0, [*aValue length])];
     }
     
-    // PROPERTIES
+    // PROPERTIES - TODO
     NSRegularExpression *regex_properties_tags = [NSRegularExpression regularExpressionWithPattern:@"\\{([a-zA-Z0-9_\\- \\.]+)\\}"
                                                                                           options:NSRegularExpressionCaseInsensitive
                                                                                             error:nil];

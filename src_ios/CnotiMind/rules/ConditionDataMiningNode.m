@@ -48,6 +48,8 @@
 
 - (void) exec
 {
+//    DLog(@"ConditionDataMining exec");
+    
     if ([self isTrue]) {
             
         if ([_variable length]==0) {
@@ -57,6 +59,7 @@
             NSMutableDictionary* variables = [[NSMutableDictionary alloc] init];
             [variables setObject:_result forKey:_variable];
             
+            //  TODO
             [self execChildren:variables];
         }
     }
@@ -65,12 +68,15 @@
 
 - (void) exec:(NSMutableDictionary*)aVariables
 {
+//    DLog(@"ConditionDataMining exec aVariables");
+    
     if ([self isTrue]) {
     
         if ([_variable length]!=0) {
             [aVariables setObject:_result forKey:_variable];
         }
         
+        //  TODO        
         [self execChildren:aVariables];
     }
 }

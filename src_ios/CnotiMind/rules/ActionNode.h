@@ -26,6 +26,13 @@
                                        brain:(Brain*)aBrain 
                                       parent:(id)aParent;
 
+- (id) initWithNameAndValueAndBrainAndParent:(NSString*)aName 
+                                       value:(NSString*)aValue
+                                 probability:(NSString*)aProbability
+                                       brain:(Brain*)aBrain 
+                                      parent:(id)aParent;
+
+
 - (void) exec;
 - (void) exec:(NSMutableDictionary*)aVariables;
 

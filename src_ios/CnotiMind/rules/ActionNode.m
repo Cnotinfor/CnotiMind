@@ -16,6 +16,20 @@
 @implementation ActionNode
 
 
+- (id) initWithNameAndValueAndBrainAndParent: (NSString*)aName 
+                                       value:(NSString*)aValue 
+                                       brain:(Brain*)aBrain 
+                                      parent:(id)aParent
+{
+    if (self = [super initWithBrainAndParent:aBrain parent:aParent]) {
+        _name = (aName == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aName];
+        _value = (aValue == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aValue];
+    }
+    
+    return self;
+    
+}
+
 - (id) initWithNameAndValueAndBrainAndParent:(NSString*)aName 
                                        value:(NSString*)aValue
                                  probability:(NSString*)aProbability
