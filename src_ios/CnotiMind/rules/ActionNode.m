@@ -10,18 +10,28 @@
 
 #import "Brain.h"
 
+#define ARC4RANDOM_MAX      0x100000000
+
 
 @implementation ActionNode
 
 
-- (id) initWithNameAndValueAndBrainAndParent: (NSString*)aName 
-                                       value:(NSString*)aValue 
+- (id) initWithNameAndValueAndBrainAndParent:(NSString*)aName 
+                                       value:(NSString*)aValue
+                                 probability:(NSString*)aProbability
                                        brain:(Brain*)aBrain 
                                       parent:(id)aParent
 {
     if (self = [super initWithBrainAndParent:aBrain parent:aParent]) {
         _name = (aName == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aName];
         _value = (aValue == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aValue];
+        
+        _probability = (aProbability == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aProbability];
+
+        if ([self isNumeric:_probability]) {
+            _isProbabilityNumeric = true;
+            _probabilityValue = [_probability floatValue];    
+        }
     }
     
     return self;
@@ -30,7 +40,28 @@
 
 - (void) exec
 {
-//    TODO probability
+//    TODO check if probability is ok
+    if (_isProbabilityNumeric) {
+        if ( _probabilityValue <= 0 ) {
+            return;
+        }
+        if (_probabilityValue < 1) {
+            
+            //test if should execute
+            double val = floorf(((double)arc4random() / ARC4RANDOM_MAX) * 100.0f);
+            val = val / 100;
+
+            if ( val > _probabilityValue ) {
+                return;
+            }
+            
+        }
+        else {
+            // if the probability is not a number, return since there are no variables
+			// to get the value
+			return;
+        }
+    }
     [_brain executeAction:_name value:_value]; 
 }
 

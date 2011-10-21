@@ -149,7 +149,6 @@ enum { HAS_DATA, NO_DATA };
 
 
 /**
- TODO
  Main loop for the thread.
  
  Everytime a perceptions arrives, the _semaphoreBrian is made available, so it unlocks

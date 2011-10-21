@@ -43,7 +43,9 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         
         _properties = [[NSMutableDictionary alloc] init];
         
-        _semaphoreBrain = [[NSConditionLock alloc] initWithCondition:NO_DATA];       
+        _semaphoreBrain = [[NSConditionLock alloc] initWithCondition:NO_DATA];
+        
+        _quit = false;
         
     }
     
@@ -65,7 +67,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         //  [self initWithTarget:self selector:@selector(run) object:nil];
         //  [self run];
         
-        //        [NSThread detachNewThreadSelector:@selector(startThreadRun) toTarget:self withObject:nil];
+        //  [NSThread detachNewThreadSelector:@selector(startThreadRun) toTarget:self withObject:nil];
     }
     return self;
 }
@@ -387,10 +389,11 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 }
 
 
-//  TODO
+//  TODO - not tested
 - (void) stop
 {
-    
+    _quit = true;
+    [_semaphoreBrain unlockWithCondition:HAS_DATA];
 }
 
 
@@ -466,11 +469,9 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 
 - (void) executeActionWithVariables:(NSString*)aKey value:(NSString*)aValue
 {
-    //  TODO: send signal
     NSMutableDictionary* action = [[NSMutableDictionary alloc] init];
     [action setObject:aValue forKey:aKey];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"SEND_ACTION" object:action];
-    
 }
 
 
@@ -482,10 +483,8 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     [[NSNotificationCenter defaultCenter] postNotificationName:SEND_ACTION object:action];
 }
 
-//TODO - Not tested
 - (void) deleteEvent:(NSString*)aKey position:(enum DeletePosition)aPosition memory:(enum MemoryType)aMemory
 {
-
     NSMutableArray* mem = aMemory == LongTermMemory ? _longTermMemory : _workingMemory;
     
     NSEnumerator* eMem = [mem objectEnumerator];
@@ -1102,6 +1101,11 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     while (true) {
         
         [_semaphoreBrain lockWhenCondition:HAS_DATA];
+        
+        if (_quit) {
+            return;
+        }
+        
         DLog(@"Brain - run - HAS_DATA");
         int nEmotions;
         nEmotions = [_emotionsChanged count];

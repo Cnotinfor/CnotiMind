@@ -15,6 +15,10 @@
 @interface ActionNode : RuleNode {
     NSString* _name;
     NSString* _value;
+    
+    NSString* _probability;
+    BOOL _isProbabilityNumeric;
+    float _probabilityValue;
 }
 
 - (id) initWithNameAndValueAndBrainAndParent: (NSString*)aName 
