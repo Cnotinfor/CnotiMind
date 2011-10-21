@@ -10,6 +10,7 @@
 		1853868C1446EF46000DE2A9 /* mozart_rules_without_comments.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1853868B1446EF46000DE2A9 /* mozart_rules_without_comments.xml */; };
 		18572DE5144F068D00B42519 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18572DE3144F068D00B42519 /* MainWindow-iPad.xib */; };
 		18572DEB144F0DF800B42519 /* whitey.png in Resources */ = {isa = PBXBuildFile; fileRef = 18572DEA144F0DF800B42519 /* whitey.png */; };
+		1865317E1451AB9300520944 /* LittleMozartViewControlleriPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 1865317C1451AB9300520944 /* LittleMozartViewControlleriPad.m */; };
 		1868F7A01443320B00B61726 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1868F79F1443320B00B61726 /* UIKit.framework */; };
 		1868F7A21443320B00B61726 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1868F7A11443320B00B61726 /* Foundation.framework */; };
 		1868F7A41443320B00B61726 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1868F7A31443320B00B61726 /* CoreGraphics.framework */; };
@@ -55,12 +56,15 @@
 		18B41B091444AAF6008D9CE6 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 18B41B001444AAF6008D9CE6 /* README */; };
 		18B41B0A1444AAF6008D9CE6 /* simple_rules.xml in Resources */ = {isa = PBXBuildFile; fileRef = 18B41B011444AAF6008D9CE6 /* simple_rules.xml */; };
 		18B41B0B1444AAF6008D9CE6 /* single_emotion_rules.xml in Resources */ = {isa = PBXBuildFile; fileRef = 18B41B021444AAF6008D9CE6 /* single_emotion_rules.xml */; };
+		18E8879B1451AFAF0050227C /* LittleMozartViewControlleriPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E8879A1451AFAF0050227C /* LittleMozartViewControlleriPad.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1853868B1446EF46000DE2A9 /* mozart_rules_without_comments.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mozart_rules_without_comments.xml; sourceTree = "<group>"; };
 		18572DE4144F068D00B42519 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "iPad/en.lproj/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		18572DEA144F0DF800B42519 /* whitey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whitey.png; sourceTree = "<group>"; };
+		1865317B1451AB9300520944 /* LittleMozartViewControlleriPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LittleMozartViewControlleriPad.h; sourceTree = "<group>"; };
+		1865317C1451AB9300520944 /* LittleMozartViewControlleriPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LittleMozartViewControlleriPad.m; sourceTree = "<group>"; };
 		1868F79B1443320B00B61726 /* LittleMozart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LittleMozart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1868F79F1443320B00B61726 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1868F7A11443320B00B61726 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -142,6 +146,7 @@
 		18B41B001444AAF6008D9CE6 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		18B41B011444AAF6008D9CE6 /* simple_rules.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = simple_rules.xml; sourceTree = "<group>"; };
 		18B41B021444AAF6008D9CE6 /* single_emotion_rules.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = single_emotion_rules.xml; sourceTree = "<group>"; };
+		18E8879A1451AFAF0050227C /* LittleMozartViewControlleriPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LittleMozartViewControlleriPad.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,7 +166,10 @@
 		18572DE2144F068900B42519 /* iPad */ = {
 			isa = PBXGroup;
 			children = (
+				18E8879A1451AFAF0050227C /* LittleMozartViewControlleriPad.xib */,
 				18572DE3144F068D00B42519 /* MainWindow-iPad.xib */,
+				1865317B1451AB9300520944 /* LittleMozartViewControlleriPad.h */,
+				1865317C1451AB9300520944 /* LittleMozartViewControlleriPad.m */,
 			);
 			name = iPad;
 			sourceTree = "<group>";
@@ -412,6 +420,7 @@
 				1853868C1446EF46000DE2A9 /* mozart_rules_without_comments.xml in Resources */,
 				18572DE5144F068D00B42519 /* MainWindow-iPad.xib in Resources */,
 				18572DEB144F0DF800B42519 /* whitey.png in Resources */,
+				18E8879B1451AFAF0050227C /* LittleMozartViewControlleriPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,6 +461,7 @@
 				1868F82314449C1A00B61726 /* RulesXmlHandler.m in Sources */,
 				1868F82414449C1A00B61726 /* StorageNode.m in Sources */,
 				1868F82514449C1A00B61726 /* SettingsXmlHandler.m in Sources */,
+				1865317E1451AB9300520944 /* LittleMozartViewControlleriPad.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -560,7 +570,7 @@
 				);
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -582,7 +592,7 @@
 				);
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

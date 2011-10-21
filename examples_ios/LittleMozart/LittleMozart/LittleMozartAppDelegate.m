@@ -18,6 +18,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        _viewController = [[LittleMozartViewController alloc] initWithNibName:@"LittleMozartViewControlleriPad" bundle:nil];
+    else
+        _viewController = [[LittleMozartViewController alloc] initWithNibName:@"LittleMozartViewController" bundle:nil];
+    
      
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
