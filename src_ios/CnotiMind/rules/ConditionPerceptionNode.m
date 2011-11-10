@@ -3,7 +3,7 @@
 //  CnotiMind
 //
 //  Created by Gonçalo Rodrigues on 11/05/09.
-//  Copyright 2011 Universidade de Coimbra. All rights reserved.
+//  Copyright 2011 Cnotinfor. All rights reserved.
 //
 
 #import "ConditionPerceptionNode.h"
@@ -37,6 +37,7 @@
         
         //  TODO
         [self execChildren:variables];
+        [variables release];
     }
 }
 

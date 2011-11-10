@@ -3,7 +3,7 @@
 //  SingleEmotion
 //
 //  Created by Gonçalo Rodrigues on 8/17/11.
-//  Copyright 2011 Universidade de Coimbra. All rights reserved.
+//  Copyright 2011 Cnotinfor. All rights reserved.
 //
 
 #ifndef SETTINGSXMLHANDLER_H

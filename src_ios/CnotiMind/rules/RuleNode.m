@@ -3,7 +3,7 @@
 //  CnotiMind
 //
 //  Created by Gonçalo Rodrigues on 11/04/26.
-//  Copyright 2011 Universidade de Coimbra. All rights reserved.
+//  Copyright 2011 Cnotinfor. All rights reserved.
 //
 
 #import "RuleNode.h"
@@ -420,7 +420,7 @@
     NSError *error = nil;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:NSRegularExpressionDotMatchesLineSeparators error:&error];
     if(regex == nil) {
-        NSLog(@"-- %@", error);
+        DLog(@"error: %@", error);
         return nil;
     }
     

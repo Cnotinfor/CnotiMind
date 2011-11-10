@@ -3,7 +3,7 @@
 //  CnotiMind
 //
 //  Created by Gonçalo Rodrigues on 11/04/21.
-//  Copyright 2011 Universidade de Coimbra. All rights reserved.
+//  Copyright 2011 Cnotinfor. All rights reserved.
 //
 
 #import "Emotion.h"
@@ -116,10 +116,7 @@
 
 - (NSString *)description:(Emotion*)aEmotion
 {
-
     NSString* res = [NSString stringWithFormat:@"Emotion: %@; value: %@; min: %f; max: %f;", aEmotion.name, aEmotion.value, aEmotion.min, aEmotion.max];
-
-    NSLog(@"%@", res);
     return res;
 }
 

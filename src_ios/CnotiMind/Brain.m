@@ -3,7 +3,7 @@
 //  CnotiMind
 //
 //  Created by Gonçalo Rodrigues on 11/04/27.
-//  Copyright 2011 Universidade de Coimbra. All rights reserved.
+//  Copyright 2011 Cnotinfor. All rights reserved.
 //
 
 #import "Brain.h"
@@ -119,7 +119,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         //  Make the parsing - must be recursive!!!
         NSArray *settingsMembers = [doc.rootElement children];
         
-        NSLog(@"settingsMembers: %@", settingsMembers);
+        DLog(@"settingsMembers: %@", settingsMembers);
         
         [_settingsXMLHandler startElement:nil localName:nil qName:@"Settings" atts:nil];
         [self loadXMLRecursiveSettings: settingsMembers];
@@ -155,7 +155,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         //  Make the parsing - must be recursive!!!
         NSArray *rulesMembers = [doc.rootElement children];
         
-        NSLog(@"rulesMembers: %@", rulesMembers);
+        DLog(@"rulesMembers: %@", rulesMembers);
         
         [_rulesXMLHandler startElement:nil localName:nil qName:@"Rules" atts:nil];
         [self loadXMLRecursive: rulesMembers];
@@ -179,7 +179,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     }
     
     for (GDataXMLElement* rulesMember in rulesMembers) {
-        NSString* elementName = [[NSString alloc] initWithFormat:@"%@",[rulesMember name]];
+        NSString* elementName = [NSString stringWithString:[rulesMember name]];
 
         [_rulesXMLHandler startElement:nil localName:nil qName:elementName atts:rulesMember];
     
@@ -199,7 +199,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     }
     
     for (GDataXMLElement* settingMember in settingsMembers) {
-        NSString* elementName = [[NSString alloc] initWithFormat:@"%@",[settingMember name]];
+        NSString* elementName = [NSString stringWithString:[settingMember name]];
         
         [_settingsXMLHandler startElement:nil localName:nil qName:elementName atts:settingMember];
         
@@ -402,6 +402,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     NSMutableDictionary* action = [[NSMutableDictionary alloc] init];
     [action setObject:aValue forKey:aKey];
     [[NSNotificationCenter defaultCenter] postNotificationName:SEND_ACTION object:action];
+    [action release];
 }
 
 
@@ -410,6 +411,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     NSMutableDictionary* action = [[NSMutableDictionary alloc] init];
     [action setObject:aValue forKey:aKey];
     [[NSNotificationCenter defaultCenter] postNotificationName:SEND_EMOTIONAL_STATE object:action];
+    [action release];
 }
 
 
@@ -472,6 +474,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     NSMutableDictionary* action = [[NSMutableDictionary alloc] init];
     [action setObject:aValue forKey:aKey];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"SEND_ACTION" object:action];
+    [action release];
 }
 
 
@@ -479,8 +482,8 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 {
     NSMutableDictionary* action = [[NSMutableDictionary alloc] init];
     [action setObject:aValue forKey:aKey];
-    
     [[NSNotificationCenter defaultCenter] postNotificationName:SEND_ACTION object:action];
+    [action release];
 }
 
 - (void) deleteEvent:(NSString*)aKey position:(enum DeletePosition)aPosition memory:(enum MemoryType)aMemory

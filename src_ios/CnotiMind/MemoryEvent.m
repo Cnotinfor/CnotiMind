@@ -3,7 +3,7 @@
 //  CnotiMind
 //
 //  Created by Gonçalo Rodrigues on 11/04/26.
-//  Copyright 2011 Universidade de Coimbra. All rights reserved.
+//  Copyright 2011 Cnotinfor. All rights reserved.
 //
 
 #import "MemoryEvent.h"
