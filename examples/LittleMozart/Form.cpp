@@ -123,7 +123,7 @@ void Form::durationClicked( const QString& duration )
 
 void Form::on_pushButtonPrint_clicked()
 {
-	_brain->printMemory(CnotiMind::WorkingMemory);
+	_brain->printMemory(CnotiMind::LongTermMemory);
 	_brain->printProperties();
 }
 
@@ -185,7 +185,7 @@ void Form::on_pushButtonFinishMelody_clicked()
 
 void Form::actionReceived(const QString& action,const QString& value)
 {
-	if( action.compare("TALK", Qt::CaseInsensitive ) == 0 )
+//	if( action.compare("TALK", Qt::CaseInsensitive ) == 0 )
 	{
 		ui->plainTextEditActions->insertPlainText( action + ": " + value + "\n");
 	}

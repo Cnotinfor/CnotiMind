@@ -33,6 +33,8 @@ namespace CnotiMind
 		friend bool operator ==(const MemoryEvent& event, const QString& name);
 		friend bool operator ==(const QString& name, const MemoryEvent& event);
 
+		static qint64 eventTime();
+
 	protected:
 		QString _event;
 		QVariant _value;

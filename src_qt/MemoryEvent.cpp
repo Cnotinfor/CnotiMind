@@ -8,7 +8,7 @@
 namespace CnotiMind
 {
 	MemoryEvent::MemoryEvent():
-		_time( QDateTime::currentDateTime().toMSecsSinceEpoch() )
+		_time( eventTime() )
 	{
 
 	}
@@ -16,7 +16,7 @@ namespace CnotiMind
 	MemoryEvent::MemoryEvent( const QString& key ):
 		_event( key ),
 		_value( QVariant() ),
-		_time( QDateTime::currentDateTime().toMSecsSinceEpoch() )
+		_time( eventTime() )
 	{
 
 	}
@@ -30,7 +30,7 @@ namespace CnotiMind
 	MemoryEvent::MemoryEvent(const QString& key, const QVariant& value):
 		_event( key ),
 		_value( value ),
-		_time( QDateTime::currentDateTime().toMSecsSinceEpoch() )
+		_time( eventTime() )
 	{
 
 	}
@@ -49,7 +49,7 @@ namespace CnotiMind
 	MemoryEvent::MemoryEvent( const Perception& perception ):
 		_event( perception.name() ),
 		_value( perception.value() ),
-		_time( QDateTime::currentDateTime().toMSecsSinceEpoch() )
+		_time( eventTime() )
 	{
 
 	}
@@ -82,6 +82,11 @@ namespace CnotiMind
 		xml += "/>";
 
 		return xml;
+	}
+
+	qint64 MemoryEvent::eventTime()
+	{
+		return QDateTime::currentDateTime().toMSecsSinceEpoch();
 	}
 
 	/*
@@ -117,5 +122,4 @@ namespace CnotiMind
 	{
 		return operator ==(event, name);
 	}
-
 }

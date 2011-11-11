@@ -141,13 +141,15 @@ namespace CnotiMind
 
 	bool Brain::saveMemory(const QString& filename)
 	{
+		saveEmotionalStateToMemory();
+
+		// Save to xml
 		QFile f(filename);
 		QTextStream out(&f);
 		out.setCodec(QTextCodec::codecForName("UTF-8"));
 
 		if( f.open( QIODevice::WriteOnly | QIODevice::Text ) )
 		{
-
 			f.write( "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" );
 			f.write( "<Memory>\n" );
 			f.write( "\t<LongTermMemory>\n" );
@@ -158,14 +160,14 @@ namespace CnotiMind
 				f.write( it.next().toXml().toUtf8() + "\n" );
 			}
 			f.write( "\t</LongTermMemory>\n" );
-			f.write( "\t<WorkingMemory>\n" );
-			QListIterator<MemoryEvent> it2(_workingMemory);
-			while(it2.hasNext())
-			{
-				f.write( "\t\t");
-				f.write( it2.next().toXml().toUtf8() + "\n" );
-			}
-			f.write( "\t</WorkingMemory>\n" );
+//			f.write( "\t<WorkingMemory>\n" );
+//			QListIterator<MemoryEvent> it2(_workingMemory);
+//			while(it2.hasNext())
+//			{
+//				f.write( "\t\t");
+//				f.write( it2.next().toXml().toUtf8() + "\n" );
+//			}
+//			f.write( "\t</WorkingMemory>\n" );
 			f.write( "</Memory>\n" );
 
 			f.close();
@@ -194,19 +196,49 @@ namespace CnotiMind
 		// Retrives data from file
 		if( reader.parse( source ) )
 		{
+			loadEmotionalStateFromMemory();
 			return true;
 		}
 
 		return false;
 	}
 
-	bool Brain::saveEmotionalState(const QString& filename)
+	/**
+	  Saves the emotions states to the long term memory
+	*/
+	bool Brain::saveEmotionalStateToMemory()
 	{
+		qint64 emotionTime = MemoryEvent::eventTime(); // It's given to all the emotions the same time
+		QListIterator<Emotion> memIt(_emotions);
+		while(memIt.hasNext())
+		{
+			Emotion e = memIt.next();
+			MemoryEvent m( "Emotion " + e.key(), e.value(), emotionTime );
+
+			this->storeToMemory( m, LongTermMemory);
+		}
 		return true;
 	}
 
-	bool Brain::loadEmotionalState(const QString& filename)
+	/**
+	  Loads the emotions states from the long term memory
+	*/
+	bool Brain::loadEmotionalStateFromMemory()
 	{
+		// update emotion value
+		QListIterator<MemoryEvent> it(_longTermMemory);
+		it.toBack();
+		while (it.hasPrevious())
+		{
+			MemoryEvent m = it.previous();
+			if (!m.event().contains("Emotion "))
+			{
+				break;
+			}
+
+			QString emotionName = m.event().split(' ').last();
+			this->updateEmotionalValue(emotionName, m.value().toReal());
+		}
 		return true;
 	}
 
