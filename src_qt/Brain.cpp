@@ -452,6 +452,12 @@ namespace CnotiMind
 
 	void Brain::updateEmotionalValue(const QString& emotionName, qreal variation, qreal max, qreal min)
 	{
+		if (_disabledTasks.contains(EmotionNodes))
+		{
+			qDebug() << "[Brain::updateEmotionalValue] Emotional tasks are disabled.";
+			return;
+		}
+
 		QMutableListIterator<Emotion> it(_emotions);
 		while(it.hasNext())
 		{
@@ -522,6 +528,12 @@ namespace CnotiMind
 	*/
 	void Brain::executeAction( const QString& key, const QString& value )
 	{
+		if (_disabledTasks.contains(ActionNodes))
+		{
+			qDebug() << "[Brain::executeAction] Action tasks are disabled.";
+			return;
+		}
+
 		if( _gui != NULL )
 		{
 			_gui->updateActions( key, value );
@@ -1394,4 +1406,34 @@ namespace CnotiMind
 			*valid = value;
 		}
 	}
+
+	/*
+		Private method, to disable tasks perfomed by the brain.
+	*/
+	void Brain::deactivateTask(const QString& task)
+	{
+		_disabledTasks << translateBrainTasks(task);
+	}
+
+	/*
+		Private method, to enable tasks perfomed by the brain.
+	*/
+	void Brain::activateTask(const QString& task)
+	{
+		_disabledTasks.removeAll(translateBrainTasks(task));
+	}
+
+	Brain::BrainNodes Brain::translateBrainTasks(const QString &text)
+	{
+		if (QString::compare( text, "Emotions", Qt::CaseInsensitive) == 0)
+		{
+			return EmotionNodes;
+		}
+		if (QString::compare( text, "Actions", Qt::CaseInsensitive) == 0)
+		{
+			return ActionNodes;
+		}
+		return UndefinedNodes;
+	}
 }
+

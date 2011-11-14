@@ -14,8 +14,6 @@
 #include "CnotiMind.h"
 //#include "rules/ConditionNode.h"
 
-
-
 namespace CnotiMind
 {
 
@@ -38,7 +36,12 @@ namespace CnotiMind
 
 	public:
 
-
+		enum BrainNodes
+		{
+			EmotionNodes,
+			ActionNodes,
+			UndefinedNodes
+		};
 
 		Q_ENUMS( MemoryType )
 
@@ -91,14 +94,13 @@ namespace CnotiMind
 		friend class RootNode;
 		friend class StorageNode;
 		friend class StorageCopyNode;
+		friend class DisableNode;
 
 		// Friend class Models
 		friend class EmotionsModel;
 		friend class MemoryModel;
 		friend class PerceptionsModel;
 		friend class PropertiesModel;
-
-
 
 	public:
 
@@ -167,6 +169,10 @@ namespace CnotiMind
 		// method to help set valid value
 		inline void setValid( bool* valid, bool value );
 
+		void deactivateTask(const QString& task);
+		void activateTask(const QString& task);
+		BrainNodes translateBrainTasks( const QString& text );
+
 	private:
 		RuleNode* _rules;
 		QList<QString> _validPerceptions;
@@ -183,6 +189,8 @@ namespace CnotiMind
 		bool _quit;
 
 		BrainGUI *_gui;
+
+		QList<BrainNodes> _disabledTasks;	// List with the brain activities that are disabled.
 	};
 
 }

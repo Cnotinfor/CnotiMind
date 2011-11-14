@@ -17,7 +17,8 @@ HEADERS += \
     rules/ClearMemoryNode.h \
     rules/DeleteNode.h \
     rules/RandomNode.h \
-    rules/StorageCopyNode.h
+    rules/StorageCopyNode.h \
+    rules/DisableNode.h
 
 SOURCES += \
 	rules/ActionNode.cpp \
@@ -38,4 +39,7 @@ SOURCES += \
     rules/ClearMemoryNode.cpp \
     rules/DeleteNode.cpp \
     rules/RandomNode.cpp \
-    rules/StorageCopyNode.cpp
+    rules/StorageCopyNode.cpp \
+    rules/DisableNode.cpp
+
+
