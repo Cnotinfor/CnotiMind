@@ -2,9 +2,7 @@
 //  Brain.h
 //  CnotiMind
 //
-//  Created by Gonçalo Rodrigues on 11/04/27.
-//  Copyright 2011 Cnotinfor. All rights reserved.
-//
+
 
 #import <Foundation/Foundation.h>
 
@@ -16,6 +14,8 @@
 #import "ConditionDataMiningNode.h"
 #import "ActionNode.h"
 #import "EmotionNode.h"
+#import "Crutch.h"
+
 #import "StorageNode.h"
 
 #import "CnotiMind.h"
@@ -23,6 +23,7 @@
 
 #import "RulesXmlHandler.h"
 #import "SettingsXmlHandler.h"
+#import "CrutchesXmlHandler.h"
 
 
 
@@ -40,6 +41,8 @@ enum { HAS_DATA, NO_DATA };
     NSMutableArray* _validPerceptions;
     NSMutableArray* _validActions;
     NSMutableArray* _emotions;
+    
+    NSMutableArray* _crutches;
 
     //  QSemaphore _semaphoreBrain;
     NSConditionLock* _semaphoreBrain;
@@ -57,6 +60,9 @@ enum { HAS_DATA, NO_DATA };
     
     RulesXmlHandler* _rulesXMLHandler;
     SettingsXmlHandler* _settingsXMLHandler;
+    CrutchesXmlHandler* _crutchesXMLHandler;
+    
+    BOOL _crutchEnabled;
 }
 
 
@@ -74,11 +80,14 @@ enum { HAS_DATA, NO_DATA };
 - (void) addValidPerception:(NSString*)aPerception;
 - (void) addValidAction:(NSString*)aAction;
 - (void) addEmotion:(Emotion*)aEmotion;
+- (void) addCrutch:(Crutch*)aCrutch;
 
 - (BOOL) loadXmlSettings:(NSString*)aFilename;
+- (BOOL) loadXmlCrutches:(NSString*)aFilePath;
 - (BOOL) loadXmlRules:(NSString*)aFilename;
 - (BOOL) loadXMLRecursive:(NSArray*)rulesMembers;
 - (BOOL) loadXMLRecursiveSettings:(NSArray*)settingsMembers;
+- (BOOL) loadXMLRecursiveCrutches:(NSArray*)crutchesMembers;
 
 
 - (BOOL) validateXml:(NSString*)aFilename;
@@ -128,7 +137,7 @@ enum { HAS_DATA, NO_DATA };
 - (float) dataMiningMax:(NSString*)aEvent memory:(NSMutableArray*)aMemory valid:(BOOL*)aValid;
 - (float) dataMiningMin:(NSString*)aEvent memory:(NSMutableArray*)aMemory valid:(BOOL*)aValid;
 - (float) dataMiningSum:(NSString*)aEvent memory:(NSMutableArray*)aMemory valid:(BOOL*)aValid;
-- (BOOL)isNumeric:(NSString*)s;
+- (BOOL) isNumeric:(NSString*)s;
 - (float) dataMiningSum:(NSString*)aEvent value:(float)aValue memory:(NSMutableArray*)aMemory valid:(BOOL*)aValid;
 
 - (float) dataMiningCount:(NSString*)aEvent memory:(NSMutableArray*)aMemory valid:(BOOL*)aValid;

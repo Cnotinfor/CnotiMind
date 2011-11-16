@@ -34,6 +34,9 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         _validPerceptions = [[NSMutableArray alloc] init];
         _validActions = [[NSMutableArray alloc] init];
         _emotions = [[NSMutableArray alloc] init];
+        
+        _crutches = [[NSMutableArray alloc] init];
+        
         _receivedPerceptions = [[NSMutableArray alloc] init];
         
         _receivedPerceptions = [[NSMutableArray alloc] init];
@@ -47,9 +50,12 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         
         _quit = false;
         
+        _crutchEnabled = false;
+        
     }
     
     _settingsXMLHandler = [[SettingsXmlHandler alloc] initWithBrain:self];
+    _crutchesXMLHandler = [[CrutchesXmlHandler alloc] initWithBrain:self];
     
     return self;
 }
@@ -96,6 +102,11 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     [_emotions enqueue:aEmotion];
 }
 
+- (void) addCrutch:(Crutch*)aCrutch
+{
+    [_crutches enqueue:aCrutch];
+}
+
 /**
  Load a XML file with settings.
  This method can me called several times, append new settings to the Brain.
@@ -130,6 +141,45 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     [xmlData release];
     
     DLog(@"[Brain::loadXmlSettings] done");
+    
+    return true;
+}
+
+/**
+ Load a XML file with crutches.
+ This method can me called several times, append new settings to the Brain.
+ XML file can have Crutches
+ */
+- (BOOL) loadXmlCrutches:(NSString*)aFilePath
+{
+    DLog(@"%@", aFilePath);
+    
+    NSData *xmlData = [[NSMutableData alloc] initWithContentsOfFile:aFilePath];  
+    NSError *error;
+    GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:xmlData 
+														   options:0 
+                                                             error:&error];
+    
+    if (error) {
+        DLog(@"[Brain::loadXmlCrutches] File not found");
+        return false;
+    }
+    
+    else {
+        //  Make the parsing - must be recursive!!!
+        NSArray *crutchesMembers = [doc.rootElement children];
+        
+        DLog(@"crutchesMembers: %@", crutchesMembers);
+        
+        [_crutchesXMLHandler startElement:nil localName:nil qName:@"Crutches" atts:nil];
+        [self loadXMLRecursiveCrutches: crutchesMembers];
+        [_crutchesXMLHandler endElement:nil localName:nil qName:@"Crutches"];
+    }
+    
+    [doc release];
+    [xmlData release];
+    
+    DLog(@"[Brain::loadXmlCrutches] done");
     
     return true;
 }
@@ -207,6 +257,26 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         [self loadXMLRecursiveSettings:childArray];
         
         [_settingsXMLHandler endElement:nil localName:nil qName:elementName];
+    }
+    return true;
+}
+
+
+- (BOOL) loadXMLRecursiveCrutches:(NSArray*)crutchesMembers
+{
+    if ([crutchesMembers count]==0) {
+        return false;
+    }
+    
+    for (GDataXMLElement* crutchMember in crutchesMembers) {
+        NSString* elementName = [NSString stringWithString:[crutchMember name]];
+        
+        [_crutchesXMLHandler startElement:nil localName:nil qName:elementName atts:crutchMember];
+        
+        NSArray* childArray = [crutchMember children];        
+        [self loadXMLRecursiveSettings:childArray];
+        
+        [_crutchesXMLHandler endElement:nil localName:nil qName:elementName];
     }
     return true;
 }
@@ -377,15 +447,10 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 - (void) receivePerception:(Perception*)aPerception
 {
     [_semaphoreBrain lockWhenCondition:NO_DATA];
-    
-//    DLog(@"name: %@. value: %@", [aPerception name], [aPerception value]);
-    
+
     [_receivedPerceptions enqueue:aPerception];
     
     [_semaphoreBrain unlockWithCondition:HAS_DATA];
-    
-    //  Trigger the brain
-    //    [self run];
 }
 
 
@@ -482,8 +547,77 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 {
     NSMutableDictionary* action = [[NSMutableDictionary alloc] init];
     [action setObject:aValue forKey:aKey];
-    [[NSNotificationCenter defaultCenter] postNotificationName:SEND_ACTION object:action];
+    
+    DLog(@"action key: %@", aKey);
+    DLog(@"action value: %@", aValue);
+    
+    enum EnumCrutchOrder orderOfCrutch = -1;
+    NSMutableArray* tempCrutchesArray = [[NSMutableArray alloc] initWithCapacity:100];
+    BOOL foundCrutch = false;
+    
+    for (Crutch* crutchObject in _crutches) {
+    // current emotional state (must search emotions array for particular emotion)
+        for (Emotion* emotionObject in _emotions) {
+            // if name are the same and action are same        
+            if ( ![[emotionObject name] caseInsensitiveCompare:[crutchObject emotion]] && ![aKey caseInsensitiveCompare:[crutchObject action]] ) {
+                
+                // check if between min and max values
+                if ( [emotionObject value] >= [crutchObject min] && [emotionObject value] <= [crutchObject max] ) {
+                    [tempCrutchesArray addObject:crutchObject];
+                    
+                    //check order
+                    orderOfCrutch = [crutchObject order];
+                    foundCrutch = true;
+                }
+            }
+        }
+    }
+
+    if ( foundCrutch && [tempCrutchesArray count]>0 && _crutchEnabled) {
+        DLog(@"I found a crutch!");
+        // search for a crutch in the crutches temp array        
+        int n = arc4random() % [tempCrutchesArray count];
+        DLog(@"n: %d", n);
+        Crutch* randomCrutch = [tempCrutchesArray objectAtIndex:n];
+        
+        NSMutableDictionary* actionCrutch = [[NSMutableDictionary alloc] init];
+        [actionCrutch setObject:[randomCrutch name] forKey:[randomCrutch action]];
+        
+        if ( orderOfCrutch == CrutchOrder_BEGIN ) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:SEND_ACTION object:actionCrutch];
+            [[NSNotificationCenter defaultCenter] postNotificationName:SEND_ACTION object:action];
+        }
+        else if ( orderOfCrutch == CrutchOrder_BEGIN_AND_END ) {
+        
+            int foo = arc4random() % 1;
+
+            if ( foo == 0 ) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:SEND_ACTION object:actionCrutch];
+                [[NSNotificationCenter defaultCenter] postNotificationName:SEND_ACTION object:action];
+                
+            }
+            else if ( foo == 1 ) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:SEND_ACTION object:action];
+                [[NSNotificationCenter defaultCenter] postNotificationName:SEND_ACTION object:actionCrutch];
+            }            
+        }
+        else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:SEND_ACTION object:action];
+            [[NSNotificationCenter defaultCenter] postNotificationName:SEND_ACTION object:actionCrutch];
+        }
+        
+        [actionCrutch release];
+        
+        _crutchEnabled = false;
+    }
+    
+    else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:SEND_ACTION object:action];
+    }
+    
     [action release];
+    [tempCrutchesArray removeAllObjects];
+    [tempCrutchesArray release];
 }
 
 - (void) deleteEvent:(NSString*)aKey position:(enum DeletePosition)aPosition memory:(enum MemoryType)aMemory
@@ -1114,8 +1248,9 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         nEmotions = [_emotionsChanged count];
         
         // Execute the rules
-        if (_rules!=nil) {
-            [_rules exec];       
+        if ( _rules!=nil ) {
+            _crutchEnabled = true;
+            [_rules exec];
         }
         
         // remove the emotions changed since the last rules exection
@@ -1137,7 +1272,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         if( [_receivedPerceptions count] != 0 )
         {
             Perception* p = [_receivedPerceptions dequeue];
-//          DLog(@"dequeue from _receivedPerceptions: %@ %@", [p name], [p value]);
+            DLog(@"dequeue from _receivedPerceptions: %@ %@", [p name], [p value]);
         }
         
         [_semaphoreBrain unlockWithCondition:NO_DATA];
