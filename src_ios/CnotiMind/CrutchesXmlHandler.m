@@ -26,33 +26,33 @@
         
         _rootNode = NULL;
         _currentNode = NULL;
-//        _parentNode = NULL;
         _line = 0;
         
+        _insideCrutch = false;
+        _needValues = false;
+        
+        _currentAction = [[NSString alloc] initWithString:@""];
+        _currentEmotion = [[NSString alloc] initWithString:@""];
+        _currentEmotionMin = [[NSString alloc] initWithString:@""];
+        _currentEmotionMax = [[NSString alloc] initWithString:@""];
+        _currentProperties = [[NSMutableDictionary alloc] init];
+        _currentOrder = [[NSString alloc] initWithString:@""];
+        
+        _elementType = [[NSString alloc] initWithFormat:@""""];
+		TYPE = [[NSString alloc] initWithFormat:@"type"];
+		TYPE_INT = [[NSString alloc] initWithFormat:@"int"];
+		TYPE_STRING = [[NSString alloc] initWithFormat:@"string"];
+		TYPE_VALUES = [[NSString alloc] initWithFormat:@"values"];
+		NAME = [[NSString alloc] initWithFormat:@"name"];
     }
     return self;
 }
 
 - (id)initWithBrain:(Brain*)aBrain
 {
-    self = [super init];
+    self = [self init];
     if (self) {
-
-        _rootNode = NULL;
-        _currentNode = NULL;
-//      _parentNode = NULL;
-        _brain = aBrain;
-        _line = 0;
-        
-        _insideCrutch = false;
-        _needValues = false;
-        
-		_elementType = [[NSString alloc] initWithFormat:@""""];
-		TYPE = [[NSString alloc] initWithFormat:@"type"];
-		TYPE_INT = [[NSString alloc] initWithFormat:@"int"];
-		TYPE_STRING = [[NSString alloc] initWithFormat:@"string"];
-		TYPE_VALUES = [[NSString alloc] initWithFormat:@"values"];
-		NAME = [[NSString alloc] initWithFormat:@"name"];
+        _brain = aBrain;                
     }
     return self;
 }
@@ -64,6 +64,22 @@
     if( ![aQName caseInsensitiveCompare:@"Crutches"] )
     {
         return true;
+    }
+    if( ![aQName caseInsensitiveCompare:@"Action"] )
+    {
+        return [self elementAction:atts];
+    }
+    if( ![aQName caseInsensitiveCompare:@"Emotion"] )
+    {
+        return [self elementEmotion:atts];
+    }
+    if( ![aQName caseInsensitiveCompare:@"Property"] )
+    {
+        return [self elementProperty:atts];
+    }
+    if( ![aQName caseInsensitiveCompare:@"Order"] )
+    {
+        return [self elementOrder:atts];
     }
     if( ![aQName caseInsensitiveCompare:@"Crutch"] )
     {
@@ -89,6 +105,22 @@
     {
         return true;
     }
+    if( ![aQName caseInsensitiveCompare:@"Action"] )
+    {
+        return true;
+    }
+    if( ![aQName caseInsensitiveCompare:@"Emotion"] )
+    {
+        return true;
+    }
+    if( ![aQName caseInsensitiveCompare:@"Property"] )
+    {
+        return true;
+    }
+    if( ![aQName caseInsensitiveCompare:@"Order"] )
+    {
+        return true;
+    }
     if( ![aQName caseInsensitiveCompare:@"Crutch"] )
     {
         return [self endElementCrutch];
@@ -104,10 +136,77 @@
 
 }
 
+- (BOOL) elementAction:(GDataXMLElement*)atts
+{
+    if( [atts attributeForName:@"name"] != nil ) {
+        NSString* name = [NSString stringWithFormat:@"%@", [[atts attributeForName:@"name"] stringValue]];
+        _currentAction = name;
+    }
+    else {
+        return false;
+    }
+    
+    return true;
+}
+
+
+- (BOOL) elementEmotion:(GDataXMLElement*)atts
+{
+    // clear all the currentProperties
+    [_currentProperties removeAllObjects];
+    
+    if( [atts attributeForName:@"name"] != nil &&
+        [atts attributeForName:@"min"] != nil &&
+        [atts attributeForName:@"max"] != nil ) {
+        NSString* name = [NSString stringWithFormat:@"%@", [[atts attributeForName:@"name"] stringValue]];
+        NSString* min = [NSString stringWithFormat:@"%@", [[atts attributeForName:@"min"] stringValue]];
+        NSString* max = [NSString stringWithFormat:@"%@", [[atts attributeForName:@"max"] stringValue]];
+
+        _currentEmotion = name;
+        _currentEmotionMin = min;
+        _currentEmotionMax = max;
+    }
+    else {
+        return false;
+    }
+    
+    return true; 
+}
+
+
+- (BOOL) elementProperty:(GDataXMLElement*)atts
+{
+    if( [atts attributeForName:@"name"] != nil &&
+       [atts attributeForName:@"value"] != nil ) {
+        NSString* name = [NSString stringWithFormat:@"%@", [[atts attributeForName:@"name"] stringValue]];
+        NSString* value = [NSString stringWithFormat:@"%@", [[atts attributeForName:@"value"] stringValue]];
+        [_currentProperties setValue:value forKey:name];
+        DLog(@"elementProperty: name: %@ value: %@", name, value);
+    }
+    else {
+        return false;
+    }
+    
+    return true;     
+}
+
+
+- (BOOL) elementOrder:(GDataXMLElement*)atts
+{
+    if( [atts attributeForName:@"value"] != nil ) {
+        NSString* value = [NSString stringWithFormat:@"%@", [[atts attributeForName:@"value"] stringValue]];
+        _currentOrder = value;
+    }
+    else {
+        return false;
+    }
+    
+    return true; 
+}
+
 
 - (BOOL) elementCrutch:(GDataXMLElement*)atts
 {
-    
     // Get the emotion name
     _elementName = [[atts attributeForName:@"name"] stringValue];
 
@@ -117,21 +216,16 @@
     }
     
     // Test if it has all the attributes required for the crutches
-    if( [atts attributeForName:@"name"] != nil &&
-       [atts attributeForName:@"action"] != nil &&
-       [atts attributeForName:@"emotion"] != nil &&
-       [atts attributeForName:@"order"] != nil )
+    if( [atts attributeForName:@"name"] )
     {
-        [_crutchAttributes removeAllObjects];
-        
         NSString* name = [NSString stringWithFormat:@"%@", [[atts attributeForName:@"name"] stringValue]];
-        NSString* action = [NSString stringWithFormat:@"%@", [[atts attributeForName:@"action"] stringValue]];
-        NSString* emotion = [NSString stringWithFormat:@"%@", [[atts attributeForName:@"emotion"] stringValue]];
+        NSString* action = _currentAction;
+        NSString* emotion = _currentEmotion;
         
-        NSString* min = [NSString stringWithFormat:@"%@", [[atts attributeForName:@"min"] stringValue]];
-        NSString* max = [NSString stringWithFormat:@"%@", [[atts attributeForName:@"max"] stringValue]];
+        NSString* min = _currentEmotionMin;
+        NSString* max = _currentEmotionMax;
         
-        NSString* orderString = [NSString stringWithFormat:@"%@", [[atts attributeForName:@"order"] stringValue]];
+        NSString* orderString = _currentOrder;
         
         enum EnumCrutchOrder order;
         
@@ -150,13 +244,12 @@
                                                                              emotion:emotion 
                                                                                  min:min
                                                                                  max:max
-                                                                               order:order];
-        
+                                                                               order:order
+                                                                          properties:_currentProperties];
         [_brain addCrutch:crutch];
         
         DLog(@"Crutch added: %@, action: %@, emotion: %@, min: %@, max: %@ order: %@.", name, action, emotion, min, max, orderString);
         [crutch release];
-        
     }
     else
     {
@@ -170,17 +263,23 @@
 
 - (BOOL) endElementCrutch
 {
-
     if( _insideCrutch )
     {
-        Emotion* e = [[Emotion alloc] initWithNameAndValueAndMaxAndMin:_elementName value:[[_crutchAttributes objectAtIndex:0] floatValue] max:[[_crutchAttributes objectAtIndex:1] floatValue] min:[[_crutchAttributes objectAtIndex:2] floatValue]];
-        [_brain addEmotion:e];
         _insideCrutch = false;
         return true;
     }
-//    TODO
     return false;
 }
 
+- (void)dealloc {
+    [_currentAction release];
+    [_currentEmotion release];
+    [_currentEmotionMin release];
+    [_currentEmotionMax release];
+    [_currentProperties release];
+    [_currentOrder release];
+    
+    [super dealloc];
+}
 
 @end

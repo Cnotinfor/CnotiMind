@@ -19,6 +19,8 @@ enum EnumCrutchOrder
     int _min;
     int _max;
     enum EnumCrutchOrder _order;
+    
+    NSMutableDictionary* _properties;
 }
 
 @property (readwrite, assign) NSString* name;
@@ -28,13 +30,16 @@ enum EnumCrutchOrder
 @property (readwrite, assign) int max;
 @property (readwrite, assign) enum EnumCrutchOrder order;
 
+@property (readwrite, assign) NSMutableDictionary* properties;
+
 - (id)init;
 - (id)initWithNameAndActionAndEnforcementAndOrder:(NSString*)aName 
                                            action:(NSString*)aAction 
                                           emotion:(NSString*)aEmotion
                                               min:(NSString*)aMin
                                               max:(NSString*)aMax
-                                            order:(enum EnumCrutchOrder)aOrder;
+                                            order:(enum EnumCrutchOrder)aOrder
+                                       properties:(NSMutableDictionary*)aProperties;
 - (BOOL)isNumeric:(NSString*)s;
 - (void)dealloc;
 

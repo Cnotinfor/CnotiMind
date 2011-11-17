@@ -70,6 +70,7 @@ enum { HAS_DATA, NO_DATA };
 @property (readwrite, retain) NSMutableArray* receivedPerceptions;
 
 @property (readwrite, retain) NSMutableDictionary* properties;
+@property (readwrite, retain) NSMutableArray* crutches;
 
 - (id) init;
 - (id) initWithPath:(NSString*)aPath;
@@ -123,7 +124,7 @@ enum { HAS_DATA, NO_DATA };
 
 - (void) storeToMemory:(MemoryEvent*)aMemoryEvent memoryType:(enum MemoryType)aMemoryType;
 
-
+- (BOOL)checkIfCrutchPropertiesAreTheSameAsBrainProperties:(Crutch*)aCrutch;
 - (void) executeAction:(NSString*)aKey value:(NSString*)aValue;
 //- (void) executeAction:(NSMutableArray*)aVariables;
 

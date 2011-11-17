@@ -13,6 +13,7 @@
 @synthesize min = _min;
 @synthesize max = _max;
 @synthesize order = _order;
+@synthesize properties = _properties;
 
 - (id)init {
     self = [super init];
@@ -23,6 +24,8 @@
         _min = INT8_MIN;
         _max = INT8_MAX;
         _order = -1;
+        
+        _properties = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -32,10 +35,9 @@
                                           emotion:(NSString*)aEmotion
                                               min:(NSString*)aMin
                                               max:(NSString*)aMax
-                                            order:(enum EnumCrutchOrder)aOrder {
-    self = [super init];
-
-    if (self) {
+                                            order:(enum EnumCrutchOrder)aOrder
+                                       properties:(NSMutableDictionary*)aProperties {
+    if ( self = [self init] ) {
         _name = (aName == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aName];
         _action = (aAction == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aAction];
         _emotion = (aEmotion == nil) ? [[NSString alloc] initWithString:@""] : [[NSString alloc] initWithString:aEmotion];
@@ -51,6 +53,7 @@
         }
         
         _order = -1;
+        _properties = [[NSMutableDictionary alloc] initWithDictionary:aProperties copyItems:true];
     }
     return self;
 }

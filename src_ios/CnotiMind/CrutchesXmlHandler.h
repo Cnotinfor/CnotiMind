@@ -21,10 +21,8 @@
 #import "GDataXMLNode.h"
 
 @interface CrutchesXmlHandler : NSObject
-{
-    
+{    
     Brain* _brain;
-    
 
     bool _insideCrutch;
     NSString* _elementType;
@@ -48,6 +46,13 @@
     RuleNode* _currentNode;
     
     int _line;
+    
+    NSString* _currentAction;
+    NSString* _currentEmotion;
+    NSString* _currentEmotionMin;
+    NSString* _currentEmotionMax;
+    NSMutableDictionary* _currentProperties;
+    NSString* _currentOrder;
 }
 
 @property (readwrite, retain) RuleNode* rootNode;
@@ -61,8 +66,14 @@
 
 - (BOOL) characters:(NSString*)aCharacter;
 
+- (BOOL) elementAction:(GDataXMLElement*)atts;
+- (BOOL) elementEmotion:(GDataXMLElement*)atts;
+- (BOOL) elementProperty:(GDataXMLElement*)atts;
+- (BOOL) elementOrder:(GDataXMLElement*)atts;
 - (BOOL) elementCrutch:(GDataXMLElement*)atts;
 - (BOOL) endElementCrutch;
+
+- (void)dealloc; 
 
 @end
 #endif // CRUTCHESXMLHANDLER_H

@@ -27,6 +27,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 @synthesize receivedPerceptions = _receivedPerceptions;
 
 @synthesize properties = _properties;
+@synthesize crutches = _crutches;
 
 - (id) init
 {
@@ -104,6 +105,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 
 - (void) addCrutch:(Crutch*)aCrutch
 {
+    DLog(@"aCrutch properties: %@", aCrutch.properties);    
     [_crutches enqueue:aCrutch];
 }
 
@@ -188,7 +190,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 {
     
     _rulesXMLHandler = [[RulesXmlHandler alloc] initWithBrain:self rules:_rules];
-
+    
     DLog(@"%@", aFilePath);
     
     NSData *xmlData = [[NSMutableData alloc] initWithContentsOfFile:aFilePath];  
@@ -217,7 +219,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     
     _rules = [_rulesXMLHandler rootNode];
     DLog(@"[Brain::loadXmlRules] done rules: %@",_rules);
-
+    
     return true;
 }
 
@@ -230,12 +232,12 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     
     for (GDataXMLElement* rulesMember in rulesMembers) {
         NSString* elementName = [NSString stringWithString:[rulesMember name]];
-
+        
         [_rulesXMLHandler startElement:nil localName:nil qName:elementName atts:rulesMember];
-    
+        
         NSArray* childArray = [rulesMember children];        
         [self loadXMLRecursive:childArray];
-    
+        
         [_rulesXMLHandler endElement:nil localName:nil qName:elementName];
     }
     return true;
@@ -274,7 +276,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         [_crutchesXMLHandler startElement:nil localName:nil qName:elementName atts:crutchMember];
         
         NSArray* childArray = [crutchMember children];        
-        [self loadXMLRecursiveSettings:childArray];
+        [self loadXMLRecursiveCrutches:childArray];
         
         [_crutchesXMLHandler endElement:nil localName:nil qName:elementName];
     }
@@ -447,7 +449,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 - (void) receivePerception:(Perception*)aPerception
 {
     [_semaphoreBrain lockWhenCondition:NO_DATA];
-
+    
     [_receivedPerceptions enqueue:aPerception];
     
     [_semaphoreBrain unlockWithCondition:HAS_DATA];
@@ -542,55 +544,98 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     [action release];
 }
 
+/**
+ Checks if properties in the crutch have the same value as brain properties
+ @param Crutch*
+ @returns BOOL
+ */
+- (BOOL)checkIfCrutchPropertiesAreTheSameAsBrainProperties:(Crutch*)aCrutch
+{
+    int counterProperties = 0;
+    int counterOK = 0;
+    
+    counterProperties = [aCrutch.properties count];
+    DLog(@"[aCrutch.properties count]: %d", counterProperties);
+    NSEnumerator *enumerator = [aCrutch.properties keyEnumerator];
+    id key;
+    // for all properties in the crutch search the corresponding values in the brain properties   
+    while ((key = [enumerator nextObject])) {
+        NSString* value = [aCrutch.properties objectForKey:key];
+        DLog(@"crutch key: %@ value: %@ ", key, value);
+        DLog(@"brain key: %@ value: %@", key, [_properties objectForKey:key]);
+        // if values are the same        
+        if ( ![value caseInsensitiveCompare:[_properties objectForKey:key]] ) {
+            counterOK++;
+        }
+    }
+    
+    if ( counterOK == counterProperties ) {
+        DLog(@"checkIfCrutchPropertiesAreTheSameAsBrainProperties: true");
+        return true;
+    }
+    
+    DLog(@"checkIfCrutchPropertiesAreTheSameAsBrainProperties: false");
+    return false;
+}
+
 
 - (void)executeAction:(NSString *)aKey value:(NSString *)aValue
 {
     NSMutableDictionary* action = [[NSMutableDictionary alloc] init];
     [action setObject:aValue forKey:aKey];
     
-    DLog(@"action key: %@", aKey);
-    DLog(@"action value: %@", aValue);
+    DLog(@"executeAction key: %@", aKey);
+    DLog(@"executeAction value: %@", aValue);
     
     enum EnumCrutchOrder orderOfCrutch = -1;
-    NSMutableArray* tempCrutchesArray = [[NSMutableArray alloc] initWithCapacity:100];
+    NSMutableArray* tempCrutchesArray = [[NSMutableArray alloc] init];
     BOOL foundCrutch = false;
     
     for (Crutch* crutchObject in _crutches) {
-    // current emotional state (must search emotions array for particular emotion)
+        // current emotional state (must search emotions array for particular emotion)
         for (Emotion* emotionObject in _emotions) {
             // if name are the same and action are same        
             if ( ![[emotionObject name] caseInsensitiveCompare:[crutchObject emotion]] && ![aKey caseInsensitiveCompare:[crutchObject action]] ) {
+
+                DLog(@"emotionObjectValue: %@", [emotionObject name]);
+                DLog(@"emotionObjectValue: %f", [emotionObject value]);
+                DLog(@"crutchObject: %@", [crutchObject emotion]);
+                DLog(@"crutchObject: %d", [crutchObject min]);
+                DLog(@"crutchObject: %d", [crutchObject max]);
+                DLog(@"crutchObject properties: %@", crutchObject.properties);
                 
                 // check if between min and max values
-                if ( [emotionObject value] >= [crutchObject min] && [emotionObject value] <= [crutchObject max] ) {
-                    [tempCrutchesArray addObject:crutchObject];
+                if ( [emotionObject value] >= [crutchObject min] && [emotionObject value] <= [crutchObject max] && [self checkIfCrutchPropertiesAreTheSameAsBrainProperties:crutchObject] ) {
                     
-                    //check order
-                    orderOfCrutch = [crutchObject order];
+                    DLog(@"Added a crutch to the crutches tempArray: %@", [crutchObject name]);
+                    
+                    [tempCrutchesArray addObject:crutchObject];
                     foundCrutch = true;
                 }
             }
         }
     }
-
-    if ( foundCrutch && [tempCrutchesArray count]>0 && _crutchEnabled) {
-        DLog(@"I found a crutch!");
+    
+    if ( foundCrutch && [tempCrutchesArray count]>0 && _crutchEnabled ) {
+        DLog(@"WOW! I found a crutch!");
+        
         // search for a crutch in the crutches temp array        
         int n = arc4random() % [tempCrutchesArray count];
-        DLog(@"n: %d", n);
         Crutch* randomCrutch = [tempCrutchesArray objectAtIndex:n];
         
         NSMutableDictionary* actionCrutch = [[NSMutableDictionary alloc] init];
         [actionCrutch setObject:[randomCrutch name] forKey:[randomCrutch action]];
+        
+        orderOfCrutch = [randomCrutch order];
         
         if ( orderOfCrutch == CrutchOrder_BEGIN ) {
             [[NSNotificationCenter defaultCenter] postNotificationName:SEND_ACTION object:actionCrutch];
             [[NSNotificationCenter defaultCenter] postNotificationName:SEND_ACTION object:action];
         }
         else if ( orderOfCrutch == CrutchOrder_BEGIN_AND_END ) {
-        
+            
             int foo = arc4random() % 1;
-
+            
             if ( foo == 0 ) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:SEND_ACTION object:actionCrutch];
                 [[NSNotificationCenter defaultCenter] postNotificationName:SEND_ACTION object:action];
@@ -607,7 +652,6 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         }
         
         [actionCrutch release];
-        
         _crutchEnabled = false;
     }
     
@@ -669,9 +713,9 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
             if (removeAll) {
                 [mem removeAllObjects];
             }
-
+            
             break;    
-
+            
         default:
             break;
     }
@@ -681,7 +725,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 //TODO
 - (void) deleteEvent:(NSString*)aKey value:(NSString*)aValue position:(enum DeletePosition)aPosition memory:(enum MemoryType)aMemory
 {
-
+    
 }
 
 
@@ -753,7 +797,6 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     // if value is empty, do datamining without the value
     if( [aValue length]==0 )
     {
-        DLog(@"tete");
         return [[self dataMining:aOperation event:aEvent memoryType:aMemoryType valid:aValid] autorelease];
     }
     
@@ -1025,8 +1068,8 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     MemoryEvent* objectMemoryEvent;
     while( objectMemoryEvent = [eMemoryEvent nextObject] ) // Iterate all memory
     {
-//        DLog(@"%@ - %@", [objectMemoryEvent event], [objectMemoryEvent value]);
-//        DLog(@"%@ - %@", aEvent, aValue);
+        //        DLog(@"%@ - %@", [objectMemoryEvent event], [objectMemoryEvent value]);
+        //        DLog(@"%@ - %@", aEvent, aValue);
         
         if( ![[objectMemoryEvent event] caseInsensitiveCompare:aEvent] && ![[objectMemoryEvent value] caseInsensitiveCompare:aValue]) // Event found
         {
@@ -1147,7 +1190,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 - (NSString*) dataMiningLast: (NSString*)aEvent memory:(NSMutableArray*)aMemory valid:(BOOL*)aValid
 {
     
-//    DLog(@"dataMiningLast: %@",aEvent);
+    //    DLog(@"dataMiningLast: %@",aEvent);
     
     // by defaulf the data mining is not valid
     [self setValid:aValid value:false];

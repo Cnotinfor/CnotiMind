@@ -184,8 +184,6 @@
 
 - (BOOL) createActionNode:(GDataXMLElement*)atts
 {
-
-
     NSString* name = [[atts attributeForName:@"name"] stringValue];
     NSString* value = [[atts attributeForName:@"value"] stringValue];
     NSString* probability = [[atts attributeForName:@"probability"] stringValue];

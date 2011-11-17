@@ -33,7 +33,6 @@
         
         _rootNode = NULL;
         _currentNode = NULL;
-//        _parentNode = NULL;
         _line = 0;
         
     }
@@ -47,7 +46,6 @@
 
         _rootNode = NULL;
         _currentNode = NULL;
-//      _parentNode = NULL;
         _brain = aBrain;
         _line = 0;
         
