@@ -13,6 +13,8 @@
 #include "rules/RulesXmlHandler.h"
 #include "gui/BrainGUI.h"
 #include "MemoryXmlHandler.h"
+#include "ActionModifier.h"
+#include "ActionModifiersXmlHandler.h"
 
 namespace CnotiMind
 {
@@ -270,6 +272,7 @@ namespace CnotiMind
 			// Execute the rules
 			if( _rules != NULL )
 			{
+				_talkModifierEnabled = true;
 				_rules->exec();
 			}
 
@@ -534,12 +537,70 @@ namespace CnotiMind
 			return;
 		}
 
-		if( _gui != NULL )
+		// Hold action info
+		typedef struct {
+			QString key;
+			QString value;
+		} action;
+
+		action a = {key, value};
+		QList<action> actions;
+		actions << a;
+
+		// Verify modifiers
+		if (_talkModifierEnabled)
 		{
-			_gui->updateActions( key, value );
+			// Get modifiers for this action
+			QList<ActionModifier*> modifiers = actionModifiers(key);
+			if (!modifiers.empty())
+			{
+				_talkModifierEnabled = false;
+				// Select one of the modifiers
+				int pos = qrand() % modifiers.size();
+				ActionModifier* r = modifiers.at(pos);
+				action mAction = {key, r->identification()};
+
+				int order = r->order();
+				if (order == ActionModifier::ExecuteBeforeOrAfter)
+				{
+					if ((qrand() % 2) == 1)
+					{
+						order = ActionModifier::ExecuteBefore;
+					}
+					else
+					{
+						order = ActionModifier::ExecuteAfter;
+					}
+				}
+
+				// Add to action list
+				switch (order)
+				{
+				case ActionModifier::ExecuteBefore:
+					// Start of the list
+					actions.insert(0, mAction);
+					break;
+				case ActionModifier::ExecuteAfter:
+					// End of the list
+					actions << mAction;
+					break;
+				}
+			}
 		}
 
-		emit sendAction( key, value );
+		// Execute actions
+		QListIterator<action> it(actions);
+		while (it.hasNext())
+		{
+			action itAction = it.next();
+			if( _gui != NULL )
+			{
+				_gui->updateActions( itAction.key, itAction.value );
+			}
+
+			emit sendAction( itAction.key, itAction.value );
+		}
+
 	}
 
 	/*
@@ -1435,5 +1496,107 @@ namespace CnotiMind
 		}
 		return UndefinedNodes;
 	}
-}
 
+	/**
+	  Load the reinforce statements from the xml file
+	*/
+	bool Brain::loadXmlActionModifiers(const QString &filename)
+	{
+		QFile f( filename );
+
+		ActionModifiersXmlHandler* handler = new ActionModifiersXmlHandler();
+		QXmlInputSource source( &f );
+		if( source.data() == "" )
+		{
+			qWarning() << "[Brain::loadXmlReinforceStatements] File not found" << filename;
+			return false;
+		}
+
+		QXmlSimpleReader reader;
+		reader.setContentHandler( handler );
+
+		// Retrives data from file
+		if( reader.parse( source ) )
+		{
+			_actionModifiers = handler->reinforceStatements();
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	  Find all modifiers that can afect the current action.
+	*/
+	QList<ActionModifier *> Brain::actionModifiers(const QString &action)
+	{
+		QList<ActionModifier *> result;
+
+		QListIterator<ActionModifier *> it(_actionModifiers);
+		ActionModifier *r;
+		while (it.hasNext())
+		{
+			r = it.next();
+			// Check action
+			if (QString::compare(r->action(), action, Qt::CaseInsensitive) != 0)
+			{
+				continue;
+			}
+			// Check emotion
+			bool emotionNotFound = false;
+			Emotion* mEmotion = r->emotion();
+			QListIterator<Emotion> it2(_emotions);
+			while (it2.hasNext())
+			{
+				Emotion e = it2.next();
+				// Check if emotion from modifier is equal to emotion from iterator
+				if (QString::compare(e.key(), mEmotion->key(), Qt::CaseInsensitive) == 0)
+				{
+					// Check if emotion value is between the max and min value
+					// for the current modifier
+					if (e.value() > mEmotion->max() || e.value() < mEmotion->min())
+					{
+						emotionNotFound = true;
+						break;
+					}
+				}
+			}
+
+			if (emotionNotFound)
+			{
+				continue;
+			}
+
+			// Check properties
+			bool passedProperties = true;
+			QHashIterator<QString, QString> it3(r->properties());
+			while (it3.hasNext())
+			{
+				it3.next();
+				// Check if property existes in the brain
+				QHash<QString, QString>::const_iterator itP = _properties.find(it3.key());
+				if (itP == _properties.end())
+				{
+					passedProperties = false;
+					break;
+				}
+				// Check if the value is the same.
+				if (QString::compare(it3.value(), itP.value(), Qt::CaseInsensitive) != 0)
+				{
+					passedProperties = false;
+					break;
+				}
+			}
+
+			if (!passedProperties)
+			{
+				continue;
+			}
+
+			result << r;
+		}
+
+		return result;
+	}
+
+}

@@ -42,6 +42,16 @@ namespace CnotiMind
 		return _key;
 	}
 
+	qreal Emotion::max()
+	{
+		return _max;
+	}
+
+	qreal Emotion::min()
+	{
+		return _min;
+	}
+
 	/*
 		Changes the emotional value.
 

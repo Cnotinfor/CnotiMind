@@ -26,6 +26,7 @@ namespace CnotiMind
 	class ConditionEmotionNode;
 	class ConditionDataMiningNode;
 	class MemoryXmlHandler;
+	class ActionModifier;
 
 	class BrainGUI;
 
@@ -56,8 +57,7 @@ namespace CnotiMind
 		void addValidAction( const QString& action );
 		void addEmotion( const Emotion& Emotion );
 		bool loadXmlRules( const QString& filename );
-
-
+		bool loadXmlActionModifiers( const QString& filename );
 
 		bool saveMemory(const QString& filename);
 		bool loadMemory(const QString& filename);
@@ -173,6 +173,8 @@ namespace CnotiMind
 		void activateTask(const QString& task);
 		BrainNodes translateBrainTasks( const QString& text );
 
+		QList<ActionModifier*> actionModifiers(const QString& action);
+
 	private:
 		RuleNode* _rules;
 		QList<QString> _validPerceptions;
@@ -191,6 +193,8 @@ namespace CnotiMind
 		BrainGUI *_gui;
 
 		QList<BrainNodes> _disabledTasks;	// List with the brain activities that are disabled.
+		QList<ActionModifier*> _actionModifiers;
+		bool _talkModifierEnabled;	// TODO: in the future maybe necessary to think a better way, so it can handle all the actions.
 	};
 
 }

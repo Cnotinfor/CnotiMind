@@ -19,6 +19,9 @@ namespace CnotiMind
 
 		qreal value() const;
 		const QString& key() const;
+		qreal max();
+		qreal min();
+
 		bool setValue( qreal newValue, qreal max, qreal min );
 		bool setValue( qreal newValue );
 		bool addValue( qreal increment, qreal max, qreal min );

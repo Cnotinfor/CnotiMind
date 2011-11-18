@@ -9,7 +9,9 @@ HEADERS += \
 	SettingsXmlHandler.h \
 	CnotiMind.h \
 	ObjectToXml.h \
-	MemoryXmlHandler.h
+	MemoryXmlHandler.h \
+    ActionModifier.h \
+    ActionModifiersXmlHandler.h
 
 SOURCES += \
 	Brain.cpp \
@@ -21,4 +23,6 @@ SOURCES += \
 	SettingsXmlHandler.cpp \
 	CnotiMind.cpp \
 	ObjectToXml.cpp \
-	MemoryXmlHandler.cpp
+	MemoryXmlHandler.cpp \
+    ActionModifier.cpp \
+    ActionModifiersXmlHandler.cpp

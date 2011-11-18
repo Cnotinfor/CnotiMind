@@ -19,7 +19,6 @@
 #include "DeleteNode.h"
 #include "ClearMemoryNode.h"
 #include "RandomNode.h"
-#include "DisableNode.h"
 #include "../Brain.h"
 
 namespace CnotiMind
@@ -96,10 +95,6 @@ namespace CnotiMind
 		if( QString::compare( qName, "Random", Qt::CaseInsensitive ) == 0 )
 		{
 			return createRandomNode( atts );
-		}
-		if( QString::compare( qName, "Disable", Qt::CaseInsensitive ) == 0 )
-		{
-			return createDisableNode( atts );
 		}
 
 		qDebug() << "[RulesXmlHandler::startElement] Invalid element" << qName;
@@ -460,16 +455,6 @@ namespace CnotiMind
 
 		_parentNode = _currentNode;
 		_currentNode =  new RandomNode( _brain, _parentNode );
-
-		return true;
-	}
-
-	bool RulesXmlHandler::createDisableNode( const QXmlAttributes & atts )
-	{
-		QString task = atts.value( "name" );
-		QString value = atts.value( "value" );
-		_parentNode = _currentNode;
-		_currentNode =  new DisableNode( task, value, _brain, _parentNode );
 
 		return true;
 	}
