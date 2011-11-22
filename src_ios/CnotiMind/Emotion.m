@@ -60,14 +60,17 @@
 
 - (void) setEmotionValue:(double)aValue max:(double)aMax min:(double)aMin
 {
-//    double oldValue = _value;
-//    double newMax = MAX(aMax, _max);
-//    double newMin = MIN(aMin, _min);
+    double oldValue = _value;
+
+
+    if (oldValue >= _min && oldValue <= _max) {
+        float newMax = MIN(aMax, _max);
+        float newMin = MAX(aMin, _min);
+        
+        _value = MAX(newMin, MIN(aValue, newMax));    
+    }
     
-    _value = MAX(aMin, MIN(aValue, aMax));
     DLog(@"setEmotionValue; %f", _value);
-    
-//    return oldValue != _value;
 }
 
 

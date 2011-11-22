@@ -58,6 +58,8 @@ enum { HAS_DATA, NO_DATA };
     
     bool _quit;
     
+    NSMutableArray* _disabledTasks;
+    
     RulesXmlHandler* _rulesXMLHandler;
     SettingsXmlHandler* _settingsXMLHandler;
     CrutchesXmlHandler* _crutchesXMLHandler;
@@ -65,6 +67,12 @@ enum { HAS_DATA, NO_DATA };
     BOOL _crutchEnabled;
 }
 
+enum BrainNodes
+{
+    EmotionNodes,
+    ActionNodes,
+    UndefinedNodes
+};
 
 @property (readwrite, retain) NSMutableArray* emotions;
 @property (readwrite, retain) NSMutableArray* receivedPerceptions;
@@ -89,7 +97,6 @@ enum { HAS_DATA, NO_DATA };
 - (BOOL) loadXMLRecursive:(NSArray*)rulesMembers;
 - (BOOL) loadXMLRecursiveSettings:(NSArray*)settingsMembers;
 - (BOOL) loadXMLRecursiveCrutches:(NSArray*)crutchesMembers;
-
 
 - (BOOL) validateXml:(NSString*)aFilename;
 - (BOOL) saveMemory:(NSString*)aFilename;
@@ -157,6 +164,9 @@ enum { HAS_DATA, NO_DATA };
 // method to help set valid value
 - (void) setValid:(BOOL*)aValid value:(BOOL)aValue;
 
+- (void) deactivateTask:(NSString*)aTask;
+- (void) activateTask:(NSString*)aTask;
+- (enum BrainNodes) translateBrainTasks:(NSString*)aText;
 
 /**
  Main loop for the thread.

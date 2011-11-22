@@ -24,6 +24,7 @@
 #import "DeleteNode.h"
 #import "ClearMemoryNode.h"
 #import "RandomNode.h"
+#import "DisableNode.h"
 
 #import "CnotiMind.h"
 #import "Brain.h"
@@ -118,6 +119,10 @@
     if( ![aQName caseInsensitiveCompare:@"Random"] )
     {
         return [self createRandomNode:atts];
+    }
+    if( ![aQName caseInsensitiveCompare:@"Disable"] )
+    {
+        return [self createDisableNode:atts];
     }
     if (![aQName caseInsensitiveCompare:@"comment"])
     {
@@ -526,6 +531,18 @@
 {
     _parentNode = _currentNode;
     _currentNode = [[RandomNode alloc] initWithBrainAndParent:_brain parent:_parentNode];
+    return true;    
+}
+
+- (BOOL) createDisableNode:(GDataXMLElement*)atts
+{
+    NSString* name = [[atts attributeForName:@"name"] stringValue];
+    NSString* value = [[atts attributeForName:@"value"] stringValue];
+
+    DLog(@"createDisableNode: %@ %@", name, value);
+    
+    _parentNode = _currentNode;
+    _currentNode = [[DisableNode alloc] initWithNameAndValueAndBrainAndParent:name value:value brain:_brain parent:_parentNode];
     return true;    
 }
 

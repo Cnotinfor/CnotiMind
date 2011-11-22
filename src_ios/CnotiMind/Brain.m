@@ -53,6 +53,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         
         _crutchEnabled = false;
         
+        _disabledTasks = [[NSMutableArray alloc] init];
     }
     
     _settingsXMLHandler = [[SettingsXmlHandler alloc] initWithBrain:self];
@@ -448,10 +449,9 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 
 - (void) receivePerception:(Perception*)aPerception
 {
+    DLog(@"receivePerception: %@", [aPerception name]);
     [_semaphoreBrain lockWhenCondition:NO_DATA];
-    
     [_receivedPerceptions enqueue:aPerception];
-    
     [_semaphoreBrain unlockWithCondition:HAS_DATA];
 }
 
@@ -489,6 +489,16 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 
 - (void) updateEmotionValue:(NSString*)aEmotionName variation:(double)aVariation max:(double)aMax min:(double)aMin
 {
+    
+    for (NSNumber* node in _disabledTasks) {
+        
+        DLog(@"-node: %d", [node intValue]);
+        
+        if ( [node intValue] == (int)EmotionNodes ) {
+            DLog(@"Disabled Emotion!");
+            return;
+        }
+    }
     NSEnumerator* eEmotions = [_emotions objectEnumerator];
     Emotion* objectEmotion;
     while (objectEmotion = [eEmotions nextObject]) {
@@ -581,6 +591,16 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 
 - (void)executeAction:(NSString *)aKey value:(NSString *)aValue
 {
+    DLog(@"_disabledTasks: %@", _disabledTasks);
+    
+    for (NSNumber* node in _disabledTasks) {
+        DLog(@"-node: %d", [node intValue])
+        if ( [node intValue] == (int)ActionNodes ) {
+            DLog(@"Disabled Action!");
+            return;
+        }
+    }
+    
     NSMutableDictionary* action = [[NSMutableDictionary alloc] init];
     [action setObject:aValue forKey:aKey];
     
@@ -1272,6 +1292,37 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     if (aValid != NULL) {
         *aValid = aValue;
     }
+}
+
+- (void) deactivateTask:(NSString*)aTask
+{
+    int number = (int)[self translateBrainTasks:aTask];
+    DLog(@"deactivateTask: %@ - %d", aTask, number);
+    [_disabledTasks addObject:[NSNumber numberWithInt:number]];
+}
+
+
+- (void) activateTask:(NSString*)aTask
+{
+    int number = (int)[self translateBrainTasks:aTask];
+    DLog(@"activateTask: %@ - %d", aTask, number);
+    [_disabledTasks removeObjectIdenticalTo:[NSNumber numberWithInt:number]];
+}
+
+
+- (enum BrainNodes) translateBrainTasks:(NSString*)aText
+{
+    if ( ![aText caseInsensitiveCompare:@"Emotions"] ) {
+        DLog(@"translateBrainTasks: %d", EmotionNodes);
+        return EmotionNodes;
+    }
+    if ( ![aText caseInsensitiveCompare:@"Actions"] ) {
+        DLog(@"translateBrainTasks: %d", ActionNodes);
+        return ActionNodes;
+    }
+    DLog(@"translateBrainTasks: %d", UndefinedNodes);
+
+    return UndefinedNodes;
 }
 
 - (void) run

@@ -65,6 +65,7 @@
 - (BOOL) createDeleteNode:(GDataXMLElement*)atts;
 - (BOOL) createClearMemoryNode:(GDataXMLElement*)atts;
 - (BOOL) createRandomNode:(GDataXMLElement*)atts;
+- (BOOL) createDisableNode:(GDataXMLElement*)atts;
 
 @end
 #endif // RULESXMLHANDLER_H
