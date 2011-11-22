@@ -135,7 +135,7 @@
 			<!-- Get the last note added -->
 			<Condition type="Variable" variable="[Last Note]" compareValue="Pause" operator="different">
 				<Random>
-					<Action name="Talk" value="Try Pause" />
+					<Action name="Talk" value="Use This Pause" />
 					<Action name="Discard" />
 					<Action name="Discard" />
 					<Action name="Discard" />

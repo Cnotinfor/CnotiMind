@@ -478,12 +478,12 @@
 						<Property name="Duration Option" value ="Good" />
 					</Condition>
 					<Condition type="Perception" perception="Duration" value="2">
-						<Emotion name="Joy" increment="-4" min="-10" />
-						<Property name="Duration Option" value ="Bad" />
+						<Emotion name="Joy" increment="1" max="10" />
+						<Property name="Duration Option" value ="Good" />
 					</Condition>
 					<Condition type="Perception" perception="Duration" value="3">
-						<Emotion name="Joy" increment="-4" min="-10" />
-						<Property name="Duration Option" value ="Bad" />
+						<Emotion name="Joy" increment="1" max="10" />
+						<Property name="Duration Option" value ="Good" />
 					</Condition>
 					<Condition type="Perception" perception="Duration" value="4">
 						<Emotion name="Joy" increment="-4" min="-10" />
@@ -512,7 +512,7 @@
 				</Condition>
 
 				<!-- Compass with 3 durations -->
-				<Condition type="Variable" variable="[Duration]" compareValue="3">
+				<Condition type="Variable" variable="[Duration]" compareValue="3">zzz
 					<Condition type="Perception" perception="Duration" value="1">
 						<Emotion name="Joy" increment="1" max="10" />
 						<Property name="Duration Option" value ="Good" />
@@ -686,11 +686,15 @@
 	<!-- When a music is loaded -->
 	<Condition type="Perception" perception="Loading Melody">
 		<Property name="Loading" value="True" />
+		<Disable name="Emotions" />
+		<Disable name="Actions" />
 	</Condition>
 	
 	<!-- When a music finish loaded -->
 	<Condition type="Perception" perception="Melody Loaded">
 		<Property name="Loading" value="False" />
+		<Disable name="Emotions" value="False" />
+		<Disable name="Actions" value="False" />
 	</Condition>
 	
 	
