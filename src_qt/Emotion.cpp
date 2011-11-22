@@ -69,10 +69,13 @@ namespace CnotiMind
 	{
 		qreal oldValue = _value;
 
-		qreal newMax = qMin( max, _max );
-		qreal newMin = qMax( min, _min );
+		if (oldValue >= min && oldValue <= max)
+		{
+			qreal newMax = qMin( max, _max );
+			qreal newMin = qMax( min, _min );
 
-		_value = qBound( newMin, newValue, newMax );
+			_value = qBound( newMin, newValue, newMax );
+		}
 
 		// Return true if the value changed
 		return oldValue != _value;
