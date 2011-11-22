@@ -60,6 +60,12 @@ Form::Form(QWidget *parent) :
 	connect( _brain, SIGNAL(sendAction(const QString&,const QString&)), this, SLOT(actionReceived(const QString&,const QString&)));
 	connect( _brain, SIGNAL(sendEmotionalState(const QString&,qreal)), this, SLOT(emotionReceived( const QString&, qreal )));
 
+
+	if(!_brain->loadXmlActionModifiers( "../../xml/mozart_action_modifiers.xml" ));
+	{
+		qWarning() << "[LittleMozart::LittleMozart] Error loading Xml crutches.";
+	}
+
 	if(!_brain->loadXmlRules( "../../xml/mozart_rules.xml" ) )
 	{
 		qWarning() << "[Form::Form] Error loading Xml rules.";
@@ -185,7 +191,7 @@ void Form::on_pushButtonFinishMelody_clicked()
 
 void Form::actionReceived(const QString& action,const QString& value)
 {
-//	if( action.compare("TALK", Qt::CaseInsensitive ) == 0 )
+	if( action.compare("TALK", Qt::CaseInsensitive ) == 0 )
 	{
 		ui->plainTextEditActions->insertPlainText( action + ": " + value + "\n");
 	}
