@@ -24,7 +24,7 @@
 #import "RulesXmlHandler.h"
 #import "SettingsXmlHandler.h"
 #import "CrutchesXmlHandler.h"
-
+#import "MemoryXmlHandler.h"
 
 
 extern NSString* const SEND_ACTION;
@@ -63,6 +63,7 @@ enum { HAS_DATA, NO_DATA };
     RulesXmlHandler* _rulesXMLHandler;
     SettingsXmlHandler* _settingsXMLHandler;
     CrutchesXmlHandler* _crutchesXMLHandler;
+    MemoryXmlHandler* _memoryXMLHandler;
     
     BOOL _crutchEnabled;
 }
@@ -97,12 +98,13 @@ enum BrainNodes
 - (BOOL) loadXMLRecursive:(NSArray*)rulesMembers;
 - (BOOL) loadXMLRecursiveSettings:(NSArray*)settingsMembers;
 - (BOOL) loadXMLRecursiveCrutches:(NSArray*)crutchesMembers;
+- (BOOL) loadXMLRecursiveMemory:(NSArray*)memoryMembers;
 
 - (BOOL) validateXml:(NSString*)aFilename;
 - (BOOL) saveMemory:(NSString*)aFilename;
 - (BOOL) loadMemory:(NSString*)aFilename;
-- (BOOL) saveEmotionalState:(NSString*)aFilename;
-- (BOOL) loadEmotionalState:(NSString*)aFilename;
+- (BOOL) saveEmotionalStateToMemory;
+- (BOOL) loadEmotionalStateFromMemory;
 
 // Methods to clear brain state
 - (void) clearWorkingMemory;

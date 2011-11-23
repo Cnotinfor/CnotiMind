@@ -16,7 +16,11 @@
 #import "ConditionPerceptionNode.h"
 #import "ActionNode.h"
 
+#import "MemoryEvent.h"
+
 #import "CnotiMind.h"
+
+#import "GameState.h"
 
 @implementation Brain
 
@@ -46,18 +50,17 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         _workingMemory = [[NSMutableArray alloc] init];
         
         _properties = [[NSMutableDictionary alloc] init];
-        
         _semaphoreBrain = [[NSConditionLock alloc] initWithCondition:NO_DATA];
         
         _quit = false;
         
         _crutchEnabled = false;
-        
         _disabledTasks = [[NSMutableArray alloc] init];
     }
     
     _settingsXMLHandler = [[SettingsXmlHandler alloc] initWithBrain:self];
     _crutchesXMLHandler = [[CrutchesXmlHandler alloc] initWithBrain:self];
+    _memoryXMLHandler = [[MemoryXmlHandler alloc] initWithBrain:self];
     
     return self;
 }
@@ -285,17 +288,39 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 }
 
 
+- (BOOL) loadXMLRecursiveMemory:(NSArray*)memoryMembers
+{
+    if ([memoryMembers count]==0) {
+        return false;
+    }
+    
+    for (GDataXMLElement* memoryMember in memoryMembers) {
+        NSString* elementName = [NSString stringWithString:[memoryMember name]];
+        
+        [_crutchesXMLHandler startElement:nil localName:nil qName:elementName atts:memoryMember];
+        
+        NSArray* childArray = [memoryMember children];        
+        [self loadXMLRecursiveMemory:childArray];
+        
+        [_crutchesXMLHandler endElement:nil localName:nil qName:elementName];
+    }
+    return true;
+}
+
+
 - (BOOL) validateXml:(NSString*)aFilename
 {
     return true;
 }
 
-
 - (BOOL) saveMemory:(NSString*)aFilename
-{
+{    
+    [self saveEmotionalStateToMemory];
+    
     NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString* documentsDirectory = [paths objectAtIndex:0];
-    NSString* filenameToSave = [documentsDirectory stringByAppendingFormat:@"%@", aFilename];
+    NSString* aFilePath = [documentsDirectory stringByAppendingFormat:@"/KidsMusics/%@", [[[GameState sharedInstance] authentication] username]];
+    aFilePath = [aFilePath stringByAppendingFormat:@"/mozart.mnd"];
     
     
     NSString* xmlMemory = [NSString stringWithFormat:@""];
@@ -309,19 +334,21 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     }
     
     xmlMemory = [xmlMemory stringByAppendingString:@"</LongTermMemory>\n"];
-    xmlMemory = [xmlMemory stringByAppendingString:@"<WorkingMemory>\n"];
-    
-    NSEnumerator* eWorkingMemory = [_workingMemory objectEnumerator];
-    MemoryEvent* objectWorkingMemory;
-    while (objectWorkingMemory = [eWorkingMemory nextObject]) {
-        xmlMemory = [xmlMemory stringByAppendingFormat:@"%@", [objectWorkingMemory toXML]];
-    }
-    
-    xmlMemory = [xmlMemory stringByAppendingString:@"</WorkingMemory>\n"];    
+//    xmlMemory = [xmlMemory stringByAppendingString:@"<WorkingMemory>\n"];
+//    
+//    NSEnumerator* eWorkingMemory = [_workingMemory objectEnumerator];
+//    MemoryEvent* objectWorkingMemory;
+//    while (objectWorkingMemory = [eWorkingMemory nextObject]) {
+//        xmlMemory = [xmlMemory stringByAppendingFormat:@"%@", [objectWorkingMemory toXML]];
+//    }
+//    
+//    xmlMemory = [xmlMemory stringByAppendingString:@"</WorkingMemory>\n"];    
     xmlMemory = [xmlMemory stringByAppendingString:@"</Memory>\n"];
     
     NSData *xmlMemoryData = [xmlMemory dataUsingEncoding:NSUTF8StringEncoding];
-    [xmlMemoryData writeToFile:filenameToSave atomically:YES];
+    [xmlMemoryData writeToFile:aFilePath atomically:YES];
+    
+    DLog(@"saveMemory aFilePath: %@", aFilePath);
     
     return true;
 }
@@ -331,26 +358,104 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 - (BOOL) loadMemory:(NSString*)aFilename
 {
     
-    return false;
-}
-
-
-//  TODO
-- (BOOL) saveEmotionalState:(NSString*)aFilename
-{
+    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString* documentsDirectory = [paths objectAtIndex:0];
+    NSString* aFilePath = [documentsDirectory stringByAppendingFormat:@"/KidsMusics/%@", [[[GameState sharedInstance] authentication] username]];
+    aFilePath = [aFilePath stringByAppendingFormat:@"/mozart.mnd"];
     
-    return false;
-}
-
-
-//  TODO
-- (BOOL) loadEmotionalState:(NSString*)aFilename
-{
+    DLog(@"%@", aFilePath);
     
+    NSData *xmlData = [[NSMutableData alloc] initWithContentsOfFile:aFilePath];  
+    NSError *error;
+    GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:xmlData 
+														   options:0 error:&error];
+    if (error) {
+        DLog(@"[Brain::loadXmlMemory] File not found");
+        return false;
+    }
+    
+    else {
+        //  Make the parsing - must be recursive!!!
+        NSArray *memoryMembers = [doc.rootElement children];
+        
+        DLog(@"settingsMembers: %@", memoryMembers);
+        
+        [_memoryXMLHandler startElement:nil localName:nil qName:@"Memory" atts:nil];
+        [self loadXMLRecursiveMemory: memoryMembers];
+        [_memoryXMLHandler endElement:nil localName:nil qName:@"Memory"];
+        
+        [self loadEmotionalStateFromMemory];
+
+        [doc release];
+        [xmlData release];
+
+        DLog(@"[Brain::loadXmlMemory] done");
+        return true;
+    }
+    
+    [doc release];
+    [xmlData release];
+    
+    DLog(@"[Brain::loadXmlMemory] error");
+
     return false;
 }
 
+/**
+ Saves the emotions states to the long term memory
+ */
+//NOTESTED
+- (BOOL) saveEmotionalStateToMemory 
+{
+    DLog(@"saveEmotionalStateToMemory");
+    NSEnumerator* enumerator = [_emotions objectEnumerator]; 
+    
+    NSString* currentTime = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]]; // It's given to all the emotions the same time
+    
+    Emotion* emotion;
+    while ( (emotion = [enumerator nextObject]) ) {
+        
+        NSString* event = [NSString stringWithFormat:@"Emotion %@", [emotion name]];
+        
+        DLog(@"event: %@", event);
+        
+        MemoryEvent* memoryEvent = [[MemoryEvent alloc] initWithEventAndValueAndTime:event
+                                                                               value:[NSNumber numberWithFloat:[emotion value]] 
+                                                                                time:currentTime];
+        [self storeToMemory:memoryEvent memoryType:LongTermMemory];
+    }
+    
+    return true;
+}
 
+/**
+ Loads the emotions states from the long term memory
+ */
+//NOTESTED
+- (BOOL) loadEmotionalStateFromMemory
+{
+    DLog(@"loadEmotionalStateFromMemory");
+    NSEnumerator *e = [_longTermMemory reverseObjectEnumerator];
+    
+    MemoryEvent* m;
+    while ( (m = [e nextObject]) ) {
+        NSRange textRange;
+        textRange =[[[m event] lowercaseString] rangeOfString:[@"Emotion" lowercaseString]];
+        
+        // does contain the substring        
+        if(textRange.location == NSNotFound) {
+            break;        
+        }
+        NSArray *listItems = [[m event] componentsSeparatedByString:@" "];
+        
+        NSString* emotionName = [NSString stringWithFormat:@"%@",[listItems objectAtIndex:[listItems count]-1]];
+        DLog(@"loadEmotionalStateFromMemory emotionName: %@", emotionName);
+        
+        [self updateEmotionValue:emotionName variation:[[m value] floatValue]];
+    }
+    
+    return true;
+}
 
 - (void) clearWorkingMemory
 {

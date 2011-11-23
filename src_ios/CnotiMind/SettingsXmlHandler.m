@@ -238,7 +238,6 @@
        [atts attributeForName:@"max"] != nil &&
        [atts attributeForName:@"min"] != nil )
     {
-        bool ok;
         int i;
         [_emotionAttributes removeAllObjects];
         

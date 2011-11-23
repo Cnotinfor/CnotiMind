@@ -33,13 +33,13 @@
 }
 
 
-- (id) initWithEventAndValueAndTime:(NSString*)aEvent value:(id)aValue time:(NSTimeInterval)aTime
+- (id) initWithEventAndValueAndTime:(NSString*)aEvent value:(id)aValue time:(NSString*)aTime
 {
     if (self == [super init]) {
         _event = aEvent;
         _value = aValue;
         
-        _time = aTime;
+        _time = [aTime floatValue];
     }
     return self;
 }
@@ -60,7 +60,7 @@
 {
     NSString* xml;
     
-    xml = [NSString stringWithFormat:@"<MemoryEvent event=%@ value=%@ time=%@ </MemoryEvent>"];
+    xml = [NSString stringWithFormat:@"<MemoryEvent event=%@ value=%@ time=%f </MemoryEvent>", _event, _value, _time];
     
     return xml;
 }

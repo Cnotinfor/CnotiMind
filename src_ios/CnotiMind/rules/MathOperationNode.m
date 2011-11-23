@@ -42,7 +42,6 @@
 
 - (void) exec:(NSMutableDictionary*)aVariables
 {
-    bool valueOk;
     float numericValue;
     
     // Test if the value to use in the operation is a variable

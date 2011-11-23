@@ -24,7 +24,7 @@
 
 
 - (id) initWithEventAndValue:(NSString*)aEvent value:(id)aValue;
-- (id) initWithEventAndValueAndTime:(NSString*)aEvent value:(id)aValue time:(NSTimeInterval)aTime;
+- (id) initWithEventAndValueAndTime:(NSString*)aEvent value:(id)aValue time:(NSString*)aTime;
 
 - (id) initWithPerception: (Perception*)aPerception;
 
