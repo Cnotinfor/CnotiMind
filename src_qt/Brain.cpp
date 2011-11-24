@@ -211,6 +211,12 @@ namespace CnotiMind
 	bool Brain::saveEmotionalStateToMemory()
 	{
 		qint64 emotionTime = MemoryEvent::eventTime(); // It's given to all the emotions the same time
+
+		// Marks in long term memory that the emotions are going to be saved
+		MemoryEvent m("EmotionDump", emotionTime);
+		this->storeToMemory( m, LongTermMemory);
+
+		// Saves all emotion to long term memory
 		QListIterator<Emotion> memIt(_emotions);
 		while(memIt.hasNext())
 		{
@@ -227,7 +233,7 @@ namespace CnotiMind
 	*/
 	bool Brain::loadEmotionalStateFromMemory()
 	{
-		// update emotion value
+		// Gets the last savd emotions values in long term memory and updates them.
 		QListIterator<MemoryEvent> it(_longTermMemory);
 		it.toBack();
 		while (it.hasPrevious())
