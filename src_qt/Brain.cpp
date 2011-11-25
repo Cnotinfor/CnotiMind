@@ -181,6 +181,8 @@ namespace CnotiMind
 
 	bool Brain::loadMemory(const QString& filename)
 	{
+		_longTermMemory.clear();
+
 		QFile f(filename);
 
 		QXmlInputSource source( &f );
