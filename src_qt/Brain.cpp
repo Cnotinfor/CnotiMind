@@ -244,8 +244,9 @@ namespace CnotiMind
 				break;
 			}
 
+			// Find emotion and change it
 			QString emotionName = m.event().split(' ').last();
-			this->updateEmotionalValue(emotionName, m.value().toReal());
+			this->setEmotionalValue(emotionName, m.value().toReal());
 		}
 		return true;
 	}
@@ -467,24 +468,64 @@ namespace CnotiMind
 			return;
 		}
 
+		Emotion* e = findEmotion(emotionName);
+		if( e->addValue( variation, max, min) )
+		{
+			emotionChanged(e);
+		}
+	}
+
+	void Brain::updateEmotionalValue(const QString& emotionName, qreal variation)
+	{
+		updateEmotionalValue( emotionName, variation, INT_MAX, INT_MIN);
+	}
+
+	/**
+	  Changes the value of an emotion
+	*/
+	void Brain::setEmotionalValue(const QString& emotionName, qreal value)
+	{
+		if (_disabledTasks.contains(EmotionNodes))
+		{
+			qDebug() << "[Brain::setEmotionalValue] Emotional tasks are disabled.";
+			return;
+		}
+
+		Emotion* e = findEmotion(emotionName);
+		if (e->setValue(value))
+		{
+			emotionChanged(e);
+		}
+	}
+
+	/**
+	  Searches an emotion in the emotion list, by it's name.
+	*/
+	Emotion* Brain::findEmotion(const QString& emotionName)
+	{
 		QMutableListIterator<Emotion> it(_emotions);
-		while(it.hasNext())
+		while (it.hasNext())
 		{
 			Emotion& e = it.next();
-			if( QString::compare( e.key(), emotionName, Qt::CaseInsensitive ) == 0 )
+			if (QString::compare( e.key(), emotionName, Qt::CaseInsensitive ) == 0)
 			{
-				if( e.addValue( variation, max, min) )
-				{
-					emit sendEmotionalState( emotionName, e.value() );
-
-					_emotionsChanged.enqueue( emotionName );
-					if(_semaphoreBrain.available() == 0)
-					{
-						_semaphoreBrain.release();
-					}
-					break;
-				}
+				return &e;
 			}
+		}
+		return NULL;
+	}
+
+	/**
+	  Tasks to execute after a emotion values has changed
+	*/
+	void Brain::emotionChanged(const Emotion* emotion)
+	{
+		emit sendEmotionalState( emotion->key(), emotion->value() );
+
+		_emotionsChanged.enqueue( emotion->key() );
+		if(_semaphoreBrain.available() == 0)
+		{
+			_semaphoreBrain.release();
 		}
 
 		// Update the GUI
@@ -492,11 +533,6 @@ namespace CnotiMind
 		{
 			_gui->updateEmotions();
 		}
-	}
-
-	void Brain::updateEmotionalValue(const QString& emotionName, qreal variation)
-	{
-		updateEmotionalValue( emotionName, variation, INT_MAX, INT_MIN);
 	}
 
 	void Brain::updatePropertyValue( const QString& name, const QString& value )

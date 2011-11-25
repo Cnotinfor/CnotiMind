@@ -102,8 +102,6 @@ namespace CnotiMind
 		friend class PerceptionsModel;
 		friend class PropertiesModel;
 
-	public:
-
 	public slots:
 		void receivePerception(const Perception& perception);
 		void stop();
@@ -114,12 +112,15 @@ namespace CnotiMind
 		void sendEmotionalState(const QString& emotion, qreal value);
 
 	private:
-
 		void updateGUI();
 
 		// Methods to update the emotional state
 		void updateEmotionalValue(const QString& emotionName, qreal variation, qreal max, qreal min);
 		void updateEmotionalValue(const QString& emotionName, qreal variation);
+		void setEmotionalValue(const QString &emotionName, qreal value);
+
+		Emotion* findEmotion(const QString& emotionName);
+		void emotionChanged(const Emotion* emotion);
 
 		// Methods to update a property
 		void updatePropertyValue( const QString& name, const QString& value );
