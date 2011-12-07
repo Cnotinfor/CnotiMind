@@ -25,7 +25,6 @@
         _max = INT8_MAX;
         _order = -1;
         
-        _properties = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -53,7 +52,7 @@
         }
         
         _order = -1;
-        _properties = [[NSMutableDictionary alloc] initWithDictionary:aProperties copyItems:true];
+        _properties = aProperties;
     }
     return self;
 }
@@ -76,6 +75,8 @@
 - (void)dealloc {
     [_name release];
     [_action release];
+    [_emotion release];
+    [_properties release];
     
     [super dealloc];
 }

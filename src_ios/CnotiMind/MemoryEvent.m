@@ -24,8 +24,8 @@
 - (id) initWithEventAndValue:(NSString*)aEvent value:(id)aValue
 {
     if (self == [super init]) {
-        _event = aEvent;
-        _value = aValue;
+        _event = [[NSString alloc] initWithString:aEvent];
+        _value = [[NSString alloc] initWithString:aValue];
 
         _time = [[NSDate date] timeIntervalSince1970];
     }
@@ -33,12 +33,9 @@
 }
 
 
-- (id) initWithEventAndValueAndTime:(NSString*)aEvent value:(id)aValue time:(NSString*)aTime
+- (id) initWithEventAndValueAndTime:(NSString*)aEvent value:(NSString*)aValue time:(NSString*)aTime
 {
-    if (self == [super init]) {
-        _event = aEvent;
-        _value = aValue;
-        
+    if (self == [self initWithEventAndValue: aEvent value:aValue]) {        
         _time = [aTime floatValue];
     }
     return self;
@@ -59,10 +56,20 @@
 - (NSString*) toXML
 {
     NSString* xml;
-    
-    xml = [NSString stringWithFormat:@"<MemoryEvent event=%@ value=%@ time=%f </MemoryEvent>", _event, _value, _time];
+    DLog(@"event: %@", _event);
+    DLog(@"value: %@", _value);
+    DLog(@"time: %f", _time);
+    xml = [NSString stringWithFormat:@"\t<MemoryEvent event=\"%@\" value=\"%@\" time=\"%f\" />\n", _event, _value, _time];
     
     return xml;
+}
+
+- (void) dealloc
+{
+    [_event release];
+    [_value release];
+    
+    [super dealloc];
 }
 
 @end

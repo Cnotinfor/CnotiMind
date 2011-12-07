@@ -2,25 +2,15 @@
 //  Brain.m
 //  CnotiMind
 //
-//  Created by Gonçalo Rodrigues on 11/04/27.
-//  Copyright 2011 Cnotinfor. All rights reserved.
-//
 
 #import "Brain.h"
-
 #import "GDataXMLNode.h"
-
 #import "NSMutableArray+QueueAdditions.h"
-
 #import "RootNode.h"
 #import "ConditionPerceptionNode.h"
 #import "ActionNode.h"
-
 #import "MemoryEvent.h"
-
 #import "CnotiMind.h"
-
-#import "GameState.h"
 
 @implementation Brain
 
@@ -32,6 +22,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 
 @synthesize properties = _properties;
 @synthesize crutches = _crutches;
+@synthesize longTermMemory = _longTermMemory;
 
 - (id) init
 {
@@ -297,12 +288,12 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     for (GDataXMLElement* memoryMember in memoryMembers) {
         NSString* elementName = [NSString stringWithString:[memoryMember name]];
         
-        [_crutchesXMLHandler startElement:nil localName:nil qName:elementName atts:memoryMember];
+        [_memoryXMLHandler startElement:nil localName:nil qName:elementName atts:memoryMember];
         
         NSArray* childArray = [memoryMember children];        
         [self loadXMLRecursiveMemory:childArray];
         
-        [_crutchesXMLHandler endElement:nil localName:nil qName:elementName];
+        [_memoryXMLHandler endElement:nil localName:nil qName:elementName];
     }
     return true;
 }
@@ -317,15 +308,11 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 {    
     [self saveEmotionalStateToMemory];
     
-    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString* documentsDirectory = [paths objectAtIndex:0];
-    NSString* aFilePath = [documentsDirectory stringByAppendingFormat:@"/KidsMusics/%@", [[[GameState sharedInstance] authentication] username]];
-    aFilePath = [aFilePath stringByAppendingFormat:@"/mozart.mnd"];
-    
-    
     NSString* xmlMemory = [NSString stringWithFormat:@""];
     xmlMemory = [xmlMemory stringByAppendingString:@"<Memory>\n"];
-    xmlMemory = [xmlMemory stringByAppendingString:@"<LongTermMemory>\n"];    
+    xmlMemory = [xmlMemory stringByAppendingString:@"\n<LongTermMemory>\n"];    
+    
+    DLog(@"_longTermMemory: %@", _longTermMemory);
     
     NSEnumerator* eLongTermMemory = [_longTermMemory objectEnumerator];
     MemoryEvent* objectLongTermMemory;
@@ -333,7 +320,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         xmlMemory = [xmlMemory stringByAppendingFormat:@"%@", [objectLongTermMemory toXML]];
     }
     
-    xmlMemory = [xmlMemory stringByAppendingString:@"</LongTermMemory>\n"];
+    xmlMemory = [xmlMemory stringByAppendingString:@"\n</LongTermMemory>\n"];
 //    xmlMemory = [xmlMemory stringByAppendingString:@"<WorkingMemory>\n"];
 //    
 //    NSEnumerator* eWorkingMemory = [_workingMemory objectEnumerator];
@@ -346,9 +333,9 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     xmlMemory = [xmlMemory stringByAppendingString:@"</Memory>\n"];
     
     NSData *xmlMemoryData = [xmlMemory dataUsingEncoding:NSUTF8StringEncoding];
-    [xmlMemoryData writeToFile:aFilePath atomically:YES];
+    [xmlMemoryData writeToFile:aFilename atomically:YES];
     
-    DLog(@"saveMemory aFilePath: %@", aFilePath);
+    DLog(@"saveMemory aFilePath: %@", aFilename);
     
     return true;
 }
@@ -357,15 +344,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 //  TODO
 - (BOOL) loadMemory:(NSString*)aFilename
 {
-    
-    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString* documentsDirectory = [paths objectAtIndex:0];
-    NSString* aFilePath = [documentsDirectory stringByAppendingFormat:@"/KidsMusics/%@", [[[GameState sharedInstance] authentication] username]];
-    aFilePath = [aFilePath stringByAppendingFormat:@"/mozart.mnd"];
-    
-    DLog(@"%@", aFilePath);
-    
-    NSData *xmlData = [[NSMutableData alloc] initWithContentsOfFile:aFilePath];  
+    NSData *xmlData = [[NSMutableData alloc] initWithContentsOfFile:aFilename];  
     NSError *error;
     GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:xmlData 
 														   options:0 error:&error];
@@ -375,6 +354,9 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     }
     
     else {
+        
+        [_longTermMemory removeAllObjects];
+        
         //  Make the parsing - must be recursive!!!
         NSArray *memoryMembers = [doc.rootElement children];
         
@@ -412,17 +394,27 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     
     NSString* currentTime = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]]; // It's given to all the emotions the same time
     
+    
+    NSString* event = [NSString stringWithFormat:@"EmotionDump"];
+    
+    MemoryEvent* memoryEvent = [[MemoryEvent alloc] initWithEventAndValueAndTime:event
+                                                                           value:@"" 
+                                                                            time:currentTime];
+    [self storeToMemory:memoryEvent memoryType:LongTermMemory];
+    [memoryEvent release];
+
     Emotion* emotion;
     while ( (emotion = [enumerator nextObject]) ) {
-        
         NSString* event = [NSString stringWithFormat:@"Emotion %@", [emotion name]];
-        
-        DLog(@"event: %@", event);
+        DLog(@"saveEmotionalStateToMemory event: %@", event);
+        DLog(@"saveEmotionalStateToMemory value: %f", [emotion value]);
         
         MemoryEvent* memoryEvent = [[MemoryEvent alloc] initWithEventAndValueAndTime:event
-                                                                               value:[NSNumber numberWithFloat:[emotion value]] 
+                                                                               value:[NSString stringWithFormat:@"%f",[emotion value]] 
                                                                                 time:currentTime];
         [self storeToMemory:memoryEvent memoryType:LongTermMemory];
+        
+        [memoryEvent release];
     }
     
     return true;
@@ -440,7 +432,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     MemoryEvent* m;
     while ( (m = [e nextObject]) ) {
         NSRange textRange;
-        textRange =[[[m event] lowercaseString] rangeOfString:[@"Emotion" lowercaseString]];
+        textRange =[[[m event] lowercaseString] rangeOfString:[@"Emotion " lowercaseString]];
         
         // does contain the substring        
         if(textRange.location == NSNotFound) {
@@ -451,7 +443,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         NSString* emotionName = [NSString stringWithFormat:@"%@",[listItems objectAtIndex:[listItems count]-1]];
         DLog(@"loadEmotionalStateFromMemory emotionName: %@", emotionName);
         
-        [self updateEmotionValue:emotionName variation:[[m value] floatValue]];
+        [self setEmotionValue:emotionName variation:[[m value] floatValue]];
     }
     
     return true;
@@ -582,6 +574,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 {
     NSMutableDictionary* action = [[NSMutableDictionary alloc] init];
     [action setObject:aValue forKey:aKey];
+    DLog(@"aKey: %@ aValue: %@", aKey, aValue);
     [[NSNotificationCenter defaultCenter] postNotificationName:SEND_EMOTIONAL_STATE object:action];
     [action release];
 }
@@ -594,36 +587,64 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 
 - (void) updateEmotionValue:(NSString*)aEmotionName variation:(double)aVariation max:(double)aMax min:(double)aMin
 {
-    
     for (NSNumber* node in _disabledTasks) {
-        
-        DLog(@"-node: %d", [node intValue]);
-        
         if ( [node intValue] == (int)EmotionNodes ) {
             DLog(@"Disabled Emotion!");
             return;
         }
     }
+    
+    Emotion* e = [self findEmotion:aEmotionName];
+    
+    if ([e addValue:aVariation max:aMax min:aMin]) {
+        [self emotionChanged:e];
+    }
+
+}
+
+
+- (void) setEmotionValue:(NSString*)aEmotionName variation:(double)aValue
+{
+    for (NSNumber* node in _disabledTasks) {
+        if ( [node intValue] == (int)EmotionNodes ) {
+            DLog(@"Disabled Emotion!");
+            return;
+        }
+    }
+
+    Emotion* e  = [self findEmotion:aEmotionName];
+    if ([e setEmotionValue:aValue]) {
+        [self emotionChanged:e];
+    }
+
+}
+
+
+- (Emotion*) findEmotion:(NSString*)aEmotionName
+{
     NSEnumerator* eEmotions = [_emotions objectEnumerator];
     Emotion* objectEmotion;
     while (objectEmotion = [eEmotions nextObject]) {
         
         if (![[objectEmotion name] caseInsensitiveCompare:aEmotionName] == TRUE) {
-            
-            [objectEmotion addValue:aVariation max:aMax min:aMin];
-            
-            [self sendEmotionalState:[objectEmotion name] value:[NSString stringWithFormat:@"%f", [objectEmotion value]]];
-            
-            [_emotionsChanged enqueue:aEmotionName];
-            
-            if ([_semaphoreBrain tryLock]) {
-                [_semaphoreBrain unlockWithCondition:HAS_DATA];
-            }
-            
-            break;
+            return objectEmotion;
         }
     }
+    return nil;
 }
+
+
+- (void) emotionChanged:(Emotion*)aEmotion
+{
+    [self sendEmotionalState:[aEmotion name] value:[NSString stringWithFormat:@"%f", [aEmotion value]]];
+    
+    [_emotionsChanged enqueue:[aEmotion name]];
+    
+    if ([_semaphoreBrain tryLock]) {
+        [_semaphoreBrain unlockWithCondition:HAS_DATA];
+    }
+}
+
 
 - (void) updatePropertyValue:(NSString*)aPropertyName value:(NSString*)aValue
 {

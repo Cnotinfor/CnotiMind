@@ -51,38 +51,50 @@
         DLog(@"initWithNameAndValue: %@", _name);
 
         _value = aValue;
-        _min = INT8_MIN;
-        _max = INT8_MAX;
+        _min = aMin;
+        _max = aMax;
     }
     return self;
 }
 
 
-- (void) setEmotionValue:(double)aValue max:(double)aMax min:(double)aMin
+- (BOOL) setEmotionValue:(double)aValue max:(double)aMax min:(double)aMin
 {
     double oldValue = _value;
 
 
-    if (oldValue >= _min && oldValue <= _max) {
+    if (oldValue >= aMin && oldValue <= aMax) {
         float newMax = MIN(aMax, _max);
         float newMin = MAX(aMin, _min);
-        
-        _value = MAX(newMin, MIN(aValue, newMax));    
+        DLog(@"setEmotionValue 1: %f", aValue);
+
+        DLog(@"oldValue: %f", oldValue);
+        _value = MAX(newMin, MIN(aValue, newMax));
+        DLog(@"_value: %f", _value);        
+        DLog(@"_min: %f", _min);
+        DLog(@"_max: %f", _max);
+        DLog(@"aMin: %f", aMin);
+        DLog(@"aMax: %f", aMax);
+        DLog(@"newMin: %f", newMin);
+        DLog(@"newMax: %f", newMax);
     }
-    
-    DLog(@"setEmotionValue; %f", _value);
+
+
+    DLog(@"setEmotionValue 2: %f", _value);
+    DLog(@"return setEmotionValue: %d", oldValue != _value);
+    return oldValue != _value;
 }
 
 
-- (void) setEmotionValue:(double)aValue
+- (BOOL) setEmotionValue:(double)aValue
 {
-    [self setEmotionValue:aValue max:_max min:_min];
+    return [self setEmotionValue:aValue max:_max min:_min];
 }
 
 
-- (void) addValue:(double)aIncrement max:(double)aMax min:(double)aMin
+- (BOOL) addValue:(double)aIncrement max:(double)aMax min:(double)aMin
 {
-    [self setEmotionValue:_value + aIncrement max:aMax min:aMin];
+    return [self setEmotionValue:_value + aIncrement max:aMax min:aMin];
 }
 
 

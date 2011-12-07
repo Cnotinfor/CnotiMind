@@ -80,6 +80,7 @@ enum BrainNodes
 
 @property (readwrite, retain) NSMutableDictionary* properties;
 @property (readwrite, retain) NSMutableArray* crutches;
+@property (readwrite, retain) NSMutableArray* longTermMemory;
 
 - (id) init;
 - (id) initWithPath:(NSString*)aPath;
@@ -128,6 +129,10 @@ enum BrainNodes
 
 - (void) updateEmotionValue:(NSString*)aEmotionName variation:(double)aVariation max:(double)aMax min:(double)aMin;
 - (void) updateEmotionValue:(NSString*)aEmotionName variation:(double)aVariation;
+
+- (void) setEmotionValue:(NSString*)aEmotionName variation:(double)aValue;
+- (Emotion*) findEmotion:(NSString*)aEmotionName;
+- (void) emotionChanged:(Emotion*)aEmotionName;
 
 - (void) updatePropertyValue:(NSString*)aPropertyName value:(NSString*)aValue;
 

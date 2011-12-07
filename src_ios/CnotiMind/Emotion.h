@@ -28,10 +28,10 @@
 - (id) initWithNameAndValue:(NSString*)aKey value:(double)aValue;
 - (id) initWithNameAndValueAndMaxAndMin:(NSString*)aKey value:(double)aValue max:(double)aMax min:(double)aMin;
 
-- (void) setEmotionValue:(double)aValue max:(double)aMax min:(double)aMin;
-- (void) setEmotionValue:(double)aValue;
+- (BOOL) setEmotionValue:(double)aValue max:(double)aMax min:(double)aMin;
+- (BOOL) setEmotionValue:(double)aValue;
 
-- (void) addValue:(double)aIncrement max:(double)aMax min:(double)aMin;
+- (BOOL) addValue:(double)aIncrement max:(double)aMax min:(double)aMin;
 - (void) addValue:(double)aIncrement;
 
 + (BOOL) compareWithEmotionAndString:(Emotion*)aEmotion name:(NSString*)aEmotionName;

@@ -270,6 +270,8 @@
     if (!okMax) {
         max = INT_MAX;
     }
+    
+    DLog(@"createEmotionNode: min: %f max: %f", min, max);
     _parentNode = _currentNode;
     _currentNode = [[EmotionNode alloc] initWithEmotionAndValueAndMaxAndMinAndBrainAndParent:emotion 
                                                                                        value:value 

@@ -24,13 +24,13 @@
 
 
 - (id) initWithEventAndValue:(NSString*)aEvent value:(id)aValue;
-- (id) initWithEventAndValueAndTime:(NSString*)aEvent value:(id)aValue time:(NSString*)aTime;
+- (id) initWithEventAndValueAndTime:(NSString*)aEvent value:(NSString*)aValue time:(NSString*)aTime;
 
 - (id) initWithPerception: (Perception*)aPerception;
 
 - (NSString*) toXML;
 
-
+- (void) dealloc;
 
 
 @end

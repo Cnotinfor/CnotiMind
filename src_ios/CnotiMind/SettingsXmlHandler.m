@@ -34,6 +34,7 @@
         _rootNode = NULL;
         _currentNode = NULL;
         _line = 0;
+        _emotionAttributes = [[NSMutableArray alloc] init];
         
     }
     return self;
@@ -62,6 +63,9 @@
 		TYPE_STRING = [[NSString alloc] initWithFormat:@"string"];
 		TYPE_VALUES = [[NSString alloc] initWithFormat:@"values"];
 		NAME = [[NSString alloc] initWithFormat:@"name"];
+        
+        _emotionAttributes = [[NSMutableArray alloc] init];
+
     }
     return self;
 }
@@ -239,6 +243,7 @@
        [atts attributeForName:@"min"] != nil )
     {
         int i;
+        NSNumber* num;
         [_emotionAttributes removeAllObjects];
         
         
@@ -249,7 +254,9 @@
             DLog("[SettingsXmlHandler::elementEmotion] Invalid attribute value: value = %d", i);
             return false;
         }
-        [_emotionAttributes addObject:[NSNumber numberWithInt:i]];
+        
+        num = [[NSNumber alloc] initWithInt:i];
+        [_emotionAttributes addObject:num];
         
         
         if ([CnotiMind isNumeric: [[atts attributeForName:@"max"] stringValue]]) {
@@ -259,7 +266,8 @@
             DLog("[SettingsXmlHandler::elementEmotion] Invalid attribute value: max = %d", i);
             return false;
         }
-        [_emotionAttributes addObject:[NSNumber numberWithInt:i]];
+        num = [[NSNumber alloc] initWithInt:i];
+        [_emotionAttributes addObject:num];
         
         
         if ([CnotiMind isNumeric: [[atts attributeForName:@"min"] stringValue]]) {
@@ -269,7 +277,15 @@
             DLog("[SettingsXmlHandler::elementEmotion] Invalid attribute value: min = %d", i);
             return false;
         }
-        [_emotionAttributes addObject:[NSNumber numberWithInt:i]];
+        
+        num = [[NSNumber alloc] initWithInt:i];
+        [_emotionAttributes addObject:num];
+        
+
+        for (NSNumber* num in _emotionAttributes) {
+            DLog(@"...%@", num)
+        }
+        DLog(@"tata: %@", _emotionAttributes);
     }
     else
     {
@@ -313,7 +329,10 @@
 
     if( _insideEmotion )
     {
-        Emotion* e = [[Emotion alloc] initWithNameAndValueAndMaxAndMin:_elementName value:[[_emotionAttributes objectAtIndex:0] floatValue] max:[[_emotionAttributes objectAtIndex:1] floatValue] min:[[_emotionAttributes objectAtIndex:2] floatValue]];
+        Emotion* e = [[Emotion alloc] initWithNameAndValueAndMaxAndMin:_elementName 
+                                                                 value:[[_emotionAttributes objectAtIndex:0] floatValue] 
+                                                                   max:[[_emotionAttributes objectAtIndex:1] floatValue] 
+                                                                   min:[[_emotionAttributes objectAtIndex:2] floatValue]];
         [_brain addEmotion:e];
         _insideEmotion = false;
         return true;

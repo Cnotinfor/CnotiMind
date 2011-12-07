@@ -89,7 +89,7 @@
         // Update the numeric value
         _valueNumeric = newValueInt;
     }
-    
+    DLog(@"EmotionNode exec: %f", _valueNumeric);
     [_brain updateEmotionValue:_emotion variation:_valueNumeric max:_max min:_min];
 }
 
