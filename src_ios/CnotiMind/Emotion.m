@@ -2,9 +2,6 @@
 //  Emotion.m
 //  CnotiMind
 //
-//  Created by Gonçalo Rodrigues on 11/04/21.
-//  Copyright 2011 Cnotinfor. All rights reserved.
-//
 
 #import "Emotion.h"
 
