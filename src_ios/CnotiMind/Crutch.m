@@ -51,8 +51,9 @@
             _max = [maxString intValue];
         }
         
-        _order = -1;
-        _properties = aProperties;
+        _order = aOrder;
+        _properties = [[NSMutableDictionary alloc] initWithDictionary:aProperties];
+        DLog(@"Crutch Properties Class: %@", _properties);
     }
     return self;
 }

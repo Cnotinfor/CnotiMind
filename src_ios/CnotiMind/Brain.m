@@ -177,6 +177,10 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     [xmlData release];
     
     DLog(@"[Brain::loadXmlCrutches] done");
+    DLog(@"_crutches: %@", _crutches);
+    for (Crutch* obj in _crutches) {
+        DLog(@"-> %@: %@", obj.name, obj.properties);
+    }
     
     return true;
 }
@@ -731,25 +735,22 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     [action setObject:aValue forKey:aKey];
     
     DLog(@"executeAction key: %@", aKey);
-    DLog(@"executeAction value: %@", aValue);
+    DLog(@"executeValue value: %@", aValue);
     
     enum EnumCrutchOrder orderOfCrutch = -1;
     NSMutableArray* tempCrutchesArray = [[NSMutableArray alloc] init];
     BOOL foundCrutch = false;
     
     for (Crutch* crutchObject in _crutches) {
+        DLog(@"action crutchObject properties: %@", crutchObject.properties);
+    }
+    
+    for (Crutch* crutchObject in _crutches) {
         // current emotional state (must search emotions array for particular emotion)
         for (Emotion* emotionObject in _emotions) {
-            // if name are the same and action are same        
-            if ( ![[emotionObject name] caseInsensitiveCompare:[crutchObject emotion]] && ![aKey caseInsensitiveCompare:[crutchObject action]] ) {
-
-                DLog(@"emotionObjectValue: %@", [emotionObject name]);
-                DLog(@"emotionObjectValue: %f", [emotionObject value]);
-                DLog(@"crutchObject: %@", [crutchObject emotion]);
-                DLog(@"crutchObject: %d", [crutchObject min]);
-                DLog(@"crutchObject: %d", [crutchObject max]);
-                DLog(@"crutchObject properties: %@", crutchObject.properties);
-                
+            // if name are the same and action are same
+            
+            if ( ![[emotionObject name] caseInsensitiveCompare:[crutchObject emotion]] && ![aKey caseInsensitiveCompare:[crutchObject action]] ) {                
                 // check if between min and max values
                 if ( [emotionObject value] >= [crutchObject min] && [emotionObject value] <= [crutchObject max] && [self checkIfCrutchPropertiesAreTheSameAsBrainProperties:crutchObject] ) {
                     
@@ -771,6 +772,9 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         
         NSMutableDictionary* actionCrutch = [[NSMutableDictionary alloc] init];
         [actionCrutch setObject:[randomCrutch name] forKey:[randomCrutch action]];
+        
+        DLog(@"tempCrutchesArray: %@", tempCrutchesArray);
+        DLog(@"[randomCrutch name]: %@", [randomCrutch name]);
         
         orderOfCrutch = [randomCrutch order];
         
