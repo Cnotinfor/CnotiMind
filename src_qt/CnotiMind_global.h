@@ -1,7 +1,7 @@
 #ifndef CNOTIMIND_GLOBAL_H
 #define CNOTIMIND_GLOBAL_H
 
-#include <Qt/qglobal.h>
+#include <QtCore/qglobal.h>
 
 #ifdef CNOTIMIND_LIB
 # define CNOTIMIND_EXPORT Q_DECL_EXPORT

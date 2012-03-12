@@ -579,13 +579,7 @@ namespace CnotiMind
 		{
 			qDebug() << "[Brain::executeAction] Action tasks are disabled.";
 			return;
-		}
-
-		// Hold action info
-		typedef struct {
-			QString key;
-			QString value;
-		} action;
+        }
 
 		action a = {key, value};
 		QList<action> actions;

@@ -1,5 +1,5 @@
 #include "CnotiMind.h"
-#include <QtCore\QString>
+#include <QString>
 
 namespace CnotiMind
 {
