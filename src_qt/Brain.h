@@ -198,7 +198,13 @@ namespace CnotiMind
 		QList<BrainNodes> _disabledTasks;	// List with the brain activities that are disabled.
 		QList<ActionModifier*> _actionModifiers;
 		bool _talkModifierEnabled;	// TODO: in the future maybe necessary to think a better way, so it can handle all the actions.
-	};
+
+        // Hold action info
+        typedef struct {
+            QString key;
+            QString value;
+        } action;
+    };
 
 }
 #endif  //_BRAIN_H
