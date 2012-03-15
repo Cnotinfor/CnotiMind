@@ -144,6 +144,7 @@ namespace CnotiMind
 	bool Brain::saveMemory(const QString& filename)
 	{
 		saveEmotionalStateToMemory();
+		saveLastSceneToMemory();
 
 		// Save to xml
 		QFile f(filename);
@@ -201,6 +202,7 @@ namespace CnotiMind
 		if( reader.parse( source ) )
 		{
 			loadEmotionalStateFromMemory();
+			loadLastSceneFromMemory();
 			return true;
 		}
 
@@ -243,12 +245,57 @@ namespace CnotiMind
 			MemoryEvent m = it.previous();
 			if (!m.event().contains("Emotion "))
 			{
-				break;
+				continue;
 			}
 
 			// Find emotion and change it
 			QString emotionName = m.event().split(' ').last();
 			this->setEmotionalValue(emotionName, m.value().toReal());
+
+			break;
+		}
+		return true;
+	}
+
+	bool Brain::saveLastSceneToMemory()
+	{
+		// Saves current scene to long term memory
+		QHashIterator<QString, QString> propIt(_properties);
+		while(propIt.hasNext())
+		{
+			propIt.next();
+			QString prop = propIt.key();
+			if (prop.compare("SCENE", Qt::CaseInsensitive) == 0)
+			{
+				MemoryEvent m( "Last Scene", propIt.value(), MemoryEvent::eventTime() );
+				this->storeToMemory( m, LongTermMemory);
+				return true;
+			}
+		}
+		// Default scene
+		MemoryEvent m( "Last Scene", "Entry", MemoryEvent::eventTime() );
+		this->storeToMemory( m, LongTermMemory);
+		return true;
+	}
+
+	bool Brain::loadLastSceneFromMemory()
+	{
+		// Gets the last saved scene in long term memory and updates them.
+		QListIterator<MemoryEvent> it(_longTermMemory);
+		it.toBack();
+		while (it.hasPrevious())
+		{
+			MemoryEvent m = it.previous();
+			if (m.event().contains("Last Scene"))
+			{
+				// Find emotion and change it
+				QString name = m.event().split(' ').last();
+				QString value = m.value().toString();
+				this->updatePropertyValue(name, value);
+
+				emit sendAction(name, value);
+				break;
+			}
 		}
 		return true;
 	}
@@ -256,7 +303,7 @@ namespace CnotiMind
 	/**
 		Main loop for the thread.
 
-		Everytime a perceptions arrives, the _semaphoreBrian is made available, so it unlocks
+		Everytime a perceptions arrives, the _semaphoreBrain is made available, so it unlocks
 		and start
 	*/
 	void Brain::run()

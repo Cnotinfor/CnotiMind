@@ -63,7 +63,7 @@ Form::Form(QWidget *parent) :
 
 	if(!_brain->loadXmlActionModifiers( "../../xml/mozart_action_modifiers.xml" ));
 	{
-		qWarning() << "[LittleMozart::LittleMozart] Error loading Xml crutches.";
+		qWarning() << "[LittleMozart::LittleMozart] Error loading Xml for Action Modifiers.";
 	}
 
 	if(!_brain->loadXmlRules( "../../xml/mozart_rules.xml" ) )
@@ -191,7 +191,7 @@ void Form::on_pushButtonFinishMelody_clicked()
 
 void Form::actionReceived(const QString& action,const QString& value)
 {
-	if( action.compare("TALK", Qt::CaseInsensitive ) == 0 )
+//	if( action.compare("TALK", Qt::CaseInsensitive ) == 0 )
 	{
 		ui->plainTextEditActions->insertPlainText( action + ": " + value + "\n");
 	}

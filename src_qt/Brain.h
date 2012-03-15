@@ -63,6 +63,8 @@ namespace CnotiMind
 		bool loadMemory(const QString& filename);
 		bool saveEmotionalStateToMemory();
 		bool loadEmotionalStateFromMemory();
+		bool saveLastSceneToMemory();
+		bool loadLastSceneFromMemory();
 		void run();
 
 		// Methods to clear brain state
