@@ -67,8 +67,8 @@
 		18F98A8813603671006AE7F4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18F98A8613603671006AE7F4 /* InfoPlist.strings */; };
 		18F98A8B13603671006AE7F4 /* CnotiMindTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 18F98A8A13603671006AE7F4 /* CnotiMindTests.h */; };
 		18F98A8D13603671006AE7F4 /* CnotiMindTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F98A8C13603671006AE7F4 /* CnotiMindTests.m */; };
-		18F98A981360411B006AE7F4 /* Node.h in Headers */ = {isa = PBXBuildFile; fileRef = 18F98A961360411B006AE7F4 /* Node.h */; };
-		18F98A991360411B006AE7F4 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F98A971360411B006AE7F4 /* Node.m */; };
+		18F98A981360411B006AE7F4 /* MindNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 18F98A961360411B006AE7F4 /* MindNode.h */; };
+		18F98A991360411B006AE7F4 /* MindNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F98A971360411B006AE7F4 /* MindNode.m */; };
 		18F98A9C1360476E006AE7F4 /* Action.h in Headers */ = {isa = PBXBuildFile; fileRef = 18F98A9A1360476E006AE7F4 /* Action.h */; };
 		18F98A9D1360476E006AE7F4 /* Action.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F98A9B1360476E006AE7F4 /* Action.m */; };
 /* End PBXBuildFile section */
@@ -147,8 +147,8 @@
 		18F98A8913603671006AE7F4 /* CnotiMindTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CnotiMindTests-Prefix.pch"; sourceTree = "<group>"; };
 		18F98A8A13603671006AE7F4 /* CnotiMindTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CnotiMindTests.h; sourceTree = "<group>"; };
 		18F98A8C13603671006AE7F4 /* CnotiMindTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CnotiMindTests.m; sourceTree = "<group>"; };
-		18F98A961360411B006AE7F4 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
-		18F98A971360411B006AE7F4 /* Node.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Node.m; sourceTree = "<group>"; };
+		18F98A961360411B006AE7F4 /* MindNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MindNode.h; sourceTree = "<group>"; };
+		18F98A971360411B006AE7F4 /* MindNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MindNode.m; sourceTree = "<group>"; };
 		18F98A9A1360476E006AE7F4 /* Action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Action.h; sourceTree = "<group>"; };
 		18F98A9B1360476E006AE7F4 /* Action.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Action.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -290,8 +290,8 @@
 				1890E67D140F8EFB0039AAD9 /* rules */,
 				1800506F1368252A00DB332E /* Auxiliary */,
 				18F98A7313603671006AE7F4 /* Supporting Files */,
-				18F98A961360411B006AE7F4 /* Node.h */,
-				18F98A971360411B006AE7F4 /* Node.m */,
+				18F98A961360411B006AE7F4 /* MindNode.h */,
+				18F98A971360411B006AE7F4 /* MindNode.m */,
 				18F98A9A1360476E006AE7F4 /* Action.h */,
 				18F98A9B1360476E006AE7F4 /* Action.m */,
 				18888C061366CEC400F96F2B /* Perception.h */,
@@ -344,7 +344,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18F98A981360411B006AE7F4 /* Node.h in Headers */,
+				18F98A981360411B006AE7F4 /* MindNode.h in Headers */,
 				18F98A9C1360476E006AE7F4 /* Action.h in Headers */,
 				18888C081366CEC400F96F2B /* Perception.h in Headers */,
 				18888C0D1366D80A00F96F2B /* MemoryEvent.h in Headers */,
@@ -474,7 +474,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18F98A991360411B006AE7F4 /* Node.m in Sources */,
+				18F98A991360411B006AE7F4 /* MindNode.m in Sources */,
 				18F98A9D1360476E006AE7F4 /* Action.m in Sources */,
 				18888C091366CEC400F96F2B /* Perception.m in Sources */,
 				18888C0E1366D80A00F96F2B /* MemoryEvent.m in Sources */,

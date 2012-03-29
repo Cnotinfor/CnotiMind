@@ -12,7 +12,7 @@
 #import <Availability.h>
 //  end Copied from CCNode
 
-#import "Node.h"
+#import "MindNode.h"
 
 @class Brain;
 

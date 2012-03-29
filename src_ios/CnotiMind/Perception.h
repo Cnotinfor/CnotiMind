@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "Node.h"
+#import "MindNode.h"
 
 
 @interface Perception : NSObject {

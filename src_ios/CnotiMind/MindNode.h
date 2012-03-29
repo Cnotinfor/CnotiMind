@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Node : NSObject {
+@interface MindNode : NSObject {
     
     NSString* _key;
     NSString* _value;

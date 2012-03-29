@@ -35,7 +35,6 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         
         _receivedPerceptions = [[NSMutableArray alloc] init];
         
-        _receivedPerceptions = [[NSMutableArray alloc] init];
         _emotionsChanged = [[NSMutableArray alloc] init];
         _longTermMemory = [[NSMutableArray alloc] init];
         _workingMemory = [[NSMutableArray alloc] init];
@@ -311,6 +310,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 - (BOOL) saveMemory:(NSString*)aFilename
 {    
     [self saveEmotionalStateToMemory];
+    [self saveCurrentSceneToMemory];
     
     NSString* xmlMemory = [NSString stringWithFormat:@""];
     xmlMemory = [xmlMemory stringByAppendingString:@"<Memory>\n"];
@@ -325,15 +325,6 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     }
     
     xmlMemory = [xmlMemory stringByAppendingString:@"\n</LongTermMemory>\n"];
-//    xmlMemory = [xmlMemory stringByAppendingString:@"<WorkingMemory>\n"];
-//    
-//    NSEnumerator* eWorkingMemory = [_workingMemory objectEnumerator];
-//    MemoryEvent* objectWorkingMemory;
-//    while (objectWorkingMemory = [eWorkingMemory nextObject]) {
-//        xmlMemory = [xmlMemory stringByAppendingFormat:@"%@", [objectWorkingMemory toXML]];
-//    }
-//    
-//    xmlMemory = [xmlMemory stringByAppendingString:@"</WorkingMemory>\n"];    
     xmlMemory = [xmlMemory stringByAppendingString:@"</Memory>\n"];
     
     NSData *xmlMemoryData = [xmlMemory dataUsingEncoding:NSUTF8StringEncoding];
@@ -358,7 +349,6 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     }
     
     else {
-        
         [_longTermMemory removeAllObjects];
         
         //  Make the parsing - must be recursive!!!
@@ -371,6 +361,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         [_memoryXMLHandler endElement:nil localName:nil qName:@"Memory"];
         
         [self loadEmotionalStateFromMemory];
+        [self loadSceneFromMemory];
 
         [doc release];
         [xmlData release];
@@ -390,7 +381,6 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 /**
  Saves the emotions states to the long term memory
  */
-//NOTESTED
 - (BOOL) saveEmotionalStateToMemory 
 {
     DLog(@"saveEmotionalStateToMemory");
@@ -424,10 +414,43 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     return true;
 }
 
+
+- (BOOL)saveCurrentSceneToMemory {
+    
+    NSString* currentTime = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]]; // It's given to all the emotions the same time
+
+    NSEnumerator *enumerator = [_properties keyEnumerator];
+    id key;
+
+    while ((key = [enumerator nextObject])) {
+        NSString* value = [_properties objectForKey:key];
+
+        if ( ![key caseInsensitiveCompare:@"scene"] ) { 
+            
+            NSString* name = [NSString stringWithFormat:@"Last Scene"];
+            
+            MemoryEvent* memoryEvent = [[MemoryEvent alloc] initWithEventAndValueAndTime:name
+                                                                                   value:value 
+                                                                                    time:currentTime];
+            [self storeToMemory:memoryEvent memoryType:LongTermMemory];
+            return true;
+        }
+    }
+    return false;
+}
+
+
+- (BOOL)saveCurrentMusicToMemory
+{
+    //TODO
+    return false;
+}
+
+
+
 /**
  Loads the emotions states from the long term memory
  */
-//NOTESTED
 - (BOOL) loadEmotionalStateFromMemory
 {
     DLog(@"loadEmotionalStateFromMemory");
@@ -440,7 +463,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         
         // does contain the substring        
         if(textRange.location == NSNotFound) {
-            break;        
+            continue;        
         }
         NSArray *listItems = [[m event] componentsSeparatedByString:@" "];
         
@@ -448,9 +471,28 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         DLog(@"loadEmotionalStateFromMemory emotionName: %@", emotionName);
         
         [self setEmotionValue:emotionName variation:[[m value] floatValue]];
+        
+        break;
     }
     
     return true;
+}
+
+- (BOOL)loadSceneFromMemory {
+    DLog(@"loadSceneFromMemory");
+    NSEnumerator *e = [_longTermMemory reverseObjectEnumerator];
+    
+    MemoryEvent* m;
+    while ( (m = [e nextObject]) ) {
+        if ( ![m.event caseInsensitiveCompare:@"Last Scene"] ) {
+            [self sendAction:@"last_scene" value:m.value];
+            return true;
+        }
+    }
+    
+    [self sendAction:@"last_scene" value:@"entry"];
+
+    return false;
 }
 
 - (void) clearWorkingMemory
@@ -1390,7 +1432,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     // start search from back
     MemoryEvent* objectMemoryEvent;
     
-    for (int i = 0; i<[aMemoryEvents count]-1; i++) {
+    for (int i = 0; i<(int)[aMemoryEvents count]-1; i++) {
         objectMemoryEvent = [aMemoryEvents objectAtIndex:i];
         
         if( ![[objectMemoryEvent event] caseInsensitiveCompare:aEvent] ) // Event found

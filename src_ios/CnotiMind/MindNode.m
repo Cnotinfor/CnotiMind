@@ -6,10 +6,10 @@
 //  Copyright 2011 Cnotinfor. All rights reserved.
 //
 
-#import "Node.h"
+#import "MindNode.h"
 
 
-@implementation Node
+@implementation MindNode
 
 @synthesize _key = key;
 @synthesize _value = value;

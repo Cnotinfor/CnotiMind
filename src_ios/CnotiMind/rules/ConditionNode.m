@@ -73,7 +73,7 @@
 - (NSString*) info:(int)aDepth
 {
     NSString* info = [NSString stringWithFormat:@""];
-    NSString* space = [self space:aDepth];
+//    NSString* space = [self space:aDepth];
     
     //    info = [info stringByAppendingFormat:@"%@ Condition", space];
     info = [info stringByAppendingFormat:@"%@", [super info:aDepth]];

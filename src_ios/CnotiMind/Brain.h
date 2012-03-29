@@ -104,6 +104,8 @@ enum BrainNodes
 - (BOOL) validateXml:(NSString*)aFilename;
 - (BOOL) saveMemory:(NSString*)aFilename;
 - (BOOL) loadMemory:(NSString*)aFilename;
+- (BOOL) saveCurrentSceneToMemory;
+- (BOOL)loadSceneFromMemory;
 - (BOOL) saveEmotionalStateToMemory;
 - (BOOL) loadEmotionalStateFromMemory;
 

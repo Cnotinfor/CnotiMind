@@ -250,7 +250,7 @@
     
     NSEnumerator* eChildren = [children_ objectEnumerator];
     
-    Node* objectNode;
+    MindNode* objectNode;
     while (objectNode = [eChildren nextObject]) {
         info = [info stringByAppendingFormat:@"%@", [objectNode info:aDepth + 1]];
     }
