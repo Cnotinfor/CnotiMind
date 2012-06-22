@@ -86,7 +86,7 @@ namespace CnotiMind
 
 	qint64 MemoryEvent::eventTime()
 	{
-		return QDateTime::currentDateTime().toMSecsSinceEpoch();
+		return QDateTime::currentDateTime().toMSecsSinceEpoch() * 0.001;	// Return in seconds
 	}
 
 	/*

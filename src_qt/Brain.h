@@ -61,10 +61,6 @@ namespace CnotiMind
 
 		bool saveMemory(const QString& filename);
 		bool loadMemory(const QString& filename);
-		bool saveEmotionalStateToMemory();
-		bool loadEmotionalStateFromMemory();
-		bool saveLastSceneToMemory();
-		bool loadLastSceneFromMemory();
 		void run();
 
 		// Methods to clear brain state
@@ -177,6 +173,13 @@ namespace CnotiMind
 		BrainNodes translateBrainTasks( const QString& text );
 
 		QList<ActionModifier*> actionModifiers(const QString& action);
+
+		bool saveEmotionalStateToMemory();
+		bool loadEmotionalStateFromMemory();
+		bool saveLastSceneToMemory();
+		bool loadLastSceneFromMemory();
+		void saveDumpTimeToMemory();
+		bool loadDumpTimeFromMemory();
 
 	private:
 		RuleNode* _rules;
