@@ -19,7 +19,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 
 @synthesize emotions = _emotions;
 @synthesize receivedPerceptions = _receivedPerceptions;
-
+@synthesize crutchEnabledConst=_crutchEnabledConst;
 @synthesize properties = _properties;
 @synthesize crutches = _crutches;
 @synthesize longTermMemory = _longTermMemory;
@@ -32,7 +32,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         _emotions = [[NSMutableArray alloc] init];
         
         _crutches = [[NSMutableArray alloc] init];
-        
+        _crutchEnabledConst=true;
         _receivedPerceptions = [[NSMutableArray alloc] init];
         
         _emotionsChanged = [[NSMutableArray alloc] init];
@@ -362,6 +362,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         
         [self loadEmotionalStateFromMemory];
         [self loadSceneFromMemory];
+        [self loadDumpTime];
 
         [doc release];
         [xmlData release];
@@ -385,14 +386,14 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 {
     DLog(@"saveEmotionalStateToMemory");
     NSEnumerator* enumerator = [_emotions objectEnumerator]; 
+    NSNumber * time = [NSNumber numberWithFloat:[[NSDate date] timeIntervalSince1970]];
+    NSString* currentTime = [NSString stringWithFormat:@"%f", [time floatValue]]; // It's given to all the emotions the same time
     
-    NSString* currentTime = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]]; // It's given to all the emotions the same time
     
-    
-    NSString* event = [NSString stringWithFormat:@"EmotionDump"];
+    NSString* event = [NSString stringWithFormat:@"MemoryDump"];
     
     MemoryEvent* memoryEvent = [[MemoryEvent alloc] initWithEventAndValueAndTime:event
-                                                                           value:@"" 
+                                                                           value:currentTime 
                                                                             time:currentTime];
     [self storeToMemory:memoryEvent memoryType:LongTermMemory];
     [memoryEvent release];
@@ -492,6 +493,24 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     
     [self sendAction:@"last_scene" value:@"entry"];
 
+    return false;
+}
+
+- (BOOL)loadDumpTime
+{
+    DLog(@"loadTimeFromMemory");
+    NSEnumerator *e = [_longTermMemory reverseObjectEnumerator];
+    
+    MemoryEvent* m;
+    while ( (m = [e nextObject]) ) {
+        if ( ![m.event caseInsensitiveCompare:@"MemoryDump"] ) {
+            [self sendAction:@"MemoryDump" value:m.value];
+            return true;
+        }
+    }
+    
+    [self sendAction:@"MemoryDump" value:@"-1"];
+    
     return false;
 }
 
@@ -805,7 +824,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         }
     }
     
-    if ( foundCrutch && [tempCrutchesArray count]>0 && _crutchEnabled ) {
+    if ( foundCrutch && [tempCrutchesArray count]>0 && _crutchEnabled && _crutchEnabledConst ) {
         DLog(@"WOW! I found a crutch!");
         
         // search for a crutch in the crutches temp array        

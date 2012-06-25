@@ -170,5 +170,12 @@
     [super dealloc];
 }
 
+/**
+ Possible problem origin
+ */
+- (BOOL) isTrue
+{
 
+    return true;
+}
 @end

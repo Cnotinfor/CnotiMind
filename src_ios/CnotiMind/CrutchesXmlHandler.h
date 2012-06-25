@@ -64,8 +64,6 @@
 - (BOOL) startElement:(NSString*)aNamespaceURI localName:(NSString*)aLocalName qName:(NSString*)aQName atts:(GDataXMLElement*)atts;
 - (BOOL) endElement:(NSString*)aNamespaceURI localName:(NSString*)aLocalName qName:(NSString*)aQName;
 
-- (BOOL) characters:(NSString*)aCharacter;
-
 - (BOOL) elementAction:(GDataXMLElement*)atts;
 - (BOOL) elementEmotion:(GDataXMLElement*)atts;
 - (BOOL) elementProperty:(GDataXMLElement*)atts;

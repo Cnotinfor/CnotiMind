@@ -64,7 +64,7 @@ enum { HAS_DATA, NO_DATA };
     SettingsXmlHandler* _settingsXMLHandler;
     CrutchesXmlHandler* _crutchesXMLHandler;
     MemoryXmlHandler* _memoryXMLHandler;
-    
+    BOOL _crutchEnabledConst;
     BOOL _crutchEnabled;
 }
 
@@ -77,6 +77,7 @@ enum BrainNodes
 
 @property (readwrite, retain) NSMutableArray* emotions;
 @property (readwrite, retain) NSMutableArray* receivedPerceptions;
+@property (assign) BOOL crutchEnabledConst;
 
 @property (readwrite, retain) NSMutableDictionary* properties;
 @property (readwrite, retain) NSMutableArray* crutches;
@@ -108,6 +109,8 @@ enum BrainNodes
 - (BOOL)loadSceneFromMemory;
 - (BOOL) saveEmotionalStateToMemory;
 - (BOOL) loadEmotionalStateFromMemory;
+- (BOOL) loadDumpTime;
+
 
 // Methods to clear brain state
 - (void) clearWorkingMemory;
