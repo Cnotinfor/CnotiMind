@@ -41,7 +41,7 @@
 - (void) exec:(NSMutableDictionary*)aVariables
 {
     if ([self isTrue:aVariables]) {
-        [aVariables setObject:_value forKey:@"[perception.value]"];
+       // [aVariables setObject:_value forKey:@"[perception.value]"];
         [self execChildren:aVariables];
     }
 
