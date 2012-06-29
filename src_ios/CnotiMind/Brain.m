@@ -320,7 +320,8 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     
     NSEnumerator* eLongTermMemory = [_longTermMemory objectEnumerator];
     MemoryEvent* objectLongTermMemory;
-    while (objectLongTermMemory = [eLongTermMemory nextObject]) {
+    while (objectLongTermMemory = [eLongTermMemory nextObject])
+    {
         xmlMemory = [xmlMemory stringByAppendingFormat:@"%@", [objectLongTermMemory toXML]];
     }
     
@@ -384,6 +385,15 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
  */
 - (BOOL) saveEmotionalStateToMemory 
 {
+    for(int i=[_longTermMemory count]-1;i>=0;i--)
+    {
+        MemoryEvent * eventObject = [_longTermMemory objectAtIndex:i];
+        if(![eventObject.event caseInsensitiveCompare:@"MemoryDump"] || ![eventObject.event caseInsensitiveCompare:@"EmotionDump"])
+        {
+            [_longTermMemory removeObject:eventObject];
+        }
+    }
+
     DLog(@"saveEmotionalStateToMemory");
     NSEnumerator* enumerator = [_emotions objectEnumerator]; 
     NSNumber * time = [NSNumber numberWithFloat:[[NSDate date] timeIntervalSince1970]];
@@ -399,8 +409,19 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     [memoryEvent release];
 
     Emotion* emotion;
-    while ( (emotion = [enumerator nextObject]) ) {
+    while ( (emotion = [enumerator nextObject]) )
+    {
+        
         NSString* event = [NSString stringWithFormat:@"Emotion %@", [emotion name]];
+        for(int i=[_longTermMemory count]-1;i>=0;i--)
+        {
+            MemoryEvent * eventObject = [_longTermMemory objectAtIndex:i];
+            if(![eventObject.event caseInsensitiveCompare:event])
+            {
+                [_longTermMemory removeObject:eventObject];
+            }
+        }
+
         DLog(@"saveEmotionalStateToMemory event: %@", event);
         DLog(@"saveEmotionalStateToMemory value: %f", [emotion value]);
         
@@ -422,7 +443,15 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 
     NSEnumerator *enumerator = [_properties keyEnumerator];
     id key;
-
+    for(int i=[_longTermMemory count]-1;i>=0;i--)
+    {
+        MemoryEvent * eventObject = [_longTermMemory objectAtIndex:i];
+        if(![eventObject.event caseInsensitiveCompare:@"Last Scene"])
+        {
+            [_longTermMemory removeObject:eventObject];
+        }
+    }
+    
     while ((key = [enumerator nextObject])) {
         NSString* value = [_properties objectForKey:key];
 
