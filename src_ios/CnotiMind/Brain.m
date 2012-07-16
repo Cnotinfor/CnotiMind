@@ -1585,7 +1585,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         // Remove first perception added.
         if( [_receivedPerceptions count] != 0 )
         {
-            Perception* p = [_receivedPerceptions dequeue];
+            Perception* p __attribute__((unused)) = [_receivedPerceptions dequeue];
             DLog(@"dequeue from _receivedPerceptions: %@ %@", [p name], [p value]);
         }
         
