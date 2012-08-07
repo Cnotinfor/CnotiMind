@@ -83,7 +83,8 @@
 - (void) exec:(NSMutableDictionary*)aVariables
 {
     NSString* value = [NSString stringWithFormat:@"%@", _value];
-    
+    if(![_name compare:@"Think"])
+        DThinkLog(@"%@", value);
     [self tagsToValue:&value variables:&aVariables];
     
     if ([value length]>0) {

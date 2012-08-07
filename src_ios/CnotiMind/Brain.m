@@ -910,50 +910,58 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     
     NSEnumerator* eMem = [mem objectEnumerator];
     
-    BOOL removeLast = false;
-    BOOL removeFirst = false;
-    BOOL removeAll = false;
     
     switch ((int)aPosition) {
         case DeleteLast:
-            @synchronized(mem) {
+            @synchronized(mem)
+            {
+                MemoryEvent * last = nil;
                 for (MemoryEvent* aKey2 in eMem) {
                     NSString* k = [NSString stringWithFormat:@"%@", [aKey2 event]];
-                    if (![aKey caseInsensitiveCompare: k]) {
-                        removeLast = true;
+                    if (![aKey caseInsensitiveCompare: k]) 
+                    {
+                        last = aKey2;
                     }
                 }
+                if (last!= nil)
+                {
+                    [mem removeObject:last];    
+                }
+
             }
-            if (removeLast) {
-                [mem removeLastObject];    
-            }
-            break;
+        break;
         case DeleteFirst:
-            @synchronized(mem) {
-                for (MemoryEvent* aKey2 in eMem) {
+            @synchronized(mem) 
+            {
+                NSMutableArray * toDelete= [NSMutableArray arrayWithObjects: nil];
+                for (MemoryEvent* aKey2 in eMem) 
+                {
                     NSString* k = [NSString stringWithFormat:@"%@", [aKey2 event]];
-                    if (![aKey caseInsensitiveCompare: k]) {
-                        removeFirst = true;
+                    if (![aKey caseInsensitiveCompare: k]) 
+                    {
+                        [toDelete addObject:aKey2];
+                        break;
+
                     }
                 }
-            }
-            if (removeFirst) {
-                [mem removeObjectAtIndex:0];
+                [mem removeObjectsInArray:toDelete];
+                [toDelete release];
             }
             break;
         case DeleteAll:
             @synchronized(mem) {
-                for (MemoryEvent* aKey2 in eMem) {
+                NSMutableArray * toDelete= [NSMutableArray arrayWithObjects: nil];
+                for (MemoryEvent* aKey2 in eMem) 
+                {
                     NSString* k = [NSString stringWithFormat:@"%@", [aKey2 event]];
-                    if (![aKey caseInsensitiveCompare: k]) {
-                        removeAll = true;
+                    if (![aKey caseInsensitiveCompare: k])
+                    {
+                        [toDelete addObject:aKey2];
                     }
                 }
+                [mem removeObjectsInArray:toDelete];
+                [toDelete release];
             }
-            if (removeAll) {
-                [mem removeAllObjects];
-            }
-            
             break;    
             
         default:
