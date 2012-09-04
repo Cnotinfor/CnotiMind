@@ -15,15 +15,17 @@
     
     id _value;
     NSString* _name;
+    int _id;
 }
 
 
 @property (readwrite, retain) id value;
+@property (readwrite, assign) int id;
 @property (readwrite, retain) NSString* name;
 
 - (id) init;
 - (id) initWithNameAndAValue:(NSString*)aName value:(NSString*)aValue;
-
+- (id) initWithNameAndAValueAndId:(NSString*)aName value:(NSString*)aValue id:(int)aId;
 - (void) dealloc;
 
 @end

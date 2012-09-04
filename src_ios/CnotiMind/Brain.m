@@ -646,6 +646,20 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     [_semaphoreBrain unlockWithCondition:HAS_DATA];
 }
 
+- (void) cleanPerceptionWithTypeOf:(Perception *)aPerception
+{
+    NSMutableArray * forRemoval = [NSMutableArray arrayWithObjects:nil];
+
+    for(Perception * perc in _receivedPerceptions )
+    {
+        if([aPerception.name compare:perc.name])
+        {
+            [forRemoval addObject:perc];
+        }
+    }
+    [_receivedPerceptions removeObjectsInArray:forRemoval];
+
+}
 
 //  TODO - not tested
 - (void) stop
@@ -823,7 +837,9 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     
     NSMutableDictionary* action = [[NSMutableDictionary alloc] init];
     [action setObject:aValue forKey:aKey];
-    
+    Perception* p = [[self receivedPerceptions] objectAtIndex:0];
+    [action setObject:[NSNumber numberWithInt:p.id]
+               forKey:@"id"];
     DLog(@"executeAction key: %@", aKey);
     DLog(@"executeValue value: %@", aValue);
     
@@ -862,7 +878,8 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
         
         NSMutableDictionary* actionCrutch = [[NSMutableDictionary alloc] init];
         [actionCrutch setObject:[randomCrutch name] forKey:[randomCrutch action]];
-        
+        [actionCrutch setObject:[NSNumber numberWithInt:p.id]
+                         forKey:@"id"];
         DLog(@"tempCrutchesArray: %@", tempCrutchesArray);
         DLog(@"[randomCrutch name]: %@", [randomCrutch name]);
         
