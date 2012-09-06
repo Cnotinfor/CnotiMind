@@ -635,126 +635,36 @@
 			<!-- Save duration value to the memory -->
 			<Storage event="Duration" value="[Perception.value]" memory="WM" />
 			
-			<!-- 
-				Check same note repetetion 
-				Is repeted and duration bigger then 6 decrease JOY.
+			<!-- 	
+					Check duration repetetions 
 			-->
-			<!-- Get 1st note (last note inserted) -->
-			<DataMining operation="Last" event="Note" variable="[Last Note]"  memory="WM" >
-
-				<!-- Get 2nd note and duration to compare -->
-				<DataMining operation="Item" event="Note" variable="[Note To Check]" position="-2" memory="WM" >
-					<DataMining operation="Item" event="Duration" variable="[Duration To Check]" position="-2" memory="WM" >
-						<!-- Calc duration total -->
-						<MathOperation name="Sum" variable="[Duration To Check]" value="[Perception.value]" result="[Total Duration]" >
-							<!-- Compare notes -->
-							<Condition type="Variable" variable="[Note To Check]" compareValue="[Last Note]">
-								<!-- Check if total duration is bigger then 6 -->
-								<Condition type="Variable" variable="[Total Duration]" operator="bigger" compareValue="6" >
-									<Action name="Think" value="2nd Note Repetition too big: [Total Duration]" />
-									<Emotion name="Joy" increment="-1" min="-2" />
-									<Property name="Duration Option" value ="Bad" />
-								</Condition>
-								<!-- Check if total duration is smaller or equal then 6 -->
-								<Condition type="Variable" variable="[Total Duration]" operator="smaller" compareValue="7" >
-
-									<!-- Get 3rd note and duration to compare -->
-									<DataMining operation="Item" event="Note" variable="[Note To Check]" position="-3" memory="WM" >
-										<DataMining operation="Item" event="Duration" variable="[Duration To Check]" position="-3" memory="WM" >
-											<!-- Calc duration total -->
-											<MathOperation name="Sum" variable="[Duration To Check]" value="[Total Duration]" result="[Total Duration]" >
-												<!-- Compare notes -->
-												<Condition type="Variable" variable="[Note To Check]" compareValue="[Last Note]">
-													<!-- Check if total duration is bigger then 6 -->
-													<Condition type="Variable" variable="[Total Duration]" operator="bigger" compareValue="6" >
-														<Action name="Think" value="3rd Note Repetition too big: [Total Duration]" />
-														<Emotion name="Joy" increment="-1" min="-2" />
-														<Property name="Duration Option" value ="Bad" />
-													</Condition>
-													<!-- Check if total duration is smaller or equal then 6 -->
-													<Condition type="Variable" variable="[Total Duration]" operator="smaller" compareValue="7" >
-
-														<!-- Get 4th note and duration to compare -->
-														<DataMining operation="Item" event="Note" variable="[Note To Check]" position="-4" memory="WM" >
-															<DataMining operation="Item" event="Duration" variable="[Duration To Check]" position="-4" memory="WM" >
-																<!-- Calc duration total -->
-																<MathOperation name="Sum" variable="[Duration To Check]" value="[Total Duration]" result="[Total Duration]" >
-																	<!-- Compare notes -->
-																	<Condition type="Variable" variable="[Note To Check]" compareValue="[Last Note]">
-																		<!-- Check if total duration is bigger then 6 -->
-																		<Condition type="Variable" variable="[Total Duration]" operator="bigger" compareValue="6" >
-																			<Action name="Think" value="4th Note Repetition too big: [Total Duration]" />
-																			<Emotion name="Joy" increment="-1" min="-2" />
-																			<Property name="Duration Option" value ="Bad" />
-																		</Condition>
-																		<!-- Check if total duration is smaller or equal then 6 -->
-																		<Condition type="Variable" variable="[Total Duration]" operator="smaller" compareValue="7" >
-
-																			<!-- Get 5th note and duration to compare -->
-																			<DataMining operation="Item" event="Note" variable="[Note To Check]" position="-5" memory="WM" >
-																				<DataMining operation="Item" event="Duration" variable="[Duration To Check]" position="-5" memory="WM" >
-																					<!-- Calc duration total -->
-																					<MathOperation name="Sum" variable="[Duration To Check]" value="[Total Duration]" result="[Total Duration]" >
-																						<!-- Compare notes -->
-																						<Condition type="Variable" variable="[Note To Check]" compareValue="[Last Note]">
-																							<!-- Check if total duration is bigger then 6 -->
-																							<Condition type="Variable" variable="[Total Duration]" operator="bigger" compareValue="6" >
-																								<Action name="Think" value="5th Note Repetition too big: [Total Duration]" />
-																								<Emotion name="Joy" increment="-1" min="-2" />
-																								<Property name="Duration Option" value ="Bad" />
-																							</Condition>
-																							<!-- Check if total duration is smaller or equal then 6 -->
-																							<Condition type="Variable" variable="[Total Duration]" operator="smaller" compareValue="7" >
-
-																								<!-- Get 6th note and duration to compare -->
-																								<DataMining operation="Item" event="Note" variable="[Note To Check]" position="-6" memory="WM" >
-																									<DataMining operation="Item" event="Duration" variable="[Duration To Check]" position="-6" memory="WM" >
-																										<!-- Calc duration total -->
-																										<MathOperation name="Sum" variable="[Duration To Check]" value="[Total Duration]" result="[Total Duration]" >
-																											<!-- Compare notes -->
-																											<Condition type="Variable" variable="[Note To Check]" compareValue="[Last Note]">
-																												<!-- Check if total duration is bigger then 6 -->
-																												<Condition type="Variable" variable="[Total Duration]" operator="bigger" compareValue="6" >
-																													<Action name="Think" value="6th Note Repetition too big: [Total Duration]" />
-																													<Emotion name="Joy" increment="-1" min="-2" />
-																													<Property name="Duration Option" value ="Bad" />
-																												</Condition>
-																											</Condition>
-																										</MathOperation>
-																									</DataMining>
-																								</DataMining>
-																								<!-- Finished 6th note verification -->
-																								
-																							</Condition>
-																						</Condition>
-																					</MathOperation>
-																				</DataMining>
-																			</DataMining>
-																			<!-- Finished 5th note verification -->
-																			
-																		</Condition>
-																	</Condition>
-																</MathOperation>
-															</DataMining>
-														</DataMining>
-														<!-- Finished 4th note verification -->
-														
-													</Condition>
-												</Condition>
-											</MathOperation>
-										</DataMining>
-									</DataMining>
-									<!-- Finished 3rd note verification -->
-									
-								</Condition>
-							</Condition>
-						</MathOperation>
-					</DataMining>
-				</DataMining>
-				<!-- Finished 2nd note verification -->
-				
+			<!-- 4 x 4 -->
+			<DataMining operation="sum" event="Duration" variable="[Total Duration]" position="-2" memory="WM" >
+				<Condition type="Variable" variable="[Total Duration]" compareValue="8" >
+					<Action name="Talk" value="TooMany 4Durations" />
+				</Condition>
 			</DataMining>
-
+			<!-- 2 x 2 x 2 x 2 -->
+			<DataMining operation="sum" event="Duration" variable="[Total Duration]" position="-4" memory="WM" >
+				<Condition type="Variable" variable="[Total Duration]" compareValue="8" >
+				<!-- Ceck if last duration is 2 tempos -->
+					<Condition type="Variable" variable="[Perception.value]" compareValue="2" >
+						<!-- Ceck if 3rd duration also is 2 tempos -->
+						<DataMining operation="item" event="Duration" variable="[3rdItem]" position="-3" memory="WM" >
+							<Condition type="Variable" variable="[3rdItem]" compareValue="2" >
+								<Action name="Talk" value="TooMany 2Durations" />
+							</Condition>
+						</DataMining>
+					</Condition>
+				</Condition>
+			</DataMining>
+			<!-- 1 x 1 x 1 x 1 x 1 x 1 x 1 x 1 -->
+			<DataMining operation="sum" event="Duration" variable="[Total Duration]" position="-8" memory="WM" >
+				<Condition type="Variable" variable="[Total Duration]" compareValue="8" >
+					<Action name="Talk" value="TooMany 1Durations" />
+				</Condition>
+			</DataMining>
+			
 			<!-- 
 				Save good/bad sequence to the memory 
 			-->
@@ -813,7 +723,7 @@
 			<!-- Update Notes Option -->
 			<DataMining  variable="[Last Note Option]" operation="Last" event="Note Option" memory="WM" />
 			<Property name="Notes Option" value="[Last Note Option]" />
-
+			
 			<!-- Test if there are more then 2 notes, to update the Note Sequence -->
 			<DataMining variable="[Notes Count]" operation="Count" event="Note" memory="WM" />
 			<Condition type="variable" variable="[Notes Count]" operator="Bigger" compareValue="1">
@@ -847,6 +757,12 @@
 				</MathOperation>
 			</DataMining>
 		</DataMining>
+		
+		<!-- Increase JOY if removed a bad note -->
+		<Condition type="Property" property="Deleted Notes Option" compareValue="Bad">
+			<Emotion name="Joy" increment="1" max="7" />
+		</Condition>
+			
 	</Condition>
 
 	<!-- When a duration is deleted -->
@@ -863,12 +779,7 @@
 			
 			<!-- Increase JOY if deleted bad choice -->
 			<Condition type="Property" property="Deleted Duration Option" compareValue="Bad">
-				<Emotion name="Joy" increment="1" max="4" />
-			</Condition>
-			<Condition type="Property" property="Deleted Duration Option" compareValue="Good">
-				<Condition type="Property" property="Deleted Notes Option" compareValue="Bad">
-					<Emotion name="Joy" increment="1" max="4" />
-				</Condition>
+				<Emotion name="Joy" increment="1" max="7" />
 			</Condition>
 			
 			<!-- Update WM -->

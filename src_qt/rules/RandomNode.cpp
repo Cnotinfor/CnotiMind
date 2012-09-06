@@ -53,6 +53,8 @@ namespace CnotiMind
 
 	RandomNode *RandomNode::fromXML( const QString &qName, const QXmlAttributes &atts, Brain* brain, QObject* parent )
 	{
+        Q_UNUSED(atts);
+
 		if( qName.compare( "Random", Qt::CaseInsensitive ) == 0 )
 		{
 			return new RandomNode(brain, parent);

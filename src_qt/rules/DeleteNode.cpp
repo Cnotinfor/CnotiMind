@@ -61,5 +61,7 @@ namespace CnotiMind
 			return new DeleteNode( name, value, position, memory, brain, parent );
 
 		}
+
+        return NULL;
 	}
 }

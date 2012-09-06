@@ -960,7 +960,7 @@ namespace CnotiMind
 		case DMO_Min:
 			return QString::number( dataMiningMin( event, memory, valid ) );
 		case DMO_Sum:
-			return QString::number( dataMiningSum( event, memory, valid ) );
+            return QString::number( dataMiningSum( event, memory, valid, position ) );
 		case DMO_Count:
 			return QString::number( dataMiningCount( event, memory, valid ) );
 		case DMO_Mean:
@@ -1041,7 +1041,7 @@ namespace CnotiMind
 		switch( operation )
 		{
 		case DMO_Sum:
-			return dataMiningSum( event, value, memory, valid );
+            return dataMiningSum( event, memory, valid, position, QString::number(value) );
 		}
 
 		setValid( valid, false );
@@ -1145,84 +1145,91 @@ namespace CnotiMind
 
 	/*
 		Datamining Sum only works if the values are numbers.
-
-		If any value of the event is not a number, it will set valid to false.
-
-		If the memory is empty or no event is found it will set valid to true, and return 0.
-	*/
-	qreal Brain::dataMiningSum( const QString& event, const QList<MemoryEvent>& memory, bool* valid)
-	{
-		// by defaulf the data mining is valid
-		setValid( valid, true );
-
-		if( memory.isEmpty() )
-		{
-			return 0;
-		}
-
-		bool ok;
-		qreal sum = 0;
-		qreal aux;
-		QListIterator<MemoryEvent> it(memory);
-		while(it.hasNext()) // Iterate all memory
-		{
-			const MemoryEvent& me = it.next();
-
-			if( QString::compare(me.event(), event, Qt::CaseInsensitive) == 0 ) // Event found
-			{
-				aux = me.value().toReal(&ok); // convert value to qreal
-				if( !ok ) // if the event value is not numeric
-				{
-					setValid( valid, false ); // mark has invalid datamining
-					return 0;
-				}
-				sum += aux; // increment
-			}
-		}
-
-		return sum;
-	}
-
-	/*
-		Datamining Sum only works if the values are numbers.
 		It only sums events with the value specified.
 
 		If any value of the event is not a number, it will set valid to false.
 
 		If the memory is empty or no event with the value is found it will set valid to true, and return 0.
 	*/
-	qreal Brain::dataMiningSum( const QString& event, qreal value, const QList<MemoryEvent>& memory, bool* valid )
-	{
-		// by defaulf the data mining is valid
-		setValid( valid, true );
+    qreal Brain::dataMiningSum(const QString& event, const QList<MemoryEvent>& memory, bool* valid , int position, const QString& value)
+    {
+        // by defaulf the data mining is valid
+        setValid( valid, true );
 
-		if( memory.isEmpty() )
-		{
-			return 0;
-		}
+        if( memory.isEmpty() )
+        {
+            return 0;
+        }
 
-		bool ok;
-		qreal sum = 0;
-		qreal aux;
-		QListIterator<MemoryEvent> it(memory);
-		while(it.hasNext()) // Iterate all memory
-		{
-			const MemoryEvent& me = it.next();
+        if (position == 0)
+        {
+            position = memory.count();
+        }
 
-			if( QString::compare(me.event(), event, Qt::CaseInsensitive) == 0 ) // Event found
-			{
-				aux = me.value().toReal(&ok); // convert value to qreal
-				if( !ok ) // if the event value is not numeric
-				{
-					setValid( valid, false );
-					return 0;
-				}
-				if( value == aux )
-				{
-					sum += aux; // increment
-				}
-			}
-		}
+        bool ok;
+        qreal sum = 0;
+        qreal aux;
+
+        if (position > 0)
+        {
+            int counter = 0;
+            QListIterator<MemoryEvent> it(memory);
+            while(it.hasNext()) // Iterate all memory
+            {
+                const MemoryEvent& me = it.next();
+
+                if( QString::compare(me.event(), event, Qt::CaseInsensitive) == 0 ) // Event found
+                {
+                    aux = me.value().toReal(&ok); // convert value to qreal
+                    if( !ok ) // if the event value is not numeric
+                    {
+                        setValid( valid, false );
+                        return 0;
+                    }
+                    if( value == QString::number(aux) || value == "*" )
+                    {
+                        sum += aux; // increment
+                    }
+
+                    // Check if reach final position
+                    if (++counter >= position)
+                    {
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (position < 0)
+        {
+            int counter = 0;
+            QListIterator<MemoryEvent> it(memory);
+            it.toBack();
+            while(it.hasPrevious()) // Iterate all memory
+            {
+                const MemoryEvent& me = it.previous();
+
+                if( QString::compare(me.event(), event, Qt::CaseInsensitive) == 0 ) // Event found
+                {
+                    aux = me.value().toReal(&ok); // convert value to qreal
+                    if( !ok ) // if the event value is not numeric
+                    {
+                        setValid( valid, false );
+                        return 0;
+                    }
+                    if( value == QString::number(aux) || value == "*" )
+                    {
+                        sum += aux; // increment
+                    }
+
+                    // Check if reach final position
+                    if (--counter <= position)
+                    {
+                        break;
+                    }
+                }
+            }
+        }
 
 		return sum;
 	}

@@ -145,9 +145,8 @@ namespace CnotiMind
 		QVariant dataMining( DataMiningOperation operation, const QString& event, qreal value, int position, MemoryType memoryType, bool *valid = NULL );
 
 		qreal dataMiningMax( const QString& event, const QList<MemoryEvent>& memory, bool *valid = NULL );
-		qreal dataMiningMin( const QString& event, const QList<MemoryEvent>& memory, bool *valid = NULL );
-		qreal dataMiningSum( const QString& event, const QList<MemoryEvent>& memory, bool *valid = NULL );
-		qreal dataMiningSum( const QString& event, qreal value, const QList<MemoryEvent>& memory, bool *valid = NULL );
+        qreal dataMiningMin( const QString& event, const QList<MemoryEvent>& memory, bool *valid = NULL );
+        qreal dataMiningSum( const QString& event, const QList<MemoryEvent>& memory, bool *valid = NULL, int position = 0, const QString &value = "*" );
 		qreal dataMiningCount( const QString& event, const QList<MemoryEvent>& memory, bool *valid = NULL );
 		qreal dataMiningCount( const QString& event, const QString& value, const QList<MemoryEvent>& memory, bool *valid = NULL );
 		qreal dataMiningMean( const QString& event, const QList<MemoryEvent>& memory, bool *valid = NULL );
