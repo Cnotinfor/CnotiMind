@@ -104,256 +104,256 @@
 		<Condition type="DataMining" operation="Exists"	event="Note" compareValue="1" memory="WM">
 			<DataMining operation="Last" event="Note" variable="[Last Note]"  memory="WM">
 				<!-- Do -->
-				<Condition type="Perception" perception="Note" value="Do">
-					<Condition type="Variable" variable="[Last Note]" compareValue="Re">
+				<Condition type="Variable" variable="[Last Note]" compareValue="Do">
+					<Condition type="Perception" perception="Note" value="Re">
 						<Emotion name="Joy" increment="4" max="7" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Mi">
+					<Condition type="Perception" perception="Note" value="Mi">
 						<Emotion name="Joy" increment="6" max="9" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Fa">
+					<Condition type="Perception" perception="Note" value="Fa">
 						<Emotion name="Joy" increment="-6" min="2" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Sol">
+					<Condition type="Perception" perception="Note" value="Sol">
 						<Emotion name="Joy" increment="7" max="10" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="La">
+					<Condition type="Perception" perception="Note" value="La">
 						<Emotion name="Joy" increment="-3" min="5"/>
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Si">
+					<Condition type="Perception" perception="Note" value="Si">
 						<Emotion name="Joy" increment="-7" min="1"/>
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
+					<Condition type="Perception" perception="Note" value="DoAgudo">
 						<Emotion name="Joy" increment="5" max="8" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
 				</Condition>
 
 				<!-- Re -->
-				<Condition type="Perception" perception="Note" value="Re">
-					<Condition type="Variable" variable="[Last Note]" compareValue="Do">
+				<Condition type="Variable" variable="[Last Note]" compareValue="Re">
+					<Condition type="Perception" perception="Note" value="Do">
 						<Emotion name="Joy" increment="7" max="10" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Mi">
+					<Condition type="Perception" perception="Note" value="Mi">
 						<Emotion name="Joy" increment="6" max="9" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Fa">
+					<Condition type="Perception" perception="Note" value="Fa">
 						<Emotion name="Joy" increment="-3" max="5" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Sol">
+					<Condition type="Perception" perception="Note" value="Sol">
 						<Emotion name="Joy" increment="5" min="8" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="La">
+					<Condition type="Perception" perception="Note" value="La">
 						<Emotion name="Joy" increment="-4" min="4" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Si">
+					<Condition type="Perception" perception="Note" value="Si">
 						<Emotion name="Joy" increment="-6" min="2" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
+					<Condition type="Perception" perception="Note" value="DoAgudo">
 						<Emotion name="Joy" increment="-7" min="1" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
 				</Condition>
 
 				<!-- Mi -->
-				<Condition type="Perception" perception="Note" value="Mi">
-					<Condition type="Variable" variable="[Last Note]" compareValue="Do">
+				<Condition type="Variable" variable="[Last Note]" compareValue="Mi">
+					<Condition type="Perception" perception="Note" value="Do">
 						<Emotion name="Joy" increment="7" max="10" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Re">
+					<Condition type="Perception" perception="Note" value="Re">
 						<Emotion name="Joy" increment="5" max="8" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Fa">
+					<Condition type="Perception" perception="Note" value="Fa">
 						<Emotion name="Joy" increment="5" max="8" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Sol">
+					<Condition type="Perception" perception="Note" value="Sol">
 						<Emotion name="Joy" increment="6" max="9" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="La">
+					<Condition type="Perception" perception="Note" value="La">
 						<Emotion name="Joy" increment="-3" min="5" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Si">
+					<Condition type="Perception" perception="Note" value="Si">
 						<Emotion name="Joy" increment="-5" min="3" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
+					<Condition type="Perception" perception="Note" value="DoAgudo">
 						<Emotion name="Joy" increment="4" min="7" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
 				</Condition>
 
 				<!-- Fa -->
-				<Condition type="Perception" perception="Note" value="Fa">
-					<Condition type="Variable" variable="[Last Note]" compareValue="Do">
+				<Condition type="Variable" variable="[Last Note]" compareValue="Fa">
+					<Condition type="Perception" perception="Note" value="Do">
 						<Emotion name="Joy" increment="-4" min="4" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Re">
+					<Condition type="Perception" perception="Note" value="Re">
 						<Emotion name="Joy" increment="-3" max="5" />
 						<Property name="Notes Option" value="Badd" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Mi">
+					<Condition type="Perception" perception="Note" value="Mi">
 						<Emotion name="Joy" increment="6" max="9" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Sol">
+					<Condition type="Perception" perception="Note" value="Sol">
 						<Emotion name="Joy" increment="7" max="10" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="La">
+					<Condition type="Perception" perception="Note" value="La">
 						<Emotion name="Joy" increment="4" max="7" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Si">
+					<Condition type="Perception" perception="Note" value="Si">
 						<Emotion name="Joy" increment="-7" min="1" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
+					<Condition type="Perception" perception="Note" value="DoAgudo">
 						<Emotion name="Joy" increment="-4" min="4" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
 				</Condition>
 
 				<!-- Sol -->
-				<Condition type="Perception" perception="Note" value="Sol">
-					<Condition type="Variable" variable="[Last Note]" compareValue="Do">
+				<Condition type="Variable" variable="[Last Note]" compareValue="Sol">
+					<Condition type="Perception" perception="Note" value="Do">
 						<Emotion name="Joy" increment="7" max="10" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Re">
+					<Condition type="Perception" perception="Note" value="Re">
 						<Emotion name="Joy" increment="4" min="7" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Mi">
+					<Condition type="Perception" perception="Note" value="Mi">
 						<Emotion name="Joy" increment="6" max="9" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Fa">
+					<Condition type="Perception" perception="Note" value="Fa">
 						<Emotion name="Joy" increment="5" max="8" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="La">
+					<Condition type="Perception" perception="Note" value="La">
 						<Emotion name="Joy" increment="5" max="8" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Si">
+					<Condition type="Perception" perception="Note" value="Si">
 						<Emotion name="Joy" increment="4" min="7" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
+					<Condition type="Perception" perception="Note" value="DoAgudo">
 						<Emotion name="Joy" increment="7" max="10" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
 				</Condition>
 
 				<!-- La -->
-				<Condition type="Perception" perception="Note" value="La">
-					<Condition type="Variable" variable="[Last Note]" compareValue="Do">
+				<Condition type="Variable" variable="[Last Note]" compareValue="La">
+					<Condition type="Perception" perception="Note" value="Do">
 						<Emotion name="Joy" increment="-3" min="5" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Re">
+					<Condition type="Perception" perception="Note" value="Re">
 						<Emotion name="Joy" increment="-5" min="3" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Mi">
+					<Condition type="Perception" perception="Note" value="Mi">
 						<Emotion name="Joy" increment="4" min="7" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Fa">
+					<Condition type="Perception" perception="Note" value="Fa">
 						<Emotion name="Joy" increment="-4" max="4" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Sol">
+					<Condition type="Perception" perception="Note" value="Sol">
 						<Emotion name="Joy" increment="7" max="10" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Si">
+					<Condition type="Perception" perception="Note" value="Si">
 						<Emotion name="Joy" increment="7" max="10" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
+					<Condition type="Perception" perception="Note" value="DoAgudo">
 						<Emotion name="Joy" increment="3" min="6"/>
 						<Property name="Notes Option" value="Good" />
 					</Condition>
 				</Condition>
 
 				<!-- Si -->
-				<Condition type="Perception" perception="Note" value="Si">
-					<Condition type="Variable" variable="[Last Note]" compareValue="Do">
+				<Condition type="Variable" variable="[Last Note]" compareValue="Si">
+					<Condition type="Perception" perception="Note" value="Do">
 						<Emotion name="Joy" increment="-7" min="1" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Re">
+					<Condition type="Perception" perception="Note" value="Re">
 						<Emotion name="Joy" increment="-6" min="2" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Mi">
+					<Condition type="Perception" perception="Note" value="Mi">
 						<Emotion name="Joy" increment="-5" min="3" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Fa">
+					<Condition type="Perception" perception="Note" value="Fa">
 						<Emotion name="Joy" increment="-7" min="1" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Sol">
+					<Condition type="Perception" perception="Note" value="Sol">
 						<Emotion name="Joy" increment="5" min="8" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="La">
+					<Condition type="Perception" perception="Note" value="La">
 						<Emotion name="Joy" increment="6" max="9" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
+					<Condition type="Perception" perception="Note" value="DoAgudo">
 						<Emotion name="Joy" increment="7" max="10" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
 				</Condition>
 
 				<!-- DoAgudo -->
-				<Condition type="Perception" perception="Note" value="DoAgudo">
-					<Condition type="Variable" variable="[Last Note]" compareValue="Do">
+				<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
+					<Condition type="Perception" perception="Note" value="Do">
 						<Emotion name="Joy" increment="5" max="8" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Re">
+					<Condition type="Perception" perception="Note" value="Re">
 						<Emotion name="Joy" increment="-7" min="1" />
 						<Property name="Notes Option" value="Bd" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Mi">
+					<Condition type="Perception" perception="Note" value="Mi">
 						<Emotion name="Joy" increment="4" min="7" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Fa">
+					<Condition type="Perception" perception="Note" value="Fa">
 						<Emotion name="Joy" increment="-4" min="4" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Sol">
+					<Condition type="Perception" perception="Note" value="Sol">
 						<Emotion name="Joy" increment="7" max="10" />
 						<Property name="Notes Option" value="Good" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="La">
+					<Condition type="Perception" perception="Note" value="La">
 						<Emotion name="Joy" increment="-3" min="5" />
 						<Property name="Notes Option" value="Bad" />
 					</Condition>
-					<Condition type="Variable" variable="[Last Note]" compareValue="Si">
+					<Condition type="Perception" perception="Note" value="Si">
 						<Emotion name="Joy" increment="6" max="9"/>
 						<Property name="Notes Option" value="Good" />
 					</Condition>
