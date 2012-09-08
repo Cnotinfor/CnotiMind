@@ -23,87 +23,10 @@
 
 	<!-- Note added (note + duration) -->
 	<Condition type="Perception" perception="Duration">
-		<!-- Calculate the number of notes and pause -->
-		<DataMining variable="[Count Notes]" operation="Count" event="Note" memory="WM" />
-		<DataMining variable="[Count Pause]" operation="Count" event="Pause" memory="WM" />
-		<MathOperation result="[Number Notes]" name="Sum" variable="[Count Pause]" value="[Count Notes]" />
-		<!-- If exist notes -->
-		<Condition type="Variable" variable="[Number Notes]" compareValue="0" operator="Bigger">
-			<!-- Get the note added -->
-			<DataMining operation="Last" event="Note" variable="[Last Note]"  memory="WM" />
-		</Condition>
-		<!-- It's the first note -->
-		<Condition type="Variable" variable="[Number Notes]" compareValue="1">
-			<!-- Compare to DO -->
-			<Condition type="Variable" variable="[Last Note]" compareValue="Do">
-				<Action name="Talk" value="Start Good" />
-			</Condition>
-			<!-- Compare to RE -->
-			<Condition type="Variable" variable="[Last Note]" compareValue="Re">
-				<Action name="Talk" value="Start Bad [Last Note]" />
-			</Condition>
-			<!-- Compare to MI -->
-			<Condition type="Variable" variable="[Last Note]" compareValue="Mi">
-				<Action name="Talk" value="Start Good" />
-			</Condition>
-			<!-- Compare to FA -->
-			<Condition type="Variable" variable="[Last Note]" compareValue="Fa">
-				<Action name="Talk" value="Start Bad [Last Note]" />
-			</Condition>
-			<!-- Compare to SOL -->
-			<Condition type="Variable" variable="[Last Note]" compareValue="Sol">
-				<Action name="Talk" value="Start Good" />
-			</Condition>
-			<!-- Compare to LA -->
-			<Condition type="Variable" variable="[Last Note]" compareValue="La">
-				<Action name="Talk" value="Start Bad [Last Note]" />
-			</Condition>
-			<!-- Compare to SI -->
-			<Condition type="Variable" variable="[Last Note]" compareValue="Si">
-				<Action name="Talk" value="Start Bad [Last Note]" />
-			</Condition>
-			<!-- Compare to DO AGUDO -->
-			<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
-				<Action name="Talk" value="Start Good" />
-			</Condition>
-			<!-- Compare to PAUSE -->
-			<Condition type="Variable" variable="[Last Note]" compareValue="Pause">
-				<Action name="Talk" value="Start Bad [Last Note]" />
-			</Condition>
-		</Condition>
-		<!-- Isn't the first note -->
-		<Condition type="Variable" variable="[Number Notes]" compareValue="1" operator="Bigger">
-			<!-- Bad note and duration -->
-			<Condition type="Property" property="Notes Option" compareValue="Bad">
-				<Condition type="Property" property="Duration Option" compareValue="Bad">
-					<Random>
-						<Action name="Talk" value="Bad Choice" />
-						<Action name="Talk" value="Both Bad" />
-					</Random>
-				</Condition>
-			</Condition>
-			<!-- Bad note and Good duration -->
-			<Condition type="Property" property="Notes Option" compareValue="Bad">
-				<Condition type="Property" property="Duration Option" compareValue="Good">
-					<Random>
-						<Action name="Talk" value="Bad Choice" />
-						<Action name="Talk" value="Bad Note" />
-					</Random>
-				</Condition>
-			</Condition>
-			<!-- Good note but Bad duration -->
-			<Condition type="Property" property="Notes Option" compareValue="Good">
-				<Condition type="Property" property="Duration Option" compareValue="Bad">
-					<Action name="Talk" value="Bad Duration" />
-				</Condition>
-			</Condition>
-			
-			<!-- Good note and duration -->
-				<!-- TODO ????? -->
-
 			<!-- Music time -->
 <!-- TODO: is missing a OR between the conditions -->
 <!--       var that is changed when enters in a condition -->
+			<Property name="Good Time To Finish" value="False" />
 			<DataMining variable="[Music Duration]" operation="Sum" event="Duration" memory="WM" />
 			<MathOperation result="[Rest]" name="remainder" variable="[Music Duration]" value="4" />
 			<!-- Bigger the 12 -->
@@ -114,9 +37,11 @@
 					<!-- End in Do or Do Agudo -->
 					<Condition type="Variable" variable="[Last Note]" compareValue="Do">
 						<Action name="Talk" value="Finish Time" />
+						<Property name="Good Time To Finish" value="True" />
 					</Condition>
 					<Condition type="Variable" variable="[Last Note]" compareValue="DoAgudo">
 						<Action name="Talk" value="Finish Time" />
+						<Property name="Good Time To Finish" value="True" />
 					</Condition>
 				</Condition>
 			</Condition>
