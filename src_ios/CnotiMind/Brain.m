@@ -703,7 +703,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     }
     
     Emotion* e = [self findEmotion:aEmotionName];
-    
+
     if ([e addValue:aVariation max:aMax min:aMin]) {
         [self emotionChanged:e];
     }
@@ -993,8 +993,23 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     
 }
 
+- (id) dataMining: (enum DataMiningOperation)aOperation
+            event:(NSString*)aEvent
+       memoryType:(enum MemoryType)aMemoryType
+            valid:(BOOL*)aValid
+{
+    return [self dataMining:aOperation
+                      event:aEvent
+                 memoryType:aMemoryType
+                      valid:aValid
+                   position:0];
+}
 
-- (id) dataMining: (enum DataMiningOperation)aOperation event:(NSString*)aEvent memoryType:(enum MemoryType)aMemoryType valid:(BOOL*)aValid
+- (id) dataMining: (enum DataMiningOperation)aOperation
+            event:(NSString*)aEvent
+       memoryType:(enum MemoryType)aMemoryType
+            valid:(BOOL*)aValid
+         position:(int)position
 {
     // test if parameters are valid for datamining
     if( [aEvent length]==0 )
@@ -1016,9 +1031,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
             return [[NSNumber alloc] initWithFloat:[self dataMiningMin: aEvent memory: memory valid:aValid]];
             break;
         case DMO_Sum:
-            DLog(@"%f", [self dataMiningSum: aEvent memory: memory valid:aValid]);
-            DLog(@"%@", [[NSNumber alloc] initWithFloat:[self dataMiningSum: aEvent memory: memory valid:aValid]]);
-            return [[NSNumber alloc] initWithFloat:[self dataMiningSum: aEvent memory: memory valid:aValid]];
+            return [[NSNumber alloc] initWithFloat:[self dataMiningSum: aEvent memory: memory valid:aValid position:position]];
             break;
         case DMO_Count:
             return [[NSNumber alloc] initWithFloat:[self dataMiningCount: aEvent memory: memory valid:aValid]];
@@ -1187,32 +1200,35 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     return min;
 }
 
-
-- (float) dataMiningSum:(NSString*)aEvent memory:(NSMutableArray*)aMemory valid:(BOOL*)aValid
+- (float) dataMiningSum:(NSString*)aEvent
+                 memory:(NSMutableArray*)aMemory
+                  valid:(BOOL*)aValid
+               position:(int)position
 {
     // by defaulf the data mining is valid
     [self setValid:aValid value:true];
-    
+
     if([aMemory count] == 0)
     {
         return 0;
     }
-    
+    if(position == 0)
+    {
+        position= [aMemory count];
+    }
     bool ok;
     float sum = 0;
     float aux;
-    
-    NSEnumerator* eMemoryEvent = [aMemory objectEnumerator];
-    
-    MemoryEvent* objectMemoryEvent;
-    while( objectMemoryEvent = [eMemoryEvent nextObject] ) // Iterate all memory
+    int cr=0;
+    for(int counter=0;position>0 && counter<(uint)[aMemory count];counter++)
     {
+        MemoryEvent * objectMemoryEvent = [aMemory objectAtIndex:counter];
         if( ![[objectMemoryEvent event] caseInsensitiveCompare:aEvent] ) // Event found
         {
             if ([self isNumeric: [objectMemoryEvent value]]) {
                 ok = true;
             }
-            
+
             aux = [[objectMemoryEvent value] floatValue]; // convert value to qreal
             if( !ok ) // if the event value is not numeric
             {
@@ -1220,47 +1236,71 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
                 return 0;
             }
             sum += aux; // increment
+            if(++cr>=position)
+            {
+               return sum;
+            }
+        }
+    }
+    cr = position;
+    for(uint counter=[aMemory count]-1;position<0 && counter>0;counter--)
+    {
+        MemoryEvent * objectMemoryEvent = [aMemory objectAtIndex:counter];
+        if( ![[objectMemoryEvent event] caseInsensitiveCompare:aEvent] ) // Event found
+        {
+            if ([self isNumeric: [objectMemoryEvent value]]) {
+                ok = true;
+            }
+
+            aux = [[objectMemoryEvent value] floatValue]; // convert value to qreal
+            if( !ok ) // if the event value is not numeric
+            {
+                [self setValid: aValid value:false]; // mark has invalid datamining
+                return 0;
+            }
+            sum += aux; // increment
+            if(--cr==0)
+            {
+                return sum;
+            }
         }
     }
     return sum;
 }
 
-- (BOOL)isNumeric:(NSString*)s
+- (float) dataMiningSum:(NSString*)aEvent
+                 memory:(NSMutableArray*)aMemory
+                  valid:(BOOL*)aValid
 {
-    NSScanner *sc = [NSScanner scannerWithString: s];
-    // We can pass NULL because we don't actually need the value to test
-    // for if the string is numeric. This is allowable.
-    if ( [sc scanFloat:NULL] )
-    {
-        // Ensure nothing left in scanner so that "42foo" is not accepted.
-        // ("42" would be consumed by scanFloat above leaving "foo".)
-        return [sc isAtEnd];
-    }
-    // Couldn't even scan a float :(
-    return NO;
+    return [self dataMiningSum:aEvent
+                 memory:aMemory
+                 valid:aValid
+              position:0];
 }
 
 
 
-- (float) dataMiningSum:(NSString*)aEvent value:(float)aValue memory:(NSMutableArray*)aMemory valid:(BOOL*)aValid
+- (float) dataMiningSum:(NSString*)aEvent
+                  value:(float)aValue
+                 memory:(NSMutableArray*)aMemory
+                  valid:(BOOL*)aValid
+               position:(int)position
 {
     // by defaulf the data mining is valid
     [self setValid:aValid value:true];
-    
+
     if([aMemory count] == 0)
     {
         return 0;
     }
-    
+
     bool ok;
     float sum = 0;
     float aux;
-    
-    NSEnumerator* eMemoryEvent = [aMemory objectEnumerator];
-    
-    MemoryEvent* objectMemoryEvent;
-    while( objectMemoryEvent = [eMemoryEvent nextObject] ) // Iterate all memory
+    int cr=0;
+    for(int counter=0;position>0 && counter<(uint)[aMemory count];counter++)
     {
+        MemoryEvent * objectMemoryEvent = [aMemory objectAtIndex:counter];
         if( ![[objectMemoryEvent event] caseInsensitiveCompare:aEvent] ) // Event found
         {
             if (strcmp([[objectMemoryEvent value] objCType], "f") || strcmp([[objectMemoryEvent value] objCType], "i") || strcmp([[objectMemoryEvent value] objCType], "d") || strcmp([[objectMemoryEvent value] objCType], "l")) {
@@ -1277,12 +1317,71 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
             if( aValue == aux )
             {
                 sum += aux; // increment
-            }        
+                if(++cr>=position)
+                {
+                    return sum;
+                }
+            }
+        }
+    }
+     cr = position;
+    for(int counter=[aMemory count]-1;position<0 && counter>0;counter--)
+    {
+        MemoryEvent * objectMemoryEvent = [aMemory objectAtIndex:counter];
+        if( ![[objectMemoryEvent event] caseInsensitiveCompare:aEvent] ) // Event found
+        {
+            if (strcmp([[objectMemoryEvent value] objCType], "f") || strcmp([[objectMemoryEvent value] objCType], "i") || strcmp([[objectMemoryEvent value] objCType], "d") || strcmp([[objectMemoryEvent value] objCType], "l")) {
+                ok = true;
+            }
+
+            aux = [[objectMemoryEvent value] floatValue]; // convert value to qreal
+            if( !ok ) // if the event value is not numeric
+            {
+                [self setValid: aValid value:false]; // mark has invalid datamining
+                return 0;
+            }
+
+            if( aValue == aux )
+            {
+                sum += aux; // increment
+            }
+            if(--cr==0)
+            {
+                return sum;
+            }
         }
     }
     return sum;
 }
 
+
+- (float) dataMiningSum:(NSString*)aEvent
+                  value:(float)aValue
+                 memory:(NSMutableArray*)aMemory
+                  valid:(BOOL*)aValid
+
+{
+    return [self dataMiningSum:aEvent
+                         value:aValue
+                        memory:aMemory
+                         valid:aValid
+                      position:0];
+}
+
+- (BOOL)isNumeric:(NSString*)s
+{
+    NSScanner *sc = [NSScanner scannerWithString: s];
+    // We can pass NULL because we don't actually need the value to test
+    // for if the string is numeric. This is allowable.
+    if ( [sc scanFloat:NULL] )
+    {
+        // Ensure nothing left in scanner so that "42foo" is not accepted.
+        // ("42" would be consumed by scanFloat above leaving "foo".)
+        return [sc isAtEnd];
+    }
+    // Couldn't even scan a float :(
+    return NO;
+}
 
 /*
  Datamining Count counts all events with name event in memory 

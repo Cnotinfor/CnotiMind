@@ -148,7 +148,7 @@
     // If the values are numbers it should use the
     if( _isValueNumeric )
     {
-        _result = [_brain dataMining: _operation event:_event memoryType:_memory valid:&valid];
+        _result = [_brain dataMining: _operation event:_event memoryType:_memory valid:&valid position:position];
         
         DLog(@"_result: %@", _result);
         return valid;
@@ -156,7 +156,7 @@
     else // If the value is QString
     {
         DLog(@"_value: %@", _value);
-        _result = [_brain dataMining: _operation event:_event value:_value memoryType:_memory valid:&valid];
+        _result = [_brain dataMining: _operation event:_event value:_value memoryType:_memory valid:&valid position:position];
         return valid;
     }
 }
