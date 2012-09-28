@@ -99,7 +99,6 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 
 - (void) addCrutch:(Crutch*)aCrutch
 {
-    DLog(@"aCrutch properties: %@", aCrutch.properties);    
     [_crutches enqueue:aCrutch];
 }
 
@@ -828,7 +827,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     DLog(@"_disabledTasks: %@", _disabledTasks);
     
     for (NSNumber* node in _disabledTasks) {
-        DLog(@"-node: %d", [node intValue])
+        DLog(@"-node: %d", [node intValue]);
         if ( [node intValue] == (int)ActionNodes ) {
             DLog(@"Disabled Action!");
             return;
@@ -1062,6 +1061,17 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
 - (id) dataMining: (enum DataMiningOperation)aOperation event:(NSString*)aEvent value:(NSString*)aValue memoryType:(enum MemoryType)aMemoryType valid:(BOOL*)aValid
 {
     
+    return [self dataMining:aOperation
+                      event:aEvent
+                      value:aValue
+                 memoryType:aMemoryType
+                      valid:aValid
+                   position:0];
+}
+
+- (id) dataMining: (enum DataMiningOperation)aOperation event:(NSString*)aEvent value:(NSString*)aValue memoryType:(enum MemoryType)aMemoryType valid:(BOOL*)aValid position:(int)position
+{
+    
     NSString* result = [[NSString alloc] initWithString:@""];
     
     // test if parameters are valid for datamining
@@ -1220,7 +1230,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     float sum = 0;
     float aux;
     int cr=0;
-    for(int counter=0;position>0 && counter<(uint)[aMemory count];counter++)
+    for(int counter=0;position>0 && (uint)counter<[aMemory count];counter++)
     {
         MemoryEvent * objectMemoryEvent = [aMemory objectAtIndex:counter];
         if( ![[objectMemoryEvent event] caseInsensitiveCompare:aEvent] ) // Event found
@@ -1298,7 +1308,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
     float sum = 0;
     float aux;
     int cr=0;
-    for(int counter=0;position>0 && counter<(uint)[aMemory count];counter++)
+    for(int counter=0;position>0 && (uint)counter<[aMemory count];counter++)
     {
         MemoryEvent * objectMemoryEvent = [aMemory objectAtIndex:counter];
         if( ![[objectMemoryEvent event] caseInsensitiveCompare:aEvent] ) // Event found
