@@ -1269,7 +1269,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
                 return 0;
             }
             sum += aux; // increment
-            if(--cr==0)
+            if(++cr==0)
             {
                 return sum;
             }
@@ -1355,7 +1355,7 @@ NSString* const SEND_EMOTIONAL_STATE = @"SEND_EMOTIONAL_STATE";
             {
                 sum += aux; // increment
             }
-            if(--cr==0)
+            if(++cr==0)
             {
                 return sum;
             }
